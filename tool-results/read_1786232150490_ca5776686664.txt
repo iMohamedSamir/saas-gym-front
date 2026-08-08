@@ -1,0 +1,372 @@
+     1→   350→   350→   350→   350→            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+     2→   351→   351→   351→   351→              {(pricingPlans.length
+     3→   352→   352→   352→   352→                ? pricingPlans
+     4→   353→   353→   353→   353→                : [
+     5→   354→   354→   354→   354→                    {
+     6→   355→   355→   355→   355→                      id: 'p1', title: 'Essentials', price: '97', yearlyPrice: '970',
+     7→   356→   356→   356→   356→                      description: 'Core necessities for organizing leads.',
+     8→   357→   357→   357→   357→                      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+     9→   358→   358→   358→   358→                      features: [
+    10→   359→   359→   359→   359→                        { label: 'Unified Lead Inbox', included: true },
+    11→   360→   360→   360→   360→                        { label: 'Missed Call Auto-Responder', included: true },
+    12→   361→   361→   361→   361→                        { label: 'Autopilot Review Generator', included: true },
+    13→   362→   362→   362→   362→                        { label: '24/7 Appointment Scheduler', included: false },
+    14→   363→   363→   363→   363→                        { label: 'Automated Follow-Up Campaigns', included: false },
+    15→   364→   364→   364→   364→                      ],
+    16→   365→   365→   365→   365→                    },
+    17→   366→   366→   366→   366→                    {
+    18→   367→   367→   367→   367→                      id: 'p2', title: 'Growth', price: '297', yearlyPrice: '2970',
+    19→   368→   368→   368→   368→                      description: 'Everything for complete autopilot growth.',
+    20→   369→   369→   369→   369→                      isFeatured: true, offerText: 'Most Popular', buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+    21→   370→   370→   370→   370→                      features: [
+    22→   371→   371→   371→   371→                        { label: 'Unified Lead Inbox & Reviews', included: true },
+    23→   372→   372→   372→   372→                        { label: '24/7 Appointment Scheduler', included: true },
+    24→   373→   373→   373→   373→                        { label: 'Automated Follow-Up Campaigns', included: true },
+    25→   374→   374→   374→   374→                        { label: 'High-Converting Websites & Funnels', included: true },
+    26→   375→   375→   375→   375→                        { label: 'Advanced API Integrations', included: false },
+    27→   376→   376→   376→   376→                      ],
+    28→   377→   377→   377→   377→                    },
+    29→   378→   378→   378→   378→                    {
+    30→   379→   379→   379→   379→                      id: 'p3', title: 'Scale', price: '497', yearlyPrice: '4970',
+    31→   380→   380→   380→   380→                      description: 'Total control to scale multiple locations.',
+    32→   381→   381→   381→   381→                      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+    33→   382→   382→   382→   382→                      features: [
+    34→   383→   383→   383→   383→                        { label: 'Everything in Growth', included: true },
+    35→   384→   384→   384→   384→                        { label: 'Unlimited Social Media Posting', included: true },
+    36→   385→   385→   385→   385→                        { label: 'Advanced API Integrations', included: true },
+    37→   386→   386→   386→   386→                        { label: 'Multi-Location Support', included: true },
+    38→   387→   387→   387→   387→                        { label: 'Dedicated Account Manager', included: true },
+    39→   388→   388→   388→   388→                      ],
+    40→   389→   389→   389→   389→                    },
+    41→   390→   390→   390→   390→                  ]
+    42→   391→   391→   391→   391→              ).map((plan: PricingPlan) => (
+    43→   392→   392→   392→   392→                <div
+    44→   393→   393→   393→   393→                  key={plan.id}
+    45→   394→   394→   394→   394→                  className={`relative rounded-2xl p-8 border transition-all duration-300 ${
+    46→   395→   395→   395→   395→                    plan.isFeatured
+    47→   396→   396→   396→   396→                      ? 'bg-[#937AFF]/10 border-[#937AFF]/50 shadow-lg shadow-[#937AFF]/10'
+    48→   397→   397→   397→   397→                      : 'bg-[#0B0C17] border-[#202128] hover:border-[#937AFF]/30'
+    49→   398→   398→   398→   398→                  }`}
+    50→   399→   399→   399→   399→                >
+    51→   400→   400→   400→   400→                  {plan.offerText && (
+    52→   401→   401→   401→   401→                    <span className="absolute -top-3 start-4 bg-[#937AFF] text-white text-xs font-bold px-3 py-1 rounded-full">
+    53→   402→   402→   402→   402→                      {plan.offerText}
+    54→   403→   403→   403→   403→                    </span>
+    55→   404→   404→   404→   404→                  )}
+    56→   405→   405→   405→   405→                  <h3 className="text-xl font-bold text-white">{plan.title}</h3>
+    57→   406→   406→   406→   406→                  <p className="mt-2 text-sm text-[#817E84]">{plan.description}</p>
+    58→   407→   407→   407→   407→                  <div className="mt-6 flex items-baseline gap-1">
+    59→   408→   408→   408→   408→                    <span className="text-4xl font-bold text-white">${plan.price}</span>
+    60→   409→   409→   409→   409→                    <span className="text-sm text-[#817E84]">{t.pricing_monthly}</span>
+    61→   410→   410→   410→   410→                  </div>
+    62→   411→   411→   411→   411→                  <ul className="mt-8 space-y-3">
+    63→   412→   412→   412→   412→                    {plan.features?.map((feat, fi) => (
+    64→   413→   413→   413→   413→                      <li key={fi} className="flex items-center gap-3">
+    65→   414→   414→   414→   414→                        {feat.included ? (
+    66→   415→   415→   415→   415→                          <Check className="w-5 h-5 text-[#937AFF] shrink-0" />
+    67→   416→   416→   416→   416→                        ) : (
+    68→   417→   417→   417→   417→                          <X className="w-5 h-5 text-[#817E84] shrink-0" />
+    69→   418→   418→   418→   418→                        )}
+    70→   419→   419→   419→   419→                        <span className={`text-sm ${feat.included ? 'text-[#E5E5E5]' : 'text-[#817E84]'}`}>{feat.label}</span>
+    71→   420→   420→   420→   420→                      </li>
+    72→   421→   421→   421→   421→                    ))}
+    73→   422→   422→   422→   422→                  </ul>
+    74→   423→   423→   423→   423→                  <a
+    75→   424→   424→   424→   424→                    href={plan.buttonLink || '#contact'}
+    76→   425→   425→   425→   425→                    className={`mt-8 block text-center font-semibold py-3 rounded-lg transition-colors duration-200 ${
+    77→   426→   426→   426→   426→                      plan.isFeatured
+    78→   427→   427→   427→   427→                        ? 'bg-[#937AFF] hover:bg-[#7d5ff0] text-white'
+    79→   428→   428→   428→   428→                        : 'border border-[#202128] hover:border-[#937AFF]/50 text-white'
+    80→   429→   429→   429→   429→                    }`}
+    81→   430→   430→   430→   430→                  >
+    82→   431→   431→   431→   431→                    {plan.buttonLabel}
+    83→   432→   432→   432→   432→                  </a>
+    84→   433→   433→   433→   433→                </div>
+    85→   434→   434→   434→   434→              ))}
+    86→   435→   435→   435→   435→            </div>
+    87→   436→   436→   436→   436→          </div>
+    88→   437→   437→   437→   437→        </section>
+    89→   438→   438→   438→   438→
+    90→   439→   439→   439→   439→        {/* ============================================================ */}
+    91→   440→   440→   440→   440→        {/* 9. TESTIMONIAL QUOTE                                         */}
+    92→   441→   441→   441→   441→        {/* ============================================================ */}
+    93→   442→   442→   442→   442→        <section id="testimonials" className="py-20 sm:py-28">
+    94→   443→   443→   443→   443→          <div className="max-w-4xl mx-auto px-6 text-center">
+    95→   444→   444→   444→   444→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.testimonial_title }} />
+    96→   445→   445→   445→   445→            <blockquote className="mt-12">
+    97→   446→   446→   446→   446→              <p className="text-2xl sm:text-3xl font-medium text-[#E5E5E5] leading-relaxed italic">
+    98→   447→   447→   447→   447→                &ldquo;{t.testimonial_quote}&rdquo;
+    99→   448→   448→   448→   448→              </p>
+   100→   449→   449→   449→   449→              {t.singleTestimonial_name && (
+   101→   450→   450→   450→   450→                <div className="mt-8 flex flex-col items-center">
+   102→   451→   451→   451→   451→                  <img src="/images/avatar.png" alt={t.singleTestimonial_name} className="w-14 h-14 rounded-full" />
+   103→   452→   452→   452→   452→                  <p className="mt-3 font-semibold text-white">{t.singleTestimonial_name}</p>
+   104→   453→   453→   453→   453→                  <p className="text-sm text-[#817E84]">{t.singleTestimonial_company}</p>
+   105→   454→   454→   454→   454→                </div>
+   106→   455→   455→   455→   455→              )}
+   107→   456→   456→   456→   456→              {t.singleTestimonial_stats && t.singleTestimonial_stats.length > 0 && (
+   108→   457→   457→   457→   457→                <div className="mt-10 grid grid-cols-3 gap-6">
+   109→   458→   458→   458→   458→                  {t.singleTestimonial_stats.map((stat, i) => (
+   110→   459→   459→   459→   459→                    <div key={i}>
+   111→   460→   460→   460→   460→                      <div className="text-2xl sm:text-3xl font-bold text-[#937AFF]">{stat.value}</div>
+   112→   461→   461→   461→   461→                      <div className="text-sm text-[#817E84]">{stat.label}</div>
+   113→   462→   462→   462→   462→                    </div>
+   114→   463→   463→   463→   463→                  ))}
+   115→   464→   464→   464→   464→                </div>
+   116→   465→   465→   465→   465→              )}
+   117→   466→   466→   466→   466→            </blockquote>
+   118→   467→   467→   467→   467→          </div>
+   119→   468→   468→   468→   468→        </section>
+   120→   469→   469→   469→   469→
+   121→   470→   470→   470→   470→        {/* ============================================================ */}
+   122→   471→   471→   471→   471→        {/* 10. TESTIMONIALS CARDS                                       */}
+   123→   472→   472→   472→   472→        {/* ============================================================ */}
+   124→   473→   473→   473→   473→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   125→   474→   474→   474→   474→          <div className="max-w-7xl mx-auto px-6">
+   126→   475→   475→   475→   475→            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+   127→   476→   476→   476→   476→              {testimonials.map((tm: any) => (
+   128→   477→   477→   477→   477→                <div key={tm.id} className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/30 transition-all duration-300">
+   129→   478→   478→   478→   478→                  <div className="flex gap-1 mb-4">
+   130→   479→   479→   479→   479→                    {[...Array(5)].map((_, i) => (
+   131→   480→   480→   480→   480→                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+   132→   481→   481→   481→   481→                    ))}
+   133→   482→   482→   482→   482→                  </div>
+   134→   483→   483→   483→   483→                  <p className="text-[#E5E5E5] leading-relaxed">{tm.content}</p>
+   135→   484→   484→   484→   484→                  <div className="mt-6 flex items-center gap-3">
+   136→   485→   485→   485→   485→                    <img src={tm.avatar} alt={tm.name} className="w-10 h-10 rounded-full" />
+   137→   486→   486→   486→   486→                    <div>
+   138→   487→   487→   487→   487→                      <p className="font-semibold text-white text-sm">{tm.name}</p>
+   139→   488→   488→   488→   488→                      <p className="text-xs text-[#817E84]">{tm.designation}</p>
+   140→   489→   489→   489→   489→                    </div>
+   141→   490→   490→   490→   490→                  </div>
+   142→   491→   491→   491→   491→                </div>
+   143→   492→   492→   492→   492→              ))}
+   144→   493→   493→   493→   493→            </div>
+   145→   494→   494→   494→   494→          </div>
+   146→   495→   495→   495→   495→        </section>
+   147→   496→   496→   496→   496→
+   148→   497→   497→   497→   497→        {/* ============================================================ */}
+   149→   498→   498→   498→   498→        {/* 11. GROWTH PROCESS / HOW IT WORKS                            */}
+   150→   499→   499→   499→   499→        {/* ============================================================ */}
+   151→   500→   500→   500→   500→        <section className="py-20 sm:py-28">
+   152→   501→   501→   501→   501→          <div className="max-w-7xl mx-auto px-6">
+   153→   502→   502→   502→   502→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.growthProcess_title }} />
+   154→   503→   503→   503→   503→            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+   155→   504→   504→   504→   504→              {(t.growthProcess_steps.length
+   156→   505→   505→   505→   505→                ? t.growthProcess_steps
+   157→   506→   506→   506→   506→                : [
+   158→   507→   507→   507→   507→                    { stepNumber: '1', title: 'Start Your Trial', content: 'Sign up for a free trial.' },
+   159→   508→   508→   508→   508→                    { stepNumber: '2', title: 'Connect Your Business', content: 'Forward your calls, plug in social accounts.' },
+   160→   509→   509→   509→   509→                    { stepNumber: '3', title: 'Scale on Autopilot', content: 'Watch your calendar fill up.' },
+   161→   510→   510→   510→   510→                  ]
+   162→   511→   511→   511→   511→              ).map((step: any, i: number) => (
+   163→   512→   512→   512→   512→                <div key={i} className="relative bg-[#0B0C17] border border-[#202128] rounded-2xl p-8 text-center hover:border-[#937AFF]/30 transition-all duration-300">
+   164→   513→   513→   513→   513→                  <div className="w-12 h-12 rounded-full bg-[#937AFF]/20 text-[#937AFF] flex items-center justify-center mx-auto text-xl font-bold">
+   165→   514→   514→   514→   514→                    {step.stepNumber}
+   166→   515→   515→   515→   515→                  </div>
+   167→   516→   516→   516→   516→                  <h3 className="mt-6 text-xl font-semibold text-white">{step.title}</h3>
+   168→   517→   517→   517→   517→                  <p className="mt-3 text-[#817E84]">{step.content}</p>
+   169→   518→   518→   518→   518→                </div>
+   170→   519→   519→   519→   519→              ))}
+   171→   520→   520→   520→   520→            </div>
+   172→   521→   521→   521→   521→            <div className="mt-12 text-center">
+   173→   522→   522→   522→   522→              <a
+   174→   523→   523→   523→   523→                href="#pricing"
+   175→   524→   524→   524→   524→                className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25"
+   176→   525→   525→   525→   525→              >
+   177→   526→   526→   526→   526→                {t.growthProcess_btn}
+   178→   527→   527→   527→   527→                <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   179→   528→   528→   528→   528→              </a>
+   180→   529→   529→   529→   529→            </div>
+   181→   530→   530→   530→   530→          </div>
+   182→   531→   531→   531→   531→        </section>
+   183→   532→   532→   532→   532→
+   184→   533→   533→   533→   533→        {/* ============================================================ */}
+   185→   534→   534→   534→   534→        {/* 12. FAQ                                                      */}
+   186→   535→   535→   535→   535→        {/* ============================================================ */}
+   187→   536→   536→   536→   536→        <section id="faq" className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   188→   537→   537→   537→   537→          <div className="max-w-3xl mx-auto px-6">
+   189→   538→   538→   538→   538→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.faq_title }} />
+   190→   539→   539→   539→   539→            <p className="mt-4 text-[#817E84] text-center">{t.faq_content}</p>
+   191→   540→   540→   540→   540→
+   192→   541→   541→   541→   541→            <div className="mt-12">
+   193→   542→   542→   542→   542→              <FaqAccordion
+   194→   543→   543→   543→   543→                items={faqItems.length
+   195→   544→   544→   544→   544→                  ? faqItems
+   196→   545→   545→   545→   545→                  : t.faq_fallback as unknown as FaqItem[]}
+   197→   546→   546→   546→   546→              />
+   198→   547→   547→   547→   547→            </div>
+   199→   548→   548→   548→   548→          </div>
+   200→   549→   549→   549→   549→        </section>
+   201→   550→   550→   550→   550→
+   202→   551→   551→   551→   551→        {/* ============================================================ */}
+   203→   552→   552→   552→   552→        {/* 13. INTEGRATIONS                                             */}
+   204→   553→   553→   553→   553→        {/* ============================================================ */}
+   205→   554→   554→   554→   554→        <section className="py-20 sm:py-28">
+   206→   555→   555→   555→   555→          <div className="max-w-7xl mx-auto px-6 text-center">
+   207→   556→   556→   556→   556→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.integrations_title }} />
+   208→   557→   557→   557→   557→            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 opacity-60">
+   209→   558→   558→   558→   558→              {['slack', 'youtube', 'mailchimp', 'snapchat', 'fastapi', 'airtable', 'asana', 'zendesk'].map((name) => (
+   210→   559→   559→   559→   559→                <img
+   211→   560→   560→   560→   560→                  key={name}
+   212→   561→   561→   561→   561→                  src={`/images/integrations/${name}.png`}
+   213→   562→   562→   562→   562→                  alt={name}
+   214→   563→   563→   563→   563→                  className="h-8 w-auto grayscale hover:grayscale-0 transition-all duration-300"
+   215→   564→   564→   564→   564→                />
+   216→   565→   565→   565→   565→              ))}
+   217→   566→   566→   566→   566→            </div>
+   218→   567→   567→   567→   567→          </div>
+   219→   568→   568→   568→   568→        </section>
+   220→   569→   569→   569→   569→
+   221→   570→   570→   570→   570→        {/* ============================================================ */}
+   222→   571→   571→   571→   571→        {/* 14. CTA                                                      */}
+   223→   572→   572→   572→   572→        {/* ============================================================ */}
+   224→   573→   573→   573→   573→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   225→   574→   574→   574→   574→          <div className="max-w-4xl mx-auto px-6 text-center">
+   226→   575→   575→   575→   575→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.cta_title }} />
+   227→   576→   576→   576→   576→            <p className="mt-6 text-lg text-[#817E84] max-w-2xl mx-auto">{t.cta_description}</p>
+   228→   577→   577→   577→   577→            <a
+   229→   578→   578→   578→   578→              href="#pricing"
+   230→   579→   579→   579→   579→              className="mt-10 inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25"
+   231→   580→   580→   580→   580→            >
+   232→   581→   581→   581→   581→              {t.cta_button}
+   233→   582→   582→   582→   582→              <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   234→   583→   583→   583→   583→            </a>
+   235→   584→   584→   584→   584→          </div>
+   236→   585→   585→   585→   585→        </section>
+   237→   586→   586→   586→   586→
+   238→   587→   587→   587→   587→        {/* ============================================================ */}
+   239→   588→   588→   588→   588→        {/* 15. CONTACT                                                  */}
+   240→   589→   589→   589→   589→        {/* ============================================================ */}
+   241→   590→   590→   590→   590→        <section id="contact" className="py-20 sm:py-28">
+   242→   591→   591→   591→   591→          <div className="max-w-7xl mx-auto px-6">
+   243→   592→   592→   592→   592→            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+   244→   593→   593→   593→   593→              <div>
+   245→   594→   594→   594→   594→                <h2 className="text-3xl sm:text-4xl font-bold text-white">{t.contact_title}</h2>
+   246→   595→   595→   595→   595→                <p className="mt-4 text-[#817E84]">{t.contact_subtitle}</p>
+   247→   596→   596→   596→   596→
+   248→   597→   597→   597→   597→                <div className="mt-10 space-y-6">
+   249→   598→   598→   598→   598→                  <div className="flex items-center gap-4">
+   250→   599→   599→   599→   599→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   251→   600→   600→   600→   600→                      <Mail className="w-5 h-5 text-[#937AFF]" />
+   252→   601→   601→   601→   601→                    </div>
+   253→   602→   602→   602→   602→                    <div>
+   254→   603→   603→   603→   603→                      <p className="text-sm text-[#817E84]">{t.contact_email}</p>
+   255→   604→   604→   604→   604→                      <p className="text-white">hello@automark.com</p>
+   256→   605→   605→   605→   605→                    </div>
+   257→   606→   606→   606→   606→                  </div>
+   258→   607→   607→   607→   607→                  <div className="flex items-center gap-4">
+   259→   608→   608→   608→   608→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   260→   609→   609→   609→   609→                      <Phone className="w-5 h-5 text-[#937AFF]" />
+   261→   610→   610→   610→   610→                    </div>
+   262→   611→   611→   611→   611→                    <div>
+   263→   612→   612→   612→   612→                      <p className="text-sm text-[#817E84]">{t.contact_phone}</p>
+   264→   613→   613→   613→   613→                      <p className="text-white" dir="ltr">+1 (800) 123-4567</p>
+   265→   614→   614→   614→   614→                    </div>
+   266→   615→   615→   615→   615→                  </div>
+   267→   616→   616→   616→   616→                  <div className="flex items-center gap-4">
+   268→   617→   617→   617→   617→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   269→   618→   618→   618→   618→                      <Calendar className="w-5 h-5 text-[#937AFF]" />
+   270→   619→   619→   619→   619→                    </div>
+   271→   620→   620→   620→   620→                    <div>
+   272→   621→   621→   621→   621→                      <p className="text-sm text-[#817E84]">{t.contact_address}</p>
+   273→   622→   622→   622→   622→                      <p className="text-white">{t.contact_addressValue}</p>
+   274→   623→   623→   623→   623→                    </div>
+   275→   624→   624→   624→   624→                  </div>
+   276→   625→   625→   625→   625→                </div>
+   277→   626→   626→   626→   626→              </div>
+   278→   627→   627→   627→   627→
+   279→   628→   628→   628→   628→              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+   280→   629→   629→   629→   629→                <div>
+   281→   630→   630→   630→   630→                  <label className="block text-sm text-[#817E84] mb-2">{t.contact_name}</label>
+   282→   631→   631→   631→   631→                  <input
+   283→   632→   632→   632→   632→                    type="text"
+   284→   633→   633→   633→   633→                    className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors"
+   285→   634→   634→   634→   634→                    placeholder={t.contact_name}
+   286→   635→   635→   635→   635→                  />
+   287→   636→   636→   636→   636→                </div>
+   288→   637→   637→   637→   637→                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+   289→   638→   638→   638→   638→                  <div>
+   290→   639→   639→   639→   639→                    <label className="block text-sm text-[#817E84] mb-2">{t.contact_email}</label>
+   291→   640→   640→   640→   640→                    <input
+   292→   641→   641→   641→   641→                      type="email"
+   293→   642→   642→   642→   642→                      className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors"
+   294→   643→   643→   643→   643→                      placeholder={t.contact_email}
+   295→   644→   644→   644→   644→                    />
+   296→   645→   645→   645→   645→                  </div>
+   297→   646→   646→   646→   646→                  <div>
+   298→   647→   647→   647→   647→                    <label className="block text-sm text-[#817E84] mb-2">{t.contact_phone}</label>
+   299→   648→   648→   648→   648→                    <input
+   300→   649→   649→   649→   649→                      type="tel"
+   301→   650→   650→   650→   650→                      className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors"
+   302→   651→   651→   651→   651→                      placeholder={t.contact_phone}
+   303→   652→   652→   652→   652→                      dir="ltr"
+   304→   653→   653→   653→   653→                    />
+   305→   654→   654→   654→   654→                  </div>
+   306→   655→   655→   655→   655→                </div>
+   307→   656→   656→   656→   656→                <div>
+   308→   657→   657→   657→   657→                  <label className="block text-sm text-[#817E84] mb-2">{t.contact_message}</label>
+   309→   658→   658→   658→   658→                  <textarea
+   310→   659→   659→   659→   659→                    rows={5}
+   311→   660→   660→   660→   660→                    className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors resize-none"
+   312→   661→   661→   661→   661→                    placeholder={t.contact_message}
+   313→   662→   662→   662→   662→                  />
+   314→   663→   663→   663→   663→                </div>
+   315→   664→   664→   664→   664→                <button
+   316→   665→   665→   665→   665→                  type="submit"
+   317→   666→   666→   666→   666→                  className="w-full bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold py-3.5 rounded-lg transition-colors duration-200"
+   318→   667→   667→   667→   667→                >
+   319→   668→   668→   668→   668→                  {t.contact_send}
+   320→   669→   669→   669→   669→                </button>
+   321→   670→   670→   670→   670→              </form>
+   322→   671→   671→   671→   671→            </div>
+   323→   672→   672→   672→   672→          </div>
+   324→   673→   673→   673→   673→        </section>
+   325→   674→   674→   674→   674→      </main>
+   326→   675→   675→   675→   675→
+   327→   676→   676→   676→   676→      {/* ============================================================ */}
+   328→   677→   677→   677→   677→      {/* FOOTER                                                       */}
+   329→   678→   678→   678→   678→      {/* ============================================================ */}
+   330→   679→   679→   679→   679→      <footer className="border-t border-[#202128] bg-[#03010E] py-16">
+   331→   680→   680→   680→   680→        <div className="max-w-7xl mx-auto px-6">
+   332→   681→   681→   681→   681→          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+   333→   682→   682→   682→   682→            {/* Brand */}
+   334→   683→   683→   683→   683→            <div className="md:col-span-1">
+   335→   684→   684→   684→   684→              <a href="/" className="text-[#937AFF] font-bold text-xl">Automark</a>
+   336→   685→   685→   685→   685→              <p className="mt-4 text-sm text-[#817E84]">{t.footer_description}</p>
+   337→   686→   686→   686→   686→            </div>
+   338→   687→   687→   687→   687→
+   339→   688→   688→   688→   688→            {/* Links */}
+   340→   689→   689→   689→   689→            <div>
+   341→   690→   690→   690→   690→              <h4 className="font-semibold text-white mb-4">{t.footer_product}</h4>
+   342→   691→   691→   691→   691→              <ul className="space-y-2">
+   343→   692→   692→   692→   692→                {navLinks.map((l) => (
+   344→   693→   693→   693→   693→                  <li key={l.href}><a href={l.href} className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{l.label}</a></li>
+   345→   694→   694→   694→   694→                ))}
+   346→   695→   695→   695→   695→              </ul>
+   347→   696→   696→   696→   696→            </div>
+   348→   697→   697→   697→   697→            <div>
+   349→   698→   698→   698→   698→              <h4 className="font-semibold text-white mb-4">{t.footer_company}</h4>
+   350→   699→   699→   699→   699→              <ul className="space-y-2">
+   351→   700→   700→   700→   700→                <li><a href="#about" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.nav_about}</a></li>
+   352→   701→   701→   701→   701→                <li><a href="#contact" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_contact}</a></li>
+   353→   702→   702→   702→   702→              </ul>
+   354→   703→   703→   703→   703→            </div>
+   355→   704→   704→   704→   704→            <div>
+   356→   705→   705→   705→   705→              <h4 className="font-semibold text-white mb-4">{t.footer_legal}</h4>
+   357→   706→   706→   706→   706→              <ul className="space-y-2">
+   358→   707→   707→   707→   707→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_privacy}</a></li>
+   359→   708→   708→   708→   708→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_terms}</a></li>
+   360→   709→   709→   709→   709→              </ul>
+   361→   710→   710→   710→   710→            </div>
+   362→   711→   711→   711→   711→          </div>
+   363→   712→   712→   712→   712→
+   364→   713→   713→   713→   713→          <div className="mt-12 pt-8 border-t border-[#202128] text-center text-sm text-[#817E84]">
+   365→   714→   714→   714→   714→            {t.footer_copyright} {t.footer_allRights}
+   366→   715→   715→   715→   715→          </div>
+   367→   716→   716→   716→   716→        </div>
+   368→   717→   717→   717→   717→      </footer>
+   369→   718→   718→   718→   718→    </div>
+   370→   719→   719→   719→   719→  );
+   371→   720→   720→   720→   720→}
+   372→   721→   721→   721→   721→
