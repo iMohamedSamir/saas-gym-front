@@ -1,0 +1,605 @@
+     1→---
+     2→import ImageMod from "@/layouts/components/ImageMod.astro";
+     3→import Base from "@/layouts/Base.astro";
+     4→import ValueCard from "@/layouts/components/ValueCard.astro";
+     5→import BusinessNeeds from "@/layouts/components/BusinessNeeds.astro";
+     6→import ComparisonRow from "@/layouts/components/ComparisonRow.astro";
+     7→import PricingSection from "@/layouts/components/PricingSection.astro";
+     8→import ProcessCard from "@/layouts/components/ProcessCard.astro";
+     9→import GradientBlob from "@/layouts/components/GradientBlob.astro";
+    10→import BrandsCarousel from "@/layouts/components/BrandsCarousel.astro";
+    11→import OurStory from "@/layouts/components/OurStory.astro";
+    12→import Faq from "@/layouts/components/Faq.astro";
+    13→import CallToAction from "@/layouts/components/CallToAction.astro";
+    14→import VideoShowcase from "@/layouts/components/VideoShowcase.astro";
+    15→import LeadGeneration from "@/layouts/components/LeadGeneration.astro";
+    16→import Badge from "@/layouts/components/Badge.astro";
+    17→import TeamCard from "@/layouts/components/TeamCard.astro";
+    18→import ShowcaseCard from "@/layouts/components/ShowcaseCard.astro";
+    19→import config from "@/config/config.json";
+    20→import { getListPage } from "@/lib/contentParser.astro";
+    21→import { markdownify } from "@/lib/utils/textConverter";
+    22→import Testimonial from "@/partials/Testimonial.astro";
+    23→import Features from "@/partials/Features.astro";
+    24→import DynamicIcon from "@/helpers/DynamicIcon";
+    25→import type { Homepage, About, Features as FeaturesType, Contact } from "@/types";
+    26→
+    27→const homepage = await getListPage("homepage", "-index");
+    28→const homepageData: Homepage = homepage.data;
+    29→const about = await getListPage("about", "-index");
+    30→const aboutData: About = about.data;
+    31→const features = await getListPage("features", "-index");
+    32→const featuresData: FeaturesType = features.data;
+    33→const contact = await getListPage("contact", "-index");
+    34→const contactData: Contact = contact.data;
+    35→---
+    36→
+    37→<Base>
+    38→  <!-- ===== HERO BANNER ===== -->
+    39→  <section id="hero" class="section-ph relative overflow-hidden">
+    40→    <div class="container relative">
+    41→      <div class="absolute top-0 left-0 w-full">
+    42→        <div class="h-100 w-full overflow-hidden -translate-y-10">
+    43→          <canvas class="heroSporeCanvas w-full"></canvas>
+    44→        </div>
+    45→      </div>
+    46→      <div class="row justify-center">
+    47→        <div class="mb-20 text-center relative">
+    48→          <h1
+    49→            class="mb-8 lg:col-9 mx-auto text-h3 lg:text-h1 hasHighlight"
+    50→            set:html={markdownify(homepageData.banner.title)}
+    51→          />
+    52→          <p class="mb-10 lg:col-6 mx-auto">{homepageData.banner.content}</p>
+    53→          <div class="flex gap-4 justify-center items-center flex-wrap">
+    54→            <a
+    55→              class="btn btn-primary"
+    56→              rel="noopener noreferrer"
+    57→              href={homepageData.banner.button_primary.link}
+    58→            >
+    59→              {homepageData.banner.button_primary.label}
+    60→            </a>
+    61→            <a
+    62→              class="btn btn-outline"
+    63→              rel="noopener noreferrer"
+    64→              href={homepageData.banner.button_secondary.link}
+    65→            >
+    66→              {homepageData.banner.button_secondary.label}
+    67→            </a>
+    68→          </div>
+    69→        </div>
+    70→        <div class="col-12">
+    71→          <div
+    72→            class="flex justify-center w-full perspective-near xl:perspective-dramatic"
+    73→          >
+    74→            <VideoShowcase />
+    75→          </div>
+    76→        </div>
+    77→      </div>
+    78→    </div>
+    79→    <div
+    80→      class="absolute left-1/2 top-0 -translate-y-1/2 -translate-x-1/2 size-160 xl:size-300 -z-20 blur-2xl"
+    81→      style="background: radial-gradient(circle, var(--color-primary) 0%, color-mix(in srgb, var(--color-primary) 78%, transparent) 20%, transparent 70%);"
+    82→    >
+    83→    </div>
+    84→    <div class="absolute top-0 left-0 flex flex-col gap-6 -z-10">
+    85→      <svg xmlns="http://www.w3.org/2000/svg" width="567" height="558" fill="none">
+    86→        <g opacity=".5">
+    87→          <g filter="url(#a-banner)" style="mix-blend-mode:plus-lighter"><path fill="url(#b-banner)" d="M-20.527-7.51 10.182-43l259.774 233.148-13.283 15.352-277.2-213.01Z"></path></g>
+    88→          <g filter="url(#c-banner)" style="mix-blend-mode:plus-lighter"><path fill="url(#d-banner)" d="M-52 13.659-20.788-25l267.328 224.459-13.502 16.722-285.04-202.522Z"></path></g>
+    89→          <g filter="url(#e-banner)" style="mix-blend-mode:plus-lighter"><path fill="url(#f-banner)" d="M-108.079-4.9-66.125-46l290.011 307.352-18.147 17.779-313.818-284.03Z"></path></g>
+    90→          <g filter="url(#g-banner)"><ellipse cx="143" cy="252.378" fill="var(--color-primary-light)" fill-opacity=".5" rx="143" ry="252.378" transform="scale(-1 1) rotate(46.133 191.203 -117.756)"></ellipse></g>
+    91→        </g>
+    92→        <defs>
+    93→          <filter id="a-banner" width="338.484" height="296.5" x="-44.527" y="-67" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur result="effect1" stdDeviation="12"></feGaussianBlur></filter>
+    94→          <filter id="c-banner" width="346.541" height="289.181" x="-76.001" y="-49" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur result="effect1" stdDeviation="12"></feGaussianBlur></filter>
+    95→          <filter id="e-banner" width="379.965" height="373.131" x="-132.079" y="-70" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur result="effect1" stdDeviation="12"></feGaussianBlur></filter>
+    96→          <filter id="g-banner" width="914.454" height="906.103" x="-348.178" y="-349.061" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend><feGaussianBlur result="effect1" stdDeviation="125"></feGaussianBlur></filter>
+    97→          <linearGradient id="b-banner" x1="-5.173" x2="258.744" y1="-25.255" y2="203.106" gradientUnits="userSpaceOnUse"><stop stop-color="var(--color-primary)"></stop><stop offset="1" stop-color="var(--color-primary)" stop-opacity="0"></stop></linearGradient>
+    98→          <linearGradient id="d-banner" x1="-36.394" x2="235.144" y1="-5.671" y2="213.574" gradientUnits="userSpaceOnUse"><stop stop-color="var(--color-primary)"></stop><stop offset="1" stop-color="var(--color-primary)" stop-opacity="0"></stop></linearGradient>
+    99→          <linearGradient id="f-banner" x1="-87.102" x2="208.568" y1="-25.45" y2="276.359" gradientUnits="userSpaceOnUse"><stop stop-color="var(--color-primary)"></stop><stop offset="1" stop-color="var(--color-primary)" stop-opacity="0"></stop></linearGradient>
+   100→        </defs>
+   101→      </svg>
+   102→    </div>
+   103→  </section>
+   104→  <hr class="h-px bg-linear-to-r from-transparent from-10% via-white/50 to-90% to-transparent border-0" />
+   105→
+   106→  <!-- ===== MAIN FEATURES (Pill Tags) ===== -->
+   107→  {
+   108→    homepageData.main_features.enable && (
+   109→      <section class="section pt-30 xl:pt-37">
+   110→        <div class="container">
+   111→          <div class="section-container">
+   112→            <div class="section-intro centralize">
+   113→              <h2 class="title hasHighlight" set:html={markdownify(homepageData.main_features.title)} />
+   114→              <p class="subtitle">{homepageData.main_features.content}</p>
+   115→            </div>
+   116→            <div class="section-content">
+   117→              <div class="feature-items-group mb-9">
+   118→                {homepageData.main_features.items.slice(0, 3).map((text: string) => (
+   119→                  <div class="bg-body border border-border px-4 w-full py-2.5 rounded-full flex items-center justify-center relative z-10 gap-x-2">
+   120→                    <svg class="shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+   121→                      <path d="M9.99999 1.04163C14.9476 1.04163 18.9583 5.05241 18.9583 9.99996C18.9583 14.9475 14.9476 18.9583 9.99999 18.9583C5.05244 18.9583 1.04166 14.9475 1.04166 9.99996C1.04166 5.05241 5.05244 1.04163 9.99999 1.04163ZM8.02571 6.8538C7.69841 6.58685 7.2159 6.6057 6.9108 6.91077C6.60581 7.21587 6.5869 7.6984 6.85383 8.02568L6.9108 8.08915L8.82157 9.99996L6.91161 11.9108C6.5863 12.2362 6.58619 12.7638 6.91161 13.0891C7.23705 13.4143 7.76464 13.4145 8.09 13.0891L9.99999 11.1784L11.91 13.0891L11.9735 13.1461C12.3007 13.413 12.7832 13.394 13.0884 13.0891C13.3934 12.7842 13.4128 12.3015 13.1462 11.9742L13.0884 11.9108L11.1776 9.99996L13.0892 8.08915L13.1462 8.02568C13.4131 7.69839 13.3942 7.21587 13.0892 6.91077C12.7841 6.6057 12.3016 6.58685 11.9742 6.8538L11.9108 6.91077L9.99999 8.82154L8.08918 6.91077L8.02571 6.8538Z" fill="var(--color-secondary)" />
+   122→                    </svg>
+   123→                    <span class="font-semibold text-white text-lg">{text}</span>
+   124→                  </div>
+   125→                ))}
+   126→              </div>
+   127→              <div class="feature-items-group">
+   128→                {homepageData.main_features.items.slice(3).map((text: string) => (
+   129→                  <div class="bg-body border border-border px-4 w-full py-2.5 rounded-full flex items-center justify-center relative z-10 gap-x-2">
+   130→                    <svg class="shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+   131→                      <path d="M9.99999 1.04163C14.9476 1.04163 18.9583 5.05241 18.9583 9.99996C18.9583 14.9475 14.9476 18.9583 9.99999 18.9583C5.05244 18.9583 1.04166 14.9475 1.04166 9.99996C1.04166 5.05241 5.05244 1.04163 9.99999 1.04163ZM8.02571 6.8538C7.69841 6.58685 7.2159 6.6057 6.9108 6.91077C6.60581 7.21587 6.5869 7.6984 6.85383 8.02568L6.9108 8.08915L8.82157 9.99996L6.91161 11.9108C6.5863 12.2362 6.58619 12.7638 6.91161 13.0891C7.23705 13.4143 7.76464 13.4145 8.09 13.0891L9.99999 11.1784L11.91 13.0891L11.9735 13.1461C12.3007 13.413 12.7832 13.394 13.0884 13.0891C13.3934 12.7842 13.4128 12.3015 13.1462 11.9742L13.0884 11.9108L11.1776 9.99996L13.0892 8.08915L13.1462 8.02568C13.4131 7.69839 13.3942 7.21587 13.0892 6.91077C12.7841 6.6057 12.3016 6.58685 11.9742 6.8538L11.9108 6.91077L9.99999 8.82154L8.08918 6.91077L8.02571 6.8538Z" fill="var(--color-secondary)" />
+   132→                    </svg>
+   133→                    <span class="font-semibold text-white text-lg">{text}</span>
+   134→                  </div>
+   135→                ))}
+   136→              </div>
+   137→            </div>
+   138→          </div>
+   139→        </div>
+   140→      </section>
+   141→    )
+   142→  }
+   143→
+   144→  <!-- ===== VALUE PROPOSITION ===== -->
+   145→  {
+   146→    homepageData.value_props.enable && (
+   147→      <section class="section relative overflow-hidden">
+   148→        <div class="container">
+   149→          <div class="section-container">
+   150→            <div class="section-intro centralize">
+   151→              <h2 class="title hasHighlight" set:html={markdownify(homepageData.value_props.title)} />
+   152→              <p class="subtitle">{homepageData.value_props.content}</p>
+   153→            </div>
+   154→            <div class="section-content">
+   155→              <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 mb-9">
+   156→                {homepageData.value_props.items.map((item: any) => (
+   157→                  <ValueCard logo={item.logo} title={item.title} list={item.list} />
+   158→                ))}
+   159→              </div>
+   160→            </div>
+   161→          </div>
+   162→        </div>
+   163→        <GradientBlob />
+   164→      </section>
+   165→    )
+   166→  }
+   167→
+   168→  <!-- ===== FEATURES GRID ===== -->
+   169→  <section id="features">
+   170→    {homepageData.our_features.enable && (
+   171→      <Features our_features={homepageData.our_features} />
+   172→    )}
+   173→  </section>
+   174→
+   175→  <!-- ===== SHOWCASE CARDS (from Features page) ===== -->
+   176→  {
+   177→    featuresData.smart_platform.enable && (
+   178→      <section class="section mx-5 relative isolate overflow-hidden">
+   179→        <div class="container">
+   180→          <div class="section-container">
+   181→            <div class="section-intro centralize">
+   182→              <h2 class="title hasHighlight" set:html={markdownify(featuresData.smart_platform.title)} />
+   183→            </div>
+   184→            <div class="section-content">
+   185→              <div class="grid md:grid-cols-2 xl:grid-cols-3 grid-flow-dense gap-7">
+   186→                {featuresData.smart_platform.cards.map((card: any) => (
+   187→                  <ShowcaseCard title={card.title} subtitle={card.subtitle} image={card.image} classNames={card.classNames} />
+   188→                ))}
+   189→              </div>
+   190→            </div>
+   191→          </div>
+   192→        </div>
+   193→        <GradientBlob />
+   194→      </section>
+   195→    )
+   196→  }
+   197→
+   198→  <!-- ===== SERVICE FEATURES (Alternating, from Features page) ===== -->
+   199→  {
+   200→    featuresData.service_features.enable &&
+   201→      featuresData.service_features.items.map((feature: any, index: number) => (
+   202→        <section class="section-sm relative isolate">
+   203→          <div class="container">
+   204→            <div class="rounded-3xl bg-light/6 overflow-hidden">
+   205→              <div class="grid lg:grid-cols-2">
+   206→                <div class={`p-8 lg:p-12 xl:p-14 ${feature.reverse ? "" : "lg:order-1"}`}>
+   207→                  <h2 class="text-h3-sm lg:text-h2 font-bold hasHighlight mb-9 lg:mb-12" set:html={markdownify(feature.title)} />
+   208→                  <div class="grid sm:grid-cols-2 gap-8 lg:gap-10">
+   209→                    {feature.items.map((item: any) => (
+   210→                      <article>
+   211→                        <div class="size-10 rounded-xl bg-white/6 border border-border grid place-items-center mb-4">
+   212→                          <DynamicIcon icon={item.icon} className="text-text-light text-lg" />
+   213→                        </div>
+   214→                        <h3 class="text-h5-sm font-bold text-white mb-2">{item.title}</h3>
+   215→                        <p class="text-text">{item.content}</p>
+   216→                      </article>
+   217→                    ))}
+   218→                  </div>
+   219→                </div>
+   220→                <div class={`p-8 lg:p-12 xl:p-14 bg-white/2 h-max ${feature.reverse ? "" : "lg:order-0"}`}>
+   221→                  <ImageMod src={feature.image} alt={feature.title} class="w-full object-contain" />
+   222→                </div>
+   223→              </div>
+   224→            </div>
+   225→          </div>
+   226→          <GradientBlob />
+   227→        </section>
+   228→      ))
+   229→  }
+   230→
+   231→  <!-- ===== BUSINESS NEEDS ===== -->
+   232→  <BusinessNeeds />
+   233→
+   234→  <!-- ===== COMPARISON ===== -->
+   235→  <ComparisonRow />
+   236→
+   237→  <!-- ===== TESTIMONIAL QUOTE ===== -->
+   238→  {
+   239→    homepageData.testimonial_quote.enable && (
+   240→      <section class="section overflow-hidden">
+   241→        <div class="container">
+   242→          <div class="section-container">
+   243→            <div class="section-intro centralize">
+   244→              <h2 class="title hasHighlight" set:html={markdownify(homepageData.testimonial_quote.title)} />
+   245→            </div>
+   246→            <div class="section-content">
+   247→              <hr class="h-px bg-linear-to-r from-transparent from-5% via-white/40 to-95% to-transparent border-0" />
+   248→              <div class="relative max-w-220 mx-auto">
+   249→                <blockquote class="text-center text-h6 text-white p-6 xl:p-10 xl:px-15 border-x border-text/20">
+   250→                  &ldquo;{homepageData.testimonial_quote.quote}&rdquo;
+   251→                </blockquote>
+   252→                <div class="size-2 bg-white absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2" />
+   253→                <div class="size-2 bg-white absolute right-0 top-0 translate-x-1/2 -translate-y-1/2" />
+   254→                <div class="size-2 bg-white absolute left-0 bottom-0 -translate-x-1/2 translate-y-1/2" />
+   255→                <div class="size-2 bg-white absolute right-0 bottom-0 translate-x-1/2 translate-y-1/2" />
+   256→              </div>
+   257→              <hr class="h-px bg-linear-to-r from-transparent from-5% via-white/40 to-95% to-transparent border-0" />
+   258→            </div>
+   259→          </div>
+   260→        </div>
+   261→      </section>
+   262→    )
+   263→  }
+   264→
+   265→  <!-- ===== OUR PARTNERS ===== -->
+   266→  <BrandsCarousel />
+   267→
+   268→  <!-- ===== SINGLE TESTIMONIAL ===== -->
+   269→  {
+   270→    homepageData.single_testimonial.enable && (
+   271→      <section class="section relative max-lg:overflow-hidden">
+   272→        <div class="container">
+   273→          <div class="section-container">
+   274→            <div class="section-content">
+   275→              <div class="row g-4 items-center">
+   276→                <div class="lg:col-5">
+   277→                  <div class="flex flex-col">
+   278→                    {homepageData.single_testimonial.stats.map((stat: any, i: number) => (
+   279→                      <div class={`blob-message relative z-${i + 1} ${i === 1 ? "lg:w-10/12" : ""}`}>
+   280→                        <span class="font-semibold text-white">{stat.value}</span> {stat.label}
+   281→                      </div>
+   282→                    ))}
+   283→                  </div>
+   284→                </div>
+   285→                <div class="lg:col-7 max-lg:mt-10">
+   286→                  <div class="rounded-4xl corner-squircle bg-light px-7 py-10">
+   287→                    <div class="text-white">
+   288→                      <svg width="45" height="28" viewBox="0 0 45 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+   289→                        <path d="M15.3955 0V10.9561H24.8691L16.5791 28H0L13.0264 0H15.3955ZM36.7109 0V10.9561H45L36.7109 28H21.3154L34.3418 0H36.7109Z" fill="currentColor" />
+   290→                      </svg>
+   291→                    </div>
+   292→                    <blockquote class="mt-10 text-h6 text-white">
+   293→                      {homepageData.single_testimonial.testimonial.quote}
+   294→                    </blockquote>
+   295→                    <div class="mt-12.5 flex items-center">
+   296→                      <div class="text-text-dark">
+   297→                        <ImageMod height={50} width={50} class="rounded-full size-12" src={homepageData.single_testimonial.testimonial.avatar} alt={homepageData.single_testimonial.testimonial.name} />
+   298→                      </div>
+   299→                      <div class="ml-2.5">
+   300→                        <h3 class="text-base font-primary font-semibold">{homepageData.single_testimonial.testimonial.name}</h3>
+   301→                        <p class="text-text-dark">{homepageData.single_testimonial.testimonial.company}</p>
+   302→                      </div>
+   303→                    </div>
+   304→                  </div>
+   305→                </div>
+   306→              </div>
+   307→            </div>
+   308→          </div>
+   309→        </div>
+   310→        <div class="absolute top-0 lg:bottom-0 grid place-items-center size-full lg:translate-y-20 -z-10">
+   311→          <div class="size-180 xl:size-300 bg-radial from-primary-light/60 to-transparent from-0% to-70% rounded-full" />
+   312→          <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-180">
+   313→            <div class="h-100 w-full overflow-hidden">
+   314→              <canvas class="heroSporeCanvas w-full" />
+   315→            </div>
+   316→          </div>
+   317→        </div>
+   318→      </section>
+   319→    )
+   320→  }
+   321→
+   322→  <!-- ===== GROWTH PROCESS ===== -->
+   323→  {
+   324→    homepageData.growth_process.enable && (
+   325→      <section class="section-box max-lg:overflow-hidden pb-16 xl:pb-19 bg-transparent relative isolate overflow-hidden">
+   326→        <div class="container">
+   327→          <div class="section-container">
+   328→            <div class="section-intro centralize">
+   329→              <h2 class="title hasHighlight" set:html={markdownify(homepageData.growth_process.title)} />
+   330→            </div>
+   331→            <div class="section-content">
+   332→              <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8 xl:gap-16">
+   333→                {homepageData.growth_process.items.map((item: any) => (
+   334→                  <ProcessCard logo={item.logo} title={item.title} content={item.content} />
+   335→                ))}
+   336→              </div>
+   337→              {homepageData.growth_process.button.enable && (
+   338→                <div class="flex justify-center mt-10 xl:mt-18">
+   339→                  <a href={homepageData.growth_process.button.link} class="btn btn-primary">{homepageData.growth_process.button.label}</a>
+   340→                </div>
+   341→              )}
+   342→            </div>
+   343→          </div>
+   344→        </div>
+   345→        <div class="absolute inset-x-0 top-0 -z-10">
+   346→          <svg class="w-full" viewBox="0 0 1920 1099" fill="none" xmlns="http://www.w3.org/2000/svg">
+   347→            <path d="M960 1.5C1224.88 1.5 1464.62 62.943 1638.08 162.205C1811.58 261.491 1918.5 398.425 1918.5 549.356C1918.5 700.287 1811.58 837.222 1638.08 936.508C1464.62 1035.77 1224.88 1097.21 960 1097.21C695.116 1097.21 455.383 1035.77 281.923 936.508C108.42 837.222 1.50012 700.287 1.5 549.356C1.5 398.425 108.42 261.491 281.923 162.205C455.383 62.943 695.116 1.5 960 1.5Z" fill="black" stroke="url(#paint0_linear_proc)" stroke-width="3" />
+   348→            <defs>
+   349→              <linearGradient id="paint0_linear_proc" x1="960" y1="0" x2="960" y2="84.3521" gradientUnits="userSpaceOnUse">
+   350→                <><stop stop-color="var(--color-primary-light)" /><stop offset="1" stop-color="var(--color-body)" /></>
+   351→              </linearGradient>
+   352→            </defs>
+   353→          </svg>
+   354→        </div>
+   355→        <div class="absolute inset-0 grid place-items-center size-full -z-10">
+   356→          <div class="size-225 bg-radial from-primary-light/30 to-transparent from-0% to-70% rounded-full" />
+   357→        </div>
+   358→      </section>
+   359→    )
+   360→  }
+   361→
+   362→  <!-- ===== ABOUT / STATS / TEAM ===== -->
+   363→  <section id="about">
+   364→    {aboutData.stats.enable && (
+   365→      <section class="section relative">
+   366→        <div class="container">
+   367→          <div class="section-container">
+   368→            <div class="section-intro centralize">
+   369→              <h2 class="title hasHighlight">Trusted by <strong>Thousands</strong></h2>
+   370→            </div>
+   371→          </div>
+   372→          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+   373→            {aboutData.stats.items.map((stat: any) => (
+   374→              <div class="text-center p-8 lg:p-10 lg:py-26 rounded-2xl bg-primary/10">
+   375→                <div class="text-h2 lg:text-h1 leading-none font-bold font-secondary text-white mb-4">{stat.value}</div>
+   376→                <p class="text-text text-h6">{stat.label}</p>
+   377→              </div>
+   378→            ))}
+   379→          </div>
+   380→        </div>
+   381→        <div class="-translate-y-140"><GradientBlob /></div>
+   382→      </section>
+   383→    )}
+   384→
+   385→    {aboutData.our_team.enable && (
+   386→      <section class="section relative isolate overflow-hidden">
+   387→        <div class="container">
+   388→          <div class="section-container">
+   389→            <div class="section-intro centralize">
+   390→              <Badge title={aboutData.our_team.badge} />
+   391→              <h2 class="title hasHighlight" set:html={markdownify(aboutData.our_team.title)} />
+   392→            </div>
+   393→            <div class="section-content">
+   394→              <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+   395→                {aboutData.our_team.members.map((member: any) => (
+   396→                  <TeamCard image={member.image} name={member.name} role={member.role} />
+   397→                ))}
+   398→              </div>
+   399→            </div>
+   400→          </div>
+   401→        </div>
+   402→      </section>
+   403→    )}
+   404→
+   405→    {aboutData.core_values.enable && (
+   406→      <Features our_features={aboutData.core_values} />
+   407→    )}
+   408→  </section>
+   409→
+   410→  <!-- ===== OUR STORY / CEO LETTER ===== -->
+   411→  <OurStory />
+   412→
+   413→  <!-- ===== INTEGRATIONS ===== -->
+   414→  <section id="integrations">
+   415→    {
+   416→      homepageData.integrations.enable && (
+   417→        <section class="section relative isolate max-md:overflow-hidden">
+   418→          <div class="container-sm">
+   419→            <div class="section-container">
+   420→              <div class="section-intro centralize">
+   421→                <h2 class="title hasHighlight" set:html={markdownify(homepageData.integrations.title)} />
+   422→              </div>
+   423→              <div class="section-content">
+   424→                <div class="flex items-center justify-center flex-wrap [&>div]:-ml-5">
+   425→                  {homepageData.integrations.items.map((item: any) => (
+   426→                    <div class="size-35 bg-text-light/10 backdrop-blur-xl rounded-full grid place-items-center">
+   427→                      <ImageMod src={item.image} alt={item.alt} class="max-h-14 object-contain" />
+   428→                    </div>
+   429→                  ))}
+   430→                </div>
+   431→              </div>
+   432→            </div>
+   433→          </div>
+   434→          <div class="absolute inset-0 grid place-items-center size-full -z-10">
+   435→            <div class="size-180 xl:size-225 bg-radial from-primary-light/40 to-transparent from-0% to-70% rounded-full" />
+   436→          </div>
+   437→        </section>
+   438→      )
+   439→    }
+   440→  </section>
+   441→
+   442→  <!-- ===== LEAD GENERATION ===== -->
+   443→  {
+   444→    homepageData.lead_generation.enable && (
+   445→      <LeadGeneration lead_generation={homepageData.lead_generation} />
+   446→    )
+   447→  }
+   448→
+   449→  <!-- ===== PRICING ===== -->
+   450→  <section id="pricing">
+   451→    {homepageData.pricing.enable && (
+   452→      <PricingSection title={homepageData.pricing.title} content={homepageData.pricing.content} />
+   453→    )}
+   454→  </section>
+   455→
+   456→  <!-- ===== TESTIMONIALS GRID ===== -->
+   457→  <section id="testimonials">
+   458→    <Testimonial />
+   459→  </section>
+   460→
+   461→  <!-- ===== FAQ ===== -->
+   462→  <section id="faq">
+   463→    <Faq />
+   464→  </section>
+   465→
+   466→  <!-- ===== CONTACT ===== -->
+   467→  <section id="contact" class="section pt-0">
+   468→    <div class="container">
+   469→      <div class="section-container">
+   470→        <div class="section-intro centralize">
+   471→          <h2 class="title hasHighlight">Have a question? <strong>Send us a message</strong></h2>
+   472→          <p class="subtitle">Our team is here to help. Whether you want to learn more about our platform or schedule a demo, we&rsquo;re ready to assist you.</p>
+   473→        </div>
+   474→      </div>
+   475→      <div class="row g-7 max-lg:gap-5">
+   476→        <div class="col-12 lg:col-5">
+   477→          <div class="flex flex-col gap-5">
+   478→            {contactData.contact_info?.items.map((item) => {
+   479→              const Container = item.type === "calendar" ? "div" : "a";
+   480→              const href = item.link || (item.type === "email" ? `mailto:${item.detail}` : item.type === "phone" ? `tel:${item.detail}` : undefined);
+   481→              return (
+   482→                <Container
+   483→                  href={Container === "a" ? href : undefined}
+   484→                  class="flex flex-col gap-5 p-7 md:p-8 bg-white/5 rounded-2xl cursor-pointer hover:bg-white/10 transition-all duration-300 ring-1 ring-white/10 hover:ring-primary/50 group hover:scale-[1.02]"
+   485→                >
+   486→                  <div class="w-10 h-10 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+   487→                    <DynamicIcon icon={item.icon ?? ""} className="w-10 h-10 text-white" />
+   488→                  </div>
+   489→                  <div class="flex flex-col gap-3">
+   490→                    <h3 class="font-secondary font-bold text-2xl text-white">{item.title}</h3>
+   491→                    <p class="text-text text-lg">{item.detail}</p>
+   492→                  </div>
+   493→                </Container>
+   494→              );
+   495→            })}
+   496→          </div>
+   497→        </div>
+   498→        <div class="col-12 lg:col-7">
+   499→          <div class="p-8 md:p-10 bg-white/5 rounded-2xl">
+   500→            <form id="contact-form" novalidate class="flex flex-col gap-10">
+   501→              <div class="flex flex-col gap-5">
+   502→                <div class="relative">
+   503→                  <input type="text" name="name" placeholder="Name" required class="w-full rounded-full bg-white/5 backdrop-blur-[44px] px-8 py-5 border border-border text-white placeholder:text-text-dark focus:border-primary focus:outline-none transition-colors" />
+   504→                </div>
+   505→                <div class="relative">
+   506→                  <input type="email" name="email" placeholder="Email Address" required class="w-full rounded-full bg-white/5 backdrop-blur-[44px] px-8 py-5 border border-border text-white placeholder:text-text-dark focus:border-primary focus:outline-none transition-colors" />
+   507→                </div>
+   508→                <div class="relative">
+   509→                  <input type="tel" name="phone" placeholder="Phone number" required class="w-full rounded-full bg-white/5 backdrop-blur-[44px] px-8 py-5 border border-border text-white placeholder:text-text-dark focus:border-primary focus:outline-none transition-colors" />
+   510→                </div>
+   511→                <div class="relative">
+   512→                  <textarea name="message" placeholder="Write your message..." rows={4} required class="w-full rounded-[20px] bg-white/5 backdrop-blur-[44px] px-8 py-5 border border-border text-white placeholder:text-text-dark focus:border-primary focus:outline-none transition-colors resize-none"></textarea>
+   513→                </div>
+   514→              </div>
+   515→              <div class="flex flex-col gap-6">
+   516→                <div id="form-success" class="hidden rounded-2xl bg-green-500/10 border border-green-500/30 px-6 py-4 text-green-400 text-base">
+   517→                  Message sent! We&rsquo;ll be in touch shortly.
+   518→                </div>
+   519→                <div id="form-error" class="hidden rounded-2xl bg-red-500/10 border border-red-500/30 px-6 py-4 text-red-400 text-base">
+   520→                  <span id="form-error-text">Something went wrong. Please try again.</span>
+   521→                </div>
+   522→                <button type="submit" id="contact-submit" class="btn btn-primary w-full py-4 text-lg font-medium transition-opacity disabled:opacity-60 disabled:cursor-not-allowed">
+   523→                  <span id="submit-label">Send Message</span>
+   524→                  <span id="submit-loading" class="hidden">Sending...</span>
+   525→                </button>
+   526→              </div>
+   527→            </form>
+   528→          </div>
+   529→        </div>
+   530→      </div>
+   531→    </div>
+   532→  </section>
+   533→
+   534→  <!-- ===== CALL TO ACTION ===== -->
+   535→  <CallToAction />
+   536→</Base>
+   537→
+   538→<script>
+   539→  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+   540→  const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement | null;
+   541→  const submitLabel = document.getElementById("submit-label");
+   542→  const submitLoading = document.getElementById("submit-loading");
+   543→  const successEl = document.getElementById("form-success");
+   544→  const errorEl = document.getElementById("form-error");
+   545→  const errorText = document.getElementById("form-error-text");
+   546→
+   547→  function setLoading(loading: boolean) {
+   548→    if (!submitBtn || !submitLabel || !submitLoading) return;
+   549→    submitBtn.disabled = loading;
+   550→    submitLabel.classList.toggle("hidden", loading);
+   551→    submitLoading.classList.toggle("hidden", !loading);
+   552→  }
+   553→
+   554→  form?.addEventListener("submit", async (e) => {
+   555→    e.preventDefault();
+   556→    successEl?.classList.add("hidden");
+   557→    errorEl?.classList.add("hidden");
+   558→    const formData = new FormData(form);
+   559→    setLoading(true);
+   560→    try {
+   561→      const res = await fetch("/api/contact", {
+   562→        method: "POST",
+   563→        headers: { "Content-Type": "application/json" },
+   564→        body: JSON.stringify({
+   565→          name: formData.get("name"),
+   566→          email: formData.get("email"),
+   567→          phone: formData.get("phone"),
+   568→          message: formData.get("message"),
+   569→        }),
+   570→      });
+   571→      const json = await res.json().catch(() => ({}));
+   572→      if (res.ok && json.success) {
+   573→        successEl?.classList.remove("hidden");
+   574→        errorEl?.classList.add("hidden");
+   575→        form.reset();
+   576→      } else {
+   577→        errorEl?.classList.remove("hidden");
+   578→        successEl?.classList.add("hidden");
+   579→        if (errorText && json.error) errorText.textContent = json.error;
+   580→      }
+   581→    } catch {
+   582→      errorEl?.classList.remove("hidden");
+   583→      successEl?.classList.add("hidden");
+   584→    } finally {
+   585→      setLoading(false);
+   586→    }
+   587→  });
+   588→
+   589→  // Smooth scroll for anchor links
+   590→  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+   591→    anchor.addEventListener('click', function (e) {
+   592→      const href = (this as HTMLAnchorElement).getAttribute('href');
+   593→      if (href === '#') return;
+   594→      e.preventDefault();
+   595→      const target = document.querySelector(href);
+   596→      if (target) {
+   597→        target.scrollIntoView({ behavior: 'smooth' });
+   598→        // Close mobile menu if open
+   599→        const navToggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+   600→        if (navToggle?.checked) navToggle.checked = false;
+   601→      }
+   602→    });
+   603→  });
+   604→</script>
+   605→

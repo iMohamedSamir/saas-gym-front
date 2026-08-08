@@ -1,0 +1,529 @@
+     1→    50→    50→    50→        content:
+     2→    51→    51→    51→          "Log in to a single powerful dashboard to manage everything seamlessly.",
+     3→    52→    52→    52→        items: [
+     4→    53→    53→    53→          {
+     5→    54→    54→    54→            logo: "/images/value-proposition/values-icon-1.svg",
+     6→    55→    55→    55→            title: "Automated Customer Follow-Up",
+     7→    56→    56→    56→            list: [
+     8→    57→    57→    57→              { value: "Missed Call Auto-Responder" },
+     9→    58→    58→    58→              { value: "24/7 Appointment Scheduler" },
+    10→    59→    59→    59→              { value: "Instant SMS & Email Follow-Up" },
+    11→    60→    60→    60→            ],
+    12→    61→    61→    61→          },
+    13→    62→    62→    62→          {
+    14→    63→    63→    63→            logo: "/images/value-proposition/values-icon-2.svg",
+    15→    64→    64→    64→            title: "Smart Customer Database",
+    16→    65→    65→    65→            list: [
+    17→    66→    66→    66→              { value: "Unified Lead Inbox" },
+    18→    67→    67→    67→              { value: "Smart Pipeline Manager" },
+    19→    68→    68→    68→              { value: "Client Notes & History" },
+    20→    69→    69→    69→            ],
+    21→    70→    70→    70→          },
+    22→    71→    71→    71→          {
+    23→    72→    72→    72→            logo: "/images/value-proposition/values-icon-3.svg",
+    24→    73→    73→    73→            title: "Autopilot Review Generator",
+    25→    74→    74→    74→            list: [
+    26→    75→    75→    75→              { value: "Automated Review Requests" },
+    27→    76→    76→    76→              { value: "Google & Facebook Integration" },
+    28→    77→    77→    77→              { value: "Reputation Tracking" },
+    29→    78→    78→    78→            ],
+    30→    79→    79→    79→          },
+    31→    80→    80→    80→          {
+    32→    81→    81→    81→            logo: "/images/value-proposition/values-icon-4.svg",
+    33→    82→    82→    82→            title: "High-Converting Websites",
+    34→    83→    83→    83→            list: [
+    35→    84→    84→    84→              { value: "Drag-and-Drop Landing Pages" },
+    36→    85→    85→    85→              { value: "Lead Capture Forms" },
+    37→    86→    86→    86→              { value: "Web Chat Widgets" },
+    38→    87→    87→    87→            ],
+    39→    88→    88→    88→          },
+    40→    89→    89→    89→        ],
+    41→    90→    90→    90→      },
+    42→    91→    91→    91→      our_features: {
+    43→    92→    92→    92→        enable: true,
+    44→    93→    93→    93→        title:
+    45→    94→    94→    94→          "Everything You Need To Put Growth On <strong>Autopilot</strong>",
+    46→    95→    95→    95→        content:
+    47→    96→    96→    96→          "From capturing the very first click to securing a 5-star review, we've got you covered.",
+    48→    97→    97→    97→        items: [
+    49→    98→    98→    98→          { logo: "/images/features-menu-icon.svg", title: "Automated Customer Follow-up", is_starred: false },
+    50→    99→    99→    99→          { logo: "/images/features-menu-icon.svg", title: "Autopilot Review Generator", is_starred: false },
+    51→   100→   100→   100→          { logo: "/images/features-menu-icon.svg", title: "Missed Call Auto-Responder", is_starred: false },
+    52→   101→   101→   101→          { logo: "/images/features-menu-icon.svg", title: "24/7 Appointment Scheduler", is_starred: false },
+    53→   102→   102→   102→          { logo: "/images/features-menu-icon.svg", title: "Unified Lead Inbox", is_starred: true },
+    54→   103→   103→   103→          { logo: "/images/features-menu-icon.svg", title: "Smart Customer Database", is_starred: false },
+    55→   104→   104→   104→          { logo: "/images/features-menu-icon.svg", title: "High-Converting Websites", is_starred: false },
+    56→   105→   105→   105→          { logo: "/images/features-menu-icon.svg", title: "Drag & Drop Forms", is_starred: false },
+    57→   106→   106→   106→          { logo: "/images/features-menu-icon.svg", title: "Automated Text Campaigns", is_starred: false },
+    58→   107→   107→   107→        ],
+    59→   108→   108→   108→      },
+    60→   109→   109→   109→      testimonial_quote: {
+    61→   110→   110→   110→        enable: true,
+    62→   111→   111→   111→        title:
+    63→   112→   112→   112→          "We know you didn't start your local business to become a full-time <strong>Software Engineer</strong>",
+    64→   113→   113→   113→        quote:
+    65→   114→   114→   114→          'Before this system, I was losing half my leads simply because I couldn\'t get to my phone fast enough while on jobs. Now, the system handles the follow-up for me, and I\'ve seen a 300% jump in bookings.',
+    66→   115→   115→   115→      },
+    67→   116→   116→   116→      single_testimonial: {
+    68→   117→   117→   117→        enable: true,
+    69→   118→   118→   118→        stats: [
+    70→   119→   119→   119→          { value: "10,000+", label: "Lead Captured" },
+    71→   120→   120→   120→          { value: "5x Faster", label: "Response Time" },
+    72→   121→   121→   121→          { value: "28hr/week", label: "Hours Saved" },
+    73→   122→   122→   122→        ],
+    74→   123→   123→   123→        testimonial: {
+    75→   124→   124→   124→          quote:
+    76→   125→   125→   125→            "This all-in-one software is exactly what our local business needed. It completely eliminated our need for 4 other separate platforms and organized our entire customer pipeline.",
+    77→   126→   126→   126→          avatar: "/images/avatar.png",
+    78→   127→   127→   127→          name: "Ronald Richards",
+    79→   128→   128→   128→          company: "Local Services Co.",
+    80→   129→   129→   129→        },
+    81→   130→   130→   130→      },
+    82→   131→   131→   131→      growth_process: {
+    83→   132→   132→   132→        enable: true,
+    84→   133→   133→   133→        title:
+    85→   134→   134→   134→          'Your 3-Step Path to <strong class="italic">Automated Growth</strong>',
+    86→   135→   135→   135→        items: [
+    87→   136→   136→   136→          {
+    88→   137→   137→   137→            logo: "/images/value-proposition/values-icon-2.svg",
+    89→   138→   138→   138→            title: "1. Start Your Trial",
+    90→   139→   139→   139→            content:
+    91→   140→   140→   140→              "Sign up for a free trial and experience the power of the platform for yourself. No credit card required.",
+    92→   141→   141→   141→          },
+    93→   142→   142→   142→          {
+    94→   143→   143→   143→            logo: "/images/value-proposition/values-icon-2.svg",
+    95→   144→   144→   144→            title: "2. Connect Your Business",
+    96→   145→   145→   145→            content:
+    97→   146→   146→   146→              "Forward your calls, plug in your social accounts, and unify your inbox in a matter of clicks.",
+    98→   147→   147→   147→          },
+    99→   148→   148→   148→          {
+   100→   149→   149→   149→            logo: "/images/value-proposition/values-icon-2.svg",
+   101→   150→   150→   150→            title: "3. Scale on Autopilot",
+   102→   151→   151→   151→            content:
+   103→   152→   152→   152→              "Watch your calendar fill up and reviews come in automatically, so you can focus on serving your customers.",
+   104→   153→   153→   153→          },
+   105→   154→   154→   154→        ],
+   106→   155→   155→   155→        button: {
+   107→   156→   156→   156→          enable: true,
+   108→   157→   157→   157→          label: "Start Your 14-Day Free Trial",
+   109→   158→   158→   158→          link: "#pricing",
+   110→   159→   159→   159→        },
+   111→   160→   160→   160→      },
+   112→   161→   161→   161→      integrations: {
+   113→   162→   162→   162→        enable: true,
+   114→   163→   163→   163→        title: "Connect all your <strong>Applications</strong>",
+   115→   164→   164→   164→        items: [
+   116→   165→   165→   165→          { image: "/images/integrations/snapchat.png", alt: "snapchat" },
+   117→   166→   166→   166→          { image: "/images/integrations/fastapi.png", alt: "fastapi" },
+   118→   167→   167→   167→          { image: "/images/integrations/youtube.png", alt: "youtube" },
+   119→   168→   168→   168→          { image: "/images/integrations/airtable.png", alt: "airtable" },
+   120→   169→   169→   169→          { image: "/images/integrations/zendesk.png", alt: "zendesk" },
+   121→   170→   170→   170→          { image: "/images/integrations/slack.png", alt: "slack" },
+   122→   171→   171→   171→          { image: "/images/integrations/mailchimp.png", alt: "mailchimp" },
+   123→   172→   172→   172→          { image: "/images/integrations/asana.png", alt: "asana" },
+   124→   173→   173→   173→        ],
+   125→   174→   174→   174→      },
+   126→   175→   175→   175→      lead_generation: {
+   127→   176→   176→   176→        enable: true,
+   128→   177→   177→   177→        title: "Free Resource for <strong>Local Business Owners</strong>",
+   129→   178→   178→   178→        subtitle:
+   130→   179→   179→   179→          'The "Leaking Bucket" Audit: 5 Ways You\'re Losing Local Leads (And How to Fix Them).',
+   131→   180→   180→   180→        content:
+   132→   181→   181→   181→          'Did you know that most small businesses lose up to 50% of their potential sales simply because of slow follow-up?\n\nDownload our <strong>FREE</strong> Checklist to identify the "lead leaks" in your current business and learn how to plug them with simple software automation.',
+   133→   182→   182→   182→        list: [
+   134→   183→   183→   183→          { value: "<strong>The Follow-Up Audit:</strong> A step-by-step guide to measuring your lead response time." },
+   135→   184→   184→   184→          { value: "<strong>Automation Quick-Wins:</strong> 3 workflows you can set up today to start booking more local appointments." },
+   136→   185→   185→   185→          { value: "<strong>The Tech Stack Check:</strong> Stop paying for 5 different software tools." },
+   137→   186→   186→   186→        ],
+   138→   187→   187→   187→        image: "/images/ebook.png",
+   139→   188→   188→   188→        button: {
+   140→   189→   189→   189→          enable: true,
+   141→   190→   190→   190→          label: "Get Free Checklist",
+   142→   191→   191→   191→          link: "#contact",
+   143→   192→   192→   192→        },
+   144→   193→   193→   193→      },
+   145→   194→   194→   194→      pricing: {
+   146→   195→   195→   195→        enable: true,
+   147→   196→   196→   196→        title: "Affordable <strong>Pricing Plans</strong>",
+   148→   197→   197→   197→        content:
+   149→   198→   198→   198→          "Choose the plan that fits your local business and start growing automatically.",
+   150→   199→   199→   199→      },
+   151→   200→   200→   200→    },
+   152→   201→   201→   201→  });
+   153→   202→   202→   202→
+   154→   203→   203→   203→  // --- About ---
+   155→   204→   204→   204→  await payload.create({
+   156→   205→   205→   205→    collection: "about",
+   157→   206→   206→   206→    data: {
+   158→   207→   207→   207→      title: "About Us",
+   159→   208→   208→   208→      meta_title: "About Us - All-In-One Local Business Software",
+   160→   209→   209→   209→      description: "Your System-Driven Growth Partner.",
+   161→   210→   210→   210→      page_header: {
+   162→   211→   211→   211→        title: "Your System-Driven <strong>Growth Partner.</strong>",
+   163→   212→   212→   212→        subtitle:
+   164→   213→   213→   213→          "We believe local businesses shouldn't have to hire a full-time IT department just to get more customers. We built this platform to put your growth on autopilot.",
+   165→   214→   214→   214→        image: "/images/about_hero.png",
+   166→   215→   215→   215→      },
+   167→   216→   216→   216→      stats: {
+   168→   217→   217→   217→        enable: true,
+   169→   218→   218→   218→        items: [
+   170→   219→   219→   219→          { value: "10,000+", label: "Local Businesses Served" },
+   171→   220→   220→   220→          { value: "5M+", label: "Leads Captured" },
+   172→   221→   221→   221→          { value: "24/7", label: "Automated Workflows" },
+   173→   222→   222→   222→          { value: "99%", label: "Platform Uptime" },
+   174→   223→   223→   223→        ],
+   175→   224→   224→   224→      },
+   176→   225→   225→   225→      our_team: {
+   177→   226→   226→   226→        enable: true,
+   178→   227→   227→   227→        badge: "Our Team",
+   179→   228→   228→   228→        title: "Meet Our <strong>Team Of Experts</strong>",
+   180→   229→   229→   229→        members: [
+   181→   230→   230→   230→          { image: "/images/peoples/Profile Image.png", name: "Josh Wangombe", role: "Co-Founder & CTO" },
+   182→   231→   231→   231→          { image: "/images/peoples/Profile Image-1.png", name: "Daniel Jenson", role: "Co-Founder & CEO" },
+   183→   232→   232→   232→          { image: "/images/peoples/Profile Image-2.png", name: "Toun Aalbers", role: "Co-Founder & CTO" },
+   184→   233→   233→   233→          { image: "/images/peoples/Profile Image-3.png", name: "Peter van Ursel", role: "Customer Success Director" },
+   185→   234→   234→   234→        ],
+   186→   235→   235→   235→      },
+   187→   236→   236→   236→      core_values: {
+   188→   237→   237→   237→        enable: true,
+   189→   238→   238→   238→        badge: "Our Core Mission",
+   190→   239→   239→   239→        title: "Empowering Local Businesses to <strong>Thrive and Scale</strong>",
+   191→   240→   240→   240→        subtitle:
+   192→   241→   241→   241→          "We replace the outdated, scattered tools with one powerful platform, so you can focus on what matters most: serving your clients and customers.",
+   193→   242→   242→   242→        items: [
+   194→   243→   243→   243→          { logo: "/images/icons/innovation.svg", title: "Simplicity First", is_starred: false },
+   195→   244→   244→   244→          { logo: "/images/icons/security.svg", title: "Bank-Level Security", is_starred: false },
+   196→   245→   245→   245→          { logo: "/images/icons/collaboration.svg", title: "Local Focus", is_starred: false },
+   197→   246→   246→   246→          { logo: "/images/icons/result-driven.svg", title: "Results-Driven Tools", is_starred: false },
+   198→   247→   247→   247→          { logo: "/images/icons/creativity.svg", title: "Automated Growth", is_starred: true },
+   199→   248→   248→   248→          { logo: "/images/icons/innovation.svg", title: "Client-Centric", is_starred: false },
+   200→   249→   249→   249→          { logo: "/images/icons/membership.svg", title: "No Hidden Fees", is_starred: false },
+   201→   250→   250→   250→          { logo: "/images/icons/starred-folder.svg", title: "Reliable Support", is_starred: false },
+   202→   251→   251→   251→          { logo: "/images/features-menu-icon.svg", title: "Continuous Updates", is_starred: false },
+   203→   252→   252→   252→        ],
+   204→   253→   253→   253→      },
+   205→   254→   254→   254→    },
+   206→   255→   255→   255→  });
+   207→   256→   256→   256→
+   208→   257→   257→   257→  // --- Features ---
+   209→   258→   258→   258→  await payload.create({
+   210→   259→   259→   259→    collection: "features",
+   211→   260→   260→   260→    data: {
+   212→   261→   261→   261→      title: "Features",
+   213→   262→   262→   262→      meta_title: "Features - The All-In-One Growth Software",
+   214→   263→   263→   263→      description:
+   215→   264→   264→   264→        "Everything your local business needs to attract, engage, convert, and retain customers automatically.",
+   216→   265→   265→   265→      banner: {
+   217→   266→   266→   266→        title: "Features That Turn <br /> Attention <strong>Into Revenue</strong>",
+   218→   267→   267→   267→        content:
+   219→   268→   268→   268→          "A single piece of software built to manage your entire business on autopilot. Say goodbye to scattered tools and forgotten leads.",
+   220→   269→   269→   269→        image: "/images/automark_dashboard.png",
+   221→   270→   270→   270→        button_primary: { enable: true, label: "Start Free Trial", link: "#pricing" },
+   222→   271→   271→   271→        button_secondary: { enable: true, label: "Book a Demo", link: "#contact" },
+   223→   272→   272→   272→      },
+   224→   273→   273→   273→      partners: {
+   225→   274→   274→   274→        enable: true,
+   226→   275→   275→   275→        badge: "Trusted Platform",
+   227→   276→   276→   276→        title: "Powering thousands of <strong>local businesses</strong> worldwide",
+   228→   277→   277→   277→      },
+   229→   278→   278→   278→      smart_platform: {
+   230→   279→   279→   279→        enable: true,
+   231→   280→   280→   280→        title: "Automate every part of your <br /> business with <strong>one smart platform.</strong>",
+   232→   281→   281→   281→        cards: [
+   233→   282→   282→   282→          { title: "Automated Customer Follow-Up", subtitle: "Never lose a lead again. Respond to inquiries instantly and automatically.", image: "/images/features/automated-marketing-visual.svg", classNames: "" },
+   234→   283→   283→   283→          { title: "Autopilot Review Generator", subtitle: "Automatically request and track 5-star Google reviews from happy clients.", image: "/images/features/ai-powered-graph.svg", classNames: "" },
+   235→   284→   284→   284→          { title: "Missed Call Auto-Responder", subtitle: "Turn missed calls into booked appointments with instant automated text messages.", image: "/images/features/grow-your-earnings.svg", classNames: "" },
+   236→   285→   285→   285→          { title: "Unified Lead Inbox", subtitle: "Manage all your SMS, email, Facebook, and Instagram messages in one single dashboard.", image: "/images/features/turnover-table.svg", classNames: "md:col-span-2 lg:col-span-2" },
+   237→   286→   286→   286→          { title: "24/7 Appointment Scheduler", subtitle: "Let customers book directly on your calendar, completely eliminating back-and-forth emails.", image: "/images/features/marketing-autopilot.svg", classNames: "" },
+   238→   287→   287→   287→        ],
+   239→   288→   288→   288→      },
+   240→   289→   289→   289→      service_features: {
+   241→   290→   290→   290→        enable: true,
+   242→   291→   291→   291→        items: [
+   243→   292→   292→   292→          {
+   244→   293→   293→   293→            title: "Built specifically to grow <strong>your local business</strong>",
+   245→   294→   294→   294→            image: "/images/features/service-feature-1.svg",
+   246→   295→   295→   295→            reverse: false,
+   247→   296→   296→   296→            items: [
+   248→   297→   297→   297→              { icon: "FaBolt", title: "Setup in Minutes", content: "Get up and running immediately with our pre-built local business templates." },
+   249→   298→   298→   298→              { icon: "FaBrain", title: "Automated Intelligence", content: "Smart workflows that automatically sort, nurture and follow up with your leads." },
+   250→   299→   299→   299→              { icon: "FaLock", title: "Secure & Reliable", content: "Your client database and payment info is protected with bank-level encryption." },
+   251→   300→   300→   300→              { icon: "FaCubes", title: "All Tools In One Place", content: "Replace your CRM, website builder, calendar, and email marketing software." },
+   252→   301→   301→   301→            ],
+   253→   302→   302→   302→          },
+   254→   303→   303→   303→          {
+   255→   304→   304→   304→            title: "The only software you need to <strong>scale predictably</strong>",
+   256→   305→   305→   305→            image: "/images/features/service-feature-2.svg",
+   257→   306→   306→   306→            reverse: true,
+   258→   307→   307→   307→            items: [
+   259→   308→   308→   308→              { icon: "FaChartSimple", title: "Clear ROI Tracking", content: "See exactly which campaigns and ads are generating the most revenue." },
+   260→   309→   309→   309→              { icon: "FaRocket", title: "Easy to Use", content: "Designed for business owners, not IT professionals. Simple and intuitive." },
+   261→   310→   310→   310→              { icon: "FaShieldHalved", title: "Complete Client History", content: "View every text, email, and phone call with a client in a single chronological feed." },
+   262→   311→   311→   311→              { icon: "FaTableCellsLarge", title: "Mobile App Access", content: "Manage leads, reply to messages, and run your business from anywhere using our mobile app." },
+   263→   312→   312→   312→            ],
+   264→   313→   313→   313→          },
+   265→   314→   314→   314→        ],
+   266→   315→   315→   315→      },
+   267→   316→   316→   316→    },
+   268→   317→   317→   317→  });
+   269→   318→   318→   318→
+   270→   319→   319→   319→  // --- Contact ---
+   271→   320→   320→   320→  await payload.create({
+   272→   321→   321→   321→    collection: "contact",
+   273→   322→   322→   322→    data: {
+   274→   323→   323→   323→      title: "Contact Us",
+   275→   324→   324→   324→      meta_title: "Contact Us - All-In-One Local Business Software",
+   276→   325→   325→   325→      description: "Have a question about streamlining your business? Send us a message.",
+   277→   326→   326→   326→      page_header: {
+   278→   327→   327→   327→        title: "Have a question? <strong>Send us a message</strong>",
+   279→   328→   328→   328→        subtitle:
+   280→   329→   329→   329→          "Our team is here to help. Whether you want to learn more about the Missed Call Auto-Responder, or how to set up your Unified Inbox, our support team is ready to assist you.",
+   281→   330→   330→   330→      },
+   282→   331→   331→   331→      contact_info: {
+   283→   332→   332→   332→        enable: true,
+   284→   333→   333→   333→        items: [
+   285→   334→   334→   334→          { type: "email", title: "Email Us", detail: "hello@yoursoftware.com", link: "mailto:hello@yoursoftware.com", icon: "FaEnvelope" },
+   286→   335→   335→   335→          { type: "phone", title: "Call or Text Us", detail: "+1 (800) 123-4567", link: "tel:+18001234567", icon: "FaPhone" },
+   287→   336→   336→   336→          { type: "calendar", title: "Book A Demo", detail: "Schedule your one-on-one setup call", link: "https://api.leadconnectorhq.com/widget/booking/huqDO6gbH3SQmdp73TjE", icon: "FaCalendarCheck" },
+   288→   337→   337→   337→        ],
+   289→   338→   338→   338→      },
+   290→   339→   339→   339→    },
+   291→   340→   340→   340→  });
+   292→   341→   341→   341→
+   293→   342→   342→   342→  // --- Pricing ---
+   294→   343→   343→   343→  await payload.create({
+   295→   344→   344→   344→    collection: "pricing",
+   296→   345→   345→   345→    data: {
+   297→   346→   346→   346→      title: "Pricing",
+   298→   347→   347→   347→      meta_title: "Pricing - All-In-One Local Business Software",
+   299→   348→   348→   348→      description: "Simple, transparent pricing for every stage of your local business growth.",
+   300→   349→   349→   349→      page_header: {
+   301→   350→   350→   350→        badge: "Pricing",
+   302→   351→   351→   351→        title: "Pricing Built For Local Business Growth",
+   303→   352→   352→   352→        content: "Start your free 14-day trial, scale as you grow. No contracts. Cancel anytime.",
+   304→   353→   353→   353→      },
+   305→   354→   354→   354→      toggler: {
+   306→   355→   355→   355→        monthly_label: "Monthly",
+   307→   356→   356→   356→        yearly_label: "Yearly",
+   308→   357→   357→   357→      },
+   309→   358→   358→   358→      plans: [
+   310→   359→   359→   359→        {
+   311→   360→   360→   360→          title: "Essentials",
+   312→   361→   361→   361→          price: "97",
+   313→   362→   362→   362→          yearly_price: "970",
+   314→   363→   363→   363→          is_featured: false,
+   315→   364→   364→   364→          description: "The core necessities for organizing your leads and capturing more business.",
+   316→   365→   365→   365→          button: { enable: true, label: "Start Free Trial", link: "#contact" },
+   317→   366→   366→   366→          features: [
+   318→   367→   367→   367→            { label: "Unified Lead Inbox", included: true },
+   319→   368→   368→   368→            { label: "Missed Call Auto-Responder", included: true, tooltip: "Automatically text back missed calls." },
+   320→   369→   369→   369→            { label: "Autopilot Review Generator", included: true },
+   321→   370→   370→   370→            { label: "24/7 Appointment Scheduler", included: false },
+   322→   371→   371→   371→            { label: "Automated Follow-Up Campaigns", included: false },
+   323→   372→   372→   372→          ],
+   324→   373→   373→   373→        },
+   325→   374→   374→   374→        {
+   326→   375→   375→   375→          title: "Growth",
+   327→   376→   376→   376→          price: "297",
+   328→   377→   377→   377→          yearly_price: "2970",
+   329→   378→   378→   378→          is_featured: true,
+   330→   379→   379→   379→          offer_text: "Most Popular",
+   331→   380→   380→   380→          description: "Everything you need to put your business growth on complete autopilot.",
+   332→   381→   381→   381→          button: { enable: true, label: "Start Free Trial", link: "#contact" },
+   333→   382→   382→   382→          features: [
+   334→   383→   383→   383→            { label: "Unified Lead Inbox & Reviews", included: true },
+   335→   384→   384→   384→            { label: "24/7 Appointment Scheduler", included: true, tooltip: "Unlimited calendars and bookings." },
+   336→   385→   385→   385→            { label: "Automated Follow-Up Campaigns", included: true },
+   337→   386→   386→   386→            { label: "High-Converting Websites & Funnels", included: true },
+   338→   387→   387→   387→            { label: "Advanced API Integrations", included: false },
+   339→   388→   388→   388→          ],
+   340→   389→   389→   389→        },
+   341→   390→   390→   390→        {
+   342→   391→   391→   391→          title: "Scale",
+   343→   392→   392→   392→          price: "497",
+   344→   393→   393→   393→          yearly_price: "4970",
+   345→   394→   394→   394→          is_featured: false,
+   346→   395→   395→   395→          description: "Total control and advanced tools to scale multiple locations seamlessly.",
+   347→   396→   396→   396→          button: { enable: true, label: "Start Free Trial", link: "#contact" },
+   348→   397→   397→   397→          features: [
+   349→   398→   398→   398→            { label: "Everything in Growth", included: true },
+   350→   399→   399→   399→            { label: "Unlimited Social Media Posting", included: true, tooltip: "Schedule content across all platforms." },
+   351→   400→   400→   400→            { label: "Advanced API Integrations", included: true },
+   352→   401→   401→   401→            { label: "Multi-Location Support", included: true },
+   353→   402→   402→   402→            { label: "Dedicated Account Manager", included: true },
+   354→   403→   403→   403→          ],
+   355→   404→   404→   404→        },
+   356→   405→   405→   405→      ],
+   357→   406→   406→   406→      comparison: {
+   358→   407→   407→   407→        enable: true,
+   359→   408→   408→   408→        badge: "Plan Matrix",
+   360→   409→   409→   409→        title: "Pricing Plans <strong>Comparison</strong>",
+   361→   410→   410→   410→        headers: [
+   362→   411→   411→   411→          { label: "Features" },
+   363→   412→   412→   412→          { label: "Essentials" },
+   364→   413→   413→   413→          { label: "Growth" },
+   365→   414→   414→   414→          { label: "Scale" },
+   366→   415→   415→   415→        ],
+   367→   416→   416→   416→        rows: [
+   368→   417→   417→   417→          { feature: "Monthly Price", values: [{ value: "$97" }, { value: "$297" }, { value: "$497" }] },
+   369→   418→   418→   418→          { feature: "User Accounts", values: [{ value: "3" }, { value: "10" }, { value: "Unlimited" }] },
+   370→   419→   419→   419→          { feature: "Unified Lead Inbox", values: [{ value: "true" }, { value: "true" }, { value: "true" }] },
+   371→   420→   420→   420→          { feature: "Missed Call Auto-Responder", values: [{ value: "true" }, { value: "true" }, { value: "true" }] },
+   372→   421→   421→   421→          { feature: "Autopilot Review Generator", values: [{ value: "true" }, { value: "true" }, { value: "true" }] },
+   373→   422→   422→   422→          { feature: "24/7 Appointment Scheduler", values: [{ value: "false" }, { value: "true" }, { value: "true" }] },
+   374→   423→   423→   423→          { feature: "Website & Funnel Builder", values: [{ value: "false" }, { value: "true" }, { value: "true" }] },
+   375→   424→   424→   424→          { feature: "Automated SMS/Email Campaigns", values: [{ value: "false" }, { value: "true" }, { value: "true" }] },
+   376→   425→   425→   425→          { feature: "Multi-Location Management", values: [{ value: "false" }, { value: "false" }, { value: "true" }] },
+   377→   426→   426→   426→          { feature: "Support", values: [{ value: "Email Support" }, { value: "Priority Support" }, { value: "Dedicated Manager" }] },
+   378→   427→   427→   427→        ],
+   379→   428→   428→   428→      },
+   380→   429→   429→   429→    },
+   381→   430→   430→   430→  });
+   382→   431→   431→   431→
+   383→   432→   432→   432→  // --- Testimonials ---
+   384→   433→   433→   433→  await payload.create({
+   385→   434→   434→   434→    collection: "testimonial-section",
+   386→   435→   435→   435→    data: {
+   387→   436→   436→   436→      enable: true,
+   388→   437→   437→   437→      title: "Real Stories From Local <strong>Business Owners</strong>",
+   389→   438→   438→   438→      testimonials: [
+   390→   439→   439→   439→        {
+   391→   440→   440→   440→          name: "Marvin McKinney",
+   392→   441→   441→   441→          designation: "Roofing Company Owner",
+   393→   442→   442→   442→          poster: "/images/testimonials/1.png",
+   394→   443→   443→   443→          content: "We used to lose at least 3-4 jobs a week because we couldn't answer the phone while on a roof. The Missed Call Auto-Responder immediately cut that to zero. This software pays for itself a hundred times over.",
+   395→   444→   444→   444→          video: "/showcase.mp4",
+   396→   445→   445→   445→        },
+   397→   446→   446→   446→        {
+   398→   447→   447→   447→          name: "Sarah Jenkins",
+   399→   448→   448→   448→          designation: "Dental Practice Manager",
+   400→   449→   449→   449→          poster: "/images/testimonials/2.png",
+   401→   450→   450→   450→          content: "Our front desk was overwhelmed with appointment reminders and review requests. This system automated everything. Our show-up rate increased by 40% and our Google reviews doubled in two months.",
+   402→   451→   451→   451→          video: "/showcase.mp4",
+   403→   452→   452→   452→        },
+   404→   453→   453→   453→        {
+   405→   454→   454→   454→          name: "David Alaba",
+   406→   455→   455→   455→          designation: "HVAC Contractor",
+   407→   456→   456→   456→          poster: "/images/testimonials/3.png",
+   408→   457→   457→   457→          content: "I finally cancelled my subscription to 5 different tools. Having the Smart Inbox, calendar, and text campaigns in one dashboard saved me nearly $600 a month and made my life so much simpler.",
+   409→   458→   458→   458→        },
+   410→   459→   459→   459→      ],
+   411→   460→   460→   460→    },
+   412→   461→   461→   461→  });
+   413→   462→   462→   462→
+   414→   463→   463→   463→  // --- FAQ ---
+   415→   464→   464→   464→  await payload.create({
+   416→   465→   465→   465→    collection: "faq-section",
+   417→   466→   466→   466→    data: {
+   418→   467→   467→   467→      enable: true,
+   419→   468→   468→   468→      title: "Quick Answers for the Smart Investors",
+   420→   469→   469→   469→      description: "Find answers to common questions about our product and services.",
+   421→   470→   470→   470→      button: {
+   422→   471→   471→   471→        enable: true,
+   423→   472→   472→   472→        label: "Get This Template",
+   424→   473→   473→   473→        link: "https://themefisher.com/products/automark-astro?aff=automarkdemo",
+   425→   474→   474→   474→      },
+   426→   475→   475→   475→      items: [
+   427→   476→   476→   476→        {
+   428→   477→   477→   477→          question: "Is this software hard to set up?",
+   429→   478→   478→   478→          answer: "Not at all. We built this platform specifically for local business owners who aren't tech experts. We provide templates and 1-on-1 support to get you running fast.",
+   430→   479→   479→   479→        },
+   431→   480→   480→   480→        {
+   432→   481→   481→   481→          question: "What if I already have a website?",
+   433→   482→   482→   482→          answer: "You can keep your existing website! Our tools (like the Web Chat Widget and Missed Call Text-Back) easily integrate with WordPress, Wix, and Squarespace with a simple line of code.",
+   434→   483→   483→   483→        },
+   435→   484→   484→   484→        {
+   436→   485→   485→   485→          question: "Can this replace my existing CRM or Mailchimp?",
+   437→   486→   486→   486→          answer: "Yes. Our platform includes a full CRM, unlimited email marketing, and SMS capabilities. Most of our clients cancel 3-5 other software subscriptions when they switch to us.",
+   438→   487→   487→   487→        },
+   439→   488→   488→   488→        {
+   440→   489→   489→   489→          question: "How does the Missed Call Auto-Responder work?",
+   441→   490→   490→   490→          answer: "When a customer calls your business number and you don't answer, the system instantly texts them back (e.g., 'Sorry we missed your call! How can we help you?'). This stops leads from calling your competitors.",
+   442→   491→   491→   491→        },
+   443→   492→   492→   492→        {
+   444→   493→   493→   493→          question: "Are there any hidden fees?",
+   445→   494→   494→   494→          answer: "No hidden fees. You pay a simple flat monthly rate. You may just pay fractional cents directly to telecom providers for your SMS usage, exactly what it costs.",
+   446→   495→   495→   495→        },
+   447→   496→   496→   496→      ],
+   448→   497→   497→   497→    },
+   449→   498→   498→   498→  });
+   450→   499→   499→   499→
+   451→   500→   500→   500→  // --- Brands ---
+   452→   501→   501→   501→  await payload.create({
+   453→   502→   502→   502→    collection: "brands-section",
+   454→   503→   503→   503→    data: {
+   455→   504→   504→   504→      enable: true,
+   456→   505→   505→   505→      title: 'Trusted by <strong class="text-primary">10,000+</strong> local businesses to scale their bookings and growth automatically.',
+   457→   506→   506→   506→      images: [
+   458→   507→   507→   507→        { src: "/images/brands/dropbox-logo-svg-150px.svg", alt: "Dropbox" },
+   459→   508→   508→   508→        { src: "/images/brands/hubspot-logo-svg-150.svg", alt: "HubSpot" },
+   460→   509→   509→   509→        { src: "/images/brands/livechat-logo-svg-150px.svg", alt: "LiveChat" },
+   461→   510→   510→   510→        { src: "/images/brands/pingdom-logo-svg-150px.svg", alt: "Pingdom" },
+   462→   511→   511→   511→        { src: "/images/brands/scapic-logo-svg-150px.svg", alt: "Scapic" },
+   463→   512→   512→   512→      ],
+   464→   513→   513→   513→    },
+   465→   514→   514→   514→  });
+   466→   515→   515→   515→
+   467→   516→   516→   516→  // --- Our Story ---
+   468→   517→   517→   517→  await payload.create({
+   469→   518→   518→   518→    collection: "our-story-section",
+   470→   519→   519→   519→    data: {
+   471→   520→   520→   520→      enable: true,
+   472→   521→   521→   521→      badge: "Our Philosophy",
+   473→   522→   522→   522→      title: "Why We Do What We Do - A Letter From <strong>Our CEO</strong>",
+   474→   523→   523→   523→      ceo: {
+   475→   524→   524→   524→        image: "/images/avatar-lg.png",
+   476→   525→   525→   525→        name: "Ronald Richards",
+   477→   526→   526→   526→        role: "Founder & CEO",
+   478→   527→   527→   527→      },
+   479→   528→   528→   528→      letter: "At Automark, we know you started your local business to serve your community, not to become a software engineer. The problem is most modern marketing tools are too complex, scattered, and disconnected, which leaves you feeling overwhelmed and stuck in the daily admin grind.\n\nWe believe you shouldn't have to pay for five different subscriptions or spend your weekends sending emails just to grow your company. We understand how frustrating it is to watch hard-earned leads slip through the cracks, which is why we built a single, unified platform that puts your follow-ups, reviews, and bookings on complete autopilot.",
+   480→   529→   529→   529→      letter_points_title: "Here's how we do it:",
+   481→   530→   530→   530→      letter_points: [
+   482→   531→   531→   531→        { value: "1. Plug In Your Business Data" },
+   483→   532→   532→   532→        { value: "2. Activate Our Local Workflows" },
+   484→   533→   533→   533→        { value: "3. Watch Your Bookings Grow" },
+   485→   534→   534→   534→      ],
+   486→   535→   535→   535→      closing_content: "Stop wasting money on scattered tools that don't talk to each other, and instead enjoy a streamlined business with consistent, predictable revenue growth.",
+   487→   536→   536→   536→      button: {
+   488→   537→   537→   537→        enable: true,
+   489→   538→   538→   538→        label: "Start Your 14-Day Free Trial",
+   490→   539→   539→   539→        link: "#pricing",
+   491→   540→   540→   540→      },
+   492→   541→   541→   541→    },
+   493→   542→   542→   542→  });
+   494→   543→   543→   543→
+   495→   544→   544→   544→  // --- CTA ---
+   496→   545→   545→   545→  await payload.create({
+   497→   546→   546→   546→    collection: "call-to-action-section",
+   498→   547→   547→   547→    data: {
+   499→   548→   548→   548→      enable: true,
+   500→   549→   549→   549→      title: "Ready to put Your Local Business Growth on <strong>Autopilot?</strong>",
+   501→   550→   550→   550→      description: "Stop wasting thousands on scattered tools that don't convert and start enjoying streamlined, predictable growth.",
+   502→   551→   551→   551→      button: {
+   503→   552→   552→   552→        enable: true,
+   504→   553→   553→   553→        label: "Start Your 14-Days Free Trial",
+   505→   554→   554→   554→        link: "https://themefisher.com/products/automark-astro?aff=automarkdemo",
+   506→   555→   555→   555→      },
+   507→   556→   556→   556→    },
+   508→   557→   557→   557→  });
+   509→   558→   558→   558→
+   510→   559→   559→   559→  // --- Create admin user ---
+   511→   560→   560→   560→  await payload.create({
+   512→   561→   561→   561→    collection: "users",
+   513→   562→   562→   562→    data: {
+   514→   563→   563→   563→      email: "admin@admin.com",
+   515→   564→   564→   564→      password: "admin123456",
+   516→   565→   565→   565→      role: "admin",
+   517→   566→   566→   566→    },
+   518→   567→   567→   567→  });
+   519→   568→   568→   568→
+   520→   569→   569→   569→  console.log("Seed completed successfully!");
+   521→   570→   570→   570→  console.log("Admin user: admin@admin.com / admin123456");
+   522→   571→   571→   571→  process.exit(0);
+   523→   572→   572→   572→};
+   524→   573→   573→   573→
+   525→   574→   574→   574→seed().catch((err) => {
+   526→   575→   575→   575→  console.error("Seed failed:", err);
+   527→   576→   576→   576→  process.exit(1);
+   528→   577→   577→   577→});
+   529→   578→   578→   578→

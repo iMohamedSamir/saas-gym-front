@@ -1,0 +1,77 @@
+{
+  "main": [
+    {
+      "name": "Features",
+      "url": "#features"
+    },
+    {
+      "name": "About",
+      "url": "#about"
+    },
+    {
+      "name": "Pricing",
+      "url": "#pricing"
+    },
+    {
+      "name": "Testimonials",
+      "url": "#testimonials"
+    },
+    {
+      "name": "FAQ",
+      "url": "#faq"
+    },
+    {
+      "name": "Contact",
+      "url": "#contact"
+    }
+  ],
+  "footer_col_1_title": "Primary",
+  "footer_col_2_title": "Resource",
+  "footer_col_3_title": "Legal",
+  "footer_primary": [
+    {
+      "name": "Home",
+      "url": "#"
+    },
+    {
+      "name": "About Us",
+      "url": "#about"
+    },
+    {
+      "name": "Features",
+      "url": "#features"
+    },
+    {
+      "name": "Pricing",
+      "url": "#pricing"
+    },
+    {
+      "name": "Contact",
+      "url": "#contact"
+    }
+  ],
+  "footer_resource": [
+    {
+      "name": "Case Studies",
+      "url": "#features"
+    },
+    {
+      "name": "Blog",
+      "url": "#"
+    },
+    {
+      "name": "Integrations",
+      "url": "#integrations"
+    }
+  ],
+  "footer_legal": [
+    {
+      "name": "Privacy Policy",
+      "url": "#"
+    },
+    {
+      "name": "Terms and Conditions",
+      "url": "#"
+    }
+  ]
+}

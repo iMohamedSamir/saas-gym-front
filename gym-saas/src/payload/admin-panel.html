@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Payload CMS</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface2: #242836;
+      --border: #2e3347;
+      --text: #e4e7f1;
+      --text-muted: #8b8fa8;
+      --primary: #6366f1;
+      --primary-hover: #818cf8;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --radius: 8px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); }
+    
+    /* Login */
+    #login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px; width: 360px; }
+    .login-box h1 { font-size: 24px; margin-bottom: 8px; }
+    .login-box p { color: var(--text-muted); margin-bottom: 24px; font-size: 14px; }
+    .login-box input { width: 100%; padding: 10px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 14px; margin-bottom: 12px; outline: none; }
+    .login-box input:focus { border-color: var(--primary); }
+    .login-box button { width: 100%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: var(--radius); font-size: 14px; cursor: pointer; margin-top: 4px; }
+    .login-box button:hover { background: var(--primary-hover); }
+    .login-error { color: var(--danger); font-size: 13px; margin-top: 8px; display: none; }
+
+    /* Layout */
+    #app { display: none; height: 100vh; }
+    #sidebar { width: 260px; background: var(--surface); border-right: 1px solid var(--border); padding: 20px 0; position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; }
+    #sidebar h2 { padding: 0 20px; font-size: 18px; margin-bottom: 20px; color: var(--primary); }
+    .nav-item { display: block; padding: 10px 20px; color: var(--text-muted); text-decoration: none; font-size: 14px; cursor: pointer; border-left: 3px solid transparent; transition: all 0.15s; }
+    .nav-item:hover { color: var(--text); background: var(--surface2); }
+    .nav-item.active { color: var(--text); border-left-color: var(--primary); background: var(--surface2); }
+    #main { margin-left: 260px; padding: 24px 32px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .top-bar h1 { font-size: 22px; }
+    .logout-btn { background: transparent; color: var(--text-muted); border: 1px solid var(--border); padding: 6px 16px; border-radius: var(--radius); cursor: pointer; font-size: 13px; }
+    .logout-btn:hover { color: var(--text); border-color: var(--text-muted); }
+
+    /* Data view */
+    .data-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; }
+    .data-card h3 { font-size: 16px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; }
+    .data-card h3 span { font-size: 13px; color: var(--text-muted); font-weight: normal; }
+    .field-group { margin-bottom: 16px; }
+    .field-group label { display: block; font-size: 12px; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .field-group input, .field-group textarea, .field-group select { width: 100%; padding: 8px 12px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text); font-size: 14px; font-family: inherit; outline: none; }
+    .field-group textarea { min-height: 80px; resize: vertical; }
+    .field-group input:focus, .field-group textarea:focus { border-color: var(--primary); }
+    .field-group input[type="checkbox"] { width: auto; margin-right: 8px; }
+    .btn { padding: 8px 16px; border-radius: var(--radius); border: none; cursor: pointer; font-size: 13px; font-weight: 500; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-outline { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-outline:hover { color: var(--text); border-color: var(--text-muted); }
+    .actions { display: flex; gap: 8px; margin-top: 16px; }
+    .json-view { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; font-size: 12px; white-space: pre-wrap; word-break: break-all; max-height: 500px; overflow-y: auto; color: var(--text-muted); }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .empty-state p { margin-top: 8px; font-size: 14px; }
+    .badge { display: inline-block; background: var(--primary); color: white; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
+    .nested-section { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
+    .nested-section h4 { font-size: 14px; color: var(--primary); margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="login-screen">
+    <div class="login-box">
+      <h1>Payload CMS</h1>
+      <p>Sign in to the admin panel</p>
+      <input type="email" id="email" placeholder="Email" value="admin@admin.com">
+      <input type="password" id="password" placeholder="Password" value="admin123456">
+      <button onclick="login()">Sign In</button>
+      <p class="login-error" id="login-error">Invalid credentials</p>
+    </div>
+  </div>
+
+  <!-- App -->
+  <div id="app">
+    <div id="sidebar">
+      <h2>CMS Admin</h2>
+      <div id="nav"></div>
+    </div>
+    <div id="main">
+      <div class="top-bar">
+        <h1 id="page-title">Dashboard</h1>
+        <button class="logout-btn" onclick="logout()">Sign Out</button>
+      </div>
+      <div id="content"></div>
+    </div>
+  </div>
+
+  <script>
+    const API = '/api';
+    const COLLECTIONS = [
+      { slug: 'homepage', label: 'Homepage' },
+      { slug: 'about', label: 'About' },
+      { slug: 'features', label: 'Features' },
+      { slug: 'contact', label: 'Contact' },
+      { slug: 'pricing', label: 'Pricing' },
+      { slug: 'testimonial-section', label: 'Testimonials' },
+      { slug: 'faq-section', label: 'FAQ' },
+      { slug: 'brands-section', label: 'Brands' },
+      { slug: 'our-story-section', label: 'Our Story' },
+      { slug: 'call-to-action-section', label: 'Call to Action' },
+      { slug: 'business-needs-section', label: 'Business Needs' },
+      { slug: 'comparison-row-section', label: 'Comparison' },
+      { slug: 'users', label: 'Users' },
+    ];
+
+    let token = localStorage.getItem('cms_token');
+    let currentCollection = null;
+
+    function api(path, opts = {}) {
+      return fetch(API + path, {
+        ...opts,
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token, ...opts.headers },
+      }).then(r => r.json());
+    }
+
+    async function login() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      try {
+        const res = await fetch(API + '/auth/login', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password }),
+        }).then(r => r.json());
+        if (res.token) {
+          token = res.token;
+          localStorage.setItem('cms_token', token);
+          showApp();
+        } else {
+          document.getElementById('login-error').style.display = 'block';
+        }
+      } catch { document.getElementById('login-error').style.display = 'block'; }
+    }
+
+    function logout() { token = null; localStorage.removeItem('cms_token'); showLogin(); }
+
+    function showLogin() {
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('app').style.display = 'none';
+    }
+
+    function showApp() {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      renderNav();
+    }
+
+    function renderNav() {
+      const nav = document.getElementById('nav');
+      nav.innerHTML = COLLECTIONS.map(c =>
+        `<a class="nav-item ${currentCollection === c.slug ? 'active' : ''}" onclick="loadCollection('${c.slug}')">${c.label}</a>`
+      ).join('');
+    }
+
+    async function loadCollection(slug) {
+      currentCollection = slug;
+      const col = COLLECTIONS.find(c => c.slug === slug);
+      document.getElementById('page-title').textContent = col ? col.label : slug;
+      renderNav();
+
+      const data = await api('/' + slug + '?limit=100');
+      const content = document.getElementById('content');
+
+      if (!data.docs || data.docs.length === 0) {
+        content.innerHTML = '<div class="empty-state"><p>No documents found in this collection.</p></div>';
+        return;
+      }
+
+      content.innerHTML = data.docs.map(doc => `
+        <div class="data-card">
+          <h3>Document #${doc.id} <span>${slug}</span></h3>
+          <div id="editor-${doc.id}"></div>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="editDoc('${slug}', ${doc.id})">Edit JSON</button>
+            <button class="btn btn-danger" onclick="deleteDoc('${slug}', ${doc.id})">Delete</button>
+          </div>
+          <div id="json-area-${doc.id}"></div>
+        </div>
+      `).join('');
+
+      // Render form fields for each doc
+      data.docs.forEach(doc => renderDocFields(doc, slug));
+    }
+
+    function renderDocFields(doc, slug) {
+      const container = document.getElementById('editor-' + doc.id);
+      if (!container) return;
+      container.innerHTML = renderFields(doc, slug);
+    }
+
+    function renderFields(obj, parentKey = '', depth = 0) {
+      if (obj === null || obj === undefined) return '';
+      if (typeof obj !== 'object') {
+        const key = parentKey || 'value';
+        return `<div class="field-group"><label>${key}</label><input value="${String(obj).replace(/"/g, '&quot;')}" onchange="updateField(this, '${key}')"/></div>`;
+      }
+      if (Array.isArray(obj)) {
+        if (obj.length > 0 && typeof obj[0] === 'object') {
+          return obj.map((item, i) => `
+            <div class="nested-section">
+              <h4>Item ${i + 1}</h4>
+              ${renderFields(item, parentKey + '[' + i + ']', depth + 1)}
+            </div>
+          `).join('');
+        }
+        return `<div class="field-group"><label>${parentKey || 'items'}</label><textarea>${obj.join('\n')}</textarea></div>`;
+      }
+      let html = '';
+      for (const [key, value] of Object.entries(obj)) {
+        if (key === 'id' || key === 'createdAt' || key === 'updatedAt') continue;
+        const fullKey = parentKey ? parentKey + '.' + key : key;
+        if (typeof value === 'boolean') {
+          html += `<div class="field-group"><label>${key}</label><label><input type="checkbox" ${value ? 'checked' : ''} onchange="updateCheckbox(this, '${fullKey}')"/> ${value ? 'Enabled' : 'Disabled'}</label></div>`;
+        } else if (typeof value === 'object' && value !== null) {
+          html += `<div class="nested-section"><h4>${key}</h4>${renderFields(value, fullKey, depth + 1)}</div>`;
+        } else {
+          const val = String(value ?? '').replace(/"/g, '&quot;');
+          const isLong = val.length > 80;
+          html += `<div class="field-group"><label>${key}</label>${isLong ? `<textarea onchange="updateField(this, '${fullKey}')">${val}</textarea>` : `<input value="${val}" onchange="updateField(this, '${fullKey}')"/>`}</div>`;
+        }
+      }
+      return html;
+    }
+
+    async function editDoc(slug, id) {
+      const data = await api('/' + slug + '/' + id);
+      const area = document.getElementById('json-area-' + id);
+      if (area) {
+        area.innerHTML = `<textarea class="json-view" id="json-editor-${id}" style="width:100%;min-height:300px;">${JSON.stringify(data, null, 2)}</textarea>
+          <div class="actions"><button class="btn btn-primary" onclick="saveJson('${slug}', ${id})">Save</button><button class="btn btn-outline" onclick="document.getElementById('json-editor-${id}').parentElement.innerHTML=''">Cancel</button></div>`;
+      }
+    }
+
+    async function saveJson(slug, id) {
+      const editor = document.getElementById('json-editor-' + id);
+      try {
+        const parsed = JSON.parse(editor.value);
+        const { id: _, createdAt, updatedAt, ...data } = parsed;
+        await api('/' + slug + '/' + id, { method: 'PUT', body: JSON.stringify(data) });
+        alert('Saved successfully!');
+        loadCollection(slug);
+      } catch (e) { alert('Invalid JSON: ' + e.message); }
+    }
+
+    async function deleteDoc(slug, id) {
+      if (!confirm('Delete this document?')) return;
+      await api('/' + slug + '/' + id, { method: 'DELETE' });
+      loadCollection(slug);
+    }
+
+    // Auto-login if token exists
+    if (token) showApp(); else showLogin();
+  </script>
+</body>
+</html>

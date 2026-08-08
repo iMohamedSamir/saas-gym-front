@@ -1,0 +1,761 @@
+   150→
+   151→          {/* Mobile nav */}
+   152→          <MobileNav />
+   153→        </div>
+   154→      </header>
+   155→
+   156→      <main>
+   157→        {/* ============================================================ */}
+   158→        {/* 2. HERO                                                     */}
+   159→        {/* ============================================================ */}
+   160→        <section className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+   161→          {/* Radial glow */}
+   162→          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+   163→            <div className="h-[600px] w-[600px] rounded-full bg-[#937AFF]/15 blur-[140px]" />
+   164→          </div>
+   165→
+   166→          <div className="relative max-w-7xl mx-auto px-6 text-center">
+   167→            <h1
+   168→              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-white"
+   169→              dangerouslySetInnerHTML={{ __html: hp.bannerTitle || 'Grow Your Business <strong>Automatically</strong>' }}
+   170→            />
+   171→            <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-[#817E84] leading-relaxed">
+   172→              {hp.bannerContent ||
+   173→                'The complete automated system designed to capture more leads, follow up instantly, and grow your local business.'}
+   174→            </p>
+   175→            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+   176→              <a
+   177→                href={hp.bannerPrimaryBtn?.link || '#pricing'}
+   178→                className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25"
+   179→              >
+   180→                {hp.bannerPrimaryBtn?.label || 'Get Started Free'}
+   181→                <ArrowRight className="w-4 h-4" />
+   182→              </a>
+   183→              <a
+   184→                href={hp.bannerSecondaryBtn?.link || '#features'}
+   185→                className="inline-flex items-center gap-2 border border-[#937AFF]/40 text-[#937AFF] hover:bg-[#937AFF]/10 font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200"
+   186→              >
+   187→                {hp.bannerSecondaryBtn?.label || 'See Features'}
+   188→              </a>
+   189→            </div>
+   190→          </div>
+   191→        </section>
+   192→
+   193→        {/* ============================================================ */}
+   194→        {/* 3. MAIN FEATURES                                            */}
+   195→        {/* ============================================================ */}
+   196→        <section className="py-20 sm:py-28">
+   197→          <div className="max-w-7xl mx-auto px-6 text-center">
+   198→            <h2 className="text-3xl sm:text-4xl font-bold text-white">
+   199→              {hp.mainFeaturesTitle || 'Main Features'}
+   200→            </h2>
+   201→            <p className="mt-4 max-w-xl mx-auto text-[#817E84]">
+   202→              {hp.mainFeaturesContent || 'Everything you need to automate and scale your marketing.'}
+   203→            </p>
+   204→            <div className="mt-12 flex flex-wrap justify-center gap-3">
+   205→              {(hp.mainFeaturesItems?.length
+   206→                ? hp.mainFeaturesItems
+   207→                : [
+   208→                    { text: 'Email Automation' },
+   209→                    { text: 'SMS Campaigns' },
+   210→                    { text: 'CRM & Pipeline' },
+   211→                    { text: 'Landing Pages' },
+   212→                    { text: 'Social Media' },
+   213→                    { text: 'Analytics Dashboard' },
+   214→                  ]
+   215→              ).map((item, i) => (
+   216→                <div
+   217→                  key={i}
+   218→                  className="inline-flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-full px-5 py-2.5"
+   219→                >
+   220→                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#FF5353]/20">
+   221→                    <X className="w-3 h-3 text-[#FF5353]" />
+   222→                  </span>
+   223→                  <span className="text-sm text-[#E5E5E5] whitespace-nowrap">{item.text}</span>
+   224→                </div>
+   225→              ))}
+   226→            </div>
+   227→          </div>
+   228→        </section>
+   229→
+   230→        {/* ============================================================ */}
+   231→        {/* 4. FEATURES GRID                                            */}
+   232→        {/* ============================================================ */}
+   233→        <section id="features" className="py-20 sm:py-28 bg-zinc-900/30">
+   234→          <div className="max-w-7xl mx-auto px-6">
+   235→            <div className="text-center mb-14">
+   236→              <h2 className="text-3xl sm:text-4xl font-bold text-white">
+   237→                {hp.featuresTitle || 'Powerful Features'}
+   238→              </h2>
+   239→              <p className="mt-4 max-w-xl mx-auto text-[#817E84]">
+   240→                {hp.featuresContent || 'Tools designed to help you dominate your market.'}
+   241→              </p>
+   242→            </div>
+   243→            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+   244→              {(features.length
+   245→                ? features
+   246→                : [
+   247→                    { id: 'f1', title: 'Lead Capture', isStarred: true },
+   248→                    { id: 'f2', title: 'Automated Follow-up', isStarred: false },
+   249→                    { id: 'f3', title: 'Review Management', isStarred: true },
+   250→                    { id: 'f4', title: 'Pipeline Builder', isStarred: false },
+   251→                    { id: 'f5', title: 'Social Scheduling', isStarred: false },
+   252→                    { id: 'f6', title: 'Revenue Analytics', isStarred: true },
+   253→                  ]
+   254→              ).map((f) => (
+   255→                <div
+   256→                  key={f.id}
+   257→                  className="group relative bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/40 transition-all duration-300"
+   258→                >
+   259→                  {f.isStarred && (
+   260→                    <span className="absolute top-4 right-4 inline-flex items-center gap-1 text-xs font-semibold text-amber-400 bg-amber-400/10 px-2.5 py-1 rounded-full">
+   261→                      <Star className="w-3 h-3 fill-amber-400" />
+   262→                      Popular
+   263→                    </span>
+   264→                  )}
+   265→                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[#937AFF]/10 mb-4">
+   266→                    <Star className="w-6 h-6 text-[#937AFF]" />
+   267→                  </div>
+   268→                  <h3 className="text-lg font-semibold text-white">{f.title}</h3>
+   269→                </div>
+   270→              ))}
+   271→            </div>
+   272→          </div>
+   273→        </section>
+   274→
+   275→        {/* ============================================================ */}
+   276→        {/* 5. STATS                                                    */}
+   277→        {/* ============================================================ */}
+   278→        {stats.length > 0 && (
+   279→          <section className="py-20 sm:py-28">
+   280→            <div className="max-w-7xl mx-auto px-6">
+   281→              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+   282→                {stats.map((s) => (
+   283→                  <div
+   284→                    key={s.id}
+   285→                    className="bg-[#937AFF]/10 border border-[#937AFF]/20 rounded-2xl p-6 sm:p-8 text-center"
+   286→                  >
+   287→                    <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#937AFF]">{s.value}</p>
+   288→                    <p className="mt-2 text-sm sm:text-base text-[#817E84]">{s.label}</p>
+   289→                  </div>
+   290→                ))}
+   291→              </div>
+   292→            </div>
+   293→          </section>
+   294→        )}
+   295→
+   296→        {/* ============================================================ */}
+   297→        {/* 6. TEAM                                                     */}
+   298→        {/* ============================================================ */}
+   299→        <section id="about" className="py-20 sm:py-28 bg-zinc-900/30">
+   300→          <div className="max-w-7xl mx-auto px-6">
+   301→            <div className="text-center mb-14">
+   302→              <h2 className="text-3xl sm:text-4xl font-bold text-white">{hp.ourStoryTitle || 'Our Team'}</h2>
+   303→              <p className="mt-4 max-w-xl mx-auto text-[#817E84]">
+   304→                The passionate people behind Automark.
+   305→              </p>
+   306→            </div>
+   307→            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+   308→              {(teamMembers.length
+   309→                ? teamMembers
+   310→                : [
+   311→                    { id: 't1', name: 'Alex Morgan', role: 'CEO & Founder', image: '' },
+   312→                    { id: 't2', name: 'Sarah Chen', role: 'CTO', image: '' },
+   313→                    { id: 't3', name: 'James Wilson', role: 'Head of Sales', image: '' },
+   314→                    { id: 't4', name: 'Emily Davis', role: 'Marketing Lead', image: '' },
+   315→                  ]
+   316→              ).map((m) => (
+   317→                <div
+   318→                  key={m.id}
+   319→                  className="flex flex-col items-center bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 text-center hover:border-[#937AFF]/40 transition-all duration-300"
+   320→                >
+   321→                  <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center mb-4 overflow-hidden">
+   322→                    {m.image ? (
+   323→                      <img src={m.image} alt={m.name} className="w-full h-full object-cover" />
+   324→                    ) : (
+   325→                      <span className="text-2xl font-bold text-[#937AFF]">
+   326→                        {m.name
+   327→                          ?.split(' ')
+   328→                          .map((n) => n[0])
+   329→                          .join('')}
+   330→                      </span>
+   331→                    )}
+   332→                  </div>
+   333→                  <h3 className="font-semibold text-white">{m.name}</h3>
+   334→                  <p className="text-sm text-[#817E84] mt-1">{m.role}</p>
+   335→                </div>
+   336→              ))}
+   337→            </div>
+   338→          </div>
+   339→        </section>
+   340→
+   341→        {/* ============================================================ */}
+   342→        {/* 7. PRICING                                                  */}
+   343→        {/* ============================================================ */}
+   344→        <section id="pricing" className="py-20 sm:py-28">
+   345→          <div className="max-w-7xl mx-auto px-6">
+   346→            <div className="text-center mb-14">
+   347→              <h2 className="text-3xl sm:text-4xl font-bold text-white">
+   348→                {hp.pricingTitle || 'Simple, Transparent Pricing'}
+   349→              </h2>
+   350→              <p className="mt-4 max-w-xl mx-auto text-[#817E84]">
+   351→                {hp.pricingContent || 'Choose the plan that fits your business needs.'}
+   352→              </p>
+   353→            </div>
+   354→            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-start">
+   355→              {(pricingPlans.length
+   356→                ? pricingPlans
+   357→                : [
+   358→                    {
+   359→                      id: 'p1',
+   360→                      title: 'Starter',
+   361→                      price: '$49',
+   362→                      yearlyPrice: '$39',
+   363→                      description: 'Perfect for small businesses getting started with marketing automation.',
+   364→                      isFeatured: false,
+   365→                      offerText: '',
+   366→                      buttonLabel: 'Get Started',
+   367→                      buttonLink: '#',
+   368→                      features: [
+   369→                        { label: '500 Contacts', included: true },
+   370→                        { label: 'Email Automation', included: true },
+   371→                        { label: 'Landing Pages', included: true },
+   372→                        { label: 'SMS Campaigns', included: false },
+   373→                        { label: 'CRM Pipeline', included: false },
+   374→                      ],
+   375→                    },
+   376→                    {
+   377→                      id: 'p2',
+   378→                      title: 'Professional',
+   379→                      price: '$149',
+   380→                      yearlyPrice: '$119',
+   381→                      description: 'For growing businesses that need advanced marketing tools.',
+   382→                      isFeatured: true,
+   383→                      offerText: 'Most Popular',
+   384→                      buttonLabel: 'Get Started',
+   385→                      buttonLink: '#',
+   386→                      features: [
+   387→                        { label: '5,000 Contacts', included: true },
+   388→                        { label: 'Email Automation', included: true },
+   389→                        { label: 'Landing Pages', included: true },
+   390→                        { label: 'SMS Campaigns', included: true },
+   391→                        { label: 'CRM Pipeline', included: true },
+   392→                      ],
+   393→                    },
+   394→                    {
+   395→                      id: 'p3',
+   396→                      title: 'Enterprise',
+   397→                      price: '$349',
+   398→                      yearlyPrice: '$279',
+   399→                      description: 'For large businesses that need the full power of Automark.',
+   400→                      isFeatured: false,
+   401→                      offerText: '',
+   402→                      buttonLabel: 'Contact Sales',
+   403→                      buttonLink: '#contact',
+   404→                      features: [
+   405→                        { label: 'Unlimited Contacts', included: true },
+   406→                        { label: 'Email Automation', included: true },
+   407→                        { label: 'Landing Pages', included: true },
+   408→                        { label: 'SMS Campaigns', included: true },
+   409→                        { label: 'CRM Pipeline', included: true },
+   410→                      ],
+   411→                    },
+   412→                  ]
+   413→              ).map((plan) => (
+   414→                <div
+   415→                  key={plan.id}
+   416→                  className={`relative rounded-2xl p-6 sm:p-8 transition-all duration-300 ${
+   417→                    plan.isFeatured
+   418→                      ? 'bg-[#0B0C17] border-2 border-[#937AFF] shadow-lg shadow-[#937AFF]/20 scale-[1.02]'
+   419→                      : 'bg-[#0B0C17] border border-[#202128] hover:border-[#937AFF]/30'
+   420→                  }`}
+   421→                >
+   422→                  {plan.offerText && (
+   423→                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#937AFF] text-white text-xs font-bold px-4 py-1 rounded-full">
+   424→                      {plan.offerText}
+   425→                    </div>
+   426→                  )}
+   427→                  <h3 className="text-xl font-bold text-white">{plan.title}</h3>
+   428→                  <div className="mt-4 flex items-baseline gap-1">
+   429→                    <span className="text-4xl font-bold text-white">{plan.price}</span>
+   430→                    <span className="text-[#817E84] text-sm">/month</span>
+   431→                  </div>
+   432→                  {plan.yearlyPrice && (
+   433→                    <p className="mt-1 text-sm text-[#937AFF]">
+   434→                      {plan.yearlyPrice}/month billed yearly
+   435→                    </p>
+   436→                  )}
+   437→                  <p className="mt-4 text-sm text-[#817E84] leading-relaxed">{plan.description}</p>
+   438→                  <ul className="mt-6 space-y-3">
+   439→                    {plan.features?.map((feat, fi) => (
+   440→                      <li key={fi} className="flex items-center gap-3 text-sm">
+   441→                        {feat.included ? (
+   442→                          <Check className="w-4 h-4 text-[#937AFF] shrink-0" />
+   443→                        ) : (
+   444→                          <X className="w-4 h-4 text-zinc-600 shrink-0" />
+   445→                        )}
+   446→                        <span className={feat.included ? 'text-[#E5E5E5]' : 'text-zinc-600'}>
+   447→                          {feat.label}
+   448→                        </span>
+   449→                      </li>
+   450→                    ))}
+   451→                  </ul>
+   452→                  <a
+   453→                    href={plan.buttonLink || '#'}
+   454→                    className={`mt-8 block text-center font-semibold py-3 px-6 rounded-lg transition-colors duration-200 ${
+   455→                      plan.isFeatured
+   456→                        ? 'bg-[#937AFF] hover:bg-[#7d5ff0] text-white'
+   457→                        : 'border border-[#937AFF]/40 text-[#937AFF] hover:bg-[#937AFF]/10'
+   458→                    }`}
+   459→                  >
+   460→                    {plan.buttonLabel || 'Get Started'}
+   461→                  </a>
+   462→                </div>
+   463→              ))}
+   464→            </div>
+   465→          </div>
+   466→        </section>
+   467→
+   468→        {/* ============================================================ */}
+   469→        {/* 8. TESTIMONIAL QUOTE                                         */}
+   470→        {/* ============================================================ */}
+   471→        <section className="py-20 sm:py-28 bg-zinc-900/30">
+   472→          <div className="max-w-4xl mx-auto px-6">
+   473→            <div className="relative bg-[#0B0C17] border border-[#202128] rounded-2xl p-8 sm:p-12">
+   474→              {/* Decorative corner dots */}
+   475→              <div className="absolute top-6 left-6 flex flex-col gap-1.5">
+   476→                <div className="w-2 h-2 rounded-full bg-[#937AFF]" />
+   477→                <div className="w-2 h-2 rounded-full bg-[#937AFF]" />
+   478→                <div className="w-2 h-2 rounded-full bg-[#937AFF]" />
+   479→              </div>
+   480→              <div className="absolute bottom-6 right-6 flex flex-col gap-1.5">
+   481→                <div className="w-2 h-2 rounded-full bg-[#937AFF]" />
+   482→                <div className="w-2 h-2 rounded-full bg-[#937AFF]" />
+   483→                <div className="w-2 h-2 rounded-full bg-[#937AFF]" />
+   484→              </div>
+   485→              <h3 className="text-lg font-semibold text-[#937AFF] mb-4">
+   486→                {hp.testimonialQuoteTitle || 'What Our Clients Say'}
+   487→              </h3>
+   488→              <blockquote className="text-xl sm:text-2xl font-medium text-white leading-relaxed italic">
+   489→                &ldquo;{hp.testimonialQuote || hp.singleTestimonialQuote || 'Automark transformed our business. We went from struggling to find leads to having a predictable pipeline of new customers every single month.'}&rdquo;
+   490→              </blockquote>
+   491→              {(hp.singleTestimonialName || hp.singleTestimonialCompany) && (
+   492→                <div className="mt-6 flex items-center gap-4">
+   493→                  <div>
+   494→                    <p className="font-semibold text-white">{hp.singleTestimonialName}</p>
+   495→                    <p className="text-sm text-[#817E84]">{hp.singleTestimonialCompany}</p>
+   496→                  </div>
+   497→                </div>
+   498→              )}
+   499→              {hp.singleTestimonialStats && hp.singleTestimonialStats.length > 0 && (
+   500→                <div className="mt-8 grid grid-cols-3 gap-4 border-t border-[#202128] pt-8">
+   501→                  {hp.singleTestimonialStats.map((stat, i) => (
+   502→                    <div key={i} className="text-center">
+   503→                      <p className="text-2xl font-bold text-[#937AFF]">{stat.value}</p>
+   504→                      <p className="text-sm text-[#817E84] mt-1">{stat.label}</p>
+   505→                    </div>
+   506→                  ))}
+   507→                </div>
+   508→              )}
+   509→            </div>
+   510→          </div>
+   511→        </section>
+   512→
+   513→        {/* ============================================================ */}
+   514→        {/* 9. TESTIMONIALS GRID                                         */}
+   515→        {/* ============================================================ */}
+   516→        <section id="testimonials" className="py-20 sm:py-28">
+   517→          <div className="max-w-7xl mx-auto px-6">
+   518→            <div className="text-center mb-14">
+   519→              <h2 className="text-3xl sm:text-4xl font-bold text-white">Testimonials</h2>
+   520→              <p className="mt-4 max-w-xl mx-auto text-[#817E84]">
+   521→                Hear from businesses that scaled with Automark.
+   522→              </p>
+   523→            </div>
+   524→            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+   525→              {(testimonials.length
+   526→                ? testimonials
+   527→                : [
+   528→                    {
+   529→                      id: 'te1',
+   530→                      name: 'Michael Brown',
+   531→                      designation: 'Owner, Bright Dental',
+   532→                      content:
+   533→                        'We tripled our new patient appointments in just 90 days. The automated follow-up system is a game-changer.',
+   534→                      avatar: '',
+   535→                    },
+   536→                    {
+   537→                      id: 'te2',
+   538→                      name: 'Lisa Thompson',
+   539→                      designation: 'Marketing Director, FitLife Gym',
+   540→                      content:
+   541→                        'Automark replaced 4 different tools for us. Everything is now in one place and our conversion rates have doubled.',
+   542→                      avatar: '',
+   543→                    },
+   544→                    {
+   545→                      id: 'te3',
+   546→                      name: 'David Garcia',
+   547→                      designation: 'CEO, HomePro Services',
+   548→                      content:
+   549→                        'The ROI has been incredible. For every dollar we spend on Automark, we get back at least 10 in new revenue.',
+   550→                      avatar: '',
+   551→                    },
+   552→                  ]
+   553→              ).map((t) => (
+   554→                <div
+   555→                  key={t.id}
+   556→                  className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/30 transition-all duration-300"
+   557→                >
+   558→                  <p className="text-[#E5E5E5] leading-relaxed italic">&ldquo;{t.content}&rdquo;</p>
+   559→                  <div className="mt-6 flex items-center gap-3">
+   560→                    <div className="w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center overflow-hidden shrink-0">
+   561→                      {t.avatar ? (
+   562→                        <img src={t.avatar} alt={t.name} className="w-full h-full object-cover" />
+   563→                      ) : (
+   564→                        <span className="text-sm font-bold text-[#937AFF]">
+   565→                          {t.name
+   566→                            ?.split(' ')
+   567→                            .map((n) => n[0])
+   568→                            .join('')}
+   569→                        </span>
+   570→                      )}
+   571→                    </div>
+   572→                    <div>
+   573→                      <p className="text-sm font-semibold text-white">{t.name}</p>
+   574→                      <p className="text-xs text-[#817E84]">{t.designation}</p>
+   575→                    </div>
+   576→                  </div>
+   577→                </div>
+   578→              ))}
+   579→            </div>
+   580→          </div>
+   581→        </section>
+   582→
+   583→        {/* ============================================================ */}
+   584→        {/* 10. GROWTH PROCESS                                           */}
+   585→        {/* ============================================================ */}
+   586→        <section className="py-20 sm:py-28 bg-zinc-900/30">
+   587→          <div className="max-w-7xl mx-auto px-6">
+   588→            <div className="text-center mb-14">
+   589→              <h2 className="text-3xl sm:text-4xl font-bold text-white">
+   590→                {hp.growthProcessTitle || 'How It Works'}
+   591→              </h2>
+   592→            </div>
+   593→            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+   594→              {(hp.growthProcessSteps?.length
+   595→                ? hp.growthProcessSteps
+   596→                : [
+   597→                    { stepNumber: 1, title: 'Capture Leads', content: 'Set up landing pages and forms that automatically capture and organize your leads.' },
+   598→                    { stepNumber: 2, title: 'Nurture & Engage', content: 'Automated emails, SMS, and follow-ups keep your prospects engaged around the clock.' },
+   599→                    { stepNumber: 3, title: 'Convert & Grow', content: 'Turn nurtured leads into paying customers with smart pipeline management and analytics.' },
+   600→                  ]
+   601→              ).map((step, i) => (
+   602→                <div
+   603→                  key={i}
+   604→                  className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 sm:p-8 hover:border-[#937AFF]/30 transition-all duration-300"
+   605→                >
+   606→                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[#937AFF]/10 mb-5">
+   607→                    <span className="text-xl font-bold text-[#937AFF]">{step.stepNumber || i + 1}</span>
+   608→                  </div>
+   609→                  <h3 className="text-lg font-semibold text-white mb-3">{step.title}</h3>
+   610→                  <p className="text-sm text-[#817E84] leading-relaxed">{step.content}</p>
+   611→                </div>
+   612→              ))}
+   613→            </div>
+   614→            {hp.growthProcessBtn && (
+   615→              <div className="mt-10 text-center">
+   616→                <a
+   617→                  href={hp.growthProcessBtn.link || '#pricing'}
+   618→                  className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200"
+   619→                >
+   620→                  {hp.growthProcessBtn.label || 'Get Started'}
+   621→                  <ArrowRight className="w-4 h-4" />
+   622→                </a>
+   623→              </div>
+   624→            )}
+   625→          </div>
+   626→        </section>
+   627→
+   628→        {/* ============================================================ */}
+   629→        {/* 11. CEO LETTER                                               */}
+   630→        {/* ============================================================ */}
+   631→        {(hp.ceoName || hp.ceoLetter) && (
+   632→          <section className="py-20 sm:py-28">
+   633→            <div className="max-w-4xl mx-auto px-6">
+   634→              <div className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-8 sm:p-12">
+   635→                <div className="flex items-center gap-4 mb-6">
+   636→                  <div className="w-14 h-14 rounded-full bg-[#937AFF]/20 flex items-center justify-center">
+   637→                    <span className="text-xl font-bold text-[#937AFF]">
+   638→                      {hp.ceoName
+   639→                        ?.split(' ')
+   640→                        .map((n) => n[0])
+   641→                        .join('') || 'CEO'}
+   642→                    </span>
+   643→                  </div>
+   644→                  <div>
+   645→                    <p className="font-semibold text-white text-lg">{hp.ceoName || 'CEO Name'}</p>
+   646→                    <p className="text-sm text-[#817E84]">{hp.ceoRole || 'Chief Executive Officer'}</p>
+   647→                  </div>
+   648→                </div>
+   649→                {hp.ceoLetter && (
+   650→                  <div
+   651→                    className="text-[#817E84] leading-relaxed space-y-4"
+   652→                    dangerouslySetInnerHTML={{ __html: hp.ceoLetter }}
+   653→                  />
+   654→                )}
+   655→                {hp.ceoLetterPoints && hp.ceoLetterPoints.length > 0 && (
+   656→                  <ul className="mt-6 space-y-3">
+   657→                    {hp.ceoLetterPoints.map((item, i) => (
+   658→                      <li key={i} className="flex items-start gap-3 text-[#E5E5E5]">
+   659→                        <Check className="w-5 h-5 text-[#937AFF] shrink-0 mt-0.5" />
+   660→                        <span>{item.point}</span>
+   661→                      </li>
+   662→                    ))}
+   663→                  </ul>
+   664→                )}
+   665→              </div>
+   666→            </div>
+   667→          </section>
+   668→        )}
+   669→
+   670→        {/* ============================================================ */}
+   671→        {/* 12. FAQ                                                     */}
+   672→        {/* ============================================================ */}
+   673→        <section id="faq" className="py-20 sm:py-28 bg-zinc-900/30">
+   674→          <div className="max-w-7xl mx-auto px-6">
+   675→            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+   676→              {/* Left column */}
+   677→              <div className="lg:sticky lg:top-32 lg:self-start">
+   678→                <h2 className="text-3xl sm:text-4xl font-bold text-white">
+   679→                  {hp.faqTitle || 'Frequently Asked Questions'}
+   680→                </h2>
+   681→                <p className="mt-4 text-[#817E84] leading-relaxed">
+   682→                  {hp.faqContent ||
+   683→                    "Can't find what you're looking for? Reach out to our support team and we'll get back to you within 24 hours."}
+   684→                </p>
+   685→              </div>
+   686→              {/* Right column - accordion */}
+   687→              <FaqAccordion
+   688→                items={
+   689→                  faqItems.length
+   690→                    ? faqItems
+   691→                    : [
+   692→                        { id: 'q1', question: 'How does the 14-day free trial work?', answer: 'You get full access to all Professional plan features for 14 days. No credit card required. If you love it, choose a plan that fits your business.' },
+   693→                        { id: 'q2', question: 'Can I switch plans at any time?', answer: 'Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.' },
+   694→                        { id: 'q3', question: 'Do you offer custom enterprise solutions?', answer: 'Absolutely. Our Enterprise plan is fully customizable. Contact our sales team to discuss your specific requirements and get a tailored solution.' },
+   695→                        { id: 'q4', question: 'What kind of support do you offer?', answer: 'We offer email support for all plans, priority phone support for Professional and above, and a dedicated account manager for Enterprise customers.' },
+   696→                        { id: 'q5', question: 'Is my data secure?', answer: 'Yes, we use bank-level 256-bit SSL encryption, host on secure AWS servers, and perform regular security audits. Your data is safe with us.' },
+   697→                      ]
+   698→                }
+   699→              />
+   700→            </div>
+   701→          </div>
+   702→        </section>
+   703→
+   704→        {/* ============================================================ */}
+   705→        {/* 13. CONTACT                                                 */}
+   706→        {/* ============================================================ */}
+   707→        <section id="contact" className="py-20 sm:py-28">
+   708→          <div className="max-w-7xl mx-auto px-6">
+   709→            <div className="text-center mb-14">
+   710→              <h2 className="text-3xl sm:text-4xl font-bold text-white">Get In Touch</h2>
+   711→              <p className="mt-4 max-w-xl mx-auto text-[#817E84]">
+   712→                Have questions? We'd love to hear from you.
+   713→              </p>
+   714→            </div>
+   715→            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+   716→              {/* Contact info cards */}
+   717→              <div className="lg:col-span-2 flex flex-col gap-4">
+   718→                <div className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 flex items-start gap-4 hover:border-[#937AFF]/30 transition-all duration-300">
+   719→                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[#937AFF]/10 shrink-0">
+   720→                    <Mail className="w-5 h-5 text-[#937AFF]" />
+   721→                  </div>
+   722→                  <div>
+   723→                    <h3 className="font-semibold text-white">Email Us</h3>
+   724→                    <p className="text-sm text-[#817E84] mt-1">hello@automark.io</p>
+   725→                    <p className="text-sm text-[#817E84]">We reply within 24 hours</p>
+   726→                  </div>
+   727→                </div>
+   728→                <div className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 flex items-start gap-4 hover:border-[#937AFF]/30 transition-all duration-300">
+   729→                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[#937AFF]/10 shrink-0">
+   730→                    <Phone className="w-5 h-5 text-[#937AFF]" />
+   731→                  </div>
+   732→                  <div>
+   733→                    <h3 className="font-semibold text-white">Call Us</h3>
+   734→                    <p className="text-sm text-[#817E84] mt-1">+1 (555) 000-1234</p>
+   735→                    <p className="text-sm text-[#817E84]">Mon-Fri, 9am-6pm EST</p>
+   736→                  </div>
+   737→                </div>
+   738→                <div className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 flex items-start gap-4 hover:border-[#937AFF]/30 transition-all duration-300">
+   739→                  <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[#937AFF]/10 shrink-0">
+   740→                    <Calendar className="w-5 h-5 text-[#937AFF]" />
+   741→                  </div>
+   742→                  <div>
+   743→                    <h3 className="font-semibold text-white">Book a Demo</h3>
+   744→                    <p className="text-sm text-[#817E84] mt-1">Schedule a 1-on-1 walkthrough</p>
+   745→                    <p className="text-sm text-[#817E84]">See Automark in action</p>
+   746→                  </div>
+   747→                </div>
+   748→              </div>
+   749→
+   750→              {/* Contact form */}
+   751→              <form
+   752→                action="/api/contact"
+   753→                method="POST"
+   754→                className="lg:col-span-3 bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 sm:p-8 space-y-5"
+   755→              >
+   756→                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+   757→                  <div>
+   758→                    <label htmlFor="name" className="block text-sm font-medium text-[#E5E5E5] mb-2">
+   759→                      Full Name
+   760→                    </label>
+   761→                    <input
+   762→                      id="name"
+   763→                      name="name"
+   764→                      type="text"
+   765→                      placeholder="John Smith"
+   766→                      className="w-full bg-[#03010E] border border-[#202128] rounded-lg px-4 py-3 text-sm text-[#E5E5E5] placeholder:text-zinc-600 focus:outline-none focus:border-[#937AFF] transition-colors"
+   767→                    />
+   768→                  </div>
+   769→                  <div>
+   770→                    <label htmlFor="email" className="block text-sm font-medium text-[#E5E5E5] mb-2">
+   771→                      Email Address
+   772→                    </label>
+   773→                    <input
+   774→                      id="email"
+   775→                      name="email"
+   776→                      type="email"
+   777→                      placeholder="john@example.com"
+   778→                      className="w-full bg-[#03010E] border border-[#202128] rounded-lg px-4 py-3 text-sm text-[#E5E5E5] placeholder:text-zinc-600 focus:outline-none focus:border-[#937AFF] transition-colors"
+   779→                    />
+   780→                  </div>
+   781→                </div>
+   782→                <div>
+   783→                  <label htmlFor="phone" className="block text-sm font-medium text-[#E5E5E5] mb-2">
+   784→                    Phone Number
+   785→                  </label>
+   786→                  <input
+   787→                    id="phone"
+   788→                    name="phone"
+   789→                    type="tel"
+   790→                    placeholder="+1 (555) 000-0000"
+   791→                    className="w-full bg-[#03010E] border border-[#202128] rounded-lg px-4 py-3 text-sm text-[#E5E5E5] placeholder:text-zinc-600 focus:outline-none focus:border-[#937AFF] transition-colors"
+   792→                  />
+   793→                </div>
+   794→                <div>
+   795→                  <label htmlFor="message" className="block text-sm font-medium text-[#E5E5E5] mb-2">
+   796→                    Message
+   797→                  </label>
+   798→                  <textarea
+   799→                    id="message"
+   800→                    name="message"
+   801→                    rows={5}
+   802→                    placeholder="Tell us about your business and how we can help..."
+   803→                    className="w-full bg-[#03010E] border border-[#202128] rounded-lg px-4 py-3 text-sm text-[#E5E5E5] placeholder:text-zinc-600 focus:outline-none focus:border-[#937AFF] transition-colors resize-none"
+   804→                  />
+   805→                </div>
+   806→                <button
+   807→                  type="submit"
+   808→                  className="w-full sm:w-auto bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200"
+   809→                >
+   810→                  Send Message
+   811→                </button>
+   812→              </form>
+   813→            </div>
+   814→          </div>
+   815→        </section>
+   816→
+   817→        {/* ============================================================ */}
+   818→        {/* 14. CTA                                                     */}
+   819→        {/* ============================================================ */}
+   820→        <section className="py-20 sm:py-28 bg-zinc-900/30 relative overflow-hidden">
+   821→          {/* Background glow */}
+   822→          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+   823→            <div className="h-[400px] w-[600px] rounded-full bg-[#937AFF]/10 blur-[120px]" />
+   824→          </div>
+   825→          <div className="relative max-w-4xl mx-auto px-6 text-center">
+   826→            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+   827→              {hp.ctaTitle || 'Ready to Grow Your Business?'}
+   828→            </h2>
+   829→            <p className="mt-4 text-lg text-[#817E84] max-w-2xl mx-auto">
+   830→              {hp.ctaDescription ||
+   831→                'Join thousands of businesses that use Automark to automate their marketing and drive predictable growth.'}
+   832→            </p>
+   833→            <div className="mt-10">
+   834→              <a
+   835→                href={hp.ctaButton?.link || '/admin'}
+   836→                className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-10 py-4 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25 text-lg"
+   837→              >
+   838→                {hp.ctaButton?.label || 'Get Started Free'}
+   839→                <ArrowRight className="w-5 h-5" />
+   840→              </a>
+   841→            </div>
+   842→          </div>
+   843→        </section>
+   844→      </main>
+   845→
+   846→      {/* ============================================================ */}
+   847→      {/* 15. FOOTER                                                  */}
+   848→      {/* ============================================================ */}
+   849→      <footer className="border-t border-[#202128] bg-[#0B0C17]">
+   850→        <div className="max-w-7xl mx-auto px-6 py-16">
+   851→          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+   852→            {/* Brand column */}
+   853→            <div className="sm:col-span-2 lg:col-span-1">
+   854→              <span className="text-[#937AFF] font-bold text-xl">Automark</span>
+   855→              <p className="mt-3 text-sm text-[#817E84] leading-relaxed">
+   856→                The all-in-one automated marketing system designed to capture more leads, follow up instantly, and grow your local business.
+   857→              </p>
+   858→            </div>
+   859→
+   860→            {/* Product links */}
+   861→            <div>
+   862→              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h4>
+   863→              <ul className="space-y-3">
+   864→                <li><a href="#features" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Features</a></li>
+   865→                <li><a href="#pricing" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Pricing</a></li>
+   866→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Integrations</a></li>
+   867→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Changelog</a></li>
+   868→              </ul>
+   869→            </div>
+   870→
+   871→            {/* Company links */}
+   872→            <div>
+   873→              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Company</h4>
+   874→              <ul className="space-y-3">
+   875→                <li><a href="#about" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">About</a></li>
+   876→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Blog</a></li>
+   877→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Careers</a></li>
+   878→                <li><a href="#contact" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Contact</a></li>
+   879→              </ul>
+   880→            </div>
+   881→
+   882→            {/* Support links */}
+   883→            <div>
+   884→              <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Support</h4>
+   885→              <ul className="space-y-3">
+   886→                <li><a href="#faq" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">FAQ</a></li>
+   887→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Documentation</a></li>
+   888→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Privacy Policy</a></li>
+   889→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Terms of Service</a></li>
+   890→              </ul>
+   891→            </div>
+   892→          </div>
+   893→
+   894→          {/* Bottom bar */}
+   895→          <div className="mt-14 pt-8 border-t border-[#202128] flex flex-col sm:flex-row items-center justify-between gap-4">
+   896→            <p className="text-sm text-[#817E84]">
+   897→              &copy; {new Date().getFullYear()} Automark. All rights reserved.
+   898→            </p>
+   899→            <div className="flex items-center gap-6">
+   900→              <a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">Twitter</a>
+   901→              <a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">LinkedIn</a>
+   902→              <a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">YouTube</a>
+   903→            </div>
+   904→          </div>
+   905→        </div>
+   906→      </footer>
+   907→    </div>
+   908→  );
+   909→}
+   910→

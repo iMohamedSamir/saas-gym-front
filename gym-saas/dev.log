@@ -1,0 +1,3 @@
+$ concurrently "node scripts/themeGenerator.js --watch" "astro dev"
+/usr/bin/bash: line 1: concurrently: command not found
+error: script "dev" exited with code 127

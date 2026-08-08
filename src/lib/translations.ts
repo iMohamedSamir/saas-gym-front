@@ -1,0 +1,340 @@
+export type Locale = 'ar' | 'en';
+
+const ar = {
+  // Nav
+  nav_features: 'المميزات',
+  nav_about: 'من نحن',
+  nav_pricing: 'الأسعار',
+  nav_testimonials: 'آراء العملاء',
+  nav_faq: 'الأسئلة الشائعة',
+  nav_contact: 'اتصل بنا',
+  nav_getTemplate: 'احصل على القالب',
+
+  // Hero
+  hero_title: 'برنامج النمو الشامل لأصحاب <strong>الأعمال المحلية</strong>',
+  hero_subtitle: 'النظام الآلي المتكامل المصمم لجذب المزيد من العملاء المحتملين، والمتابعة الفورية، وتنمية أعمالك المحلية - كل ذلك في مكان واحد.',
+  hero_primaryBtn: 'ابدأ فترة التجربة المجانية لمدة 14 يومًا',
+  hero_secondaryBtn: 'احجز عرضًا توضيحيًا',
+
+  // Main Features
+  mainFeatures_title: 'هل تخسر عملاء حقيقيين بسبب <strong>فجوة المتابعة؟</strong>',
+  mainFeatures_content: 'توقف عن هدر المال على التسويق إذا لم تكن تستطيع الرد بسرعة كافية.',
+  mainFeatures_items: ['إهدار الإعلانات المدفوعة', 'أدوات باهظة الثمن', 'بيانات مبعثرة', 'مكالمات فائتة', 'عملاء محتملون ضائعون', 'استجابات بطيئة'],
+
+  // Value Props
+  valueProps_title: 'استبدل أدواتك المعقدة بـ <strong>نظام ذكي شامل في واحد</strong>',
+  valueProps_content: 'سجّل الدخول إلى لوحة تحكم قوية واحدة لإدارة كل شيء بسلاسة.',
+  valueProps_values: ['التقاط العملاء المحتملين تلقائيًا', 'التسويق التلقائي', 'إدارة العملاء الذكية', 'الرد على المكالمات الفائتة'],
+
+  // Features
+  features_title: 'كل ما تحتاجه لوضع النمو <strong>على الطيار الآلي</strong>',
+  features_content: 'من التقاط النقرة الأولى إلى الحصول على تقييم 5 نجوم.',
+  features_fallback: [
+    { id: 'f1', title: 'التقاط العملاء المحتملين', isStarred: true, description: 'اجذب العملاء المحتملين تلقائيًا من جميع القنوات إلى مكان واحد.' },
+    { id: 'f2', title: 'مولّد التقييمات التلقائي', isStarred: false, description: 'احصل على تقييمات 5 نجوم تلقائيًا من عملائك السعداء.' },
+    { id: 'f3', title: 'الرد على المكالمات الفائتة', isStarred: false, description: 'رد تلقائي فوري على المكالمات الفائتة بنصوص مخصصة.' },
+    { id: 'f4', title: 'جدولة المواعيد على مدار الساعة', isStarred: false, description: 'دع العملاء يحجزون مواعيدهم بأنفسهم في أي وقت.' },
+    { id: 'f5', title: 'صندوق الوارد الموحّد', isStarred: true, description: 'إدارة جميع الرسائل والمكالمات من مكان واحد.' },
+    { id: 'f6', title: 'قاعدة بيانات العملاء الذكية', isStarred: false, description: 'تتبع كل تفاعل مع العميل تلقائيًا.' },
+  { id: 'f7', title: 'مواقع عالية التحويل', isStarred: false, description: 'أنشئ مواقع تحقق نتائج بدون معرفة تقنية.' },
+    { id: 'f8', title: 'نماذج السحب والإفلات', isStarred: false, description: 'ابنِ نماذج جميلة بسهولة دون كتابة كود.' },
+    { id: 'f9', title: 'حملات الرسائل النصية الآلية', isStarred: false, description: 'أرسل حملات تسويقية نصية مجدولة ومؤتمتة.' },
+  ],
+
+  // Stats
+  stats_fallback: [
+    { id: 's1', value: '+10,000', label: 'عمل محلي يخدمهم', sortOrder: 1 },
+    { id: 's2', value: '+5M', label: 'عملاء محتملون تم التقاطهم', sortOrder: 2 },
+    { id: 's3', value: '24/7', label: 'سير عمل آلي', sortOrder: 3 },
+    { id: 's4', value: '99%', label: 'وقت تشغيل المنصة', sortOrder: 4 },
+  ],
+
+  // Testimonials
+  testimonial_title: 'نحن نعلم أنك لم تبدأ عملك المحلي لتصبح <strong>مهندس برمجيات</strong>',
+  testimonial_quote: 'قبل هذا النظام، كنت أخسر نصف عملائي المحتملين ببساطة لأنني لم أستطع الوصول إلى هاتفي بسرعة كافية. الآن، يتولى النظام المتابعة نيابة عني، وشاهدت زيادة بنسبة 300% في الحجوزات.',
+  singleTestimonial_quote: 'هذا البرنامج الشامل هو بالضبط ما احتاجه عملنا المحلي. لقد ألغى تمامًا حاجتنا إلى 4 منصات منفصلة أخرى.',
+  singleTestimonial_name: 'رونالد ريتشاردز',
+  singleTestimonial_company: 'شركة الخدمات المحلية',
+  singleTestimonial_stats: [
+    { value: '+10,000', label: 'عملاء محتملون تم التقاطهم' },
+    { value: '5x أسرع', label: 'وقت الاستجابة' },
+    { value: '28 ساعة/أسبوع', label: 'ساعات وفرتها' },
+  ],
+  testimonials_fallback: [
+    { id: 't1', name: 'مارسف ماكينون', designation: 'صاحب شركة تسقيف', content: 'كنا نفقد 3-4 وظائف أسبوعيًا لأننا لم نستطع الرد على الهاتف بينما كنا على السطح. نظام الرد على المكالمات الفائتة قلل ذلك فورًا إلى الصفر.', avatar: '/images/testimonials/1.png', sortOrder: 1 },
+    { id: 't2', name: 'سارة جينكينز', designation: 'مديرة عيادة أسنان', content: 'كان مكتب الاستقبال لدينا غارقًا في تذكيرات المواعيد وطلبات التقييم. أتمت هذا النظام كل شيء. ارتفع معدل الحضور بنسبة 40%.', avatar: '/images/testimonials/2.png', sortOrder: 2 },
+    { id: 't3', name: 'ديفيد ألابا', designation: 'مقاول تكييف', content: 'أخيرًا ألغيت اشتراكي في 5 أدوات مختلفة. وجود صندوق الوارد الذكي والتقويم وحملات الرسائل النصية في لوحة تحكم واحدة وفر عليّ حوالي 600 دولار شهريًا.', avatar: '/images/testimonials/3.png', sortOrder: 3 },
+  ],
+
+  // Growth Process
+  growthProcess_title: 'مسارك المكون من 3 خطوات نحو <strong>النمو الآلي</strong>',
+  growthProcess_steps: [
+    { stepNumber: '1', title: 'ابدأ تجربتك', content: 'سجّل في التجربة المجانية. لا حاجة لبطاقة ائتمان.' },
+    { stepNumber: '2', title: 'اربط عملك', content: 'حوّل مكالماتك، واربط حسابات التواصل الاجتماعي الخاصة بك.' },
+    { stepNumber: '3', title: 'توسع على الطيار الآلي', content: 'شاهد تقويمك يمتلئ والتقييمات تأتي تلقائيًا.' },
+  ],
+  growthProcess_btn: 'ابدأ فترة التجربة المجانية لمدة 14 يومًا',
+
+  // Integrations
+  integrations_title: 'اربط جميع <strong>تطبيقاتك</strong>',
+
+  // Pricing
+  pricing_title: 'خطط أسعار <strong>معقولة</strong>',
+  pricing_content: 'اختر الخطة المناسبة لعملك المحلي.',
+  pricing_monthly: '/ شهريًا',
+  pricing_yearly: '/ سنويًا',
+  pricing_fallback: [
+    {
+      id: 'p1', title: 'الأساسيات', price: '97', yearlyPrice: '970',
+      description: 'الأساسيات الضرورية لتنظيم عملائك المحتملين.',
+      isFeatured: false, buttonLabel: 'ابدأ التجربة المجانية', buttonLink: '#contact',
+      features: [
+        { label: 'صندوق الوارد الموحّد', included: true },
+        { label: 'الرد على المكالمات الفائتة', included: true },
+        { label: 'مولّد التقييمات التلقائي', included: true },
+        { label: 'جدولة المواعيد على مدار الساعة', included: false },
+        { label: 'حملات المتابعة الآلية', included: false },
+      ],
+    },
+    {
+      id: 'p2', title: 'النمو', price: '297', yearlyPrice: '2970',
+      description: 'كل شيء للنمو الكامل على الطيار الآلي.',
+      isFeatured: true, offerText: 'الأكثر شعبية', buttonLabel: 'ابدأ التجربة المجانية', buttonLink: '#contact',
+      features: [
+        { label: 'صندوق الوارد الموحّد والتقييمات', included: true },
+        { label: 'جدولة المواعيد على مدار الساعة', included: true },
+        { label: 'حملات المتابعة الآلية', included: true },
+        { label: 'مواقع وقمع عالية التحويل', included: true },
+        { label: 'تكاملات API متقدمة', included: false },
+      ],
+    },
+    {
+      id: 'p3', title: 'التوسع', price: '497', yearlyPrice: '4970',
+      description: 'تحكم كامل لتوسيع مواقع متعددة.',
+      isFeatured: false, buttonLabel: 'ابدأ التجربة المجانية', buttonLink: '#contact',
+      features: [
+        { label: 'كل شيء في خطة النمو', included: true },
+        { label: 'نشر غير محدود على وسائل التواصل', included: true },
+        { label: 'تكاملات API متقدمة', included: true },
+        { label: 'دعم مواقع متعددة', included: true },
+        { label: 'مدير حساب مخصص', included: true },
+      ],
+    },
+  ],
+
+  // FAQ
+  faq_title: 'إجابات سريعة لـ <strong>المستثمرين الأذكياء</strong>',
+  faq_content: 'اعثر على إجابات للأسئلة الشائعة حول منتجنا.',
+  faq_fallback: [
+    { id: 'q1', question: 'هل هذا البرنامج صعب الإعداد؟', answer: 'على الإطلاق. صممنا هذه المنصة خصيصًا لأصحاب الأعمال المحلية الذين ليسوا خبراء تقنيين.' },
+    { id: 'q2', question: 'ماذا لو كان لديّ موقع إلكتروني بالفعل؟', answer: 'يمكنك الاحتفاظ بموقعك الحالي! أدواتنا تتكامل بسهولة مع ووردبريس وويكس وسكويرسبيس.' },
+    { id: 'q3', question: 'هل يمكن أن يحل محل نظام إدارة العملاء أو ميلتشيمب الحالي؟', answer: 'نعم. منصتنا تتضمن نظام إدارة عملاء كامل وتسويق بريد إلكتروني غير محدود وقدرات رسائل نصية.' },
+    { id: 'q4', question: 'كيف يعمل نظام الرد على المكالمات الفائتة؟', answer: 'عندما يتصل عميل ولا ترد، يرسل النظام رسالة نصية فورية.' },
+    { id: 'q5', question: 'هل هناك رسوم خفية؟', answer: 'لا توجد رسوم خفية. تدفع رسومًا شهرية بسيطة ثابتة.' },
+  ],
+
+  // Our Story
+  ourStory_title: 'لماذا نفعل ما نفعل - رسالة من <strong>المدير التنفيذي</strong>',
+  ceo_name: 'رونالد ريتشاردز',
+  ceo_role: 'المؤسس والمدير التنفيذي',
+  ceo_letter: 'في أوتومارك، نعلم أنك بدأت عملك المحلي لخدمة مجتمعك، وليس لتصبح مهندس برمجيات. بنينا منصة موحدة واحدة تضع متابعاتك وتقييماتك وحجوزاتك على طيار آلي كامل.',
+  ceo_letterPoints: ['1. أدخل بيانات عملك', '2. فعّل سير العمل المحلي الخاص بنا', '3. شاهد حجوزاتك تنمو'],
+
+  // CTA
+  cta_title: 'هل أنت مستعد لوضع نمو عملك المحلي على <strong>الطيار الآلي؟</strong>',
+  cta_description: 'توقف عن هدر الآلاف على أدوات مبعثرة لا تحقق تحويلات.',
+  cta_button: 'ابدأ فترة التجربة المجانية لمدة 14 يومًا',
+
+  // Footer
+  footer_description: 'تمكين الشركات من خلال الأتمتة الذكية.',
+  footer_product: 'المنتج',
+  footer_company: 'الشركة',
+  footer_support: 'الدعم',
+  footer_legal: 'قانوني',
+  footer_privacy: 'سياسة الخصوصية',
+  footer_terms: 'الشروط والأحكام',
+  footer_allRights: 'جميع الحقوق محفوظة.',
+  footer_copyright: '© 2026 أوتومارك.',
+  footer_contact: 'اتصل بنا',
+
+  // Contact
+  contact_title: 'تواصل معنا',
+  contact_subtitle: 'هل لديك سؤال؟ نحن هنا لمساعدتك.',
+  contact_name: 'الاسم الكامل',
+  contact_email: 'البريد الإلكتروني',
+  contact_phone: 'رقم الهاتف',
+  contact_message: 'رسالتك',
+  contact_send: 'أرسل الرسالة',
+  contact_info: 'معلومات الاتصال',
+  contact_address: 'العنوان',
+  contact_addressValue: 'القاهرة، مصر',
+
+  // Misc
+  monthly: 'شهري',
+  yearly: 'سنوي',
+  switchLang: 'English',
+  readMore: 'اقرأ المزيد',
+};
+
+const en: typeof ar = {
+  nav_features: 'Features',
+  nav_about: 'About',
+  nav_pricing: 'Pricing',
+  nav_testimonials: 'Testimonials',
+  nav_faq: 'FAQ',
+  nav_contact: 'Contact',
+  nav_getTemplate: 'Get This Template',
+
+  hero_title: 'The All-In-One Growth Software for <strong>Local Business Owners</strong>',
+  hero_subtitle: 'The complete automated system designed to capture more leads, follow up instantly, and grow your local business - all in one place.',
+  hero_primaryBtn: 'Start Your 14-day Free Trial',
+  hero_secondaryBtn: 'Book a Demo',
+
+  mainFeatures_title: 'Are you losing real customers to the <strong>Follow-up Gap?</strong>',
+  mainFeatures_content: 'Stop wasting money on marketing if you can\'t respond fast enough.',
+  mainFeatures_items: ['Wasted Ad Spend', 'Expensive Tools', 'Scattered Data', 'Missed Calls', 'Lost Leads', 'Slow Responses'],
+
+  valueProps_title: 'Replace Your Clunky Tools With A <strong>Smart, All-In-One System</strong>',
+  valueProps_content: 'Log in to a single powerful dashboard to manage everything seamlessly.',
+  valueProps_values: ['Automated Lead Capture', 'Automated Marketing', 'Smart Customer Database', 'Missed Call Response'],
+
+  features_title: 'Everything You Need To Put Growth On <strong>Autopilot</strong>',
+  features_content: 'From capturing the very first click to securing a 5-star review.',
+  features_fallback: [
+    { id: 'f1', title: 'Lead Capture', isStarred: true, description: 'Automatically capture leads from all channels into one place.' },
+    { id: 'f2', title: 'Autopilot Review Generator', isStarred: false, description: 'Get 5-star reviews automatically from your happy customers.' },
+    { id: 'f3', title: 'Missed Call Auto-Responder', isStarred: false, description: 'Instantly auto-respond to missed calls with custom texts.' },
+    { id: 'f4', title: '24/7 Appointment Scheduler', isStarred: false, description: 'Let customers book appointments themselves, anytime.' },
+    { id: 'f5', title: 'Unified Lead Inbox', isStarred: true, description: 'Manage all messages and calls from one place.' },
+    { id: 'f6', title: 'Smart Customer Database', isStarred: false, description: 'Automatically track every customer interaction.' },
+    { id: 'f7', title: 'High-Converting Websites', isStarred: false, description: 'Create result-getting websites without technical knowledge.' },
+    { id: 'f8', title: 'Drag & Drop Forms', isStarred: false, description: 'Build beautiful forms easily without writing code.' },
+    { id: 'f9', title: 'Automated Text Campaigns', isStarred: false, description: 'Send scheduled, automated SMS marketing campaigns.' },
+  ],
+
+  stats_fallback: [
+    { id: 's1', value: '10,000+', label: 'Local Businesses Served', sortOrder: 1 },
+    { id: 's2', value: '5M+', label: 'Leads Captured', sortOrder: 2 },
+    { id: 's3', value: '24/7', label: 'Automated Workflows', sortOrder: 3 },
+    { id: 's4', value: '99%', label: 'Platform Uptime', sortOrder: 4 },
+  ],
+
+  testimonial_title: 'We know you didn\'t start your local business to become a full-time <strong>Software Engineer</strong>',
+  testimonial_quote: 'Before this system, I was losing half my leads simply because I couldn\'t get to my phone fast enough. Now, the system handles the follow-up for me, and I\'ve seen a 300% jump in bookings.',
+  singleTestimonial_quote: 'This all-in-one software is exactly what our local business needed. It completely eliminated our need for 4 other separate platforms.',
+  singleTestimonial_name: 'Ronald Richards',
+  singleTestimonial_company: 'Local Services Co.',
+  singleTestimonial_stats: [
+    { value: '10,000+', label: 'Leads Captured' },
+    { value: '5x Faster', label: 'Response Time' },
+    { value: '28hr/week', label: 'Hours Saved' },
+  ],
+  testimonials_fallback: [
+    { id: 't1', name: 'Marvin McKinney', designation: 'Roofing Company Owner', content: 'We used to lose at least 3-4 jobs a week because we couldn\'t answer the phone while on a roof. The Missed Call Auto-Responder immediately cut that to zero.', avatar: '/images/testimonials/1.png', sortOrder: 1 },
+    { id: 't2', name: 'Sarah Jenkins', designation: 'Dental Practice Manager', content: 'Our front desk was overwhelmed with appointment reminders and review requests. This system automated everything. Our show-up rate increased by 40%.', avatar: '/images/testimonials/2.png', sortOrder: 2 },
+    { id: 't3', name: 'David Alaba', designation: 'HVAC Contractor', content: 'I finally cancelled my subscription to 5 different tools. Having the Smart Inbox, calendar, and text campaigns in one dashboard saved me nearly $600 a month.', avatar: '/images/testimonials/3.png', sortOrder: 3 },
+  ],
+
+  growthProcess_title: 'Your 3-Step Path to <strong>Automated Growth</strong>',
+  growthProcess_steps: [
+    { stepNumber: '1', title: 'Start Your Trial', content: 'Sign up for a free trial. No credit card required.' },
+    { stepNumber: '2', title: 'Connect Your Business', content: 'Forward your calls, plug in your social accounts.' },
+    { stepNumber: '3', title: 'Scale on Autopilot', content: 'Watch your calendar fill up and reviews come in automatically.' },
+  ],
+  growthProcess_btn: 'Start Your 14-Day Free Trial',
+
+  integrations_title: 'Connect all your <strong>Applications</strong>',
+
+  pricing_title: 'Affordable <strong>Pricing Plans</strong>',
+  pricing_content: 'Choose the plan that fits your local business.',
+  pricing_monthly: '/month',
+  pricing_yearly: '/year',
+  pricing_fallback: [
+    {
+      id: 'p1', title: 'Essentials', price: '97', yearlyPrice: '970',
+      description: 'The core necessities for organizing your leads.',
+      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+      features: [
+        { label: 'Unified Lead Inbox', included: true },
+        { label: 'Missed Call Auto-Responder', included: true },
+        { label: 'Autopilot Review Generator', included: true },
+        { label: '24/7 Appointment Scheduler', included: false },
+        { label: 'Automated Follow-Up Campaigns', included: false },
+      ],
+    },
+    {
+      id: 'p2', title: 'Growth', price: '297', yearlyPrice: '2970',
+      description: 'Everything for complete autopilot growth.',
+      isFeatured: true, offerText: 'Most Popular', buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+      features: [
+        { label: 'Unified Lead Inbox & Reviews', included: true },
+        { label: '24/7 Appointment Scheduler', included: true },
+        { label: 'Automated Follow-Up Campaigns', included: true },
+        { label: 'High-Converting Websites & Funnels', included: true },
+        { label: 'Advanced API Integrations', included: false },
+      ],
+    },
+    {
+      id: 'p3', title: 'Scale', price: '497', yearlyPrice: '4970',
+      description: 'Total control to scale multiple locations.',
+      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+      features: [
+        { label: 'Everything in Growth', included: true },
+        { label: 'Unlimited Social Media Posting', included: true },
+        { label: 'Advanced API Integrations', included: true },
+        { label: 'Multi-Location Support', included: true },
+        { label: 'Dedicated Account Manager', included: true },
+      ],
+    },
+  ],
+
+  faq_title: 'Quick Answers for the <strong>Smart Investors</strong>',
+  faq_content: 'Find answers to common questions about our product.',
+  faq_fallback: [
+    { id: 'q1', question: 'Is this software hard to set up?', answer: 'Not at all. We built this platform specifically for local business owners who aren\'t tech experts.' },
+    { id: 'q2', question: 'What if I already have a website?', answer: 'You can keep your existing website! Our tools easily integrate with WordPress, Wix, and Squarespace.' },
+    { id: 'q3', question: 'Can this replace my existing CRM or Mailchimp?', answer: 'Yes. Our platform includes a full CRM, unlimited email marketing, and SMS capabilities.' },
+    { id: 'q4', question: 'How does the Missed Call Auto-Responder work?', answer: 'When a customer calls and you don\'t answer, the system instantly texts them back.' },
+    { id: 'q5', question: 'Are there any hidden fees?', answer: 'No hidden fees. You pay a simple flat monthly rate.' },
+  ],
+
+  ourStory_title: 'Why We Do What We Do - A Letter From <strong>Our CEO</strong>',
+  ceo_name: 'Ronald Richards',
+  ceo_role: 'Founder & CEO',
+  ceo_letter: 'At Automark, we know you started your local business to serve your community, not to become a software engineer. We built a single, unified platform that puts your follow-ups, reviews, and bookings on complete autopilot.',
+  ceo_letterPoints: ['1. Plug In Your Business Data', '2. Activate Our Local Workflows', '3. Watch Your Bookings Grow'],
+
+  cta_title: 'Ready to put Your Local Business Growth on <strong>Autopilot?</strong>',
+  cta_description: 'Stop wasting thousands on scattered tools that don\'t convert.',
+  cta_button: 'Start Your 14-Days Free Trial',
+
+  footer_description: 'Empowering businesses through intelligent automation.',
+  footer_product: 'Product',
+  footer_company: 'Company',
+  footer_support: 'Support',
+  footer_legal: 'Legal',
+  footer_privacy: 'Privacy Policy',
+  footer_terms: 'Terms & Conditions',
+  footer_allRights: 'All Rights Reserved.',
+  footer_copyright: '© 2026 Automark.',
+  footer_contact: 'Contact Us',
+
+  contact_title: 'Contact Us',
+  contact_subtitle: 'Have a question? We\'re here to help.',
+  contact_name: 'Full Name',
+  contact_email: 'Email Address',
+  contact_phone: 'Phone Number',
+  contact_message: 'Your Message',
+  contact_send: 'Send Message',
+  contact_info: 'Contact Information',
+  contact_address: 'Address',
+  contact_addressValue: 'Cairo, Egypt',
+
+  monthly: 'Monthly',
+  yearly: 'Yearly',
+  switchLang: 'العربية',
+  readMore: 'Read More',
+};
+
+export const translations = { ar, en } as const;
+export type TranslationKey = keyof typeof ar;
