@@ -1,0 +1,721 @@
+     1→'use client';
+     2→
+     3→import { useEffect, useState, useCallback } from 'react';
+     4→import { Mail, Phone, Calendar, Check, X, Star, ArrowRight } from 'lucide-react';
+     5→import FaqAccordion from '@/components/FaqAccordion';
+     6→import MobileNav from '@/components/MobileNav';
+     7→import LangSwitcher from '@/components/LangSwitcher';
+     8→import { translations, Locale } from '@/lib/translations';
+     9→
+    10→/* ------------------------------------------------------------------ */
+    11→/*  Types                                                              */
+    12→/* ------------------------------------------------------------------ */
+    13→
+    14→interface PricingFeature {
+    15→  label?: string;
+    16→  included?: boolean;
+    17→  tooltip?: string;
+    18→}
+    19→
+    20→interface PricingPlan {
+    21→  id: string;
+    22→  title?: string;
+    23→  price?: string;
+    24→  yearlyPrice?: string;
+    25→  description?: string;
+    26→  isFeatured?: boolean;
+    27→  offerText?: string;
+    28→  buttonLabel?: string;
+    29→  buttonLink?: string;
+    30→  features?: PricingFeature[];
+    31→}
+    32→
+    33→interface Feature {
+    34→  id: string;
+    35→  title?: string;
+    36→  isStarred?: boolean;
+    37→  description?: string;
+    38→}
+    39→
+    40→interface Stat {
+    41→  id: string;
+    42→  value?: string;
+    43→  label?: string;
+    44→}
+    45→
+    46→interface FaqItem {
+    47→  id: string;
+    48→  question?: string;
+    49→  answer?: string;
+    50→}
+    51→
+    52→export default function HomeContent() {
+    53→  const [locale, setLocale] = useState<Locale>('ar');
+    54→  const [mounted, setMounted] = useState(false);
+    55→
+    56→  const t = translations[locale];
+    57→
+    58→  const updateLocale = useCallback((loc: Locale) => {
+    59→    setLocale(loc);
+    60→  }, []);
+    61→
+    62→  useEffect(() => {
+    63→    const saved = (localStorage.getItem('locale') || 'ar') as Locale;
+    64→    setLocale(saved);
+    65→    setMounted(true);
+    66→
+    67→    const handler = (e: Event) => {
+    68→      updateLocale((e as CustomEvent).detail);
+    69→    };
+    70→    window.addEventListener('localechange', handler);
+    71→    return () => window.removeEventListener('localechange', handler);
+    72→  }, [updateLocale]);
+    73→
+    74→  if (!mounted) {
+    75→    // SSR placeholder — matches the Arabic layout
+    76→    return (
+    77→      <div className="min-h-screen bg-[#03010E] text-[#E5E5E5]">
+    78→        <div className="flex items-center justify-center h-screen">
+    79→          <div className="h-8 w-8 border-2 border-[#937AFF] border-t-transparent rounded-full animate-spin" />
+    80→        </div>
+    81→      </div>
+    82→    );
+    83→  }
+    84→
+    85→  const isRTL = locale === 'ar';
+    86→
+    87→  const navLinks = [
+    88→    { label: t.nav_features, href: '#features' },
+    89→    { label: t.nav_about, href: '#about' },
+    90→    { label: t.nav_pricing, href: '#pricing' },
+    91→    { label: t.nav_testimonials, href: '#testimonials' },
+    92→    { label: t.nav_faq, href: '#faq' },
+    93→    { label: t.nav_contact, href: '#contact' },
+    94→  ];
+    95→
+    96→  const features: Feature[] = t.features_fallback as unknown as Feature[];
+    97→  const stats: Stat[] = t.stats_fallback as unknown as Stat[];
+    98→  const testimonials = t.testimonials_fallback;
+    99→  const faqItems: FaqItem[] = t.faq_fallback as unknown as FaqItem[];
+   100→  const pricingPlans: PricingPlan[] = t.pricing_fallback as unknown as PricingPlan[];
+   101→
+   102→  return (
+   103→    <div className="min-h-screen bg-[#03010E] text-[#E5E5E5]">
+   104→      {/* ============================================================ */}
+   105→      {/* 1. HEADER                                                    */}
+   106→      {/* ============================================================ */}
+   107→      <header className="sticky top-0 z-40 w-full border-b border-[#202128] bg-[#03010E]/80 backdrop-blur-xl">
+   108→        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 sm:h-18">
+   109→          {/* Logo */}
+   110→          <a href="/" className="text-[#937AFF] font-bold text-xl tracking-tight select-none">
+   111→            Automark
+   112→          </a>
+   113→
+   114→          {/* Desktop nav */}
+   115→          <nav className="hidden lg:flex items-center gap-8">
+   116→            {navLinks.map((l) => (
+   117→              <a
+   118→                key={l.href}
+   119→                href={l.href}
+   120→                className="text-sm text-[#817E84] hover:text-[#E5E5E5] transition-colors duration-200"
+   121→              >
+   122→                {l.label}
+   123→              </a>
+   124→            ))}
+   125→          </nav>
+   126→
+   127→          <div className="flex items-center gap-3">
+   128→            <LangSwitcher />
+   129→            {/* Desktop CTA */}
+   130→            <a
+   131→              href="/admin"
+   132→              className="hidden lg:inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200"
+   133→            >
+   134→              {t.nav_getTemplate}
+   135→            </a>
+   136→          </div>
+   137→
+   138→          {/* Mobile nav */}
+   139→          <MobileNav />
+   140→        </div>
+   141→      </header>
+   142→
+   143→      <main>
+   144→        {/* ============================================================ */}
+   145→        {/* 2. HERO                                                     */}
+   146→        {/* ============================================================ */}
+   147→        <section className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+   148→          {/* Radial glow */}
+   149→          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+   150→            <div className="h-[600px] w-[600px] rounded-full bg-[#937AFF]/15 blur-[140px]" />
+   151→          </div>
+   152→
+   153→          <div className="relative max-w-7xl mx-auto px-6 text-center">
+   154→            <h1
+   155→              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-white"
+   156→              dangerouslySetInnerHTML={{ __html: t.hero_title }}
+   157→            />
+   158→            <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-[#817E84] leading-relaxed">
+   159→              {t.hero_subtitle}
+   160→            </p>
+   161→            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+   162→              <a
+   163→                href="#pricing"
+   164→                className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25"
+   165→              >
+   166→                {t.hero_primaryBtn}
+   167→                <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   168→              </a>
+   169→              <a
+   170→                href="#contact"
+   171→                className="inline-flex items-center gap-2 border border-[#202128] hover:border-[#937AFF]/50 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200"
+   172→              >
+   173→                {t.hero_secondaryBtn}
+   174→              </a>
+   175→            </div>
+   176→          </div>
+   177→        </section>
+   178→
+   179→        {/* ============================================================ */}
+   180→        {/* 3. STATS                                                     */}
+   181→        {/* ============================================================ */}
+   182→        {stats.length > 0 && (
+   183→          <section className="py-16 border-y border-[#202128] bg-[#0B0C17]/50">
+   184→            <div className="max-w-7xl mx-auto px-6">
+   185→              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+   186→                {stats.map((s) => (
+   187→                  <div key={s.id} className="text-center">
+   188→                    <div className="text-3xl sm:text-4xl font-bold text-[#937AFF]">{s.value}</div>
+   189→                    <div className="mt-2 text-sm text-[#817E84]">{s.label}</div>
+   190→                  </div>
+   191→                ))}
+   192→              </div>
+   193→            </div>
+   194→          </section>
+   195→        )}
+   196→
+   197→        {/* ============================================================ */}
+   198→        {/* 4. MAIN FEATURES — "Follow-up Gap"                          */}
+   199→        {/* ============================================================ */}
+   200→        <section className="py-20 sm:py-28">
+   201→          <div className="max-w-7xl mx-auto px-6">
+   202→            <h2
+   203→              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center"
+   204→              dangerouslySetInnerHTML={{ __html: t.mainFeatures_title }}
+   205→            />
+   206→            <p className="mt-6 text-lg text-[#817E84] text-center max-w-3xl mx-auto">
+   207→              {t.mainFeatures_content}
+   208→            </p>
+   209→
+   210→            <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+   211→              {t.mainFeatures_items.map((item, i) => (
+   212→                <div
+   213→                  key={i}
+   214→                  className="flex items-center gap-3 bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3"
+   215→                >
+   216→                  <X className="w-5 h-5 text-red-400 shrink-0" />
+   217→                  <span className="text-sm text-[#E5E5E5]">{item}</span>
+   218→                </div>
+   219→              ))}
+   220→            </div>
+   221→          </div>
+   222→        </section>
+   223→
+   224→        {/* ============================================================ */}
+   225→        {/* 5. VALUE PROPS                                               */}
+   226→        {/* ============================================================ */}
+   227→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   228→          <div className="max-w-7xl mx-auto px-6">
+   229→            <h2
+   230→              className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center"
+   231→              dangerouslySetInnerHTML={{ __html: t.valueProps_title }}
+   232→            />
+   233→            <p className="mt-6 text-lg text-[#817E84] text-center max-w-3xl mx-auto">
+   234→              {t.valueProps_content}
+   235→            </p>
+   236→
+   237→            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+   238→              {t.valueProps_values.map((val, i) => {
+   239→                const icons = ['/images/value-proposition/values-icon-1.svg', '/images/value-proposition/values-icon-2.svg', '/images/value-proposition/values-icon-3.svg', '/images/value-proposition/values-icon-4.svg'];
+   240→                return (
+   241→                  <div
+   242→                    key={i}
+   243→                    className="group relative bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/50 transition-all duration-300"
+   244→                  >
+   245→                    <div className="w-12 h-12 rounded-lg bg-[#937AFF]/10 flex items-center justify-center mb-4">
+   246→                      <img src={icons[i]} alt="" className="w-6 h-6" />
+   247→                    </div>
+   248→                    <h3 className="text-lg font-semibold text-white">{val}</h3>
+   249→                  </div>
+   250→                );
+   251→              })}
+   252→            </div>
+   253→
+   254→            {/* Dashboard mockup */}
+   255→            <div className="mt-16 relative rounded-2xl overflow-hidden border border-[#202128]">
+   256→              <img
+   257→                src="/images/features/dashboard-mockup.png"
+   258→                alt="Dashboard"
+   259→                className="w-full h-auto"
+   260→              />
+   261→            </div>
+   262→          </div>
+   263→        </section>
+   264→
+   265→        {/* ============================================================ */}
+   266→        {/* 6. FEATURES GRID                                             */}
+   267→        {/* ============================================================ */}
+   268→        <section id="features" className="py-20 sm:py-28 bg-zinc-900/30">
+   269→          <div className="max-w-7xl mx-auto px-6">
+   270→            <h2
+   271→              className="text-3xl sm:text-4xl font-bold text-white text-center"
+   272→              dangerouslySetInnerHTML={{ __html: t.features_title }}
+   273→            />
+   274→            <p className="mt-4 text-[#817E84] text-center max-w-2xl mx-auto">
+   275→              {t.features_content}
+   276→            </p>
+   277→            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+   278→              {(features.length
+   279→                ? features
+   280→                : [
+   281→                    { id: 'f1', title: 'Lead Capture', isStarred: true, description: 'Automatically capture leads from all channels.' },
+   282→                    { id: 'f2', title: 'Review Generator', isStarred: false, description: 'Get 5-star reviews automatically.' },
+   283→                    { id: 'f3', title: 'Missed Call Responder', isStarred: false, description: 'Instant auto-respond to missed calls.' },
+   284→                    { id: 'f4', title: 'Appointment Scheduler', isStarred: false, description: 'Let customers book 24/7.' },
+   285→                    { id: 'f5', title: 'Unified Inbox', isStarred: true, description: 'All messages in one place.' },
+   286→                    { id: 'f6', title: 'Smart Database', isStarred: false, description: 'Track every interaction.' },
+   287→                  ]
+   288→              ).map((f: Feature) => (
+   289→                <div
+   290→                  key={f.id}
+   291→                  className={`relative bg-[#0B0C17] border rounded-2xl p-6 transition-all duration-300 hover:border-[#937AFF]/50 ${f.isStarred ? 'border-[#937AFF]/30' : 'border-[#202128]'}`}
+   292→                >
+   293→                  {f.isStarred && (
+   294→                    <span className="absolute top-4 end-4">
+   295→                      <Star className="w-4 h-4 text-[#937AFF] fill-[#937AFF]" />
+   296→                    </span>
+   297→                  )}
+   298→                  <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center mb-4">
+   299→                    <img src="/images/features-menu-icon.svg" alt="" className="w-5 h-5" />
+   300→                  </div>
+   301→                  <h3 className="text-lg font-semibold text-white mb-2">{f.title}</h3>
+   302→                  <p className="text-sm text-[#817E84]">{(f as any).description || ''}</p>
+   303→                </div>
+   304→              ))}
+   305→            </div>
+   306→          </div>
+   307→        </section>
+   308→
+   309→        {/* ============================================================ */}
+   310→        {/* 7. OUR STORY / TEAM                                          */}
+   311→        {/* ============================================================ */}
+   312→        <section id="about" className="py-20 sm:py-28">
+   313→          <div className="max-w-7xl mx-auto px-6">
+   314→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.ourStory_title }} />
+   315→            <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+   316→              <div>
+   317→                <p className="text-lg text-[#817E84] leading-relaxed">{t.ceo_letter}</p>
+   318→                <ul className="mt-8 space-y-4">
+   319→                  {t.ceo_letterPoints.map((pt, i) => (
+   320→                    <li key={i} className="flex items-center gap-3">
+   321→                      <Check className="w-5 h-5 text-[#937AFF] shrink-0" />
+   322→                      <span className="text-white">{pt}</span>
+   323→                    </li>
+   324→                  ))}
+   325→                </ul>
+   326→              </div>
+   327→              <div className="relative">
+   328→                <img
+   329→                  src="/images/avatar-lg.png"
+   330→                  alt={t.ceo_name}
+   331→                  className="w-full max-w-sm mx-auto rounded-2xl"
+   332→                />
+   333→                <div className="mt-4 text-center">
+   334→                  <p className="font-semibold text-white text-lg">{t.ceo_name}</p>
+   335→                  <p className="text-sm text-[#817E84]">{t.ceo_role}</p>
+   336→                </div>
+   337→              </div>
+   338→            </div>
+   339→          </div>
+   340→        </section>
+   341→
+   342→        {/* ============================================================ */}
+   343→        {/* 8. PRICING                                                   */}
+   344→        {/* ============================================================ */}
+   345→        <section id="pricing" className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   346→          <div className="max-w-7xl mx-auto px-6">
+   347→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.pricing_title }} />
+   348→            <p className="mt-4 text-[#817E84] text-center max-w-2xl mx-auto">{t.pricing_content}</p>
+   349→
+   350→            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+   351→              {(pricingPlans.length
+   352→                ? pricingPlans
+   353→                : [
+   354→                    {
+   355→                      id: 'p1', title: 'Essentials', price: '97', yearlyPrice: '970',
+   356→                      description: 'Core necessities for organizing leads.',
+   357→                      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+   358→                      features: [
+   359→                        { label: 'Unified Lead Inbox', included: true },
+   360→                        { label: 'Missed Call Auto-Responder', included: true },
+   361→                        { label: 'Autopilot Review Generator', included: true },
+   362→                        { label: '24/7 Appointment Scheduler', included: false },
+   363→                        { label: 'Automated Follow-Up Campaigns', included: false },
+   364→                      ],
+   365→                    },
+   366→                    {
+   367→                      id: 'p2', title: 'Growth', price: '297', yearlyPrice: '2970',
+   368→                      description: 'Everything for complete autopilot growth.',
+   369→                      isFeatured: true, offerText: 'Most Popular', buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+   370→                      features: [
+   371→                        { label: 'Unified Lead Inbox & Reviews', included: true },
+   372→                        { label: '24/7 Appointment Scheduler', included: true },
+   373→                        { label: 'Automated Follow-Up Campaigns', included: true },
+   374→                        { label: 'High-Converting Websites & Funnels', included: true },
+   375→                        { label: 'Advanced API Integrations', included: false },
+   376→                      ],
+   377→                    },
+   378→                    {
+   379→                      id: 'p3', title: 'Scale', price: '497', yearlyPrice: '4970',
+   380→                      description: 'Total control to scale multiple locations.',
+   381→                      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+   382→                      features: [
+   383→                        { label: 'Everything in Growth', included: true },
+   384→                        { label: 'Unlimited Social Media Posting', included: true },
+   385→                        { label: 'Advanced API Integrations', included: true },
+   386→                        { label: 'Multi-Location Support', included: true },
+   387→                        { label: 'Dedicated Account Manager', included: true },
+   388→                      ],
+   389→                    },
+   390→                  ]
+   391→              ).map((plan: PricingPlan) => (
+   392→                <div
+   393→                  key={plan.id}
+   394→                  className={`relative rounded-2xl p-8 border transition-all duration-300 ${
+   395→                    plan.isFeatured
+   396→                      ? 'bg-[#937AFF]/10 border-[#937AFF]/50 shadow-lg shadow-[#937AFF]/10'
+   397→                      : 'bg-[#0B0C17] border-[#202128] hover:border-[#937AFF]/30'
+   398→                  }`}
+   399→                >
+   400→                  {plan.offerText && (
+   401→                    <span className="absolute -top-3 start-4 bg-[#937AFF] text-white text-xs font-bold px-3 py-1 rounded-full">
+   402→                      {plan.offerText}
+   403→                    </span>
+   404→                  )}
+   405→                  <h3 className="text-xl font-bold text-white">{plan.title}</h3>
+   406→                  <p className="mt-2 text-sm text-[#817E84]">{plan.description}</p>
+   407→                  <div className="mt-6 flex items-baseline gap-1">
+   408→                    <span className="text-4xl font-bold text-white">${plan.price}</span>
+   409→                    <span className="text-sm text-[#817E84]">{t.pricing_monthly}</span>
+   410→                  </div>
+   411→                  <ul className="mt-8 space-y-3">
+   412→                    {plan.features?.map((feat, fi) => (
+   413→                      <li key={fi} className="flex items-center gap-3">
+   414→                        {feat.included ? (
+   415→                          <Check className="w-5 h-5 text-[#937AFF] shrink-0" />
+   416→                        ) : (
+   417→                          <X className="w-5 h-5 text-[#817E84] shrink-0" />
+   418→                        )}
+   419→                        <span className={`text-sm ${feat.included ? 'text-[#E5E5E5]' : 'text-[#817E84]'}`}>{feat.label}</span>
+   420→                      </li>
+   421→                    ))}
+   422→                  </ul>
+   423→                  <a
+   424→                    href={plan.buttonLink || '#contact'}
+   425→                    className={`mt-8 block text-center font-semibold py-3 rounded-lg transition-colors duration-200 ${
+   426→                      plan.isFeatured
+   427→                        ? 'bg-[#937AFF] hover:bg-[#7d5ff0] text-white'
+   428→                        : 'border border-[#202128] hover:border-[#937AFF]/50 text-white'
+   429→                    }`}
+   430→                  >
+   431→                    {plan.buttonLabel}
+   432→                  </a>
+   433→                </div>
+   434→              ))}
+   435→            </div>
+   436→          </div>
+   437→        </section>
+   438→
+   439→        {/* ============================================================ */}
+   440→        {/* 9. TESTIMONIAL QUOTE                                         */}
+   441→        {/* ============================================================ */}
+   442→        <section id="testimonials" className="py-20 sm:py-28">
+   443→          <div className="max-w-4xl mx-auto px-6 text-center">
+   444→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.testimonial_title }} />
+   445→            <blockquote className="mt-12">
+   446→              <p className="text-2xl sm:text-3xl font-medium text-[#E5E5E5] leading-relaxed italic">
+   447→                &ldquo;{t.testimonial_quote}&rdquo;
+   448→              </p>
+   449→              {t.singleTestimonial_name && (
+   450→                <div className="mt-8 flex flex-col items-center">
+   451→                  <img src="/images/avatar.png" alt={t.singleTestimonial_name} className="w-14 h-14 rounded-full" />
+   452→                  <p className="mt-3 font-semibold text-white">{t.singleTestimonial_name}</p>
+   453→                  <p className="text-sm text-[#817E84]">{t.singleTestimonial_company}</p>
+   454→                </div>
+   455→              )}
+   456→              {t.singleTestimonial_stats && t.singleTestimonial_stats.length > 0 && (
+   457→                <div className="mt-10 grid grid-cols-3 gap-6">
+   458→                  {t.singleTestimonial_stats.map((stat, i) => (
+   459→                    <div key={i}>
+   460→                      <div className="text-2xl sm:text-3xl font-bold text-[#937AFF]">{stat.value}</div>
+   461→                      <div className="text-sm text-[#817E84]">{stat.label}</div>
+   462→                    </div>
+   463→                  ))}
+   464→                </div>
+   465→              )}
+   466→            </blockquote>
+   467→          </div>
+   468→        </section>
+   469→
+   470→        {/* ============================================================ */}
+   471→        {/* 10. TESTIMONIALS CARDS                                       */}
+   472→        {/* ============================================================ */}
+   473→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   474→          <div className="max-w-7xl mx-auto px-6">
+   475→            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+   476→              {testimonials.map((tm: any) => (
+   477→                <div key={tm.id} className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/30 transition-all duration-300">
+   478→                  <div className="flex gap-1 mb-4">
+   479→                    {[...Array(5)].map((_, i) => (
+   480→                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+   481→                    ))}
+   482→                  </div>
+   483→                  <p className="text-[#E5E5E5] leading-relaxed">{tm.content}</p>
+   484→                  <div className="mt-6 flex items-center gap-3">
+   485→                    <img src={tm.avatar} alt={tm.name} className="w-10 h-10 rounded-full" />
+   486→                    <div>
+   487→                      <p className="font-semibold text-white text-sm">{tm.name}</p>
+   488→                      <p className="text-xs text-[#817E84]">{tm.designation}</p>
+   489→                    </div>
+   490→                  </div>
+   491→                </div>
+   492→              ))}
+   493→            </div>
+   494→          </div>
+   495→        </section>
+   496→
+   497→        {/* ============================================================ */}
+   498→        {/* 11. GROWTH PROCESS / HOW IT WORKS                            */}
+   499→        {/* ============================================================ */}
+   500→        <section className="py-20 sm:py-28">
+   501→          <div className="max-w-7xl mx-auto px-6">
+   502→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.growthProcess_title }} />
+   503→            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+   504→              {(t.growthProcess_steps.length
+   505→                ? t.growthProcess_steps
+   506→                : [
+   507→                    { stepNumber: '1', title: 'Start Your Trial', content: 'Sign up for a free trial.' },
+   508→                    { stepNumber: '2', title: 'Connect Your Business', content: 'Forward your calls, plug in social accounts.' },
+   509→                    { stepNumber: '3', title: 'Scale on Autopilot', content: 'Watch your calendar fill up.' },
+   510→                  ]
+   511→              ).map((step: any, i: number) => (
+   512→                <div key={i} className="relative bg-[#0B0C17] border border-[#202128] rounded-2xl p-8 text-center hover:border-[#937AFF]/30 transition-all duration-300">
+   513→                  <div className="w-12 h-12 rounded-full bg-[#937AFF]/20 text-[#937AFF] flex items-center justify-center mx-auto text-xl font-bold">
+   514→                    {step.stepNumber}
+   515→                  </div>
+   516→                  <h3 className="mt-6 text-xl font-semibold text-white">{step.title}</h3>
+   517→                  <p className="mt-3 text-[#817E84]">{step.content}</p>
+   518→                </div>
+   519→              ))}
+   520→            </div>
+   521→            <div className="mt-12 text-center">
+   522→              <a
+   523→                href="#pricing"
+   524→                className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25"
+   525→              >
+   526→                {t.growthProcess_btn}
+   527→                <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   528→              </a>
+   529→            </div>
+   530→          </div>
+   531→        </section>
+   532→
+   533→        {/* ============================================================ */}
+   534→        {/* 12. FAQ                                                      */}
+   535→        {/* ============================================================ */}
+   536→        <section id="faq" className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   537→          <div className="max-w-3xl mx-auto px-6">
+   538→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.faq_title }} />
+   539→            <p className="mt-4 text-[#817E84] text-center">{t.faq_content}</p>
+   540→
+   541→            <div className="mt-12">
+   542→              <FaqAccordion
+   543→                items={faqItems.length
+   544→                  ? faqItems
+   545→                  : t.faq_fallback as unknown as FaqItem[]}
+   546→              />
+   547→            </div>
+   548→          </div>
+   549→        </section>
+   550→
+   551→        {/* ============================================================ */}
+   552→        {/* 13. INTEGRATIONS                                             */}
+   553→        {/* ============================================================ */}
+   554→        <section className="py-20 sm:py-28">
+   555→          <div className="max-w-7xl mx-auto px-6 text-center">
+   556→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.integrations_title }} />
+   557→            <div className="mt-12 flex flex-wrap items-center justify-center gap-8 opacity-60">
+   558→              {['slack', 'youtube', 'mailchimp', 'snapchat', 'fastapi', 'airtable', 'asana', 'zendesk'].map((name) => (
+   559→                <img
+   560→                  key={name}
+   561→                  src={`/images/integrations/${name}.png`}
+   562→                  alt={name}
+   563→                  className="h-8 w-auto grayscale hover:grayscale-0 transition-all duration-300"
+   564→                />
+   565→              ))}
+   566→            </div>
+   567→          </div>
+   568→        </section>
+   569→
+   570→        {/* ============================================================ */}
+   571→        {/* 14. CTA                                                      */}
+   572→        {/* ============================================================ */}
+   573→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   574→          <div className="max-w-4xl mx-auto px-6 text-center">
+   575→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.cta_title }} />
+   576→            <p className="mt-6 text-lg text-[#817E84] max-w-2xl mx-auto">{t.cta_description}</p>
+   577→            <a
+   578→              href="#pricing"
+   579→              className="mt-10 inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25"
+   580→            >
+   581→              {t.cta_button}
+   582→              <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   583→            </a>
+   584→          </div>
+   585→        </section>
+   586→
+   587→        {/* ============================================================ */}
+   588→        {/* 15. CONTACT                                                  */}
+   589→        {/* ============================================================ */}
+   590→        <section id="contact" className="py-20 sm:py-28">
+   591→          <div className="max-w-7xl mx-auto px-6">
+   592→            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+   593→              <div>
+   594→                <h2 className="text-3xl sm:text-4xl font-bold text-white">{t.contact_title}</h2>
+   595→                <p className="mt-4 text-[#817E84]">{t.contact_subtitle}</p>
+   596→
+   597→                <div className="mt-10 space-y-6">
+   598→                  <div className="flex items-center gap-4">
+   599→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   600→                      <Mail className="w-5 h-5 text-[#937AFF]" />
+   601→                    </div>
+   602→                    <div>
+   603→                      <p className="text-sm text-[#817E84]">{t.contact_email}</p>
+   604→                      <p className="text-white">hello@automark.com</p>
+   605→                    </div>
+   606→                  </div>
+   607→                  <div className="flex items-center gap-4">
+   608→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   609→                      <Phone className="w-5 h-5 text-[#937AFF]" />
+   610→                    </div>
+   611→                    <div>
+   612→                      <p className="text-sm text-[#817E84]">{t.contact_phone}</p>
+   613→                      <p className="text-white" dir="ltr">+1 (800) 123-4567</p>
+   614→                    </div>
+   615→                  </div>
+   616→                  <div className="flex items-center gap-4">
+   617→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   618→                      <Calendar className="w-5 h-5 text-[#937AFF]" />
+   619→                    </div>
+   620→                    <div>
+   621→                      <p className="text-sm text-[#817E84]">{t.contact_address}</p>
+   622→                      <p className="text-white">{t.contact_addressValue}</p>
+   623→                    </div>
+   624→                  </div>
+   625→                </div>
+   626→              </div>
+   627→
+   628→              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+   629→                <div>
+   630→                  <label className="block text-sm text-[#817E84] mb-2">{t.contact_name}</label>
+   631→                  <input
+   632→                    type="text"
+   633→                    className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors"
+   634→                    placeholder={t.contact_name}
+   635→                  />
+   636→                </div>
+   637→                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+   638→                  <div>
+   639→                    <label className="block text-sm text-[#817E84] mb-2">{t.contact_email}</label>
+   640→                    <input
+   641→                      type="email"
+   642→                      className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors"
+   643→                      placeholder={t.contact_email}
+   644→                    />
+   645→                  </div>
+   646→                  <div>
+   647→                    <label className="block text-sm text-[#817E84] mb-2">{t.contact_phone}</label>
+   648→                    <input
+   649→                      type="tel"
+   650→                      className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors"
+   651→                      placeholder={t.contact_phone}
+   652→                      dir="ltr"
+   653→                    />
+   654→                  </div>
+   655→                </div>
+   656→                <div>
+   657→                  <label className="block text-sm text-[#817E84] mb-2">{t.contact_message}</label>
+   658→                  <textarea
+   659→                    rows={5}
+   660→                    className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors resize-none"
+   661→                    placeholder={t.contact_message}
+   662→                  />
+   663→                </div>
+   664→                <button
+   665→                  type="submit"
+   666→                  className="w-full bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold py-3.5 rounded-lg transition-colors duration-200"
+   667→                >
+   668→                  {t.contact_send}
+   669→                </button>
+   670→              </form>
+   671→            </div>
+   672→          </div>
+   673→        </section>
+   674→      </main>
+   675→
+   676→      {/* ============================================================ */}
+   677→      {/* FOOTER                                                       */}
+   678→      {/* ============================================================ */}
+   679→      <footer className="border-t border-[#202128] bg-[#03010E] py-16">
+   680→        <div className="max-w-7xl mx-auto px-6">
+   681→          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+   682→            {/* Brand */}
+   683→            <div className="md:col-span-1">
+   684→              <a href="/" className="text-[#937AFF] font-bold text-xl">Automark</a>
+   685→              <p className="mt-4 text-sm text-[#817E84]">{t.footer_description}</p>
+   686→            </div>
+   687→
+   688→            {/* Links */}
+   689→            <div>
+   690→              <h4 className="font-semibold text-white mb-4">{t.footer_product}</h4>
+   691→              <ul className="space-y-2">
+   692→                {navLinks.map((l) => (
+   693→                  <li key={l.href}><a href={l.href} className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{l.label}</a></li>
+   694→                ))}
+   695→              </ul>
+   696→            </div>
+   697→            <div>
+   698→              <h4 className="font-semibold text-white mb-4">{t.footer_company}</h4>
+   699→              <ul className="space-y-2">
+   700→                <li><a href="#about" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.nav_about}</a></li>
+   701→                <li><a href="#contact" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_contact}</a></li>
+   702→              </ul>
+   703→            </div>
+   704→            <div>
+   705→              <h4 className="font-semibold text-white mb-4">{t.footer_legal}</h4>
+   706→              <ul className="space-y-2">
+   707→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_privacy}</a></li>
+   708→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_terms}</a></li>
+   709→              </ul>
+   710→            </div>
+   711→          </div>
+   712→
+   713→          <div className="mt-12 pt-8 border-t border-[#202128] text-center text-sm text-[#817E84]">
+   714→            {t.footer_copyright} {t.footer_allRights}
+   715→          </div>
+   716→        </div>
+   717→      </footer>
+   718→    </div>
+   719→  );
+   720→}
+   721→

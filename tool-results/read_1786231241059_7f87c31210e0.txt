@@ -1,0 +1,657 @@
+     1→     1→     1→# FEATURES INVENTORY
+     2→     2→     2→
+     3→     3→     3→> Gym Management SaaS Platform — Comprehensive Feature Map
+     4→     4→     4→> Generated: 2026-08-06 | Database: SQLite (Prisma ORM) | Framework: Next.js 15 App Router
+     5→     5→     5→
+     6→     6→     6→---
+     7→     7→     7→
+     8→     8→     8→## Summary Table
+     9→     9→     9→
+    10→    10→    10→| Category | Total Features | Fully Functional | Partially Functional | UI Only |
+    11→    11→    11→|----------|:--------------:|:----------------:|:-------------------:|:-------:|
+    12→    12→    12→| Core Operations | 6 | 5 | 0 | 1 |
+    13→    13→    13→| Sales & Billing | 8 | 7 | 1 | 0 |
+    14→    14→    14→| Scheduling | 3 | 3 | 0 | 0 |
+    15→    15→    15→| CRM & Leads | 4 | 4 | 0 | 0 |
+    16→    16→    16→| Member Portal | 5 | 5 | 0 | 0 |
+    17→    17→    17→| Kiosk | 1 | 1 | 0 | 0 |
+    18→    18→    18→| Diet & Nutrition | 3 | 2 | 1 | 0 |
+    19→    19→    19→| Exercise & Fitness | 4 | 3 | 0 | 1 |
+    20→    20→    20→| Reports & Analytics | 2 | 2 | 0 | 0 |
+    21→    21→    21→| Platform Admin | 7 | 6 | 1 | 0 |
+    22→    22→    22→| Settings & Configuration | 4 | 3 | 0 | 1 |
+    23→    23→    23→| Security & Auth | 5 | 5 | 0 | 0 |
+    24→    24→    24→| i18n & Localization | 3 | 3 | 0 | 0 |
+    25→    25→    25→| Multi-tenancy | 3 | 3 | 0 | 0 |
+    26→    26→    26→| Subscription & Billing | 3 | 3 | 0 | 0 |
+    27→    27→    27→| **TOTAL** | **61** | **55** | **3** | **3** |
+    28→    28→    28→
+    29→    29→    29→---
+    30→    30→    30→
+    31→    31→    31→## 1. Core Operations
+    32→    32→    32→
+    33→    33→    33→### Member Management
+    34→    34→    34→- **Description:** Full CRUD for gym members — create, list (with active/inactive tabs), view/edit profile, member codes (MEM######), birthday tracking, review toggle
+    35→    35→    35→- **Status:** Fully Functional
+    36→    36→    36→- **Routes:** /members, /members/new, /members/[member_id], /members/birthdays
+    37→    37→    37→- **API:** GET/POST /api/members, GET/PUT/PATCH/DELETE /api/members/[id], GET /api/members?birthday=
+    38→    38→    38→- **Key Files:** src/app/(sidebar)/members/page.tsx, src/app/(sidebar)/members/new/page.tsx, src/app/(sidebar)/members/[member_id]/page.tsx, src/app/(sidebar)/members/birthdays/page.tsx
+    39→    39→    39→
+    40→    40→    40→### Attendance Tracking
+    41→    41→    41→- **Description:** Check-in members via search selector, view today's attendance list, check-out per record, historical attendance by date
+    42→    42→    42→- **Status:** Fully Functional
+    43→    43→    43→- **Routes:** /attendance, /attendance/history
+    44→    44→    44→- **API:** GET/POST /api/attendance, PATCH/DELETE /api/attendance/[id]
+    45→    45→    45→- **Key Files:** src/app/(sidebar)/attendance/page.tsx, src/app/(sidebar)/attendance/history/page.tsx
+    46→    46→    46→
+    47→    47→    47→### Staff Management
+    48→    48→    48→- **Description:** CRUD for staff accounts — create with role (ADMIN/MANAGER/TRAINER), activate/deactivate, delete, email uniqueness enforced, plan limits checked
+    49→    49→    49→- **Status:** Fully Functional
+    50→    50→    50→- **Routes:** /staff
+    51→    51→    51→- **API:** GET/POST/PATCH/DELETE /api/staff
+    52→    52→    52→- **Key Files:** src/app/(sidebar)/staff/page.tsx
+    53→    53→    53→
+    54→    54→    54→### Service Management
+    55→    55→    55→- **Description:** CRUD for services/membership types — name, description, price, duration
+    56→    56→    56→- **Status:** Fully Functional
+    57→    57→    57→- **Routes:** /services, /services/new
+    58→    58→    58→- **API:** GET/POST /api/services, GET/PUT/DELETE /api/services/[id]
+    59→    59→    59→- **Key Files:** src/app/(sidebar)/services/page.tsx, src/app/(sidebar)/services/new/page.tsx
+    60→    60→    60→
+    61→    61→    61→### To-Do / Task Manager
+    62→    62→    62→- **Description:** Personal task list — add/toggle/delete tasks, grouped by active/completed, clear completed
+    63→    63→    63→- **Status:** Fully Functional (client-side only, localStorage persistence)
+    64→    64→    64→- **Routes:** /todo
+    65→    65→    65→- **API:** None (localStorage)
+    66→    66→    66→- **Key Files:** src/app/(sidebar)/todo/page.tsx
+    67→    67→    67→
+    68→    68→    68→### Fitness Record (Legacy Sale Form)
+    69→    69→    69→- **Description:** Alternative sale creation form — appears to be a legacy/early version of the sales page. Posts to /api/sales
+    70→    70→    70→- **Status:** UI Only (duplicate of /sales/new, not linked in sidebar navigation)
+    71→    71→    71→- **Routes:** /fitness-record
+    72→    72→    72→- **API:** GET /api/members, GET /api/services, POST /api/sales
+    73→    73→    73→- **Key Files:** src/app/(sidebar)/fitness-record/page.tsx
+    74→    74→    74→
+    75→    75→    75→---
+    76→    76→    76→
+    77→    77→    77→## 2. Sales & Billing
+    78→    78→    78→
+    79→    79→    79→### Sales Management
+    80→    80→    80→- **Description:** Sales listing with status badges (active/frozen/suspended), freeze/suspend/activate with reason dialogs, WhatsApp invoice sharing, delete sales
+    81→    81→    81→- **Status:** Fully Functional
+    82→    82→    82→- **Routes:** /sales
+    83→    83→    83→- **API:** GET/PATCH/DELETE /api/sales/[id], GET /api/sales?expand=true
+    84→    84→    84→- **Key Files:** src/app/(sidebar)/sales/page.tsx
+    85→    85→    85→
+    86→    86→    86→### New Sale
+    87→    87→    87→- **Description:** Create sale — select member, service (auto-fills price), start date, paid amount, discount, shows due amount
+    88→    88→    88→- **Status:** Fully Functional
+    89→    89→    89→- **Routes:** /sales/new
+    90→    90→    90→- **API:** POST /api/sales, GET /api/members, GET /api/services
+    91→    91→    91→- **Key Files:** src/app/(sidebar)/sales/new/page.tsx
+    92→    92→    92→
+    93→    93→    93→### Sales Follow-ups
+    94→    94→    94→- **Description:** Membership expiry follow-ups with tabs (Today, Tomorrow, 5 days, 7 days, Expired), WhatsApp renewal message sender
+    95→    95→    95→- **Status:** Fully Functional
+    96→    96→    96→- **Routes:** /sales/followups
+    97→    97→    97→- **API:** GET /api/sales?expiring=N, GET /api/sales?ending=-1
+    98→    98→    98→- **Key Files:** src/app/(sidebar)/sales/followups/page.tsx
+    99→    99→    99→
+   100→   100→   100→### Pending Payments (Component)
+   101→   101→   101→- **Description:** Pending payment list with WhatsApp payment reminder, pay partial/full amounts, used on dashboard and dedicated page
+   102→   102→   102→- **Status:** Fully Functional
+   103→   103→   103→- **Routes:** /sales/pending-payments
+   104→   104→   104→- **API:** GET /api/sales/pending, POST /api/sales/[id]
+   105→   105→   105→- **Key Files:** src/app/(sidebar)/sales/pending-payments/PendingPayments.tsx, src/app/(sidebar)/sales/pending-payments/PayPendingButton.tsx
+   106→   106→   106→
+   107→   107→   107→### Pending Payments Page (Shell)
+   108→   108→   108→- **Description:** Dedicated pending payments page — renders only a title and separator, actual content is in the PendingPayments component
+   109→   109→   109→- **Status:** Partially Functional (page shell with no content; component works on dashboard)
+   110→   110→   110→- **Routes:** /sales/pending-payments
+   111→   111→   111→- **API:** None (page itself)
+   112→   112→   112→- **Key Files:** src/app/(sidebar)/sales/pending-payments/page.tsx
+   113→   113→   113→
+   114→   114→   114→### Sales Invoices Page (Legacy)
+   115→   115→   115→- **Description:** Legacy invoices listing — fetches member list, has commented-out ItemSelector, links to create new sale
+   116→   116→   116→- **Status:** Partially Functional (UI scaffold with commented-out code)
+   117→   117→   117→- **Routes:** /sales/invoices
+   118→   118→   118→- **API:** GET /api/members
+   119→   119→   119→- **Key Files:** src/app/(sidebar)/sales/invoices/page.tsx
+   120→   120→   120→
+   121→   121→   121→### Plan Management
+   122→   122→   122→- **Description:** Full CRUD for subscription plans — card grid, create/edit/delete dialogs, plan types (Monthly/Quarterly/Annual/Unlimited/Custom), features list
+   123→   123→   123→- **Status:** Fully Functional
+   124→   124→   124→- **Routes:** /plans
+   125→   125→   125→- **API:** GET/POST /api/plans, PATCH/DELETE /api/plans/[id]
+   126→   126→   126→- **Key Files:** src/app/(sidebar)/plans/page.tsx
+   127→   127→   127→
+   128→   128→   128→### Invoice Management
+   129→   129→   129→- **Description:** Invoice listing (all/pending tabs), KPI cards (total/revenue/outstanding), record partial payments (CASH/UPI/CARD/BANK_TRANSFER/OTHER), download PDF
+   130→   130→   130→- **Status:** Fully Functional
+   131→   131→   131→- **Routes:** /invoices
+   132→   132→   132→- **API:** GET/POST /api/invoices, GET /api/invoices/[id]/pdf
+   133→   133→   133→- **Key Files:** src/app/(sidebar)/invoices/page.tsx
+   134→   134→   134→
+   135→   135→   135→---
+   136→   136→   136→
+   137→   137→   137→## 3. Scheduling
+   138→   138→   138→
+   139→   139→   139→### Class & Session Management
+   140→   140→   140→- **Description:** Create classes (with trainer/location), create sessions (date/time/capacity), view upcoming sessions with booking counts, click to view bookings per session. Supports recurring session creation (daily/weekly/biweekly/monthly, up to 52 occurrences)
+   141→   141→   141→- **Status:** Fully Functional
+   142→   142→   142→- **Routes:** /bookings
+   143→   143→   143→- **API:** GET/POST /api/bookings/classes, GET/POST /api/bookings/sessions, GET/POST /api/bookings/book, GET/POST /api/bookings
+   144→   144→   144→- **Key Files:** src/app/(sidebar)/bookings/page.tsx
+   145→   145→   145→
+   146→   146→   146→### Booking Calendar
+   147→   147→   147→- **Description:** Monthly calendar view of class sessions — navigate months, click sessions for details dialog
+   148→   148→   148→- **Status:** Fully Functional
+   149→   149→   149→- **Routes:** /bookings/calendar
+   150→   150→   150→- **API:** GET /api/bookings/sessions?month=
+   151→   151→   151→- **Key Files:** src/app/(sidebar)/bookings/calendar/page.tsx
+   152→   152→   152→
+   153→   153→   153→### Subscription Management
+   154→   154→   154→- **Description:** Member subscription management — list all, create new (member+plan+start date), cancel auto-renew
+   155→   155→   155→- **Status:** Fully Functional
+   156→   156→   156→- **Routes:** /subscriptions
+   157→   157→   157→- **API:** GET/POST/PATCH /api/subscriptions, GET /api/plans
+   158→   158→   158→- **Key Files:** src/app/(sidebar)/subscriptions/page.tsx
+   159→   159→   159→
+   160→   160→   160→---
+   161→   161→   161→
+   162→   162→   162→## 4. CRM & Leads
+   163→   163→   163→
+   164→   164→   164→### Enquiry Management
+   165→   165→   165→- **Description:** Enquiry listing table (name, phone, followup date, type, message), create enquiries with type (walkin/call/instagram/whatsapp)
+   166→   166→   166→- **Status:** Fully Functional
+   167→   167→   167→- **Routes:** /enquiries, /enquiries/new
+   168→   168→   168→- **API:** GET/POST /api/enquiries, GET/DELETE /api/enquiries/[id]
+   169→   169→   169→- **Key Files:** src/app/(sidebar)/enquiries/page.tsx, src/app/(sidebar)/enquiries/new/page.tsx
+   170→   170→   170→
+   171→   171→   171→### Enquiry Follow-ups
+   172→   172→   172→- **Description:** Filterable enquiry follow-ups by date picker
+   173→   173→   173→- **Status:** Fully Functional
+   174→   174→   174→- **Routes:** /enquiries/followups
+   175→   175→   175→- **API:** GET /api/enquiries?followup=
+   176→   176→   176→- **Key Files:** src/app/(sidebar)/enquiries/followups/page.tsx
+   177→   177→   177→
+   178→   178→   178→### Lead Tracking & Scoring
+   179→   179→   179→- **Description:** Lead scoring — visual funnel (New / Contacted / Converted / Lost), KPI cards (total, conversion rate, pipeline, lost)
+   180→   180→   180→- **Status:** Fully Functional (read-only display, no lead status update UI)
+   181→   181→   181→- **Routes:** /leads
+   182→   182→   182→- **API:** GET /api/leads
+   183→   183→   183→- **Key Files:** src/app/(sidebar)/leads/page.tsx
+   184→   184→   184→
+   185→   185→   185→### CRM (Member Notes, Interactions, Health)
+   186→   186→   186→- **Description:** Member CRM — search member, view tabs: Notes (add/view/delete), Interactions (call/email/SMS/in-person/WhatsApp log), Health & Goals (height, weight, body fat, emergency contact, goals, diet preferences)
+   187→   187→   187→- **Status:** Fully Functional
+   188→   188→   188→- **Routes:** /crm
+   189→   189→   189→- **API:** GET/POST/DELETE /api/crm/notes, GET/POST /api/crm/interactions, GET/POST /api/crm/health
+   190→   190→   190→- **Key Files:** src/app/(sidebar)/crm/page.tsx
+   191→   191→   191→
+   192→   192→   192→---
+   193→   193→   193→
+   194→   194→   194→## 5. Member Portal
+   195→   195→   195→
+   196→   196→   196→### Member Dashboard
+   197→   197→   197→- **Description:** Self-service portal with 4 tabs: Overview (stats cards, profile card, active memberships), Memberships (active + expired sales), Attendance (scrollable history), Classes/Bookings (upcoming booked sessions). Profile edit dialog.
+   198→   198→   198→- **Status:** Fully Functional
+   199→   199→   199→- **Routes:** /user
+   200→   200→   200→- **API:** GET /api/user/details, PATCH /api/user/profile
+   201→   201→   201→- **Key Files:** src/app/user/page.tsx
+   202→   202→   202→
+   203→   203→   203→### Member Change Password
+   204→   204→   204→- **Description:** Password change form — old password, new password, confirm password with validation
+   205→   205→   205→- **Status:** Fully Functional
+   206→   206→   206→- **Routes:** /user/change-password
+   207→   207→   207→- **API:** POST /api/auth/change-password
+   208→   208→   208→- **Key Files:** src/app/user/change-password/page.tsx
+   209→   209→   209→
+   210→   210→   210→### Exercise Library (Member View)
+   211→   211→   211→- **Description:** Browse all exercises in a card grid layout
+   212→   212→   212→- **Status:** Fully Functional
+   213→   213→   213→- **Routes:** /user/workout
+   214→   214→   214→- **API:** GET /api/exercises
+   215→   215→   215→- **Key Files:** src/app/user/workout/page.tsx, src/components/WorkoutsList.tsx
+   216→   216→   216→
+   217→   217→   217→### Exercise Detail (Member View)
+   218→   218→   218→- **Description:** Detailed exercise view — name, category/level/force badges, image gallery, equipment/mechanic/difficulty card, targeted muscles, step-by-step instructions, pro tips
+   219→   219→   219→- **Status:** Fully Functional
+   220→   220→   220→- **Routes:** /user/workout/[exercise_id]
+   221→   221→   221→- **API:** GET /api/exercises/[id]
+   222→   222→   222→- **Key Files:** src/app/user/workout/[exercise_id]/page.tsx
+   223→   223→   223→
+   224→   224→   224→### Public Invoice View
+   225→   225→   225→- **Description:** Public invoice page (no auth required) — formatted invoice with gym branding, member details, payment summary, print button (react-to-print), share button (Web Share API)
+   226→   226→   226→- **Status:** Fully Functional (hardcoded gym branding — not dynamic per organization)
+   227→   227→   227→- **Routes:** /invoices/[sale_id]
+   228→   228→   228→- **API:** GET /api/sales/[id]?expand=true
+   229→   229→   229→- **Key Files:** src/app/(open)/invoices/[sale_id]/page.tsx
+   230→   230→   230→
+   231→   231→   231→---
+   232→   232→   232→
+   233→   233→   233→## 6. Kiosk
+   234→   234→   234→
+   235→   235→   235→### Self-Service Check-In Kiosk
+   236→   236→   236→- **Description:** Two-panel kiosk — Left: search by code/phone, check-in button. Right: today's check-in list (auto-refreshes every 30s). Creates Attendance + KioskCheckin records. No auth guard.
+   237→   237→   237→- **Status:** Fully Functional
+   238→   238→   238→- **Routes:** /kiosk
+   239→   239→   239→- **API:** POST /api/kiosk, GET /api/kiosk, GET /api/kiosk/lookup
+   240→   240→   240→- **Key Files:** src/app/kiosk/page.tsx
+   241→   241→   241→
+   242→   242→   242→---
+   243→   243→   243→
+   244→   244→   244→## 7. Diet & Nutrition
+   245→   245→   245→
+   246→   246→   246→### Food Items Management
+   247→   247→   247→- **Description:** Food items CRUD — name, calories, protein, carbs, fats, recipe. Create dialog, delete action, listing table
+   248→   248→   248→- **Status:** Fully Functional
+   249→   249→   249→- **Routes:** /diet/food-items
+   250→   250→   250→- **API:** GET/POST /api/food-items, GET/DELETE /api/food-items/[id]
+   251→   251→   251→- **Key Files:** src/app/(sidebar)/diet/food-items/page.tsx, src/app/(sidebar)/diet/food-items/Create-food.tsx
+   252→   252→   252→
+   253→   253→   253→### Diet Creation
+   254→   254→   254→- **Description:** Create diet entry — select member, date, description, diabetic/blood pressure radio selects. **Bug:** posts to /api/sales instead of a diet-specific API
+   255→   255→   255→- **Status:** Partially Functional (posts to wrong API endpoint — sales instead of diet)
+   256→   256→   256→- **Routes:** /diet/new
+   257→   257→   257→- **API:** GET /api/members, GET /api/services, POST /api/sales (should be diet API)
+   258→   258→   258→- **Key Files:** src/app/(sidebar)/diet/new/page.tsx
+   259→   259→   259→
+   260→   260→   260→### Diet Hub (Links Page)
+   261→   261→   261→- **Description:** Hub page with navigation links to "Manage Food Items" and "New Diet"
+   262→   262→   262→- **Status:** UI Only (just links, no data)
+   263→   263→   263→- **Routes:** /diet
+   264→   264→   264→- **API:** None
+   265→   265→   265→- **Key Files:** src/app/(sidebar)/diet/page.tsx
+   266→   266→   266→
+   267→   267→   267→---
+   268→   268→   268→
+   269→   269→   269→## 8. Exercise & Fitness
+   270→   270→   270→
+   271→   271→   271→### Exercise Library (Admin Import)
+   272→   272→   272→- **Description:** Developer utility — bulk seed exercises from exercises.json into DB via API. Single "Test" button. Not a user-facing feature.
+   273→   273→   273→- **Status:** UI Only (developer tool, not production feature)
+   274→   274→   274→- **Routes:** /exercise-iput
+   275→   275→   275→- **API:** POST /api/exercises (bulk)
+   276→   276→   276→- **Key Files:** src/app/(sidebar)/exercise-iput/page.tsx, src/app/(sidebar)/exercise-iput/exercises.json
+   277→   277→   277→
+   278→   278→   278→### Exercise Library (Data)
+   279→   279→   279→- **Description:** Exercise database — 800+ exercises with name, category, level, force, equipment, muscles (primary/secondary), instructions, images. Seeded from JSON. API supports single and bulk creation.
+   280→   280→   280→- **Status:** Fully Functional (backend + member-facing UI)
+   281→   281→   281→- **Routes:** /user/workout, /user/workout/[exercise_id]
+   282→   282→   282→- **API:** GET/POST /api/exercises, GET /api/exercises/[id]
+   283→   283→   283→- **Key Files:** src/app/api/exercises/route.ts, public/exercises/*.json, public/exercises/*/
+   284→   284→   284→
+   285→   285→   285→### Fitness Calculators
+   286→   286→   286→- **Description:** Three client-side calculators — BMI (Body Mass Index), BMR (Basal Metabolic Rate), WHR (Waist-to-Hip Ratio). Pure computation, no API calls.
+   287→   287→   287→- **Status:** Fully Functional
+   288→   288→   288→- **Routes:** /tools
+   289→   289→   289→- **API:** None (client-side calculations)
+   290→   290→   290→- **Key Files:** src/app/(sidebar)/tools/page.tsx, src/app/(sidebar)/tools/_components/BMICalculator.tsx, BMRCalculator.tsx, WHRCalculator.tsx
+   291→   291→   291→
+   292→   292→   292→### Rank Progression System
+   293→   293→   293→- **Description:** Create ranks (name, level, color, description), award ranks to members (search), award history table, delete ranks/rankings
+   294→   294→   294→- **Status:** Fully Functional
+   295→   295→   295→- **Routes:** /ranks
+   296→   296→   296→- **API:** GET/POST/PUT/DELETE /api/ranks, GET/POST/DELETE /api/rankings
+   297→   297→   297→- **Key Files:** src/app/(sidebar)/ranks/page.tsx
+   298→   298→   298→
+   299→   299→   299→---
+   300→   300→   300→
+   301→   301→   301→## 9. Reports & Analytics
+   302→   302→   302→
+   303→   303→   303→### Analytics Dashboard
+   304→   304→   304→- **Description:** Advanced analytics — 6 KPI cards (revenue, outstanding, active members, retention, attendance, churn), revenue trend bar chart, attendance trend, service revenue breakdown, member tenure distribution, payment methods, staff performance, location comparison, gender distribution. Filterable by location and period.
+   305→   305→   305→- **Status:** Fully Functional
+   306→   306→   306→- **Routes:** /analytics
+   307→   307→   307→- **API:** GET /api/analytics?locationId=&period=
+   308→   308→   308→- **Key Files:** src/app/(sidebar)/analytics/page.tsx
+   309→   309→   309→
+   310→   310→   310→### Reports & Export
+   311→   311→   311→- **Description:** Quick export (CSV/JSON) for members/revenue/attendance/subscriptions/invoices, save custom reports, delete saved reports, location filter
+   312→   312→   312→- **Status:** Fully Functional
+   313→   313→   313→- **Routes:** /reports
+   314→   314→   314→- **API:** GET/POST/DELETE /api/reports, POST /api/reports/export
+   315→   315→   315→- **Key Files:** src/app/(sidebar)/reports/page.tsx
+   316→   316→   316→
+   317→   317→   317→---
+   318→   318→   318→
+   319→   319→   319→## 10. Platform Admin (SUPER_ADMIN)
+   320→   320→   320→
+   321→   321→   321→### Admin Dashboard
+   322→   322→   322→- **Description:** Platform overview — 4 stat cards (Total Orgs, Members, Staff, Revenue), per-organization table, recent audit logs
+   323→   323→   323→- **Status:** Fully Functional
+   324→   324→   324→- **Routes:** /admin
+   325→   325→   325→- **API:** GET /api/admin/stats
+   326→   326→   326→- **Key Files:** src/app/admin/(panel)/page.tsx
+   327→   327→   327→
+   328→   328→   328→### Tenant Management
+   329→   329→   329→- **Description:** Organization CRUD — list with search/filter/pagination, create new org+admin, view detail (stats, subscription, billing, actions), edit org, delete org (cascades all data)
+   330→   330→   330→- **Status:** Fully Functional
+   331→   331→   331→- **Routes:** /admin/tenants, /admin/tenants/new, /admin/tenants/[orgId], /admin/tenants/[orgId]/edit
+   332→   332→   332→- **API:** GET/POST /api/admin/tenants, GET/PATCH/DELETE /api/admin/tenants/[orgId]
+   333→   333→   333→- **Key Files:** src/app/admin/(panel)/tenants/page.tsx, src/app/admin/(panel)/tenants/new/page.tsx, src/app/admin/(panel)/tenants/[orgId]/page.tsx, src/app/admin/(panel)/tenants/[orgId]/edit/page.tsx
+   334→   334→   334→
+   335→   335→   335→### Billing Center
+   336→   336→   336→- **Description:** Platform-wide billing — stats summary, quick/advanced filters (status, period, date range), search, records table with mark paid/refund actions, create billing record dialog, org status panels, pagination
+   337→   337→   337→- **Status:** Fully Functional
+   338→   338→   338→- **Routes:** /admin/billing
+   339→   339→   339→- **API:** GET /api/admin/billing-center, GET /api/admin/billing-center/org-panels, POST /api/admin/billing-records, PATCH /api/admin/billing-records/[id]
+   340→   340→   340→- **Key Files:** src/app/admin/(panel)/billing/page.tsx
+   341→   341→   341→
+   342→   342→   342→### Platform Audit Logs
+   343→   343→   343→- **Description:** Global audit log viewer — filter by action type (CREATE/UPDATE/DELETE/LOGIN), color-coded badges, pagination
+   344→   344→   344→- **Status:** Fully Functional
+   345→   345→   345→- **Routes:** /admin/audit-logs
+   346→   346→   346→- **API:** GET /api/admin/audit-logs
+   347→   347→   347→- **Key Files:** src/app/admin/(panel)/audit-logs/page.tsx
+   348→   348→   348→
+   349→   349→   349→### Technical Logs (App Logs)
+   350→   350→   350→- **Description:** Application log viewer — reads logs/app.log, tail count selector (50-500), auto-refresh toggle (5s), search, level filter badges with counts, terminal-style dark display
+   351→   351→   351→- **Status:** Fully Functional
+   352→   352→   352→- **Routes:** /admin/logs
+   353→   353→   353→- **API:** GET /api/logs?tail=N
+   354→   354→   354→- **Key Files:** src/app/admin/(panel)/logs/page.tsx
+   355→   355→   355→
+   356→   356→   356→### Platform Settings
+   357→   357→   357→- **Description:** Platform-wide config — Platform Name, Support Email/Phone, Default Plan Type, Max Organizations, Platform Currency selector. **Limitation:** persists to localStorage only, no server-side API.
+   358→   358→   358→- **Status:** Partially Functional (no server persistence — settings lost on localStorage clear or different browser)
+   359→   359→   359→- **Routes:** /admin/settings
+   360→   360→   360→- **API:** None (localStorage only)
+   361→   361→   361→- **Key Files:** src/app/admin/(panel)/settings/page.tsx
+   362→   362→   362→
+   363→   363→   363→### Subscription Lifecycle Management
+   364→   364→   364→- **Description:** Per-tenant subscription control — change plan, extend trial (7/14/30/60/90 days), pause, resume, cancel. Usage meters (members/staff/storage). Part of tenant detail page.
+   365→   365→   365→- **Status:** Fully Functional
+   366→   366→   366→- **Routes:** /admin/tenants/[orgId] (integrated)
+   367→   367→   367→- **API:** PATCH /api/admin/subscriptions/[orgId], POST .../extend-trial, POST .../resume, POST .../cancel, POST .../pause
+   368→   368→   368→- **Key Files:** src/app/admin/(panel)/tenants/[orgId]/page.tsx
+   369→   369→   369→
+   370→   370→   370→---
+   371→   371→   371→
+   372→   372→   372→## 11. Settings & Configuration
+   373→   373→   373→
+   374→   374→   374→### Organization Settings
+   375→   375→   375→- **Description:** Gym profile settings — name, address, city, phone, email, currency selector (multi-currency support)
+   376→   376→   376→- **Status:** Fully Functional
+   377→   377→   377→- **Routes:** /settings/organization
+   378→   378→   378→- **API:** GET/PATCH /api/settings/organization
+   379→   379→   379→- **Key Files:** src/app/(sidebar)/settings/organization/page.tsx
+   380→   380→   380→
+   381→   381→   381→### Org Subscription View
+   382→   382→   382→- **Description:** Current subscription details — plan info, usage meters (members/staff/storage), billing history table, link to upgrade
+   383→   383→   383→- **Status:** Fully Functional
+   384→   384→   384→- **Routes:** /settings/subscription
+   385→   385→   385→- **API:** GET /api/org-subscriptions/current, GET /api/organizations/[orgId]/usage, GET /api/org-subscriptions/current/billing
+   386→   386→   386→- **Key Files:** src/app/(sidebar)/settings/subscription/page.tsx
+   387→   387→   387→
+   388→   388→   388→### Plan Upgrade
+   389→   389→   389→- **Description:** Plan comparison cards with pricing, feature lists, member/staff limits — upgrade via mailto: link to support
+   390→   390→   390→- **Status:** Fully Functional
+   391→   391→   391→- **Routes:** /settings/subscription/upgrade
+   392→   392→   392→- **API:** GET /api/plans, GET /api/org-subscriptions/current
+   393→   393→   393→- **Key Files:** src/app/(sidebar)/settings/subscription/upgrade/page.tsx
+   394→   394→   394→
+   395→   395→   395→### Audit Log Viewer (Org-level)
+   396→   396→   396→- **Description:** Organization-scoped audit log viewer — filter by entity type (Member, Sales, Services, Staff, Enquiry, Attendance), shows date, staff, entity, action, details
+   397→   397→   397→- **Status:** Fully Functional
+   398→   398→   398→- **Routes:** /audit-logs
+   399→   399→   399→- **API:** GET /api/audit-logs?entity=&limit=
+   400→   400→   400→- **Key Files:** src/app/(sidebar)/audit-logs/page.tsx
+   401→   401→   401→
+   402→   402→   402→---
+   403→   403→   403→
+   404→   404→   404→## 12. Security & Auth
+   405→   405→   405→
+   406→   406→   406→### Staff Authentication
+   407→   407→   407→- **Description:** Staff/gym owner login via email+password, cookie-based session (staff_session), role-based redirect (SUPER_ADMIN to /admin, others to /)
+   408→   408→   408→- **Status:** Fully Functional
+   409→   409→   409→- **Routes:** /staff-login
+   410→   410→   410→- **API:** POST /api/auth/staff-login, GET/DELETE /api/auth/staff-session
+   411→   411→   411→- **Key Files:** src/app/staff-login/page.tsx, src/lib/auth.ts
+   412→   412→   412→
+   413→   413→   413→### Member Authentication
+   414→   414→   414→- **Description:** Member login via phone/email/memberCode + password, cookie-based session (member_session, 7-day expiry)
+   415→   415→   415→- **Status:** Fully Functional
+   416→   416→   416→- **Routes:** /login
+   417→   417→   417→- **API:** POST /api/auth/member-login
+   418→   418→   418→- **Key Files:** src/app/login/page.tsx, src/components/login-form.tsx
+   419→   419→   419→
+   420→   420→   420→### Organization Registration
+   421→   421→   421→- **Description:** Self-service registration — gym name, owner details, plan selector (FREE/PRO/ENTERPRISE), creates Organization + Staff (ADMIN) + OrgSubscription (14-day trial)
+   422→   422→   422→- **Status:** Fully Functional
+   423→   423→   423→- **Routes:** /register
+   424→   424→   424→- **API:** POST /api/auth/register
+   425→   425→   425→- **Key Files:** src/app/register/page.tsx
+   426→   426→   426→
+   427→   427→   427→### Middleware Auth Guard
+   428→   428→   428→- **Description:** Next.js middleware enforcing cookie-based auth — public paths whitelist, staff_session for API routes, member_session for /api/user/*, redirects unauthenticated to login, request logging
+   429→   429→   429→- **Status:** Fully Functional
+   430→   430→   430→- **Routes:** All routes (middleware)
+   431→   431→   431→- **API:** N/A (middleware)
+   432→   432→   432→- **Key Files:** src/middleware.ts
+   433→   433→   433→
+   434→   434→   434→### RBAC Permission System
+   435→   435→   435→- **Description:** Role-based access control with 5 roles (SUPER_ADMIN, ADMIN, MANAGER, TRAINER, MEMBER), 40+ permission keys covering all resources, hierarchical role system
+   436→   436→   436→- **Status:** Fully Functional
+   437→   437→   437→- **Routes:** N/A (infrastructure)
+   438→   438→   438→- **API:** Used by all protected API routes
+   439→   439→   439→- **Key Files:** src/lib/auth.ts
+   440→   440→   440→
+   441→   441→   441→---
+   442→   442→   442→
+   443→   443→   443→## 13. i18n & Localization
+   444→   444→   444→
+   445→   445→   445→### English / Arabic Translations
+   446→   446→   446→- **Description:** Full bilingual support via next-intl — 726-line translation files for both English and Arabic, covering all UI strings
+   447→   447→   447→- **Status:** Fully Functional
+   448→   448→   448→- **Routes:** All routes
+   449→   449→   449→- **API:** N/A
+   450→   450→   450→- **Key Files:** messages/en.json, messages/ar.json
+   451→   451→   451→
+   452→   452→   452→### RTL Layout Support
+   453→   453→   453→- **Description:** Arabic locale renders right-to-left layout — sidebar flips sides, text alignment adjusts, html dir/lang attributes set dynamically
+   454→   454→   454→- **Status:** Fully Functional
+   455→   455→   455→- **Routes:** All routes
+   456→   456→   456→- **API:** N/A
+   457→   457→   457→- **Key Files:** src/app/layout.tsx, src/components/app-sidebar.tsx
+   458→   458→   458→
+   459→   459→   459→### Locale Switcher
+   460→   460→   460→- **Description:** Client component to switch between English and Arabic — stores preference in NEXT_LOCALE cookie, available on login and admin pages
+   461→   461→   461→- **Status:** Fully Functional
+   462→   462→   462→- **Routes:** /login, /admin/login, /register, /staff-login
+   463→   463→   463→- **API:** N/A (cookie-based)
+   464→   464→   464→- **Key Files:** src/components/locale-switcher.tsx, src/i18n/config.ts, src/i18n/request.ts
+   465→   465→   465→
+   466→   466→   466→---
+   467→   467→   467→
+   468→   468→   468→## 14. Multi-tenancy
+   469→   469→   469→
+   470→   470→   470→### Organization Data Isolation
+   471→   471→   471→- **Description:** All API routes scope queries by organizationId from the staff session — members, sales, attendance, plans, etc. are org-scoped. 37 Prisma models have organizationId.
+   472→   472→   472→- **Status:** Fully Functional
+   473→   473→   473→- **Routes:** All sidebar routes
+   474→   474→   474→- **API:** All /api/ routes (except admin and public)
+   475→   475→   475→- **Key Files:** src/lib/auth.ts (getOrgId), all API route files
+   476→   476→   476→
+   477→   477→   477→### Multi-Location Support
+   478→   478→   478→- **Description:** Multiple locations per organization — create locations, assign members/staff, location-aware analytics and attendance
+   479→   479→   479→- **Status:** Fully Functional
+   480→   480→   480→- **Routes:** /locations
+   481→   481→   481→- **API:** GET/POST /api/locations, GET/PUT /api/locations/[id], GET /api/locations/public
+   482→   482→   482→- **Key Files:** src/app/(sidebar)/locations/page.tsx
+   483→   483→   483→
+   484→   484→   484→### Platform Admin Tenant Management
+   485→   485→   485→- **Description:** SUPER_ADMIN can create, view, edit, suspend/reactivate, and delete organizations with full data cascade
+   486→   486→   486→- **Status:** Fully Functional
+   487→   487→   487→- **Routes:** /admin/tenants/*
+   488→   488→   488→- **API:** GET/POST/PATCH/DELETE /api/admin/tenants/*
+   489→   489→   489→- **Key Files:** src/app/admin/(panel)/tenants/
+   490→   490→   490→
+   491→   491→   491→---
+   492→   492→   492→
+   493→   493→   493→## 15. Subscription & Billing
+   494→   494→   494→
+   495→   495→   495→### Plan Limits Enforcement
+   496→   496→   496→- **Description:** Checks member/staff/storage counts against plan limits before creation — returns allowed/denied with current count and limit. Used by member and staff creation endpoints.
+   497→   497→   497→- **Status:** Fully Functional
+   498→   498→   498→- **Routes:** N/A (infrastructure)
+   499→   499→   499→- **API:** Used by POST /api/members, POST /api/staff
+   500→   500→   500→- **Key Files:** src/lib/plan-limits.ts
+   501→   501→   501→
+   502→   502→   502→### Subscription Write Access Gate
+   503→   503→   503→- **Description:** Blocks write operations (create member, sale, etc.) when org subscription is CANCELLED, EXPIRED, or PAUSED. Auto-expires trials past end date.
+   504→   504→   504→- **Status:** Fully Functional
+   505→   505→   505→- **Routes:** N/A (infrastructure)
+   506→   506→   506→- **API:** Used by POST /api/members, POST /api/sales
+   507→   507→   507→- **Key Files:** src/lib/subscription.ts
+   508→   508→   508→
+   509→   509→   509→### Dynamic Currency System
+   510→   510→   510→- **Description:** Multi-currency support — per-organization currency (EGP/USD stored in DB), platform-level currency (localStorage), useCurrency() client hook, formatCurrency() utility, PDF invoice currency
+   511→   511→   511→- **Status:** Fully Functional
+   512→   512→   512→- **Routes:** /settings/organization, /admin/settings, all financial pages
+   513→   513→   513→- **API:** GET/PATCH /api/settings/organization (returns/saves currency)
+   514→   514→   514→- **Key Files:** src/lib/currency.ts, src/hooks/use-currency.ts, src/hooks/use-platform-currency.ts
+   515→   515→   515→
+   516→   516→   516→---
+   517→   517→   517→
+   518→   518→   518→## 16. Other Features
+   519→   519→   519→
+   520→   520→   520→### Marketing Campaigns
+   521→   521→   521→- **Description:** Create campaigns (name, type, target, subject, body with {{member_name}} template), execute draft campaigns, view sent/opened counts
+   522→   522→   522→- **Status:** Fully Functional
+   523→   523→   523→- **Routes:** /campaigns
+   524→   524→   524→- **API:** GET/POST /api/campaigns
+   525→   525→   525→- **Key Files:** src/app/(sidebar)/campaigns/page.tsx
+   526→   526→   526→
+   527→   527→   527→### Notification System
+   528→   528→   528→- **Description:** Notification log viewer — table showing date, recipient, subject, type, delivery status. Templates and sending via notification action layer.
+   529→   529→   529→- **Status:** Fully Functional
+   530→   530→   530→- **Routes:** /notifications
+   531→   531→   531→- **API:** GET /api/notifications?type=logs
+   532→   532→   532→- **Key Files:** src/app/(sidebar)/notifications/page.tsx, src/action/notification.action.ts
+   533→   533→   533→
+   534→   534→   534→### Integrations (API Keys & Webhooks)
+   535→   535→   535→- **Description:** API key management (create with `gym_` prefix, view, delete/revoke) + webhook management (create with URL + events, `whsec_` secret, view success/fail counts, delete)
+   536→   536→   536→- **Status:** Fully Functional
+   537→   537→   537→- **Routes:** /integrations
+   538→   538→   538→- **API:** GET/POST/DELETE /api/integrations/keys, GET/POST/DELETE /api/integrations/webhooks
+   539→   539→   539→- **Key Files:** src/app/(sidebar)/integrations/page.tsx
+   540→   540→   540→
+   541→   541→   541→### Trainer Panel
+   542→   542→   542→- **Description:** Trainer dashboard — links to assignments and member attendance, shows assignment count badge. Assignments table with remove action.
+   543→   543→   543→- **Status:** Fully Functional
+   544→   544→   544→- **Routes:** /trainer, /trainer/assignments
+   545→   545→   545→- **API:** GET/DELETE /api/assignments, GET /api/auth/staff-session
+   546→   546→   546→- **Key Files:** src/app/(sidebar)/trainer/page.tsx, src/app/(sidebar)/trainer/assignments/page.tsx
+   547→   547→   547→
+   548→   548→   548→### PDF Invoice Generation
+   549→   549→   549→- **Description:** Server-side PDF generation via pdfkit — formatted A4 invoice with gym branding, line items, payment history, dynamic currency, status badge. Returns binary PDF buffer.
+   550→   550→   550→- **Status:** Fully Functional
+   551→   551→   551→- **Routes:** /invoices (download action)
+   552→   552→   552→- **API:** GET /api/invoices/[id]/pdf
+   553→   553→   553→- **Key Files:** src/lib/pdf-generate.ts
+   554→   554→   554→
+   555→   555→   555→### Audit Logging
+   556→   556→   556→- **Description:** Every write operation (create/update/delete/login) logs to AuditLog table — staff ID, org ID, action, entity, entity ID, details. Silently swallows failures.
+   557→   557→   557→- **Status:** Fully Functional
+   558→   558→   558→- **Routes:** N/A (infrastructure)
+   559→   559→   559→- **API:** All write API routes call auditLog()
+   560→   560→   560→- **Key Files:** src/lib/audit.ts
+   561→   561→   561→
+   562→   562→   562→### Application Logging
+   563→   563→   563→- **Description:** Dual-output logger (console + file) — INFO/WARN/ERROR/DEBUG/REQ levels, 5MB log rotation (keeps last 3 rotated files), works in both Edge Runtime (console only) and Node.js
+   564→   564→   564→- **Status:** Fully Functional
+   565→   565→   565→- **Routes:** N/A (infrastructure)
+   566→   566→   566→- **API:** Used by middleware and /api/logs
+   567→   567→   567→- **Key Files:** src/lib/logger.ts
+   568→   568→   568→
+   569→   569→   569→### Dark/Light Theme
+   570→   570→   570→- **Description:** Theme toggle supporting dark and light modes — persisted in localStorage, applied via ThemeProvider
+   571→   571→   571→- **Status:** Fully Functional
+   572→   572→   572→- **Routes:** All routes
+   573→   573→   573→- **API:** N/A
+   574→   574→   574→- **Key Files:** src/components/theme-provider.tsx, src/components/custom/theme-toggle.tsx
+   575→   575→   575→
+   576→   576→   576→### PWA Manifest
+   577→   577→   577→- **Description:** Progressive Web App manifest — enables installability on mobile devices
+   578→   578→   578→- **Status:** Fully Functional
+   579→   579→   579→- **Routes:** N/A
+   580→   580→   580→- **API:** N/A
+   581→   581→   581→- **Key Files:** src/app/manifest.json
+   582→   582→   582→
+   583→   583→   583→### WhatsApp Integration
+   584→   584→   584→- **Description:** WhatsApp message sharing for birthday greetings, membership renewal reminders, and invoice sharing — opens WhatsApp Web/App with pre-filled messages
+   585→   585→   585→- **Status:** Fully Functional (uses wa.me links)
+   586→   586→   586→- **Routes:** /members/birthdays, /sales, /sales/followups
+   587→   587→   587→- **API:** N/A (client-side wa.me links)
+   588→   588→   588→- **Key Files:** src/app/(sidebar)/members/birthdays/page.tsx, src/app/(sidebar)/sales/page.tsx, src/app/(sidebar)/sales/followups/page.tsx
+   589→   589→   589→
+   590→   590→   590→---
+   591→   591→   591→
+   592→   592→   592→## Database Schema Summary
+   593→   593→   593→
+   594→   594→   594→**37 Prisma Models:**
+   595→   595→   595→Organization, Location, Staff, Member, Services, Sales, Attendance, FitnessRecord, Enquiry, ToDo, FoodItems, Exercise, Diet, DietFoodItem, SubscriptionPlan, Subscription, OrgSubscription, Invoice, BillingRecord, Payment, Refund, NotificationTemplate, NotificationLog, Campaign, CampaignLog, Lead, AuditLog, TrainerMemberAssignment, KioskCheckin, Report, Rank, MemberRank, BookingClass, ClassSession, SessionBooking, MemberNote, MemberInteraction, MemberHealthProfile, ApiKey, Webhook
+   596→   596→   596→
+   597→   597→   597→**8 Enums:**
+   598→   598→   598→Gender, EnquiryType, MembershipStatus, OrgStatus, OrgPlanType, SubscriptionStatus, BillingStatus, BillingPeriod, Role
+   599→   599→   599→
+   600→   600→   600→**Key Relationships:**
+   601→   601→   601→- Organization → Staff, Location, Member, Sales, Attendance, and 20+ other models (multi-tenant isolation)
+   602→   602→   602→- Member → Sales, Attendance, MemberNote, MemberInteraction, MemberHealthProfile, MemberRank, SessionBooking
+   603→   603→   603→- BookingClass → ClassSession → SessionBooking (class booking system)
+   604→   604→   604→- OrgSubscription → Organization (1:1), BillingRecord → Organization
+   605→   605→   605→- SubscriptionPlan → Subscription, OrgSubscription (plan definitions)
+   606→   606→   606→
+   607→   607→   607→---
+   608→   608→   608→
+   609→   609→   609→## API Endpoints Summary
+   610→   610→   610→
+   611→   611→   611→| Category | Route Files | HTTP Methods | Distinct Endpoints |
+   612→   612→   612→|----------|:-----------:|:------------:|:------------------:|
+   613→   613→   613→| Authentication | 6 | GET, POST, DELETE | 6 |
+   614→   614→   614→| Members | 2 | GET, POST, PUT, PATCH, DELETE | 5 |
+   615→   615→   615→| Sales | 3 | GET, POST, PATCH, DELETE | 8 |
+   616→   616→   616→| Attendance | 2 | GET, POST, PATCH, DELETE | 4 |
+   617→   617→   617→| Plans | 2 | GET, POST, PATCH, DELETE | 5 |
+   618→   618→   618→| Invoices | 3 | GET, POST | 5 |
+   619→   619→   619→| CRM | 3 | GET, POST, DELETE | 6 |
+   620→   620→   620→| Analytics/Reports | 3 | GET, POST, DELETE | 6 |
+   621→   621→   621→| Admin (Platform) | 11 | GET, POST, PATCH, DELETE | 17 |
+   622→   622→   622→| Org/Settings | 3 | GET, PATCH | 5 |
+   623→   623→   623→| Exercises | 2 | GET, POST | 3 |
+   624→   624→   624→| Notifications | 1 | GET, POST | 2 |
+   625→   625→   625→| Enquiries | 2 | GET, POST, DELETE | 4 |
+   626→   626→   626→| Leads/Campaigns | 2 | GET, POST, PATCH | 4 |
+   627→   627→   627→| Ranks/Rankings | 2 | GET, POST, PUT, DELETE | 7 |
+   628→   628→   628→| Subscriptions | 1 | GET, POST, PATCH | 3 |
+   629→   629→   629→| Staff | 1 | GET, POST, PATCH, DELETE | 4 |
+   630→   630→   630→| Locations | 3 | GET, POST, PUT | 5 |
+   631→   631→   631→| Services | 2 | GET, POST, PUT, DELETE | 5 |
+   632→   632→   632→| Food Items | 2 | GET, POST, DELETE | 3 |
+   633→   633→   633→| Integrations | 2 | GET, POST, DELETE | 6 |
+   634→   634→   634→| Kiosk | 2 | GET, POST | 3 |
+   635→   635→   635→| Assignments | 1 | GET, POST, DELETE | 3 |
+   636→   636→   636→| Bookings | 4 | GET, POST, PUT, DELETE | 9 |
+   637→   637→   637→| Org Subscriptions | 3 | GET, POST | 4 |
+   638→   638→   638→| User Portal | 2 | GET, PATCH | 2 |
+   639→   639→   639→| Dashboard/Audit | 2 | GET | 2 |
+   640→   640→   640→| Dev Logs | 1 | GET | 1 |
+   641→   641→   641→| **TOTAL** | **62** | **7 methods** | **~102** |
+   642→   642→   642→
+   643→   643→   643→---
+   644→   644→   644→
+   645→   645→   645→## Known Issues & Notes
+   646→   646→   646→
+   647→   647→   647→1. **Diet creation posts to /api/sales** instead of a diet-specific API (bug in /diet/new)
+   648→   648→   648→2. **Public invoice page has hardcoded gym branding** ("Synergy Fitness & Wellness Club") — not dynamic per organization
+   649→   649→   649→3. **Platform admin settings persist to localStorage only** — no server-side API, settings lost on different browser/clear
+   650→   650→   650→4. **Member portal auth is client-side only** — uses localStorage `member_id` check, no server session validation in layout
+   651→   651→   651→5. **Password fields use `type="text"`** in member login form and change-password page — passwords visible as text (UX bug)
+   652→   652→   652→4. **4 legacy components** in src/app/user/_components/ (Header, UserDetails, Sales, AttendanceSum) are no longer imported
+   653→   653→   653→6. **Sales invoices page** (/sales/invoices) has commented-out code — appears to be an unfinished redesign
+   654→   654→   654→7. **Fitness record page** (/fitness-record) duplicates /sales/new functionality, not linked in sidebar navigation
+   655→   655→   655→8. **Exercise import page** (/exercise-iput) is a developer utility, not a production feature
+   656→   656→   656→9. **Kiosk has no auth guard** — accessible without authentication
+   657→   657→   657→10. **Storage usage** in plan limits is hardcoded to 0 (TODO in plan-limits.ts)
