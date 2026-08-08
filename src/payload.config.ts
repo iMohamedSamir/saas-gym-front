@@ -13,6 +13,14 @@ import { HomePage } from "./globals/HomePage";
 import { SiteConfig } from "./globals/SiteConfig";
 
 export default buildConfig({
+  localization: {
+    locales: [
+      { code: 'ar', label: 'العربية', rtl: true },
+      { code: 'en', label: 'English', rtl: false },
+    ],
+    defaultLocale: 'ar',
+    fallback: true,
+  },
   admin: {
     user: "users",
   },

@@ -12,6 +12,7 @@ interface FieldDef {
   name: string;
   type: string;
   labelKey: TranslationKey;
+  localized: boolean;
   options?: { value: string; labelKey: TranslationKey }[];
 }
 
@@ -24,44 +25,54 @@ interface CollectionDef {
 
 const collections: CollectionDef[] = [
   { slug: 'testimonials', labelKey: 'admin_testimonials', icon: '💬', fields: [
-    { name: 'name', type: 'text', labelKey: 'admin_fieldName' },
-    { name: 'designation', type: 'text', labelKey: 'admin_fieldDesignation' },
-    { name: 'content', type: 'textarea', labelKey: 'admin_fieldContent' },
-    { name: 'avatar', type: 'text', labelKey: 'admin_fieldAvatar' },
+    { name: 'name', type: 'text', labelKey: 'admin_fieldName', localized: true },
+    { name: 'designation', type: 'text', labelKey: 'admin_fieldDesignation', localized: true },
+    { name: 'content', type: 'textarea', labelKey: 'admin_fieldContent', localized: true },
+    { name: 'avatar', type: 'text', labelKey: 'admin_fieldAvatar', localized: false },
   ]},
   { slug: 'faq-items', labelKey: 'admin_faqItems', icon: '❓', fields: [
-    { name: 'question', type: 'text', labelKey: 'admin_fieldQuestion' },
-    { name: 'answer', type: 'textarea', labelKey: 'admin_fieldAnswer' },
+    { name: 'question', type: 'text', labelKey: 'admin_fieldQuestion', localized: true },
+    { name: 'answer', type: 'textarea', labelKey: 'admin_fieldAnswer', localized: true },
   ]},
   { slug: 'team-members', labelKey: 'admin_teamMembers', icon: '👥', fields: [
-    { name: 'name', type: 'text', labelKey: 'admin_fieldName' },
-    { name: 'role', type: 'text', labelKey: 'admin_fieldRole' },
-    { name: 'image', type: 'text', labelKey: 'admin_fieldImage' },
+    { name: 'name', type: 'text', labelKey: 'admin_fieldName', localized: true },
+    { name: 'role', type: 'text', labelKey: 'admin_fieldRole', localized: true },
+    { name: 'image', type: 'text', labelKey: 'admin_fieldImage', localized: false },
   ]},
   { slug: 'pricing-plans', labelKey: 'admin_pricingPlans', icon: '💎', fields: [
-    { name: 'title', type: 'text', labelKey: 'admin_fieldTitle' },
-    { name: 'price', type: 'text', labelKey: 'admin_fieldPrice' },
-    { name: 'yearlyPrice', type: 'text', labelKey: 'admin_fieldYearlyPrice' },
-    { name: 'description', type: 'textarea', labelKey: 'admin_fieldDescription' },
-    { name: 'isFeatured', type: 'checkbox', labelKey: 'admin_fieldFeatured' },
-    { name: 'offerText', type: 'text', labelKey: 'admin_fieldOfferText' },
-    { name: 'buttonLabel', type: 'text', labelKey: 'admin_fieldButtonLabel' },
+    { name: 'title', type: 'text', labelKey: 'admin_fieldTitle', localized: true },
+    { name: 'price', type: 'text', labelKey: 'admin_fieldPrice', localized: false },
+    { name: 'yearlyPrice', type: 'text', labelKey: 'admin_fieldYearlyPrice', localized: false },
+    { name: 'description', type: 'textarea', labelKey: 'admin_fieldDescription', localized: true },
+    { name: 'isFeatured', type: 'checkbox', labelKey: 'admin_fieldFeatured', localized: false },
+    { name: 'offerText', type: 'text', labelKey: 'admin_fieldOfferText', localized: true },
+    { name: 'buttonLabel', type: 'text', labelKey: 'admin_fieldButtonLabel', localized: true },
   ]},
   { slug: 'features', labelKey: 'admin_features', icon: '⚡', fields: [
-    { name: 'title', type: 'text', labelKey: 'admin_fieldTitle' },
-    { name: 'description', type: 'textarea', labelKey: 'admin_fieldDescription' },
-    { name: 'isStarred', type: 'checkbox', labelKey: 'admin_fieldStarred' },
-    { name: 'category', type: 'select', labelKey: 'admin_fieldCategory', options: [
+    { name: 'title', type: 'text', labelKey: 'admin_fieldTitle', localized: true },
+    { name: 'description', type: 'textarea', labelKey: 'admin_fieldDescription', localized: true },
+    { name: 'isStarred', type: 'checkbox', labelKey: 'admin_fieldStarred', localized: false },
+    { name: 'category', type: 'select', labelKey: 'admin_fieldCategory', localized: false, options: [
       { value: 'main', labelKey: 'admin_catMain' },
       { value: 'values', labelKey: 'admin_catValues' },
       { value: 'value-props', labelKey: 'admin_catValueProps' },
     ]},
   ]},
   { slug: 'stats', labelKey: 'admin_stats', icon: '📊', fields: [
-    { name: 'value', type: 'text', labelKey: 'admin_fieldValue' },
-    { name: 'label', type: 'text', labelKey: 'admin_fieldLabel' },
+    { name: 'value', type: 'text', labelKey: 'admin_fieldValue', localized: false },
+    { name: 'label', type: 'text', labelKey: 'admin_fieldLabel', localized: true },
   ]},
 ];
+
+/* ------------------------------------------------------------------ */
+/*  Helper: get localized value from doc                              */
+/* ------------------------------------------------------------------ */
+function getLocalized(doc: Doc, field: string, locale: Locale): string {
+  const val = doc[field];
+  if (val == null) return '';
+  if (typeof val === 'object') return val[locale] || val.ar || val.en || '';
+  return String(val);
+}
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
@@ -83,13 +94,11 @@ export default function AdminPage() {
 
   const isRtl = locale === 'ar';
 
-  /* Sync locale from localStorage */
+  /* Sync locale */
   useEffect(() => {
     const saved = localStorage.getItem('locale') as Locale | null;
     if (saved && (saved === 'ar' || saved === 'en')) setLocale(saved);
   }, []);
-
-  /* Listen for locale changes from main site switcher */
   useEffect(() => {
     const handler = () => {
       const saved = localStorage.getItem('locale') as Locale | null;
@@ -108,7 +117,7 @@ export default function AdminPage() {
     window.dispatchEvent(new Event('localechange'));
   };
 
-  /* Check session on mount */
+  /* Check session */
   useEffect(() => {
     fetch('/api/admin/verify')
       .then(r => r.json())
@@ -116,7 +125,6 @@ export default function AdminPage() {
       .catch(() => setAuthenticated(false));
   }, []);
 
-  /* API helper */
   const api = useCallback((path: string, opts: RequestInit = {}) => {
     return fetch(`/api/admin/collections/${path}`, {
       ...opts,
@@ -125,87 +133,82 @@ export default function AdminPage() {
     });
   }, []);
 
-  /* Login */
   const login = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
     setLoginLoading(true);
     try {
       const res = await fetch('/api/admin/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ email, password }),
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin', body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
-      if (res.ok && data.error === 'Too many login attempts. Please try again later.') {
-        setLoginError(t('admin_tooManyAttempts'));
-      } else if (res.ok) {
-        setAuthenticated(true);
-        setEmail(''); setPassword('');
-      } else {
-        setLoginError(data.error === 'Too many login attempts. Please try again later.' ? t('admin_tooManyAttempts') : t('admin_invalidCredentials'));
-      }
-    } catch {
-      setLoginError(t('admin_networkError'));
-    } finally {
-      setLoginLoading(false);
-    }
+      if (res.ok) { setAuthenticated(true); setEmail(''); setPassword(''); }
+      else { setLoginError(data.error === 'Too many login attempts. Please try again later.' ? t('admin_tooManyAttempts') : t('admin_invalidCredentials')); }
+    } catch { setLoginError(t('admin_networkError')); }
+    finally { setLoginLoading(false); }
   };
 
-  /* Logout */
   const logout = async () => {
     await fetch('/api/admin/verify', { method: 'POST', credentials: 'same-origin' });
-    setAuthenticated(false);
-    setActiveSlug(null);
-    setEditingDoc(null);
+    setAuthenticated(false); setActiveSlug(null); setEditingDoc(null);
   };
 
-  /* Load counts */
   const loadCounts = useCallback(async () => {
     const c: Record<string, number> = {};
     for (const col of collections) {
-      try {
-        const res = await api(`${col.slug}?limit=0`);
-        const data = await res.json();
-        c[col.slug] = data.totalDocs || 0;
-      } catch { c[col.slug] = 0; }
+      try { const r = await api(`${col.slug}?limit=0`); const d = await r.json(); c[col.slug] = d.totalDocs || 0; }
+      catch { c[col.slug] = 0; }
     }
     setCounts(c);
   }, [api]);
 
-  /* Load docs */
   const loadDocs = useCallback(async (slug: string) => {
-    const res = await api(`${slug}?limit=100&sort=sortOrder`);
-    const data = await res.json();
-    setDocs(data.docs || []);
+    const r = await api(`${slug}?limit=100&sort=sortOrder`);
+    const d = await r.json();
+    setDocs(d.docs || []);
   }, [api]);
 
   useEffect(() => { if (authenticated) loadCounts(); }, [authenticated, loadCounts]);
   useEffect(() => { if (activeSlug) loadDocs(activeSlug); }, [activeSlug, loadDocs]);
 
-  /* CRUD */
   const saveDoc = async () => {
+    const payload = { ...editData };
+    // Ensure localized fields are stored as { ar, en } objects
+    const col = collections.find(c => c.slug === activeSlug);
+    if (col) {
+      for (const f of col.fields) {
+        if (f.localized && payload[f.name] && typeof payload[f.name] === 'string') {
+          payload[f.name] = { ar: payload[f.name], en: payload[f.name] };
+        }
+      }
+    }
     if (!editingDoc) {
-      const res = await api(activeSlug!, { method: 'POST', body: JSON.stringify(editData) });
-      if (res.ok) { setEditingDoc(null); setEditData({}); loadDocs(activeSlug!); loadCounts(); }
+      const r = await api(activeSlug!, { method: 'POST', body: JSON.stringify(payload) });
+      if (r.ok) { setEditingDoc(null); setEditData({}); loadDocs(activeSlug!); loadCounts(); }
     } else {
-      const res = await api(`${activeSlug}/${editingDoc.id}`, { method: 'PATCH', body: JSON.stringify(editData) });
-      if (res.ok) { setEditingDoc(null); setEditData({}); loadDocs(activeSlug!); }
+      const r = await api(`${activeSlug}/${editingDoc.id}`, { method: 'PATCH', body: JSON.stringify(payload) });
+      if (r.ok) { setEditingDoc(null); setEditData({}); loadDocs(activeSlug!); }
     }
   };
 
   const deleteDoc = async (id: string) => {
     if (!confirm(t('admin_deleteConfirm'))) return;
-    const res = await api(`${activeSlug}/${id}`, { method: 'DELETE' });
-    if (res.ok) { loadDocs(activeSlug!); loadCounts(); }
+    const r = await api(`${activeSlug}/${id}`, { method: 'DELETE' });
+    if (r.ok) { loadDocs(activeSlug!); loadCounts(); }
   };
 
   const startEdit = (doc: Doc) => { setEditingDoc(doc); setEditData({ ...doc }); };
   const startCreate = () => { setEditingDoc(null); setEditData({ sortOrder: 0 }); };
   const cancelEdit = () => { setEditingDoc(null); setEditData({}); };
 
-  /* ---- LOADING STATE ---- */
+  /* Set localized field for a specific locale */
+  const setLocalized = (field: string, loc: Locale, value: string) => {
+    const current = editData[field] || {};
+    setEditData({ ...editData, [field]: { ...current, [loc]: value } });
+  };
+
+  /* ---- LOADING ---- */
   if (authenticated === null) {
     return (
       <div className="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center">
@@ -214,11 +217,10 @@ export default function AdminPage() {
     );
   }
 
-  /* ---- LOGIN SCREEN ---- */
+  /* ---- LOGIN ---- */
   if (!authenticated) {
     return (
       <div className="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center" dir={isRtl ? 'rtl' : 'ltr'}>
-        {/* Lang switcher top-right */}
         <button onClick={toggleLocale}
           className="fixed top-4 end-4 px-3 py-1.5 rounded-lg border border-zinc-700 bg-zinc-900 text-sm text-zinc-300 hover:bg-zinc-800 hover:text-white transition z-50">
           {locale === 'ar' ? 'EN' : 'عربي'}
@@ -228,18 +230,11 @@ export default function AdminPage() {
           <p className="text-sm text-zinc-400 text-center mb-8">{t('admin_signInTo')}</p>
           {loginError && <p className="mb-4 text-sm text-red-400 text-center bg-red-400/10 rounded-lg py-2 px-3">{loginError}</p>}
           <form onSubmit={login} className="space-y-4">
-            <input
-              value={email} onChange={e => setEmail(e.target.value)}
-              type="email" required autoComplete="email"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
-              placeholder={t('admin_email')} />
-            <input
-              value={password} onChange={e => setPassword(e.target.value)}
-              type="password" required autoComplete="current-password"
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500"
-              placeholder={t('admin_password')} />
-            <button
-              type="submit" disabled={loginLoading}
+            <input value={email} onChange={e => setEmail(e.target.value)} type="email" required autoComplete="email"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" placeholder={t('admin_email')} />
+            <input value={password} onChange={e => setPassword(e.target.value)} type="password" required autoComplete="current-password"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" placeholder={t('admin_password')} />
+            <button type="submit" disabled={loginLoading}
               className="w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold py-3 rounded-lg transition">
               {loginLoading ? t('admin_signingIn') : t('admin_signIn')}
             </button>
@@ -249,7 +244,7 @@ export default function AdminPage() {
     );
   }
 
-  /* ---- ADMIN SCREEN ---- */
+  /* ---- ADMIN ---- */
   const activeCol = collections.find(c => c.slug === activeSlug);
   const dir = isRtl ? 'rtl' : 'ltr';
 
@@ -305,7 +300,7 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* Collection View */}
+        {/* Collection List */}
         {activeSlug && !editingDoc && activeCol && (
           <div className="p-8">
             <div className="flex items-center justify-between mb-6">
@@ -315,11 +310,13 @@ export default function AdminPage() {
             {docs.length === 0 ? (
               <p className="text-zinc-500 py-10 text-center">{t('admin_noDocuments')}</p>
             ) : (
-              <div className="border border-zinc-800 rounded-xl overflow-hidden">
-                <table className="w-full text-sm">
+              <div className="border border-zinc-800 rounded-xl overflow-x-auto">
+                <table className="w-full text-sm min-w-[500px]">
                   <thead><tr className="border-b border-zinc-800 bg-zinc-900/50">
                     {activeCol.fields.slice(0, 3).map(f => (
-                      <th key={f.name} className="text-start px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">{t(f.labelKey)}</th>
+                      <th key={f.name} className="text-start px-4 py-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                        {f.localized ? `${t(f.labelKey)} (${locale === 'ar' ? 'ع' : 'EN'})` : t(f.labelKey)}
+                      </th>
                     ))}
                     <th className="px-4 py-3 text-end text-xs font-semibold uppercase tracking-wider text-zinc-500">{t('admin_actions')}</th>
                   </tr></thead>
@@ -327,9 +324,15 @@ export default function AdminPage() {
                     {docs.map(doc => (
                       <tr key={doc.id} className="border-b border-zinc-800/50 hover:bg-zinc-900/30">
                         {activeCol.fields.slice(0, 3).map(f => (
-                          <td key={f.name} className="px-4 py-3 text-zinc-300 max-w-xs truncate">{f.type === 'checkbox' ? (doc[f.name] ? '✅' : '❌') : (doc[f.name] || '—')}</td>
+                          <td key={f.name} className="px-4 py-3 text-zinc-300 max-w-xs truncate">
+                            {f.type === 'checkbox'
+                              ? (doc[f.name] ? '✅' : '❌')
+                              : f.localized
+                                ? getLocalized(doc, f.name, locale)
+                                : (doc[f.name] || '—')}
+                          </td>
                         ))}
-                        <td className="px-4 py-3 text-end">
+                        <td className="px-4 py-3 text-end whitespace-nowrap">
                           <button onClick={() => startEdit(doc)} className="text-purple-400 hover:text-purple-300 text-xs font-medium ms-3">{t('admin_edit')}</button>
                           <button onClick={() => deleteDoc(doc.id)} className="text-red-400 hover:text-red-300 text-xs font-medium">{t('admin_delete')}</button>
                         </td>
@@ -342,18 +345,43 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* Edit / Create Form */}
+        {/* Edit / Create Form — shows AR + EN side by side for localized fields */}
         {activeSlug && editingDoc !== null && activeCol && (
           <div className="p-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold">{editingDoc ? t('admin_editTitle') : t('admin_newTitle')} {t(activeCol.labelKey)}</h2>
               <button onClick={cancelEdit} className="text-sm text-zinc-400 hover:text-zinc-200">{t('admin_cancel')}</button>
             </div>
-            <div className="max-w-2xl space-y-4">
+            <div className="max-w-3xl space-y-5">
               {activeCol.fields.map(f => (
                 <div key={f.name}>
                   <label className="block text-sm font-medium text-zinc-400 mb-1.5">{t(f.labelKey)}</label>
-                  {f.type === 'textarea' ? (
+
+                  {f.localized ? (
+                    /* Bilingual field: AR + EN side by side */
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div>
+                        <span className="block text-xs text-zinc-500 mb-1">العربية</span>
+                        {f.type === 'textarea' ? (
+                          <textarea value={(editData[f.name]?.ar) || ''} onChange={e => setLocalized(f.name, 'ar', e.target.value)}
+                            rows={3} dir="rtl" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 resize-none" />
+                        ) : (
+                          <input type="text" value={(editData[f.name]?.ar) || ''} onChange={e => setLocalized(f.name, 'ar', e.target.value)}
+                            dir="rtl" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" />
+                        )}
+                      </div>
+                      <div>
+                        <span className="block text-xs text-zinc-500 mb-1">English</span>
+                        {f.type === 'textarea' ? (
+                          <textarea value={(editData[f.name]?.en) || ''} onChange={e => setLocalized(f.name, 'en', e.target.value)}
+                            rows={3} dir="ltr" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 resize-none" />
+                        ) : (
+                          <input type="text" value={(editData[f.name]?.en) || ''} onChange={e => setLocalized(f.name, 'en', e.target.value)}
+                            dir="ltr" className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" />
+                        )}
+                      </div>
+                    </div>
+                  ) : f.type === 'textarea' ? (
                     <textarea value={editData[f.name] || ''} onChange={e => setEditData({ ...editData, [f.name]: e.target.value })}
                       rows={4} className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500 resize-none" />
                   ) : f.type === 'checkbox' ? (

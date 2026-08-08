@@ -54,12 +54,13 @@ export async function GET(
     const sort = url.searchParams.get('sort') || 'createdAt';
     const page = parseInt(url.searchParams.get('page') || '1');
 
+    // Admin panel: always fetch all locales so it can show both AR/EN
     if (id) {
       const doc = await payload.findByID({ collection, id });
       return NextResponse.json(doc);
     }
 
-    const result = await payload.find({ collection, limit, sort, page });
+    const result = await payload.find({ collection, limit, sort, page, locale: 'all' });
     return NextResponse.json(result);
   } catch (e: any) {
     return NextResponse.json({ error: e.message || 'Not found' }, { status: 404 });
@@ -86,7 +87,7 @@ export async function POST(
   try {
     const payload = await getPayload();
     const body = await req.json();
-    const doc = await payload.create({ collection, data: body });
+    const doc = await payload.create({ collection, data: body, locale: 'all' });
     return NextResponse.json(doc, { status: 201 });
   } catch (e: any) {
     return NextResponse.json({ error: e.message || 'Create failed' }, { status: 400 });
@@ -114,7 +115,7 @@ export async function PATCH(
   try {
     const payload = await getPayload();
     const body = await req.json();
-    const doc = await payload.update({ collection, id, data: body });
+    const doc = await payload.update({ collection, id, data: body, locale: 'all' });
     return NextResponse.json(doc);
   } catch (e: any) {
     return NextResponse.json({ error: e.message || 'Update failed' }, { status: 400 });

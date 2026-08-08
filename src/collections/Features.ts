@@ -2,32 +2,13 @@ import { CollectionConfig } from "payload";
 
 export const Features: CollectionConfig = {
   slug: "features",
-  admin: {
-    useAsTitle: "title",
-  },
-  access: {
-    read: () => true,
-  },
+  admin: { useAsTitle: "title" },
+  access: { read: () => true },
   fields: [
-    {
-      name: "title",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "description",
-      type: "textarea",
-    },
-    {
-      name: "icon",
-      type: "text",
-      defaultValue: "/images/features-menu-icon.svg",
-    },
-    {
-      name: "isStarred",
-      type: "checkbox",
-      defaultValue: false,
-    },
+    { name: "title", type: "text", required: true, localize: true },
+    { name: "description", type: "textarea", localize: true },
+    { name: "icon", type: "text", defaultValue: "/images/features-menu-icon.svg" },
+    { name: "isStarred", type: "checkbox", defaultValue: false },
     {
       name: "category",
       type: "select",
@@ -38,10 +19,6 @@ export const Features: CollectionConfig = {
       ],
       defaultValue: "main",
     },
-    {
-      name: "sortOrder",
-      type: "number",
-      defaultValue: 0,
-    },
+    { name: "sortOrder", type: "number", defaultValue: 0 },
   ],
 };
