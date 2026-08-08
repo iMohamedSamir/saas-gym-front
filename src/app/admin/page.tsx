@@ -55,30 +55,67 @@ const collections: Collection[] = [
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 export default function AdminPage() {
-  const [token, setToken] = useState<string | null>(null);
-  const [email, setEmail] = useState('admin@admin.com');
-  const [password, setPassword] = useState('admin123456');
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
+  const [loginLoading, setLoginLoading] = useState(false);
   const [activeSlug, setActiveSlug] = useState<string | null>(null);
   const [docs, setDocs] = useState<Doc[]>([]);
   const [editingDoc, setEditingDoc] = useState<Doc | null>(null);
   const [editData, setEditData] = useState<Record<string, any>>({});
   const [counts, setCounts] = useState<Record<string, number>>({});
 
+  /* Check session on mount */
+  useEffect(() => {
+    fetch('/api/admin/verify')
+      .then(r => r.json())
+      .then(data => setAuthenticated(data.authenticated === true))
+      .catch(() => setAuthenticated(false));
+  }, []);
+
+  /* API helper — cookies sent automatically, no manual token handling */
   const api = useCallback((path: string, opts: RequestInit = {}) => {
-    const headers: Record<string, string> = { 'Content-Type': 'application/json', ...opts.headers as Record<string, string> };
-    if (token) headers['Authorization'] = `JWT ${token}`;
-    return fetch(`/api/${path}`, { ...opts, headers });
-  }, [token]);
+    return fetch(`/api/admin/collections/${path}`, {
+      ...opts,
+      headers: { 'Content-Type': 'application/json', ...opts.headers as Record<string, string> },
+      credentials: 'same-origin',
+    });
+  }, []);
 
   /* Login */
-  const login = async () => {
+  const login = async (e: React.FormEvent) => {
+    e.preventDefault();
     setLoginError('');
-    if (email === 'admin@admin.com' && password === 'admin123456') {
-      setToken('local-admin-session');
-    } else {
-      setLoginError('Invalid credentials');
+    setLoginLoading(true);
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setAuthenticated(true);
+        setEmail('');
+        setPassword('');
+      } else {
+        setLoginError(data.error || 'Login failed');
+      }
+    } catch {
+      setLoginError('Network error');
+    } finally {
+      setLoginLoading(false);
     }
+  };
+
+  /* Logout */
+  const logout = async () => {
+    await fetch('/api/admin/verify', { method: 'POST', credentials: 'same-origin' });
+    setAuthenticated(false);
+    setActiveSlug(null);
+    setEditingDoc(null);
   };
 
   /* Load counts */
@@ -101,7 +138,7 @@ export default function AdminPage() {
     setDocs(data.docs || []);
   }, [api]);
 
-  useEffect(() => { if (token) loadCounts(); }, [token, loadCounts]);
+  useEffect(() => { if (authenticated) loadCounts(); }, [authenticated, loadCounts]);
   useEffect(() => { if (activeSlug) loadDocs(activeSlug); }, [activeSlug, loadDocs]);
 
   /* CRUD */
@@ -125,19 +162,38 @@ export default function AdminPage() {
   const startCreate = () => { setEditingDoc(null); setEditData({ sortOrder: 0 }); };
   const cancelEdit = () => { setEditingDoc(null); setEditData({}); };
 
+  /* ---- LOADING / UNKNOWN STATE ---- */
+  if (authenticated === null) {
+    return (
+      <div className="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center">
+        <div className="animate-pulse text-zinc-500">Loading...</div>
+      </div>
+    );
+  }
+
   /* ---- LOGIN SCREEN ---- */
-  if (!token) {
+  if (!authenticated) {
     return (
       <div className="min-h-screen bg-zinc-950 text-zinc-100 flex items-center justify-center">
         <div className="w-full max-w-sm p-8 rounded-2xl border border-zinc-800 bg-zinc-900">
-          <h1 className="text-2xl font-bold text-center mb-2">Payload CMS</h1>
-          <p className="text-sm text-zinc-400 text-center mb-8">Sign in to admin panel</p>
-          {loginError && <p className="mb-4 text-sm text-red-400 text-center">{loginError}</p>}
-          <div className="space-y-4">
-            <input value={email} onChange={e => setEmail(e.target.value)} className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" placeholder="Email" />
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" placeholder="Password" />
-            <button onClick={login} className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-lg transition">Sign In</button>
-          </div>
+          <h1 className="text-2xl font-bold text-center mb-2">Admin Panel</h1>
+          <p className="text-sm text-zinc-400 text-center mb-8">Sign in to manage your content</p>
+          {loginError && <p className="mb-4 text-sm text-red-400 text-center bg-red-400/10 rounded-lg py-2 px-3">{loginError}</p>}
+          <form onSubmit={login} className="space-y-4">
+            <input
+              value={email} onChange={e => setEmail(e.target.value)}
+              type="email" required autoComplete="email"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" placeholder="Email" />
+            <input
+              value={password} onChange={e => setPassword(e.target.value)}
+              type="password" required autoComplete="current-password"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500" placeholder="Password" />
+            <button
+              type="submit" disabled={loginLoading}
+              className="w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-semibold py-3 rounded-lg transition">
+              {loginLoading ? 'Signing in...' : 'Sign In'}
+            </button>
+          </form>
         </div>
       </div>
     );
@@ -165,7 +221,7 @@ export default function AdminPage() {
           </button>
         ))}
         <div className="mt-auto pt-4">
-          <button onClick={() => setToken(null)} className="w-full px-3 py-2 rounded-lg text-start text-sm text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 transition">
+          <button onClick={logout} className="w-full px-3 py-2 rounded-lg text-start text-sm text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 transition">
             Sign Out
           </button>
         </div>
