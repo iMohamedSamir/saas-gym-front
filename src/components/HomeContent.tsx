@@ -151,36 +151,49 @@ export default function HomeContent() {
 
       <main>
         {/* ============================================================ */}
-        {/* 2. HERO — Full-width gym image background                  */}
+        {/* 2. HERO — Gym images + glow                                */}
         {/* ============================================================ */}
-        <section className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+        <section className="relative overflow-hidden py-24 sm:py-32 lg:py-44">
           {/* Radial glow */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <div className="h-[600px] w-[600px] rounded-full bg-[#937AFF]/15 blur-[140px]" />
           </div>
-          {/* Background image with overlay */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6846b2d0469d.jpg"
-              alt=""
-              className="w-full h-full object-cover opacity-20"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#03010E]/60 via-[#03010E]/80 to-[#03010E]" />
-          </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-white" dangerouslySetInnerHTML={{ __html: t.hero_title }} />
-            <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-[#817E84] leading-relaxed">
-              {t.hero_subtitle}
-            </p>
-            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#pricing" className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25">
-                {t.hero_primaryBtn}
-                <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
-              </a>
-              <a href="#features" className="inline-flex items-center gap-2 border border-[#202128] hover:border-[#937AFF]/50 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200">
-                {t.hero_secondaryBtn}
-              </a>
+          <div className="relative z-10 max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Text side */}
+              <div className={isRTL ? 'lg:order-2 lg:text-right' : ''}>
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white" dangerouslySetInnerHTML={{ __html: t.hero_title }} />
+                <p className="mt-6 text-lg sm:text-xl text-[#817E84] leading-relaxed">
+                  {t.hero_subtitle}
+                </p>
+                <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
+                  <a href="#pricing" className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25">
+                    {t.hero_primaryBtn}
+                    <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+                  </a>
+                  <a href="#features" className="inline-flex items-center gap-2 border border-[#202128] hover:border-[#937AFF]/50 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200">
+                    {t.hero_secondaryBtn}
+                  </a>
+                </div>
+              </div>
+              {/* Images side */}
+              <div className={`relative flex items-center justify-center ${isRTL ? 'lg:order-1' : ''}`}>
+                {/* Back image */}
+                <div className="absolute -top-4 opacity-30 blur-sm scale-95">
+                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/03fa670ae1d4.jpeg" alt="" className="w-56 h-72 sm:w-72 sm:h-96 object-cover rounded-2xl" loading="eager" />
+                </div>
+                {/* Main image */}
+                <div className="relative z-10">
+                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fd34df0a8630.jpg" alt="" className="w-64 h-80 sm:w-80 sm:h-[28rem] object-cover rounded-2xl border border-[#202128] shadow-2xl shadow-black/50" loading="eager" />
+                  {/* Glow behind main */}
+                  <div className="absolute -inset-4 bg-[#937AFF]/20 rounded-3xl blur-2xl -z-10" />
+                </div>
+                {/* Front image */}
+                <div className="absolute -bottom-4 opacity-25 blur-sm scale-95">
+                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/82afe857d6fb.jpg" alt="" className="w-52 h-64 sm:w-64 sm:h-80 object-cover rounded-2xl" loading="eager" />
+                </div>
+              </div>
             </div>
           </div>
         </section>

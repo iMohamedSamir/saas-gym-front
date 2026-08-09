@@ -177,7 +177,44 @@ const ar = {
   pricing_content: 'اختر الخطة المناسبة لصالتك الرياضية.',
   pricing_monthly: '/ شهريًا',
   pricing_yearly: '/ سنويًا',
-  pricing_fallback: [] as any[],
+  pricing_fallback: [
+    {
+      id: 'p1', title: 'الأساسيات', price: '97', yearlyPrice: '970',
+      description: 'الأساسيات لإدارة صالتك الرياضية.',
+      isFeatured: false, buttonLabel: 'ابدأ التجربة المجانية', buttonLink: '#contact',
+      features: [
+        { label: 'إدارة الأعضاء والتسجيل', included: true },
+        { label: 'تتبع الحضور والسجلات', included: true },
+        { label: 'المبيعات والفواتير PDF', included: true },
+        { label: 'إدارة الفصول والجداول', included: false },
+        { label: 'كشك تسجيل الدخول الذاتي', included: false },
+      ],
+    },
+    {
+      id: 'p2', title: 'النمو', price: '297', yearlyPrice: '2970',
+      description: 'كل ما تحتاجه لتشغيل صالة كاملة.',
+      isFeatured: true, offerText: 'الأكثر شعبية', buttonLabel: 'ابدأ التجربة المجانية', buttonLink: '#contact',
+      features: [
+        { label: 'كل شيء في الأساسيات', included: true },
+        { label: 'إدارة الفصول والجداول المتكررة', included: true },
+        { label: 'كشك تسجيل الدخول الذاتي', included: true },
+        { label: 'تتبع العملاء المحتملين والتحويلات', included: true },
+        { label: 'لوحة التحليلات الكاملة', included: true },
+      ],
+    },
+    {
+      id: 'p3', title: 'التوسع', price: '497', yearlyPrice: '4970',
+      description: 'تحكم كامل لعدة فروع مع كل المميزات.',
+      isFeatured: false, buttonLabel: 'ابدأ التجربة المجانية', buttonLink: '#contact',
+      features: [
+        { label: 'كل شيء في خطة النمو', included: true },
+        { label: 'دعم فروع متعددة', included: true },
+        { label: 'مفاتيح API والويب هوكس', included: true },
+        { label: 'نظام الرتب والتقدم', included: true },
+        { label: 'النظام الغذائي وإدارة الأطعمة', included: true },
+      ],
+    },
+  ] as any[],
 
   // CTA
   cta_title: 'جاهز لإدارة صالتك الرياضية <strong>بذكاء؟</strong>',
@@ -452,7 +489,44 @@ const en: typeof ar = {
   pricing_content: 'Choose the plan that fits your gym.',
   pricing_monthly: '/month',
   pricing_yearly: '/year',
-  pricing_fallback: [] as any[],
+  pricing_fallback: [
+    {
+      id: 'p1', title: 'Essentials', price: '97', yearlyPrice: '970',
+      description: 'The essentials to manage your gym.',
+      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+      features: [
+        { label: 'Member Management & Profiles', included: true },
+        { label: 'Attendance Tracking & History', included: true },
+        { label: 'Sales & PDF Invoices', included: true },
+        { label: 'Class & Session Scheduling', included: false },
+        { label: 'Self-Service Check-In Kiosk', included: false },
+      ],
+    },
+    {
+      id: 'p2', title: 'Growth', price: '297', yearlyPrice: '2970',
+      description: 'Everything to run a full gym operation.',
+      isFeatured: true, offerText: 'Most Popular', buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+      features: [
+        { label: 'Everything in Essentials', included: true },
+        { label: 'Recurring Class & Session Scheduling', included: true },
+        { label: 'Self-Service Check-In Kiosk', included: true },
+        { label: 'Lead Tracking & Conversion Funnel', included: true },
+        { label: 'Full Analytics Dashboard', included: true },
+      ],
+    },
+    {
+      id: 'p3', title: 'Scale', price: '497', yearlyPrice: '4970',
+      description: 'Total control for multi-branch operations.',
+      isFeatured: false, buttonLabel: 'Start Free Trial', buttonLink: '#contact',
+      features: [
+        { label: 'Everything in Growth', included: true },
+        { label: 'Multi-Location Support', included: true },
+        { label: 'API Keys & Webhooks', included: true },
+        { label: 'Rank Progression System', included: true },
+        { label: 'Diet & Nutrition Management', included: true },
+      ],
+    },
+  ] as any[],
 
   cta_title: 'Ready to Manage Your Gym <strong>Smarter?</strong>',
   cta_description: '61 features. One dashboard. Everything you need to run your gym.',

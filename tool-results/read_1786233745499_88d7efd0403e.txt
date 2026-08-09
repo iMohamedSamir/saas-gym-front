@@ -1,0 +1,576 @@
+     1→'use client';
+     2→
+     3→import { useEffect, useState, useCallback } from 'react';
+     4→import {
+     5→  Mail, Phone, Calendar, Check, X, Star, ArrowRight,
+     6→  Users, ScanLine, CreditCard, CalendarDays,
+     7→  Target, Smartphone, BarChart3, Shield, Globe,
+     8→  Banknote, Building, Trophy, Webhook, FileText,
+     9→  Utensils, ChevronRight
+    10→} from 'lucide-react';
+    11→import FaqAccordion from '@/components/FaqAccordion';
+    12→import MobileNav from '@/components/MobileNav';
+    13→import LangSwitcher from '@/components/LangSwitcher';
+    14→import { translations, Locale } from '@/lib/translations';
+    15→
+    16→/* ------------------------------------------------------------------ */
+    17→/*  Types                                                              */
+    18→/* ------------------------------------------------------------------ */
+    19→
+    20→interface PricingFeature {
+    21→  label?: string;
+    22→  included?: boolean;
+    23→  tooltip?: string;
+    24→}
+    25→
+    26→interface PricingPlan {
+    27→  id: string;
+    28→  title?: string;
+    29→  price?: string;
+    30→  yearlyPrice?: string;
+    31→  description?: string;
+    32→  isFeatured?: boolean;
+    33→  offerText?: string;
+    34→  buttonLabel?: string;
+    35→  buttonLink?: string;
+    36→  features?: PricingFeature[];
+    37→}
+    38→
+    39→interface FaqItem {
+    40→  id: string;
+    41→  question?: string;
+    42→  answer?: string;
+    43→}
+    44→
+    45→/* ------------------------------------------------------------------ */
+    46→/*  Icon helper                                                       */
+    47→/* ------------------------------------------------------------------ */
+    48→const iconMap: Record<string, React.ReactNode> = {
+    49→  members: <Users className="w-6 h-6" />,
+    50→  attendance: <ScanLine className="w-6 h-6" />,
+    51→  billing: <CreditCard className="w-6 h-6" />,
+    52→  scheduling: <CalendarDays className="w-6 h-6" />,
+    53→  shield: <Shield className="w-6 h-6" />,
+    54→  globe: <Globe className="w-6 h-6" />,
+    55→  currency: <Banknote className="w-6 h-6" />,
+    56→  building: <Building className="w-6 h-6" />,
+    57→  utensils: <Utensils className="w-6 h-6" />,
+    58→  trophy: <Trophy className="w-6 h-6" />,
+    59→  webhook: <Webhook className="w-6 h-6" />,
+    60→  filetext: <FileText className="w-6 h-6" />,
+    61→};
+    62→
+    63→export default function HomeContent() {
+    64→  const [locale, setLocale] = useState<Locale>('ar');
+    65→  const [mounted, setMounted] = useState(false);
+    66→
+    67→  const t = translations[locale];
+    68→
+    69→  const updateLocale = useCallback((loc: Locale) => {
+    70→    setLocale(loc);
+    71→  }, []);
+    72→
+    73→  useEffect(() => {
+    74→    const saved = (localStorage.getItem('locale') || 'ar') as Locale;
+    75→    setLocale(saved);
+    76→    setMounted(true);
+    77→
+    78→    const handler = (e: Event) => {
+    79→      updateLocale((e as CustomEvent).detail);
+    80→    };
+    81→    window.addEventListener('localechange', handler);
+    82→    return () => window.removeEventListener('localechange', handler);
+    83→  }, [updateLocale]);
+    84→
+    85→  if (!mounted) {
+    86→    return (
+    87→      <div className="min-h-screen bg-[#03010E] text-[#E5E5E5]">
+    88→        <div className="flex items-center justify-center h-screen">
+    89→          <div className="h-8 w-8 border-2 border-[#937AFF] border-t-transparent rounded-full animate-spin" />
+    90→        </div>
+    91→      </div>
+    92→    );
+    93→  }
+    94→
+    95→  const isRTL = locale === 'ar';
+    96→
+    97→  const navLinks = [
+    98→    { label: t.nav_features, href: '#features' },
+    99→    { label: t.nav_pricing, href: '#pricing' },
+   100→    { label: t.nav_testimonials, href: '#testimonials' },
+   101→    { label: t.nav_faq, href: '#faq' },
+   102→    { label: t.nav_contact, href: '#contact' },
+   103→  ];
+   104→
+   105→  const stats = t.stats_fallback as any[];
+   106→  const testimonials = t.testimonials_fallback;
+   107→  const faqItems: FaqItem[] = t.faq_fallback as unknown as FaqItem[];
+   108→  const pricingPlans: PricingPlan[] = t.pricing_fallback as unknown as PricingPlan[];
+   109→
+   110→  // Feature pillars data
+   111→  const pillars = [
+   112→    { tagline: t.pillar1_tagline, points: t.pillar1_points, image: t.pillar1_image },
+   113→    { tagline: t.pillar2_tagline, points: t.pillar2_points, image: t.pillar2_image },
+   114→    { tagline: t.pillar3_tagline, points: t.pillar3_points, image: t.pillar3_image },
+   115→    { tagline: t.pillar4_tagline, points: t.pillar4_points, image: t.pillar4_image },
+   116→    { tagline: t.pillar5_tagline, points: t.pillar5_points, image: t.pillar5_image },
+   117→    { tagline: t.pillar6_tagline, points: t.pillar6_points, image: t.pillar6_image },
+   118→    { tagline: t.pillar7_tagline, points: t.pillar7_points, image: t.pillar7_image },
+   119→  ];
+   120→
+   121→  const moreFeatures = t.moreFeatures_grid as any[];
+   122→  const howItWorksSteps = t.howItWorks_steps as any[];
+   123→  const solutionValues = t.solution_values as any[];
+   124→
+   125→  return (
+   126→    <div className="min-h-screen bg-[#03010E] text-[#E5E5E5]">
+   127→      {/* ============================================================ */}
+   128→      {/* 1. HEADER                                                    */}
+   129→      {/* ============================================================ */}
+   130→      <header className="sticky top-0 z-40 w-full border-b border-[#202128] bg-[#03010E]/80 backdrop-blur-xl">
+   131→        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16 sm:h-18">
+   132→          <a href="/" className="text-[#937AFF] font-bold text-xl tracking-tight select-none">
+   133→            GymPro
+   134→          </a>
+   135→          <nav className="hidden lg:flex items-center gap-8">
+   136→            {navLinks.map((l) => (
+   137→              <a key={l.href} href={l.href} className="text-sm text-[#817E84] hover:text-[#E5E5E5] transition-colors duration-200">
+   138→                {l.label}
+   139→              </a>
+   140→            ))}
+   141→          </nav>
+   142→          <div className="flex items-center gap-3">
+   143→            <LangSwitcher />
+   144→            <a href="/admin" className="hidden lg:inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors duration-200">
+   145→              {t.nav_getTemplate}
+   146→            </a>
+   147→          </div>
+   148→          <MobileNav />
+   149→        </div>
+   150→      </header>
+   151→
+   152→      <main>
+   153→        {/* ============================================================ */}
+   154→        {/* 2. HERO — Full-width gym image background                  */}
+   155→        {/* ============================================================ */}
+   156→        <section className="relative overflow-hidden py-24 sm:py-32 lg:py-40">
+   157→          {/* Radial glow */}
+   158→          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+   159→            <div className="h-[600px] w-[600px] rounded-full bg-[#937AFF]/15 blur-[140px]" />
+   160→          </div>
+   161→          {/* Background image with overlay */}
+   162→          <div className="absolute inset-0 z-0">
+   163→            <img
+   164→              src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6846b2d0469d.jpg"
+   165→              alt=""
+   166→              className="w-full h-full object-cover opacity-20"
+   167→            />
+   168→            <div className="absolute inset-0 bg-gradient-to-b from-[#03010E]/60 via-[#03010E]/80 to-[#03010E]" />
+   169→          </div>
+   170→
+   171→          <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
+   172→            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight tracking-tight text-white" dangerouslySetInnerHTML={{ __html: t.hero_title }} />
+   173→            <p className="mt-6 max-w-2xl mx-auto text-lg sm:text-xl text-[#817E84] leading-relaxed">
+   174→              {t.hero_subtitle}
+   175→            </p>
+   176→            <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+   177→              <a href="#pricing" className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25">
+   178→                {t.hero_primaryBtn}
+   179→                <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   180→              </a>
+   181→              <a href="#features" className="inline-flex items-center gap-2 border border-[#202128] hover:border-[#937AFF]/50 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200">
+   182→                {t.hero_secondaryBtn}
+   183→              </a>
+   184→            </div>
+   185→          </div>
+   186→        </section>
+   187→
+   188→        {/* ============================================================ */}
+   189→        {/* 3. STATS                                                     */}
+   190→        {/* ============================================================ */}
+   191→        {stats.length > 0 && (
+   192→          <section className="py-16 border-y border-[#202128] bg-[#0B0C17]/50">
+   193→            <div className="max-w-7xl mx-auto px-6">
+   194→              <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+   195→                {stats.map((s: any) => (
+   196→                  <div key={s.id} className="text-center">
+   197→                    <div className="text-3xl sm:text-4xl font-bold text-[#937AFF]">{s.value}</div>
+   198→                    <div className="mt-2 text-sm text-[#817E84]">{s.label}</div>
+   199→                  </div>
+   200→                ))}
+   201→              </div>
+   202→            </div>
+   203→          </section>
+   204→        )}
+   205→
+   206→        {/* ============================================================ */}
+   207→        {/* 4. PROBLEM SECTION — Pain points                            */}
+   208→        {/* ============================================================ */}
+   209→        <section className="py-20 sm:py-28">
+   210→          <div className="max-w-7xl mx-auto px-6">
+   211→            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.problem_title }} />
+   212→            <p className="mt-6 text-lg text-[#817E84] text-center max-w-3xl mx-auto">
+   213→              {t.problem_content}
+   214→            </p>
+   215→            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+   216→              {(t.problem_items as string[]).map((item, i) => (
+   217→                <div key={i} className="flex items-center gap-3 bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3">
+   218→                  <X className="w-5 h-5 text-red-400 shrink-0" />
+   219→                  <span className="text-sm text-[#E5E5E5]">{item}</span>
+   220→                </div>
+   221→              ))}
+   222→            </div>
+   223→          </div>
+   224→        </section>
+   225→
+   226→        {/* ============================================================ */}
+   227→        {/* 5. SOLUTION INTRO — 4 value cards                           */}
+   228→        {/* ============================================================ */}
+   229→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   230→          <div className="max-w-7xl mx-auto px-6">
+   231→            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.solution_title }} />
+   232→            <p className="mt-6 text-lg text-[#817E84] text-center max-w-3xl mx-auto">
+   233→              {t.solution_content}
+   234→            </p>
+   235→
+   236→            <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+   237→              {solutionValues.map((val: any, i: number) => (
+   238→                <div key={i} className="group relative bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/50 transition-all duration-300">
+   239→                  <div className="w-12 h-12 rounded-lg bg-[#937AFF]/10 flex items-center justify-center mb-4 text-[#937AFF]">
+   240→                    {iconMap[val.icon] || <Check className="w-6 h-6" />}
+   241→                  </div>
+   242→                  <h3 className="text-lg font-semibold text-white">{val.title}</h3>
+   243→                  <p className="mt-2 text-sm text-[#817E84]">{val.desc}</p>
+   244→                </div>
+   245→              ))}
+   246→            </div>
+   247→          </div>
+   248→        </section>
+   249→
+   250→        {/* ============================================================ */}
+   251→        {/* 6. FEATURE PILLARS — Alternating image + bullets            */}
+   252→        {/* ============================================================ */}
+   253→        <section id="features" className="py-20 sm:py-28">
+   254→          <div className="max-w-7xl mx-auto px-6">
+   255→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.pillars_title }} />
+   256→            <p className="mt-4 text-[#817E84] text-center max-w-2xl mx-auto">
+   257→              {t.pillars_content}
+   258→            </p>
+   259→
+   260→            <div className="mt-16 space-y-24">
+   261→              {pillars.map((pillar: any, idx: number) => {
+   262→                const isReversed = idx % 2 === 1;
+   263→                return (
+   264→                  <div key={idx} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${isReversed ? 'lg:direction-rtl' : ''}`}>
+   265→                    {/* Text side */}
+   266→                    <div className={isReversed ? 'lg:order-2' : ''}>
+   267→                      <h3 className="text-2xl sm:text-3xl font-bold text-white" dangerouslySetInnerHTML={{ __html: pillar.tagline }} />
+   268→                      <ul className="mt-6 space-y-3">
+   269→                        {pillar.points.map((pt: string, pi: number) => (
+   270→                          <li key={pi} className="flex items-start gap-3">
+   271→                            <Check className="w-5 h-5 text-[#937AFF] shrink-0 mt-0.5" />
+   272→                            <span className="text-[#E5E5E5] leading-relaxed">{pt}</span>
+   273→                          </li>
+   274→                        ))}
+   275→                      </ul>
+   276→                      <a href="#pricing" className="mt-8 inline-flex items-center gap-2 text-[#937AFF] hover:text-[#b69fff] font-semibold transition-colors">
+   277→                        {t.hero_primaryBtn}
+   278→                        <ChevronRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
+   279→                      </a>
+   280→                    </div>
+   281→                    {/* Image side */}
+   282→                    <div className={isReversed ? 'lg:order-1' : ''}>
+   283→                      <div className="relative rounded-2xl overflow-hidden border border-[#202128] aspect-[4/3]">
+   284→                        <img src={pillar.image} alt="" className="w-full h-full object-cover" loading="lazy" />
+   285→                        <div className="absolute inset-0 bg-gradient-to-t from-[#03010E]/40 to-transparent" />
+   286→                      </div>
+   287→                    </div>
+   288→                  </div>
+   289→                );
+   290→              })}
+   291→            </div>
+   292→          </div>
+   293→        </section>
+   294→
+   295→        {/* ============================================================ */}
+   296→        {/* 7. MORE FEATURES GRID                                       */}
+   297→        {/* ============================================================ */}
+   298→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   299→          <div className="max-w-7xl mx-auto px-6">
+   300→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.moreFeatures_title }} />
+   301→            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+   302→              {moreFeatures.map((feat: any, i: number) => (
+   303→                <div key={i} className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/50 transition-all duration-300">
+   304→                  <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center mb-4 text-[#937AFF]">
+   305→                    {iconMap[feat.icon] || <Check className="w-5 h-5" />}
+   306→                  </div>
+   307→                  <h3 className="text-base font-semibold text-white">{feat.title}</h3>
+   308→                  <p className="mt-2 text-sm text-[#817E84]">{feat.desc}</p>
+   309→                </div>
+   310→              ))}
+   311→            </div>
+   312→          </div>
+   313→        </section>
+   314→
+   315→        {/* ============================================================ */}
+   316→        {/* 8. HOW IT WORKS                                             */}
+   317→        {/* ============================================================ */}
+   318→        <section className="py-20 sm:py-28">
+   319→          <div className="max-w-7xl mx-auto px-6">
+   320→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.howItWorks_title }} />
+   321→            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+   322→              {howItWorksSteps.map((step: any, i: number) => (
+   323→                <div key={i} className="relative bg-[#0B0C17] border border-[#202128] rounded-2xl p-8 text-center hover:border-[#937AFF]/30 transition-all duration-300">
+   324→                  <div className="w-12 h-12 rounded-full bg-[#937AFF]/20 text-[#937AFF] flex items-center justify-center mx-auto text-xl font-bold">
+   325→                    {step.stepNumber}
+   326→                  </div>
+   327→                  <h3 className="mt-6 text-xl font-semibold text-white">{step.title}</h3>
+   328→                  <p className="mt-3 text-[#817E84]">{step.content}</p>
+   329→                </div>
+   330→              ))}
+   331→            </div>
+   332→            <div className="mt-12 text-center">
+   333→              <a href="#pricing" className="inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25">
+   334→                {t.howItWorks_btn}
+   335→                <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   336→              </a>
+   337→            </div>
+   338→          </div>
+   339→        </section>
+   340→
+   341→        {/* ============================================================ */}
+   342→        {/* 9. PRICING — UNTOUCHED                                       */}
+   343→        {/* ============================================================ */}
+   344→        <section id="pricing" className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   345→          <div className="max-w-7xl mx-auto px-6">
+   346→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.pricing_title }} />
+   347→            <p className="mt-4 text-[#817E84] text-center max-w-2xl mx-auto">{t.pricing_content}</p>
+   348→
+   349→            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+   350→              {(pricingPlans.length > 0 ? pricingPlans : []).map((plan: PricingPlan) => (
+   351→                <div key={plan.id} className={`relative rounded-2xl p-8 border transition-all duration-300 ${
+   352→                  plan.isFeatured ? 'bg-[#937AFF]/10 border-[#937AFF]/50 shadow-lg shadow-[#937AFF]/10' : 'bg-[#0B0C17] border-[#202128] hover:border-[#937AFF]/30'
+   353→                }`}>
+   354→                  {plan.offerText && (
+   355→                    <span className="absolute -top-3 start-4 bg-[#937AFF] text-white text-xs font-bold px-3 py-1 rounded-full">
+   356→                      {plan.offerText}
+   357→                    </span>
+   358→                  )}
+   359→                  <h3 className="text-xl font-bold text-white">{plan.title}</h3>
+   360→                  <p className="mt-2 text-sm text-[#817E84]">{plan.description}</p>
+   361→                  <div className="mt-6 flex items-baseline gap-1">
+   362→                    <span className="text-4xl font-bold text-white">${plan.price}</span>
+   363→                    <span className="text-sm text-[#817E84]">{t.pricing_monthly}</span>
+   364→                  </div>
+   365→                  <ul className="mt-8 space-y-3">
+   366→                    {plan.features?.map((feat, fi) => (
+   367→                      <li key={fi} className="flex items-center gap-3">
+   368→                        {feat.included ? <Check className="w-5 h-5 text-[#937AFF] shrink-0" /> : <X className="w-5 h-5 text-[#817E84] shrink-0" />}
+   369→                        <span className={`text-sm ${feat.included ? 'text-[#E5E5E5]' : 'text-[#817E84]'}`}>{feat.label}</span>
+   370→                      </li>
+   371→                    ))}
+   372→                  </ul>
+   373→                  <a href={plan.buttonLink || '#contact'} className={`mt-8 block text-center font-semibold py-3 rounded-lg transition-colors duration-200 ${
+   374→                    plan.isFeatured ? 'bg-[#937AFF] hover:bg-[#7d5ff0] text-white' : 'border border-[#202128] hover:border-[#937AFF]/50 text-white'
+   375→                  }`}>
+   376→                    {plan.buttonLabel}
+   377→                  </a>
+   378→                </div>
+   379→              ))}
+   380→            </div>
+   381→          </div>
+   382→        </section>
+   383→
+   384→        {/* ============================================================ */}
+   385→        {/* 10. TESTIMONIAL QUOTE                                       */}
+   386→        {/* ============================================================ */}
+   387→        <section id="testimonials" className="py-20 sm:py-28">
+   388→          <div className="max-w-4xl mx-auto px-6 text-center">
+   389→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.testimonial_title }} />
+   390→            <blockquote className="mt-12">
+   391→              <p className="text-2xl sm:text-3xl font-medium text-[#E5E5E5] leading-relaxed italic">
+   392→                &ldquo;{t.testimonial_quote}&rdquo;
+   393→              </p>
+   394→              {t.singleTestimonial_name && (
+   395→                <div className="mt-8 flex flex-col items-center">
+   396→                  <img src="/images/avatar.png" alt={t.singleTestimonial_name} className="w-14 h-14 rounded-full" />
+   397→                  <p className="mt-3 font-semibold text-white">{t.singleTestimonial_name}</p>
+   398→                  <p className="text-sm text-[#817E84]">{t.singleTestimonial_company}</p>
+   399→                </div>
+   400→              )}
+   401→              {t.singleTestimonial_stats && t.singleTestimonial_stats.length > 0 && (
+   402→                <div className="mt-10 grid grid-cols-3 gap-6">
+   403→                  {t.singleTestimonial_stats.map((stat: any, i: number) => (
+   404→                    <div key={i}>
+   405→                      <div className="text-2xl sm:text-3xl font-bold text-[#937AFF]">{stat.value}</div>
+   406→                      <div className="text-sm text-[#817E84]">{stat.label}</div>
+   407→                    </div>
+   408→                  ))}
+   409→                </div>
+   410→              )}
+   411→            </blockquote>
+   412→          </div>
+   413→        </section>
+   414→
+   415→        {/* ============================================================ */}
+   416→        {/* 11. TESTIMONIALS CARDS                                       */}
+   417→        {/* ============================================================ */}
+   418→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   419→          <div className="max-w-7xl mx-auto px-6">
+   420→            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+   421→              {testimonials.map((tm: any) => (
+   422→                <div key={tm.id} className="bg-[#0B0C17] border border-[#202128] rounded-2xl p-6 hover:border-[#937AFF]/30 transition-all duration-300">
+   423→                  <div className="flex gap-1 mb-4">
+   424→                    {[...Array(5)].map((_, i) => (
+   425→                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+   426→                    ))}
+   427→                  </div>
+   428→                  <p className="text-[#E5E5E5] leading-relaxed">{tm.content}</p>
+   429→                  <div className="mt-6 flex items-center gap-3">
+   430→                    <img src={tm.avatar} alt={tm.name} className="w-10 h-10 rounded-full" />
+   431→                    <div>
+   432→                      <p className="font-semibold text-white text-sm">{tm.name}</p>
+   433→                      <p className="text-xs text-[#817E84]">{tm.designation}</p>
+   434→                    </div>
+   435→                  </div>
+   436→                </div>
+   437→              ))}
+   438→            </div>
+   439→          </div>
+   440→        </section>
+   441→
+   442→        {/* ============================================================ */}
+   443→        {/* 12. FAQ                                                      */}
+   444→        {/* ============================================================ */}
+   445→        <section id="faq" className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   446→          <div className="max-w-3xl mx-auto px-6">
+   447→            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.faq_title }} />
+   448→            <p className="mt-4 text-[#817E84] text-center">{t.faq_content}</p>
+   449→            <div className="mt-12">
+   450→              <FaqAccordion items={faqItems.length > 0 ? faqItems : t.faq_fallback as unknown as FaqItem[]} />
+   451→            </div>
+   452→          </div>
+   453→        </section>
+   454→
+   455→        {/* ============================================================ */}
+   456→        {/* 13. CTA                                                      */}
+   457→        {/* ============================================================ */}
+   458→        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+   459→          <div className="max-w-4xl mx-auto px-6 text-center">
+   460→            <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.cta_title }} />
+   461→            <p className="mt-6 text-lg text-[#817E84] max-w-2xl mx-auto">{t.cta_description}</p>
+   462→            <a href="#pricing" className="mt-10 inline-flex items-center gap-2 bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold px-8 py-3.5 rounded-lg transition-colors duration-200 shadow-lg shadow-[#937AFF]/25">
+   463→              {t.cta_button}
+   464→              <ArrowRight className={isRTL ? 'rotate-180 w-4 h-4' : 'w-4 h-4'} />
+   465→            </a>
+   466→          </div>
+   467→        </section>
+   468→
+   469→        {/* ============================================================ */}
+   470→        {/* 14. CONTACT                                                  */}
+   471→        {/* ============================================================ */}
+   472→        <section id="contact" className="py-20 sm:py-28">
+   473→          <div className="max-w-7xl mx-auto px-6">
+   474→            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+   475→              <div>
+   476→                <h2 className="text-3xl sm:text-4xl font-bold text-white">{t.contact_title}</h2>
+   477→                <p className="mt-4 text-[#817E84]">{t.contact_subtitle}</p>
+   478→                <div className="mt-10 space-y-6">
+   479→                  <div className="flex items-center gap-4">
+   480→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   481→                      <Mail className="w-5 h-5 text-[#937AFF]" />
+   482→                    </div>
+   483→                    <div>
+   484→                      <p className="text-sm text-[#817E84]">{t.contact_email}</p>
+   485→                      <p className="text-white">hello@gympro.com</p>
+   486→                    </div>
+   487→                  </div>
+   488→                  <div className="flex items-center gap-4">
+   489→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   490→                      <Phone className="w-5 h-5 text-[#937AFF]" />
+   491→                    </div>
+   492→                    <div>
+   493→                      <p className="text-sm text-[#817E84]">{t.contact_phone}</p>
+   494→                      <p className="text-white" dir="ltr">+20 100 123 4567</p>
+   495→                    </div>
+   496→                  </div>
+   497→                  <div className="flex items-center gap-4">
+   498→                    <div className="w-10 h-10 rounded-lg bg-[#937AFF]/10 flex items-center justify-center">
+   499→                      <Calendar className="w-5 h-5 text-[#937AFF]" />
+   500→                    </div>
+   501→                    <div>
+   502→                      <p className="text-sm text-[#817E84]">{t.contact_address}</p>
+   503→                      <p className="text-white">{t.contact_addressValue}</p>
+   504→                    </div>
+   505→                  </div>
+   506→                </div>
+   507→              </div>
+   508→              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+   509→                <div>
+   510→                  <label className="block text-sm text-[#817E84] mb-2">{t.contact_name}</label>
+   511→                  <input type="text" className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors" placeholder={t.contact_name} />
+   512→                </div>
+   513→                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+   514→                  <div>
+   515→                    <label className="block text-sm text-[#817E84] mb-2">{t.contact_email}</label>
+   516→                    <input type="email" className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors" placeholder={t.contact_email} />
+   517→                  </div>
+   518→                  <div>
+   519→                    <label className="block text-sm text-[#817E84] mb-2">{t.contact_phone}</label>
+   520→                    <input type="tel" className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors" dir="ltr" placeholder={t.contact_phone} />
+   521→                  </div>
+   522→                </div>
+   523→                <div>
+   524→                  <label className="block text-sm text-[#817E84] mb-2">{t.contact_message}</label>
+   525→                  <textarea rows={5} className="w-full bg-[#0B0C17] border border-[#202128] rounded-lg px-4 py-3 text-white placeholder-[#817E84] focus:outline-none focus:border-[#937AFF] transition-colors resize-none" placeholder={t.contact_message} />
+   526→                </div>
+   527→                <button type="submit" className="w-full bg-[#937AFF] hover:bg-[#7d5ff0] text-white font-semibold py-3.5 rounded-lg transition-colors duration-200">
+   528→                  {t.contact_send}
+   529→                </button>
+   530→              </form>
+   531→            </div>
+   532→          </div>
+   533→        </section>
+   534→      </main>
+   535→
+   536→      {/* ============================================================ */}
+   537→      {/* FOOTER                                                       */}
+   538→      {/* ============================================================ */}
+   539→      <footer className="border-t border-[#202128] bg-[#03010E] py-16">
+   540→        <div className="max-w-7xl mx-auto px-6">
+   541→          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+   542→            <div className="md:col-span-1">
+   543→              <a href="/" className="text-[#937AFF] font-bold text-xl">GymPro</a>
+   544→              <p className="mt-4 text-sm text-[#817E84]">{t.footer_description}</p>
+   545→            </div>
+   546→            <div>
+   547→              <h4 className="font-semibold text-white mb-4">{t.footer_product}</h4>
+   548→              <ul className="space-y-2">
+   549→                {navLinks.map((l) => (
+   550→                  <li key={l.href}><a href={l.href} className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{l.label}</a></li>
+   551→                ))}
+   552→              </ul>
+   553→            </div>
+   554→            <div>
+   555→              <h4 className="font-semibold text-white mb-4">{t.footer_company}</h4>
+   556→              <ul className="space-y-2">
+   557→                <li><a href="#features" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.nav_features}</a></li>
+   558→                <li><a href="#contact" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_contact}</a></li>
+   559→              </ul>
+   560→            </div>
+   561→            <div>
+   562→              <h4 className="font-semibold text-white mb-4">{t.footer_legal}</h4>
+   563→              <ul className="space-y-2">
+   564→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_privacy}</a></li>
+   565→                <li><a href="#" className="text-sm text-[#817E84] hover:text-[#937AFF] transition-colors">{t.footer_terms}</a></li>
+   566→              </ul>
+   567→            </div>
+   568→          </div>
+   569→          <div className="mt-12 pt-8 border-t border-[#202128] text-center text-sm text-[#817E84]">
+   570→            {t.footer_copyright} {t.footer_allRights}
+   571→          </div>
+   572→        </div>
+   573→      </footer>
+   574→    </div>
+   575→  );
+   576→}
