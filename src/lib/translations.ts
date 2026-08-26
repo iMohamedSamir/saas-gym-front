@@ -12,16 +12,16 @@ const ar = {
 
   // Hero
   hero_title: 'النظام الشامل لإدارة <strong>صالات الألعاب الرياضية</strong>',
-  hero_subtitle: 'من تسجيل الأعضاء وتجديد الاشتراكات، إلى الحضور والتحليلات — أدِر كل جانب من جوانب صالة الألعاب الرياضية الخاصة بك من لوحة تحكم واحدة قوية. توقف عن استخدام 5 أدوات مختلفة.',
+  hero_subtitle: 'الأعضاء والحضور والفواتير والفصول وإدارة العملاء والحملات والتحليلات — منصة واحدة ثنائية اللغة سيحبها أعضاؤك، مع كشك تسجيل ذاتي وبوابة أعضاء مدمجتين.',
   hero_primaryBtn: 'ابدأ فترة التجربة المجانية لمدة 14 يومًا',
   hero_secondaryBtn: 'شاهد جميع المميزات',
 
   // Stats
   stats_fallback: [
-    { id: 's1', value: '61', label: 'ميزة متكاملة', sortOrder: 1 },
-    { id: 's2', value: '800+', label: 'تمرين في المكتبة', sortOrder: 2 },
-    { id: 's3', value: '102+', label: 'نقطة برمجة API', sortOrder: 3 },
-    { id: 's4', value: '2', label: 'لغة مع دعم RTL', sortOrder: 4 },
+    { id: 's1', value: '15+', label: 'وحدة تشغيلية متكاملة', sortOrder: 1 },
+    { id: 's2', value: '40+', label: 'ميزة قابلة للتفعيل لكل صالة', sortOrder: 2 },
+    { id: 's3', value: '800+', label: 'تمرين في المكتبة', sortOrder: 3 },
+    { id: 's4', value: '2', label: 'لغتان مع دعم RTL كامل', sortOrder: 4 },
   ],
 
   // Problem Section
@@ -38,24 +38,24 @@ const ar = {
   solution_title: 'صالة الألعاب الرياضية الخاصة بك — <strong>مدارة بالكامل من مكان واحد</strong>',
   solution_content: 'نظام مصمم خصيصًا لصالات الألعاب الرياضية — ليس أداة أعمال عامة تم إعادة توجيهها. كل ميزة بُنيت لتحديداً لتشغيل صالة الألعاب الرياضية.',
   solution_values: [
-    { icon: 'members', title: 'إدارة الأعضاء', desc: 'ملفات شاملة مع تتبع أعياد الميلاد والأكواد الفريدة' },
-    { icon: 'attendance', title: 'الحضور والتسجيل', desc: 'تسجيل دخول فوري مع كشك خدمة ذاتية وقائمة حضور تلقائية' },
-    { icon: 'billing', title: 'المبيعات والفواتير', desc: 'إنشاء مبيعات بنقرة واحدة وتتبع المدفوعات المعلقة وفواتير PDF' },
-    { icon: 'scheduling', title: 'الجداول وال_CLASSES', desc: 'إدارة الفصول مع حجوزات متكررة وتقويم شهري بصري' },
+    { icon: 'members', title: 'إدارة الأعضاء', desc: 'ملفات كاملة بأكواد تلقائية مثل DEFG-1000 — سجّل عضوًا جديدًا في أقل من 30 ثانية' },
+    { icon: 'attendance', title: 'الحضور والتسجيل', desc: 'تسجيل دخول بنقرة واحدة وكشك خدمة ذاتية يعمل بالكود أو رقم الهاتف' },
+    { icon: 'billing', title: 'المبيعات والفواتير', desc: 'تسجيل المدفوعات نقدًا أو بالبطاقة، فواتير PDF بشعار صالتك، واستردادات تُوازن الحسابات تلقائيًا' },
+    { icon: 'scheduling', title: 'الفصول والحجوزات', desc: 'جلسات متكررة بعدادات مباشرة للمقاعد وشارات «ممتلئ/متاح» وتقويم شهري' },
   ],
 
   // Feature Pillars
   pillars_title: 'كل ما تحتاجه لإدارة <strong>صالة الألعاب الرياضية</strong>',
-  pillars_content: '61 ميزة عبر 15 فئة — كلها مصممة خصيصًا لعمليات الصالات الرياضية.',
+  pillars_content: 'أكثر من 15 وحدة و40+ ميزة يمكنك تشغيلها أو إيقافها لكل صالة على حدة — كلها مصممة لعمليات الصالات الرياضية.',
 
   // Pillar 1: Member Management
   pillar1_tagline: 'رحلة كل عضو — <strong>في شاشة واحدة</strong>',
   pillar1_points: [
-    'ملفات أعضاء شاملة مع معلومات الاتصال والأكواد الفريدة وتتبع أعياد الميلاد',
+    'ملفات أعضاء كاملة بأكواد تلقائية مثل DEFG-1000 وصور جاهزة للباركود',
     'بحث ذكي بالاسم أو الرمز مع تبويبات نشط/غير نشط',
     'تهاني أعياد الميلاد عبر واتساب مباشرة',
-    'ملفات صحية وبدنية: الطول والوزن ونسبة الدهون والأهداف',
-    'سجل CRM كامل: ملاحظات، مكالمات، رسائل بريد إلكتروني، واتساب',
+    'ملفات صحية وبدنية: الإصابات والحالات الصحية والأهداف اللياقية',
+    'سجل CRM كامل: ملاحظات وتفاعلات — كل مدرب يعرف قصة كل عضو',
   ],
   pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/714ce578e627.jpeg',
 
@@ -72,12 +72,13 @@ const ar = {
   // Pillar 3: Sales & Billing
   pillar3_tagline: 'احصل على أموالك أسرع — <strong>لا تفقد دولارًا واحدًا</strong>',
   pillar3_points: [
-    'إنشاء مبيعات بنقرة واحدة: اختر العضو والخدمة وينتهي الأمر',
+    'إنشاء مبيعات بنقرة واحدة: اختر العضو والخدمة وطريقة الدفع — مع دعم الخصومات',
     'تتبع حالات الاشتراك: نشط / مجمّد / معلّق بألوان مميزة',
     'متابعات انتهاء الصلاحية: اليوم، غدًا، 5 أيام، 7 أيام، منتهية',
     'تذكيرات التجديد عبر واتساب بنقرة واحدة',
     'تتبع المدفوعات المعلقة مع إمكانية السداد الجزئي أو الكامل',
-    'فواتير PDF احترافية مع دعم عملات متعددة',
+    'فواتير PDF باسم صالتك وعنوانها وهويتها — وصفحة فاتورة عامة قابلة للمشاركة والطباعة',
+    'استردادات مسجلة تعيد موازنة الفواتير والاشتراكات تلقائيًا',
   ],
   pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d42a31c39a08.jpg',
 
@@ -87,7 +88,7 @@ const ar = {
     'إنشاء فصول مع مدربين ومواقع محددة وسعة محددة',
     'دعم الجلسات المتكررة: يومي / أسبوعي / نصف شهري / شهري حتى 52 حدث',
     'تقويم شهري بصري يعرض كل الجلسات والمدربين والمقاعد المتاحة',
-    'إدارة الاشتراكات مع إمكانية إلغاء التجديد التلقائي',
+    'حجوزات مباشرة بعدادات مقاعد وشارات «ممتلئ/متاح» تمنع الحجز الزائد',
   ],
   pillar4_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08d55eb6c1a5.jpg',
 
@@ -97,17 +98,17 @@ const ar = {
     'التقاط الاستفسارات من: زيارات مباشرة، مكالمات، إنستجرام، واتساب',
     'قمع تقييم العملاء المحتملين: جديد → تم التواصل → محوّل → فقد',
     'متابعات بالتاريخ لتعرف من يجب الاتصال به اليوم',
-    'حملات تسويقية مع قوالب مخصصة باستخدام {{member_name}}',
-    'سجل تفاعلات كامل: مكالمة / بريد / رسالة / واتساب / شخصي',
+    'حملات جماعية بمتغيرات قوالب مثل {name} و{gym} تستهدف شرائح الأعضاء',
+    'قوالب إشعارات وسجل تسليم كامل يوثق كل رسالة أُرسلت',
   ],
   pillar5_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cebe0b40b2c1.jpg',
 
   // Pillar 6: Member Portal
   pillar6_tagline: 'أعضاؤك سيعشقون <strong>هذه المنصة</strong>',
   pillar6_points: [
-    'لوحة تحكم شخصية: الاشتراكات والحضور والفصول القادمة',
-    'مكتبة تمارين تضم 800+ تمرين مع صور وتعليمات خطوة بخطوة',
-    'حاسبات اللياقة: BMI و BMR ونسبة الخصر إلى الورك',
+    'لوحة تحكم شخصية: الاشتراكات وسجل الحضور والحجوزات والملف الشخصي',
+    'مكتبة تمارين تضم 800+ تمرين مع صور وخرائط عضلات وتعليمات خطوة بخطوة',
+    'إدارة كلمة المرور ذاتيًا — استقلالية كاملة للأعضاء',
     'عرض فواتير عامة مع زر الطباعة والمشاركة',
   ],
   pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5293270e4501.jpg',
@@ -115,24 +116,24 @@ const ar = {
   // Pillar 7: Analytics
   pillar7_tagline: 'قرارات مبنية على البيانات — <strong>ليس التخمين</strong>',
   pillar7_points: [
-    '6 مؤشرات أداء رئيسية: الإيرادات والمدفوعات المعلقة والأعضاء النشطين والاحتفاظ والحضور والفقد',
-    'رسوم بيانية للإيرادات والحضور والخدمات',
-    'مقارنة أداء الفروع ومقاييس أداء الموظفين',
-    'تصدير بتقنية واحدة إلى CSV أو JSON لأي تقرير',
+    'مؤشرات مباشرة: الإيرادات والأرصدة المستحقة والاحتفاظ ونسبة الفقد',
+    'اتجاهات الحضور والإيرادات حسب الخدمة ومدة العضوية وتوزيع طرق الدفع',
+    'مقارنة أداء الفروع جنباً إلى جنب ومقاييس أداء الموظفين وتوزيع الأعضاء',
+    'تصدير بتقنية واحدة إلى CSV أو JSON وحفظ تقارير مخصصة — لكل فرع وفترة (7/30/90/180/365 يومًا)',
   ],
   pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f494a18a6e38.png',
 
   // Additional Features Grid
   moreFeatures_title: 'المزيد من المميزات <strong>القوية</strong>',
   moreFeatures_grid: [
-    { icon: 'shield', title: 'أدوار وصلاحيات', desc: '5 أدوار مع أكثر من 40 صلاحية. كل دور يرى فقط ما يسمح له' },
-    { icon: 'globe', title: 'دعم اللغات', desc: 'عربي وإنجليزي مع تخطيط RTL كامل — 726+ سطر ترجمة' },
-    { icon: 'currency', title: 'عملات متعددة', desc: 'كل منظمة تضع عملتها الخاصة. الفواتير والتقارير تتكيف تلقائيًا' },
-    { icon: 'building', title: 'فروع متعددة', desc: 'أدِر عددة مواقع من تسجيل دخول واحد مع تحليلات لكل فرع' },
-    { icon: 'utensils', title: 'النظام الغذائي', desc: 'قاعدة بيانات أطعمة مع سعرات وبروتين ودهون. خطط غذائية لكل عضو' },
-    { icon: 'trophy', title: 'نظام الرتب', desc: 'أنشئ رتبًا مخصصة ومنحها للأعضاء لزيادة الدافع والاحتفاظ' },
-    { icon: 'webhook', title: 'API وتكاملات', desc: 'مفاتيح API وويب هوكس مع تتبع النجاح والفشل' },
-    { icon: 'filetext', title: 'سجل مراجعة كامل', desc: 'كل عملية مسجلة: من فعلها ومتى ولأي سجل' },
+    { icon: 'shield', title: 'أدوار وصلاحيات', desc: '4 أدوار (مالك/مسؤول، مدير، مدرب) بصلاحيات دقيقة حتى مستوى كل إجراء' },
+    { icon: 'globe', title: 'لغتان ووضع ليلي', desc: 'عربي وإنجليزي بتخطيط RTL/LTR كامل مع تبديل فوري بين الوضع الفاتح والداكن' },
+    { icon: 'currency', title: 'عملة صالتك', desc: 'حدد عملتك (جنيه/دولار) لتظهر في الفواتير والتقارير وكامل الواجهة تلقائيًا' },
+    { icon: 'building', title: 'فروع متعددة', desc: 'فروع غير محدودة من تسجيل دخول واحد مع تحليلات مقارنة تعرفك بأي فرع يستحق الاستثمار التالي' },
+    { icon: 'utensils', title: 'النظام الغذائي', desc: 'قاعدة بيانات أطعمة بقيمها الغذائية مع إسناد خطط غذائية لكل عضو' },
+    { icon: 'trophy', title: 'نظام الرتب', desc: 'رتب من الأبيض إلى الأسود مثل الأحزمة، تُمنح وتُتتبع مع لوحة صدارة — احتفاظ ممتع بالأعضاء' },
+    { icon: 'webhook', title: 'API وتكاملات', desc: 'مفاتيح API وويب هوكس مشتركة في الأحداث لربط أنظمة الدخول ومواقع الويب وأدوات BI' },
+    { icon: 'filetext', title: 'سجل مراجعة كامل', desc: 'سجل لكل عملية: من فعل ماذا ومتى — أي نزاع ينتهي هنا' },
   ],
 
   // How It Works
@@ -168,8 +169,8 @@ const ar = {
     { id: 'q2', question: 'هل تدعم اللغة العربية؟', answer: 'نعم! دعم كامل للعربي والإنجليزي مع تخطيط RTL. كل شاشة وتقرير وفاتورة يعمل باللغتين.' },
     { id: 'q3', question: 'هل يمكنني إدارة أكثر من فرع؟', answer: 'نعم. أنشئ مواقع متعددة ونسب الأعضاء والموظفين لكل فرع. التحليلات والحضور تكون لكل فرع على حدة مع إمكانية المقارنة.' },
     { id: 'q4', question: 'كيف تعمل متابعات التجديد؟', answer: 'تبويبات مخصصة تعرض الاشتراكات المنتهية اليوم وغدًا و5 أيام و7 أيام. أرسل تذكير تجديد عبر واتساب بنقرة واحدة.' },
-    { id: 'q5', question: 'هل بيانات صالتي آمنة؟', answer: 'كل صالة معزولة تمامًا بـ 37 نموذج قاعدة بيانات محدود بالمنظمة. 5 أدوار مع أكثر من 40 صلاحية. سجل مراجعة كامل لكل عملية.' },
-    { id: 'q6', question: 'ما هي طرق الدفع المدعومة؟', answer: 'نظام الدفع يدعم: نقدي، UPI، بطاقة، تحويل بنكي، وغيرها. مع تتبع المدفوعات المعلقة وإمكانية السداد الجزئي أو الكامل.' },
+    { id: 'q5', question: 'هل بيانات صالتي آمنة؟', answer: 'نعم — صلاحيات دقيقة حسب الدور (مالك/مسؤول، مدير، مدرب)، مع سجل مراجعة كامل يوثق من فعل ماذا ومتى في كل عملية.' },
+    { id: 'q6', question: 'ما هي طرق الدفع المدعومة؟', answer: 'تسجيل المدفوعات يكون يدويًا (نقدًا أو بالبطاقة عند المكتب) — بدون بوابة دفع إلكترونية وبدون أي عمولة عليك. فواتير موحدة واستردادات منظمة، ويمكنك لاحقًا ربط معالج الدفع الخاص بك عبر API والويب هوكس.' },
   ],
 
   // Pricing (keeping existing - not touching)
@@ -197,8 +198,8 @@ const ar = {
       features: [
         { label: 'كل شيء في الأساسيات', included: true },
         { label: 'إدارة الفصول والجداول المتكررة', included: true },
-        { label: 'كشك تسجيل الدخول الذاتي', included: true },
-        { label: 'تتبع العملاء المحتملين والتحويلات', included: true },
+        { label: 'تتبع العملاء المحتملين وقمع التحويل', included: true },
+        { label: 'حملات واتساب وقوالب الإشعارات', included: true },
         { label: 'لوحة التحليلات الكاملة', included: true },
       ],
     },
@@ -209,6 +210,7 @@ const ar = {
       features: [
         { label: 'كل شيء في خطة النمو', included: true },
         { label: 'دعم فروع متعددة', included: true },
+        { label: 'كشك تسجيل الدخول الذاتي', included: true },
         { label: 'مفاتيح API والويب هوكس', included: true },
         { label: 'نظام الرتب والتقدم', included: true },
         { label: 'النظام الغذائي وإدارة الأطعمة', included: true },
@@ -218,7 +220,7 @@ const ar = {
 
   // CTA
   cta_title: 'جاهز لإدارة صالتك الرياضية <strong>بذكاء؟</strong>',
-  cta_description: '61 ميزة. لوحة تحكم واحدة. كل ما تحتاجه لتشغيل صالة الألعاب الرياضية الخاصة بك.',
+  cta_description: 'أكثر من 15 وحدة و40+ ميزة قابلة للتفعيل. لوحة تحكم واحدة. كل ما تحتاجه لتشغيل صالتك الرياضية.',
   cta_button: 'ابدأ فترة التجربة المجانية لمدة 14 يومًا',
 
   // Footer
@@ -247,7 +249,7 @@ const ar = {
 
   // Features (legacy - kept for compatibility)
   features_title: 'كل ما تحتاجه لإدارة <strong>صالتك الرياضية</strong>',
-  features_content: '61 ميزة مصممة خصيصًا لعمليات الصالات الرياضية.',
+  features_content: 'أكثر من 15 وحدة تشغيلية مصممة خصيصًا لعمليات الصالات الرياضية.',
   features_fallback: [] as any[],
 
   // Legacy kept for compatibility
@@ -340,15 +342,15 @@ const en: typeof ar = {
   nav_getTemplate: 'Start Free Trial',
 
   hero_title: 'The All-In-One <strong>Gym Management Platform</strong>',
-  hero_subtitle: 'From member sign-ups to renewals, attendance to analytics — manage every aspect of your gym from a single powerful dashboard. Stop juggling spreadsheets and WhatsApp groups.',
+  hero_subtitle: 'Members, attendance, billing, classes, CRM, campaigns and analytics — one bilingual platform your members will love, with a self-service kiosk and member portal included.',
   hero_primaryBtn: 'Start Your 14-Day Free Trial',
   hero_secondaryBtn: 'See All Features',
 
   stats_fallback: [
-    { id: 's1', value: '61', label: 'Integrated Features', sortOrder: 1 },
-    { id: 's2', value: '800+', label: 'Exercise Library', sortOrder: 2 },
-    { id: 's3', value: '102+', label: 'API Endpoints', sortOrder: 3 },
-    { id: 's4', value: '2', label: 'Languages with RTL', sortOrder: 4 },
+    { id: 's1', value: '15+', label: 'Integrated Modules', sortOrder: 1 },
+    { id: 's2', value: '40+', label: 'Per-Gym Toggleable Features', sortOrder: 2 },
+    { id: 's3', value: '800+', label: 'Exercise Library', sortOrder: 3 },
+    { id: 's4', value: '2', label: 'Languages with Full RTL', sortOrder: 4 },
   ],
 
   problem_title: 'Are You Losing Real Members to <strong>These Problems?</strong>',
@@ -363,42 +365,43 @@ const en: typeof ar = {
   solution_title: 'Your Gym — <strong>Fully Managed From One Place</strong>',
   solution_content: 'Built specifically for gyms — not a generic business tool repurposed for fitness. Every feature was designed to run gym operations.',
   solution_values: [
-    { icon: 'members', title: 'Member Management', desc: 'Complete profiles with birthday tracking and unique member codes' },
-    { icon: 'attendance', title: 'Attendance & Check-In', desc: 'Instant check-in with self-service kiosk and auto-refreshing attendance list' },
-    { icon: 'billing', title: 'Sales & Billing', desc: 'One-click sale creation, pending payment tracking, and PDF invoices' },
-    { icon: 'scheduling', title: 'Scheduling & Classes', desc: 'Class management with recurring sessions and visual monthly calendar' },
+    { icon: 'members', title: 'Member Management', desc: 'Complete profiles with auto-generated codes like DEFG-1000 — register a new member in under 30 seconds' },
+    { icon: 'attendance', title: 'Attendance & Check-In', desc: 'One-click check-in plus a self-service kiosk working by code or phone number' },
+    { icon: 'billing', title: 'Sales & Billing', desc: 'Record cash or card payments, branded PDF invoices, and refunds that rebalance automatically' },
+    { icon: 'scheduling', title: 'Classes & Bookings', desc: 'Recurring sessions with live seat counters, Full/Open badges, and a monthly calendar' },
   ],
 
   pillars_title: 'Everything You Need to Run <strong>Your Gym</strong>',
-  pillars_content: '61 features across 15 categories — all designed specifically for gym operations.',
+  pillars_content: '15+ modules and 40+ features you can switch on or off per gym — all built specifically for gym operations.',
 
   pillar1_tagline: 'Every Member\'s Journey — <strong>One Screen</strong>',
   pillar1_points: [
-    'Complete member profiles with contact info, unique codes (MEM######), and birthday tracking',
+    'Complete member profiles with auto-generated codes like DEFG-1000, photos and barcodes ready',
     'Smart search by name or code with active/inactive tabs',
     'Birthday greetings sent directly via WhatsApp',
-    'Health & fitness profiles: height, weight, body fat, goals, and diet preferences',
-    'Full CRM log: notes, calls, emails, WhatsApp, and in-person interactions',
+    'Health profiles: injuries, conditions, and fitness goals',
+    'Full CRM log: notes and interactions — every trainer knows every member\'s story',
   ],
   pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/714ce578e627.jpeg',
 
   pillar2_tagline: 'Check Members In In Seconds — <strong>Track Everything Automatically</strong>',
   pillar2_points: [
     'Instant check-in — search by name or code, one click',
-    'Self-service kiosk — turn any tablet into a check-in station',
-    'Today\'s check-in list auto-refreshes every 30 seconds',
-    'Full attendance history with check-out per record',
+    'Self-service kiosk — members check themselves in by code or phone number on any tablet',
+    'Today\'s board plus full attendance history with per-member visit counts',
+    'Check-out supported on every record',
   ],
   pillar2_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c37015a87ec.png',
 
   pillar3_tagline: 'Get Paid Faster — <strong>Never Lose Track Of A Dollar</strong>',
   pillar3_points: [
-    'One-click sale creation — select member, pick service, done',
+    'One-click sale creation — select member, service, and payment method; discounts supported',
     'Membership status tracking: active, frozen, or suspended with color badges',
     'Expiry follow-ups: Today, Tomorrow, 5 days, 7 days, Expired tabs',
     'WhatsApp renewal reminders sent in one click',
-    'Pending payment tracking with partial or full payment recording',
-    'Professional PDF invoices with multi-currency support',
+    'Pending payments: who owes what, with partial or full recording and WhatsApp nudges',
+    'Branded PDF invoices carrying YOUR gym name, address, and identity — plus a shareable public invoice view',
+    'Refund recording that automatically rebalances invoices and entitlements',
   ],
   pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d42a31c39a08.jpg',
 
@@ -406,8 +409,8 @@ const en: typeof ar = {
   pillar4_points: [
     'Create classes with trainers, locations, and capacity limits',
     'Recurring sessions: daily, weekly, biweekly, or monthly up to 52 occurrences',
-    'Visual monthly calendar showing every session, trainer, and available slots',
-    'Subscription management with auto-renewal toggle',
+    'Visual monthly calendar showing every session and trainer',
+    'Member bookings with live booked/capacity counters and Full/Open badges — no more overbooked classes',
   ],
   pillar4_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08d55eb6c1a5.jpg',
 
@@ -415,40 +418,40 @@ const en: typeof ar = {
   pillar5_points: [
     'Capture enquiries from: walk-ins, phone calls, Instagram, WhatsApp',
     'Lead scoring funnel: New → Contacted → Converted → Lost',
-    'Date-based follow-ups so you know who to call today',
-    'Marketing campaigns with personalized templates using {{member_name}}',
-    'Full interaction log: call, email, SMS, WhatsApp, in-person',
+    'Date-based follow-up queue so you know who to call today',
+    'Bulk campaigns to member segments with template variables like {name} and {gym}',
+    'Reusable notification templates plus a delivery log tracking every message sent',
   ],
   pillar5_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cebe0b40b2c1.jpg',
 
   pillar6_tagline: 'Your Members Will Love <strong>This Platform</strong>',
   pillar6_points: [
-    'Personal dashboard: active memberships, attendance, and upcoming classes',
-    '800+ exercise library with images and step-by-step instructions',
-    'Fitness calculators: BMI, BMR, and Waist-to-Hip Ratio',
+    'Personal dashboard: memberships, attendance history, bookings, and profile',
+    '800+ exercise library with images, muscle maps, and step-by-step instructions',
+    'Password self-service — members manage their own credentials',
     'Public invoice view with print and share buttons',
   ],
   pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5293270e4501.jpg',
 
   pillar7_tagline: 'Make Data-Driven Decisions — <strong>Not Guesses</strong>',
   pillar7_points: [
-    '6 KPI cards: revenue, outstanding, active members, retention, attendance, churn',
-    'Revenue, attendance, and service breakdown charts',
-    'Multi-location comparison and staff performance metrics',
-    'One-click export to CSV or JSON for any report',
+    'Live KPIs: revenue, outstanding balance, retention %, and churn %',
+    'Attendance trends, revenue by service, member tenure, and payment-method split',
+    'Side-by-side branch comparison, staff performance metrics, and gender split',
+    'One-click export to CSV or JSON, saved custom reports — filterable by branch & period (7/30/90/180/365 days)',
   ],
   pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f494a18a6e38.png',
 
   moreFeatures_title: 'More <strong>Powerful Features</strong>',
   moreFeatures_grid: [
-    { icon: 'shield', title: 'Roles & Permissions', desc: '5 roles with 40+ permission keys. Each role sees only what it should' },
-    { icon: 'globe', title: 'Language Support', desc: 'English and Arabic with full RTL layout — 726+ translation lines' },
-    { icon: 'currency', title: 'Multi-Currency', desc: 'Each organization sets its own currency. Invoices and reports adapt automatically' },
-    { icon: 'building', title: 'Multi-Location', desc: 'Manage multiple locations from one login with per-branch analytics' },
-    { icon: 'utensils', title: 'Diet & Nutrition', desc: 'Food database with calories, protein, fats. Diet plans per member' },
-    { icon: 'trophy', title: 'Rank System', desc: 'Create custom ranks and award to members to boost motivation and retention' },
-    { icon: 'webhook', title: 'API & Webhooks', desc: 'API keys and webhooks with success/fail tracking' },
-    { icon: 'filetext', title: 'Full Audit Trail', desc: 'Every operation logged: who did what, when, and to which record' },
+    { icon: 'shield', title: 'Roles & Permissions', desc: '4 roles (Owner/Admin, Manager, Trainer) with granular permissions down to each action' },
+    { icon: 'globe', title: 'Bilingual & Dark Mode', desc: 'Full RTL/LTR Arabic + English interface with a light/dark theme toggle across the app' },
+    { icon: 'currency', title: 'Your Currency', desc: 'Set EGP or USD — it flows into invoices, PDFs, reports, and the entire UI automatically' },
+    { icon: 'building', title: 'Multi-Location', desc: 'Unlimited branches from one login, with comparison analytics showing which branch deserves the next investment' },
+    { icon: 'utensils', title: 'Diet & Nutrition', desc: 'Food database with nutritional info. Diet plans assigned per member' },
+    { icon: 'trophy', title: 'Rank Progression', desc: 'White-to-Black-belt style ranks with awards, history, and a member leaderboard — gamified retention' },
+    { icon: 'webhook', title: 'API & Webhooks', desc: 'REST API keys and event-subscribed webhooks to connect access control, websites, and BI tools' },
+    { icon: 'filetext', title: 'Full Audit Trail', desc: 'Organization-scoped log of who did what, when — disputes end here' },
   ],
 
   howItWorks_title: 'Get Started in <strong>3 Steps</strong>',
@@ -481,8 +484,8 @@ const en: typeof ar = {
     { id: 'q2', question: 'Does it support Arabic?', answer: 'Yes! Full bilingual support with Arabic RTL layout. Every screen, report, and invoice works in both English and Arabic.' },
     { id: 'q3', question: 'Can I manage multiple locations?', answer: 'Yes. Create multiple locations and assign members and staff per branch. Analytics and attendance are per-location with comparison views.' },
     { id: 'q4', question: 'How do renewal follow-ups work?', answer: 'Dedicated tabs show memberships expiring today, tomorrow, 5 days, 7 days, or already expired. Send a WhatsApp renewal reminder in one click.' },
-    { id: 'q5', question: 'Is my gym data safe?', answer: 'Every gym is fully isolated with 37 database models scoped by organization. 5 roles with 40+ permissions. Full audit trail for every operation.' },
-    { id: 'q6', question: 'What payment methods are supported?', answer: 'The payment system supports: cash, UPI, card, bank transfer, and others. Pending payment tracking with partial or full payment recording.' },
+    { id: 'q5', question: 'Is my gym data safe?', answer: 'Yes — role-based permissions (Owner/Admin, Manager, Trainer) plus a full audit log recording who did what, when, on every action.' },
+    { id: 'q6', question: 'What payment methods are supported?', answer: 'Payments are recorded manually (cash or card at the desk) — no online gateway by design and no commission from us. Unified invoicing and clean refunds, and you can bring your own processor later via API/webhooks.' },
   ],
 
   pricing_title: 'Affordable <strong>Pricing Plans</strong>',
@@ -509,8 +512,8 @@ const en: typeof ar = {
       features: [
         { label: 'Everything in Essentials', included: true },
         { label: 'Recurring Class & Session Scheduling', included: true },
-        { label: 'Self-Service Check-In Kiosk', included: true },
         { label: 'Lead Tracking & Conversion Funnel', included: true },
+        { label: 'WhatsApp Campaigns & Notification Templates', included: true },
         { label: 'Full Analytics Dashboard', included: true },
       ],
     },
@@ -521,6 +524,7 @@ const en: typeof ar = {
       features: [
         { label: 'Everything in Growth', included: true },
         { label: 'Multi-Location Support', included: true },
+        { label: 'Self-Service Check-In Kiosk', included: true },
         { label: 'API Keys & Webhooks', included: true },
         { label: 'Rank Progression System', included: true },
         { label: 'Diet & Nutrition Management', included: true },
@@ -529,7 +533,7 @@ const en: typeof ar = {
   ] as any[],
 
   cta_title: 'Ready to Manage Your Gym <strong>Smarter?</strong>',
-  cta_description: '61 features. One dashboard. Everything you need to run your gym.',
+  cta_description: '15+ modules. 40+ toggleable features. One dashboard. Everything you need to run your gym.',
   cta_button: 'Start Your 14-Day Free Trial',
 
   footer_description: 'The all-in-one gym management platform.',
@@ -555,7 +559,7 @@ const en: typeof ar = {
   contact_addressValue: 'Cairo, Egypt',
 
   features_title: 'Everything You Need to Run <strong>Your Gym</strong>',
-  features_content: '61 features designed specifically for gym operations.',
+  features_content: '15+ operational modules designed specifically for gym operations.',
   features_fallback: [] as any[],
 
   mainFeatures_title: '',
