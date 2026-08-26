@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Sans_Arabic } from "next/font/google";
+import { Noto_Naskh_Arabic } from "next/font/google";
 import "./globals.css";
 
-const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+const notoNaskh = Noto_Naskh_Arabic({
   weight: ["400", "600", "700"],
   subsets: ["arabic", "latin"],
   display: "swap",
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning className="scroll-smooth">
-      <body className={`antialiased ${ibmPlexArabic.className}`}>
+      <body className={`antialiased ${notoNaskh.className}`}>
         {children}
       </body>
     </html>
