@@ -36,7 +36,7 @@ export default buildConfig({
   globals: [HomePage, SiteConfig],
   db: sqliteAdapter({
     client: {
-      url: "file:payload.db",
+      url: process.env.DATABASE_URL || "file:payload.db",
     },
   }),
   secret: process.env.PAYLOAD_SECRET || "your-super-secret-key-change-in-production",

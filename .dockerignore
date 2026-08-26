@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+*.log
+dev.log
+server.log
+.env*
+.dockerignore
+docker-compose.yml
+upload
+download
+tool-results

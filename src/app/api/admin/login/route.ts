@@ -2,19 +2,19 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticate, checkRateLimit, initAdminUser } from '@/lib/auth';
 
 // Initialize the admin user on first request
-let initialized = false;
+let initPromise: Promise<void> | null = null;
 function ensureAdmin() {
-  if (!initialized) {
-    initAdminUser(
+  if (!initPromise) {
+    initPromise = initAdminUser(
       process.env.ADMIN_EMAIL || 'admin@admin.com',
       process.env.ADMIN_PASSWORD || 'admin123456'
     );
-    initialized = true;
   }
+  return initPromise;
 }
 
 export async function POST(req: NextRequest) {
-  ensureAdmin();
+  await ensureAdmin();
 
   // Rate limiting
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';

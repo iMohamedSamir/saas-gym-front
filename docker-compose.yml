@@ -1,0 +1,18 @@
+services:
+  gym-front:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=file:/app/data/payload.db
+      - DB_DIR=/app/data
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET:-change-me-in-production}
+      - JWT_SECRET=${JWT_SECRET:-change-me-in-production}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@admin.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin123456}
+    volumes:
+      - payload-db:/app/data
+    restart: unless-stopped
+
+volumes:
+  payload-db:
