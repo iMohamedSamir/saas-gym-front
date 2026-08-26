@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
+import { IBM_Plex_Sans_Arabic } from "next/font/google";
 import "./globals.css";
+
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
+  weight: ["400", "600", "700"],
+  subsets: ["arabic", "latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "أوتومارك - برنامج النمو الشامل",
@@ -13,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning className="scroll-smooth">
-      <body className="antialiased">
+      <body className={`antialiased ${ibmPlexArabic.className}`}>
         {children}
       </body>
     </html>

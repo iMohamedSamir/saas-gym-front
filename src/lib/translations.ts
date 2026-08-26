@@ -12,7 +12,7 @@ const ar = {
 
   // Hero
   hero_title: 'النظام الشامل لإدارة <strong>صالات الألعاب الرياضية</strong>',
-  hero_subtitle: 'الأعضاء والحضور والفواتير والفصول وإدارة العملاء والحملات والتحليلات — منصة واحدة ثنائية اللغة سيحبها أعضاؤك، مع كشك تسجيل ذاتي وبوابة أعضاء مدمجتين.',
+  hero_subtitle: 'الأعضاء والحضور والفواتير والفصول وإدارة العملاء والحملات والتحليلات ، منصة واحدة ثنائية اللغة سيحبها أعضاؤك، مع كشك تسجيل ذاتي وبوابة أعضاء مدمجتين.',
   hero_primaryBtn: 'ابدأ فترة التجربة المجانية لمدة 14 يومًا',
   hero_secondaryBtn: 'شاهد جميع المميزات',
 
@@ -35,10 +35,10 @@ const ar = {
   ],
 
   // Solution Intro
-  solution_title: 'صالة الألعاب الرياضية الخاصة بك — <strong>مدارة بالكامل من مكان واحد</strong>',
-  solution_content: 'نظام مصمم خصيصًا لصالات الألعاب الرياضية — ليس أداة أعمال عامة تم إعادة توجيهها. كل ميزة بُنيت لتحديداً لتشغيل صالة الألعاب الرياضية.',
+  solution_title: 'صالة الألعاب الرياضية الخاصة بك ، <strong>مدارة بالكامل من مكان واحد</strong>',
+  solution_content: 'نظام مصمم خصيصًا لصالات الألعاب الرياضية ، ليس أداة أعمال عامة تم إعادة توجيهها. كل ميزة بُنيت لتحديداً لتشغيل صالة الألعاب الرياضية.',
   solution_values: [
-    { icon: 'members', title: 'إدارة الأعضاء', desc: 'ملفات كاملة بأكواد تلقائية مثل DEFG-1000 — سجّل عضوًا جديدًا في أقل من 30 ثانية' },
+    { icon: 'members', title: 'إدارة الأعضاء', desc: 'ملفات كاملة بأكواد تلقائية مثل DEFG-1000 ، سجّل عضوًا جديدًا في أقل من 30 ثانية' },
     { icon: 'attendance', title: 'الحضور والتسجيل', desc: 'تسجيل دخول بنقرة واحدة وكشك خدمة ذاتية يعمل بالكود أو رقم الهاتف' },
     { icon: 'billing', title: 'المبيعات والفواتير', desc: 'تسجيل المدفوعات نقدًا أو بالبطاقة، فواتير PDF بشعار صالتك، واستردادات تُوازن الحسابات تلقائيًا' },
     { icon: 'scheduling', title: 'الفصول والحجوزات', desc: 'جلسات متكررة بعدادات مباشرة للمقاعد وشارات «ممتلئ/متاح» وتقويم شهري' },
@@ -46,44 +46,44 @@ const ar = {
 
   // Feature Pillars
   pillars_title: 'كل ما تحتاجه لإدارة <strong>صالة الألعاب الرياضية</strong>',
-  pillars_content: 'أكثر من 15 وحدة و40+ ميزة يمكنك تشغيلها أو إيقافها لكل صالة على حدة — كلها مصممة لعمليات الصالات الرياضية.',
+  pillars_content: 'أكثر من 15 وحدة و40+ ميزة يمكنك تشغيلها أو إيقافها لكل صالة على حدة ، كلها مصممة لعمليات الصالات الرياضية.',
 
   // Pillar 1: Member Management
-  pillar1_tagline: 'رحلة كل عضو — <strong>في شاشة واحدة</strong>',
+  pillar1_tagline: 'رحلة كل عضو ، <strong>في شاشة واحدة</strong>',
   pillar1_points: [
     'ملفات أعضاء كاملة بأكواد تلقائية مثل DEFG-1000 وصور جاهزة للباركود',
     'بحث ذكي بالاسم أو الرمز مع تبويبات نشط/غير نشط',
     'تهاني أعياد الميلاد عبر واتساب مباشرة',
     'ملفات صحية وبدنية: الإصابات والحالات الصحية والأهداف اللياقية',
-    'سجل CRM كامل: ملاحظات وتفاعلات — كل مدرب يعرف قصة كل عضو',
+    'سجل CRM كامل: ملاحظات وتفاعلات ، كل مدرب يعرف قصة كل عضو',
   ],
   pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/714ce578e627.jpeg',
 
   // Pillar 2: Attendance & Kiosk
-  pillar2_tagline: 'سجّل الدخول في ثوانٍ — <strong>تتبّع كل شيء تلقائيًا</strong>',
+  pillar2_tagline: 'سجّل الدخول في ثوانٍ ، <strong>تتبّع كل شيء تلقائيًا</strong>',
   pillar2_points: [
     'تسجيل دخول فوري بالبحث عن الاسم أو الرمز بنقرة واحدة',
-    'كشك خدمة ذاتية — حوّل أي جهاز لوحي إلى محطة تسجيل دخول',
+    'كشك خدمة ذاتية ، حوّل أي جهاز لوحي إلى محطة تسجيل دخول',
     'قائمة حضور اليوم تتحديث تلقائيًا كل 30 ثانية',
     'سجل حضور تاريخي كامل مع إمكانية تسجيل الخروج',
   ],
   pillar2_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c37015a87ec.png',
 
   // Pillar 3: Sales & Billing
-  pillar3_tagline: 'احصل على أموالك أسرع — <strong>لا تفقد دولارًا واحدًا</strong>',
+  pillar3_tagline: 'احصل على أموالك أسرع ، <strong>لا تفقد دولارًا واحدًا</strong>',
   pillar3_points: [
-    'إنشاء مبيعات بنقرة واحدة: اختر العضو والخدمة وطريقة الدفع — مع دعم الخصومات',
+    'إنشاء مبيعات بنقرة واحدة: اختر العضو والخدمة وطريقة الدفع ، مع دعم الخصومات',
     'تتبع حالات الاشتراك: نشط / مجمّد / معلّق بألوان مميزة',
     'متابعات انتهاء الصلاحية: اليوم، غدًا، 5 أيام، 7 أيام، منتهية',
     'تذكيرات التجديد عبر واتساب بنقرة واحدة',
     'تتبع المدفوعات المعلقة مع إمكانية السداد الجزئي أو الكامل',
-    'فواتير PDF باسم صالتك وعنوانها وهويتها — وصفحة فاتورة عامة قابلة للمشاركة والطباعة',
+    'فواتير PDF باسم صالتك وعنوانها وهويتها ، وصفحة فاتورة عامة قابلة للمشاركة والطباعة',
     'استردادات مسجلة تعيد موازنة الفواتير والاشتراكات تلقائيًا',
   ],
   pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d42a31c39a08.jpg',
 
   // Pillar 4: Scheduling & Classes
-  pillar4_tagline: 'املأ كل فصل — <strong>لا مزيد من الغيابات</strong>',
+  pillar4_tagline: 'املأ كل فصل ، <strong>لا مزيد من الغيابات</strong>',
   pillar4_points: [
     'إنشاء فصول مع مدربين ومواقع محددة وسعة محددة',
     'دعم الجلسات المتكررة: يومي / أسبوعي / نصف شهري / شهري حتى 52 حدث',
@@ -108,18 +108,18 @@ const ar = {
   pillar6_points: [
     'لوحة تحكم شخصية: الاشتراكات وسجل الحضور والحجوزات والملف الشخصي',
     'مكتبة تمارين تضم 800+ تمرين مع صور وخرائط عضلات وتعليمات خطوة بخطوة',
-    'إدارة كلمة المرور ذاتيًا — استقلالية كاملة للأعضاء',
+    'إدارة كلمة المرور ذاتيًا ، استقلالية كاملة للأعضاء',
     'عرض فواتير عامة مع زر الطباعة والمشاركة',
   ],
   pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5293270e4501.jpg',
 
   // Pillar 7: Analytics
-  pillar7_tagline: 'قرارات مبنية على البيانات — <strong>ليس التخمين</strong>',
+  pillar7_tagline: 'قرارات مبنية على البيانات ، <strong>ليس التخمين</strong>',
   pillar7_points: [
     'مؤشرات مباشرة: الإيرادات والأرصدة المستحقة والاحتفاظ ونسبة الفقد',
     'اتجاهات الحضور والإيرادات حسب الخدمة ومدة العضوية وتوزيع طرق الدفع',
     'مقارنة أداء الفروع جنباً إلى جنب ومقاييس أداء الموظفين وتوزيع الأعضاء',
-    'تصدير بتقنية واحدة إلى CSV أو JSON وحفظ تقارير مخصصة — لكل فرع وفترة (7/30/90/180/365 يومًا)',
+    'تصدير بتقنية واحدة إلى CSV أو JSON وحفظ تقارير مخصصة ، لكل فرع وفترة (7/30/90/180/365 يومًا)',
   ],
   pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f494a18a6e38.png',
 
@@ -131,9 +131,9 @@ const ar = {
     { icon: 'currency', title: 'عملة صالتك', desc: 'حدد عملتك (جنيه/دولار) لتظهر في الفواتير والتقارير وكامل الواجهة تلقائيًا' },
     { icon: 'building', title: 'فروع متعددة', desc: 'فروع غير محدودة من تسجيل دخول واحد مع تحليلات مقارنة تعرفك بأي فرع يستحق الاستثمار التالي' },
     { icon: 'utensils', title: 'النظام الغذائي', desc: 'قاعدة بيانات أطعمة بقيمها الغذائية مع إسناد خطط غذائية لكل عضو' },
-    { icon: 'trophy', title: 'نظام الرتب', desc: 'رتب من الأبيض إلى الأسود مثل الأحزمة، تُمنح وتُتتبع مع لوحة صدارة — احتفاظ ممتع بالأعضاء' },
+    { icon: 'trophy', title: 'نظام الرتب', desc: 'رتب من الأبيض إلى الأسود مثل الأحزمة، تُمنح وتُتتبع مع لوحة صدارة ، احتفاظ ممتع بالأعضاء' },
     { icon: 'webhook', title: 'API وتكاملات', desc: 'مفاتيح API وويب هوكس مشتركة في الأحداث لربط أنظمة الدخول ومواقع الويب وأدوات BI' },
-    { icon: 'filetext', title: 'سجل مراجعة كامل', desc: 'سجل لكل عملية: من فعل ماذا ومتى — أي نزاع ينتهي هنا' },
+    { icon: 'filetext', title: 'سجل مراجعة كامل', desc: 'سجل لكل عملية: من فعل ماذا ومتى ، أي نزاع ينتهي هنا' },
   ],
 
   // How It Works
@@ -149,14 +149,14 @@ const ar = {
   testimonial_title: 'أصحاب الصالات الرياضية <strong>يثقون بنا</strong>',
   testimonial_quote: 'كنت أخسر أعضاء لأن اشتراكاتهم تنتهي ولا أنتبه. الآن النظام يُعلمني بالمنتهية قبل أسبوع وأرسل تذكير واتساب بنقرة واحدة. معدل التجديد ارتفع بنسبة 40%.',
   singleTestimonial_name: 'أحمد محمود',
-  singleTestimonial_company: 'مدير صالة الألعاب الرياضية — القاهرة',
+  singleTestimonial_company: 'مدير صالة الألعاب الرياضية ، القاهرة',
   singleTestimonial_stats: [
     { value: '40%', label: 'زيادة في التجديد' },
     { value: '3 ساعات', label: 'موفر يوميًا' },
     { value: '500+', label: 'عضو نشط' },
   ],
   testimonials_fallback: [
-    { id: 't1', name: 'محمد علي', designation: 'صاحب صالة رياضية', content: 'كنت أستخدم Excel وواتساب لإدارة كل شيء. الآن كل شيء في مكان واحد — الأعضاء والحضور والفواتير. وفّرت 3 ساعات يوميًا على الأقل.', avatar: '/images/testimonials/1.png', sortOrder: 1 },
+    { id: 't1', name: 'محمد علي', designation: 'صاحب صالة رياضية', content: 'كنت أستخدم Excel وواتساب لإدارة كل شيء. الآن كل شيء في مكان واحد ، الأعضاء والحضور والفواتير. وفّرت 3 ساعات يوميًا على الأقل.', avatar: '/images/testimonials/1.png', sortOrder: 1 },
     { id: 't2', name: 'خالد إبراهيم', designation: 'مدرب لياقة معتمد', content: 'لوحة التحكم الخاصة بالمدرب تجعلني أرى أعضائي المعينين وحضورهم مباشرة. لم أعد أحتاج لسؤال الإدارة عن أي شيء.', avatar: '/images/testimonials/2.png', sortOrder: 2 },
     { id: 't3', name: 'عمر حسن', designation: 'مالك 3 فروع', content: 'إدارة 3 فروع من لوحة تحكم واحدة غيرت قواعد اللعبة. التحليلات تُظهرني أي فرع يحقق إيراد أكبر وأي فرع يحتاج اهتمام.', avatar: '/images/testimonials/3.png', sortOrder: 3 },
   ],
@@ -165,12 +165,12 @@ const ar = {
   faq_title: 'أسئلة شائعة',
   faq_content: 'إجابات لأهم الأسئلة حول منصة إدارة الصالات الرياضية.',
   faq_fallback: [
-    { id: 'q1', question: 'هل المنصة صعبة الإعداد؟', answer: 'لا. سجّل بأسم الصالة وبيانات المالك واختر الخطة — يُنشئ النظام كل شيء تلقائيًا مع تجربة 14 يومًا مجانية.' },
+    { id: 'q1', question: 'هل المنصة صعبة الإعداد؟', answer: 'لا. سجّل بأسم الصالة وبيانات المالك واختر الخطة ، يُنشئ النظام كل شيء تلقائيًا مع تجربة 14 يومًا مجانية.' },
     { id: 'q2', question: 'هل تدعم اللغة العربية؟', answer: 'نعم! دعم كامل للعربي والإنجليزي مع تخطيط RTL. كل شاشة وتقرير وفاتورة يعمل باللغتين.' },
     { id: 'q3', question: 'هل يمكنني إدارة أكثر من فرع؟', answer: 'نعم. أنشئ مواقع متعددة ونسب الأعضاء والموظفين لكل فرع. التحليلات والحضور تكون لكل فرع على حدة مع إمكانية المقارنة.' },
     { id: 'q4', question: 'كيف تعمل متابعات التجديد؟', answer: 'تبويبات مخصصة تعرض الاشتراكات المنتهية اليوم وغدًا و5 أيام و7 أيام. أرسل تذكير تجديد عبر واتساب بنقرة واحدة.' },
-    { id: 'q5', question: 'هل بيانات صالتي آمنة؟', answer: 'نعم — صلاحيات دقيقة حسب الدور (مالك/مسؤول، مدير، مدرب)، مع سجل مراجعة كامل يوثق من فعل ماذا ومتى في كل عملية.' },
-    { id: 'q6', question: 'ما هي طرق الدفع المدعومة؟', answer: 'تسجيل المدفوعات يكون يدويًا (نقدًا أو بالبطاقة عند المكتب) — بدون بوابة دفع إلكترونية وبدون أي عمولة عليك. فواتير موحدة واستردادات منظمة، ويمكنك لاحقًا ربط معالج الدفع الخاص بك عبر API والويب هوكس.' },
+    { id: 'q5', question: 'هل بيانات صالتي آمنة؟', answer: 'نعم ، صلاحيات دقيقة حسب الدور (مالك/مسؤول، مدير، مدرب)، مع سجل مراجعة كامل يوثق من فعل ماذا ومتى في كل عملية.' },
+    { id: 'q6', question: 'ما هي طرق الدفع المدعومة؟', answer: 'تسجيل المدفوعات يكون يدويًا (نقدًا أو بالبطاقة عند المكتب) ، بدون بوابة دفع إلكترونية وبدون أي عمولة عليك. فواتير موحدة واستردادات منظمة، ويمكنك لاحقًا ربط معالج الدفع الخاص بك عبر API والويب هوكس.' },
   ],
 
   // Pricing (keeping existing - not touching)
@@ -342,7 +342,7 @@ const en: typeof ar = {
   nav_getTemplate: 'Start Free Trial',
 
   hero_title: 'The All-In-One <strong>Gym Management Platform</strong>',
-  hero_subtitle: 'Members, attendance, billing, classes, CRM, campaigns and analytics — one bilingual platform your members will love, with a self-service kiosk and member portal included.',
+  hero_subtitle: 'Members, attendance, billing, classes, CRM, campaigns and analytics , one bilingual platform your members will love, with a self-service kiosk and member portal included.',
   hero_primaryBtn: 'Start Your 14-Day Free Trial',
   hero_secondaryBtn: 'See All Features',
 
@@ -362,55 +362,55 @@ const en: typeof ar = {
     'Lead follow-ups get lost between WhatsApp and Excel',
   ],
 
-  solution_title: 'Your Gym — <strong>Fully Managed From One Place</strong>',
-  solution_content: 'Built specifically for gyms — not a generic business tool repurposed for fitness. Every feature was designed to run gym operations.',
+  solution_title: 'Your Gym , <strong>Fully Managed From One Place</strong>',
+  solution_content: 'Built specifically for gyms , not a generic business tool repurposed for fitness. Every feature was designed to run gym operations.',
   solution_values: [
-    { icon: 'members', title: 'Member Management', desc: 'Complete profiles with auto-generated codes like DEFG-1000 — register a new member in under 30 seconds' },
+    { icon: 'members', title: 'Member Management', desc: 'Complete profiles with auto-generated codes like DEFG-1000 , register a new member in under 30 seconds' },
     { icon: 'attendance', title: 'Attendance & Check-In', desc: 'One-click check-in plus a self-service kiosk working by code or phone number' },
     { icon: 'billing', title: 'Sales & Billing', desc: 'Record cash or card payments, branded PDF invoices, and refunds that rebalance automatically' },
     { icon: 'scheduling', title: 'Classes & Bookings', desc: 'Recurring sessions with live seat counters, Full/Open badges, and a monthly calendar' },
   ],
 
   pillars_title: 'Everything You Need to Run <strong>Your Gym</strong>',
-  pillars_content: '15+ modules and 40+ features you can switch on or off per gym — all built specifically for gym operations.',
+  pillars_content: '15+ modules and 40+ features you can switch on or off per gym , all built specifically for gym operations.',
 
-  pillar1_tagline: 'Every Member\'s Journey — <strong>One Screen</strong>',
+  pillar1_tagline: 'Every Member\'s Journey , <strong>One Screen</strong>',
   pillar1_points: [
     'Complete member profiles with auto-generated codes like DEFG-1000, photos and barcodes ready',
     'Smart search by name or code with active/inactive tabs',
     'Birthday greetings sent directly via WhatsApp',
     'Health profiles: injuries, conditions, and fitness goals',
-    'Full CRM log: notes and interactions — every trainer knows every member\'s story',
+    'Full CRM log: notes and interactions , every trainer knows every member\'s story',
   ],
   pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/714ce578e627.jpeg',
 
-  pillar2_tagline: 'Check Members In In Seconds — <strong>Track Everything Automatically</strong>',
+  pillar2_tagline: 'Check Members In In Seconds , <strong>Track Everything Automatically</strong>',
   pillar2_points: [
-    'Instant check-in — search by name or code, one click',
-    'Self-service kiosk — members check themselves in by code or phone number on any tablet',
+    'Instant check-in , search by name or code, one click',
+    'Self-service kiosk , members check themselves in by code or phone number on any tablet',
     'Today\'s board plus full attendance history with per-member visit counts',
     'Check-out supported on every record',
   ],
   pillar2_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c37015a87ec.png',
 
-  pillar3_tagline: 'Get Paid Faster — <strong>Never Lose Track Of A Dollar</strong>',
+  pillar3_tagline: 'Get Paid Faster , <strong>Never Lose Track Of A Dollar</strong>',
   pillar3_points: [
-    'One-click sale creation — select member, service, and payment method; discounts supported',
+    'One-click sale creation , select member, service, and payment method; discounts supported',
     'Membership status tracking: active, frozen, or suspended with color badges',
     'Expiry follow-ups: Today, Tomorrow, 5 days, 7 days, Expired tabs',
     'WhatsApp renewal reminders sent in one click',
     'Pending payments: who owes what, with partial or full recording and WhatsApp nudges',
-    'Branded PDF invoices carrying YOUR gym name, address, and identity — plus a shareable public invoice view',
+    'Branded PDF invoices carrying YOUR gym name, address, and identity , plus a shareable public invoice view',
     'Refund recording that automatically rebalances invoices and entitlements',
   ],
   pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d42a31c39a08.jpg',
 
-  pillar4_tagline: 'Fill Every Class — <strong>No More No-Shows</strong>',
+  pillar4_tagline: 'Fill Every Class , <strong>No More No-Shows</strong>',
   pillar4_points: [
     'Create classes with trainers, locations, and capacity limits',
     'Recurring sessions: daily, weekly, biweekly, or monthly up to 52 occurrences',
     'Visual monthly calendar showing every session and trainer',
-    'Member bookings with live booked/capacity counters and Full/Open badges — no more overbooked classes',
+    'Member bookings with live booked/capacity counters and Full/Open badges , no more overbooked classes',
   ],
   pillar4_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08d55eb6c1a5.jpg',
 
@@ -428,17 +428,17 @@ const en: typeof ar = {
   pillar6_points: [
     'Personal dashboard: memberships, attendance history, bookings, and profile',
     '800+ exercise library with images, muscle maps, and step-by-step instructions',
-    'Password self-service — members manage their own credentials',
+    'Password self-service , members manage their own credentials',
     'Public invoice view with print and share buttons',
   ],
   pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5293270e4501.jpg',
 
-  pillar7_tagline: 'Make Data-Driven Decisions — <strong>Not Guesses</strong>',
+  pillar7_tagline: 'Make Data-Driven Decisions , <strong>Not Guesses</strong>',
   pillar7_points: [
     'Live KPIs: revenue, outstanding balance, retention %, and churn %',
     'Attendance trends, revenue by service, member tenure, and payment-method split',
     'Side-by-side branch comparison, staff performance metrics, and gender split',
-    'One-click export to CSV or JSON, saved custom reports — filterable by branch & period (7/30/90/180/365 days)',
+    'One-click export to CSV or JSON, saved custom reports , filterable by branch & period (7/30/90/180/365 days)',
   ],
   pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f494a18a6e38.png',
 
@@ -446,12 +446,12 @@ const en: typeof ar = {
   moreFeatures_grid: [
     { icon: 'shield', title: 'Roles & Permissions', desc: '4 roles (Owner/Admin, Manager, Trainer) with granular permissions down to each action' },
     { icon: 'globe', title: 'Bilingual & Dark Mode', desc: 'Full RTL/LTR Arabic + English interface with a light/dark theme toggle across the app' },
-    { icon: 'currency', title: 'Your Currency', desc: 'Set EGP or USD — it flows into invoices, PDFs, reports, and the entire UI automatically' },
+    { icon: 'currency', title: 'Your Currency', desc: 'Set EGP or USD , it flows into invoices, PDFs, reports, and the entire UI automatically' },
     { icon: 'building', title: 'Multi-Location', desc: 'Unlimited branches from one login, with comparison analytics showing which branch deserves the next investment' },
     { icon: 'utensils', title: 'Diet & Nutrition', desc: 'Food database with nutritional info. Diet plans assigned per member' },
-    { icon: 'trophy', title: 'Rank Progression', desc: 'White-to-Black-belt style ranks with awards, history, and a member leaderboard — gamified retention' },
+    { icon: 'trophy', title: 'Rank Progression', desc: 'White-to-Black-belt style ranks with awards, history, and a member leaderboard , gamified retention' },
     { icon: 'webhook', title: 'API & Webhooks', desc: 'REST API keys and event-subscribed webhooks to connect access control, websites, and BI tools' },
-    { icon: 'filetext', title: 'Full Audit Trail', desc: 'Organization-scoped log of who did what, when — disputes end here' },
+    { icon: 'filetext', title: 'Full Audit Trail', desc: 'Organization-scoped log of who did what, when , disputes end here' },
   ],
 
   howItWorks_title: 'Get Started in <strong>3 Steps</strong>',
@@ -465,14 +465,14 @@ const en: typeof ar = {
   testimonial_title: 'Gym Owners <strong>Trust Us</strong>',
   testimonial_quote: 'I was losing members because their subscriptions would expire and I wouldn\'t notice. Now the system alerts me a week before and I send a WhatsApp reminder in one click. Renewal rate jumped 40%.',
   singleTestimonial_name: 'Ahmed Mahmoud',
-  singleTestimonial_company: 'Gym Manager — Cairo',
+  singleTestimonial_company: 'Gym Manager , Cairo',
   singleTestimonial_stats: [
     { value: '40%', label: 'Renewal Increase' },
     { value: '3 hours', label: 'Saved Daily' },
     { value: '500+', label: 'Active Members' },
   ],
   testimonials_fallback: [
-    { id: 't1', name: 'Mohamed Ali', designation: 'Gym Owner', content: 'I used to manage everything with Excel and WhatsApp. Now it\'s all in one place — members, attendance, and invoices. I save at least 3 hours a day.', avatar: '/images/testimonials/1.png', sortOrder: 1 },
+    { id: 't1', name: 'Mohamed Ali', designation: 'Gym Owner', content: 'I used to manage everything with Excel and WhatsApp. Now it\'s all in one place , members, attendance, and invoices. I save at least 3 hours a day.', avatar: '/images/testimonials/1.png', sortOrder: 1 },
     { id: 't2', name: 'Khaled Ibrahim', designation: 'Certified Personal Trainer', content: 'The trainer dashboard lets me see my assigned members and their attendance right away. I don\'t need to ask management for anything anymore.', avatar: '/images/testimonials/2.png', sortOrder: 2 },
     { id: 't3', name: 'Omar Hassan', designation: '3-Branch Owner', content: 'Managing 3 branches from one dashboard changed the game. The analytics show me which branch generates more revenue and which one needs attention.', avatar: '/images/testimonials/3.png', sortOrder: 3 },
   ],
@@ -480,12 +480,12 @@ const en: typeof ar = {
   faq_title: 'Frequently Asked Questions',
   faq_content: 'Answers to the most common questions about our gym management platform.',
   faq_fallback: [
-    { id: 'q1', question: 'Is the platform hard to set up?', answer: 'No. Register with your gym name, owner details, and pick a plan — the system creates everything automatically with a 14-day free trial.' },
+    { id: 'q1', question: 'Is the platform hard to set up?', answer: 'No. Register with your gym name, owner details, and pick a plan , the system creates everything automatically with a 14-day free trial.' },
     { id: 'q2', question: 'Does it support Arabic?', answer: 'Yes! Full bilingual support with Arabic RTL layout. Every screen, report, and invoice works in both English and Arabic.' },
     { id: 'q3', question: 'Can I manage multiple locations?', answer: 'Yes. Create multiple locations and assign members and staff per branch. Analytics and attendance are per-location with comparison views.' },
     { id: 'q4', question: 'How do renewal follow-ups work?', answer: 'Dedicated tabs show memberships expiring today, tomorrow, 5 days, 7 days, or already expired. Send a WhatsApp renewal reminder in one click.' },
-    { id: 'q5', question: 'Is my gym data safe?', answer: 'Yes — role-based permissions (Owner/Admin, Manager, Trainer) plus a full audit log recording who did what, when, on every action.' },
-    { id: 'q6', question: 'What payment methods are supported?', answer: 'Payments are recorded manually (cash or card at the desk) — no online gateway by design and no commission from us. Unified invoicing and clean refunds, and you can bring your own processor later via API/webhooks.' },
+    { id: 'q5', question: 'Is my gym data safe?', answer: 'Yes , role-based permissions (Owner/Admin, Manager, Trainer) plus a full audit log recording who did what, when, on every action.' },
+    { id: 'q6', question: 'What payment methods are supported?', answer: 'Payments are recorded manually (cash or card at the desk) , no online gateway by design and no commission from us. Unified invoicing and clean refunds, and you can bring your own processor later via API/webhooks.' },
   ],
 
   pricing_title: 'Affordable <strong>Pricing Plans</strong>',
