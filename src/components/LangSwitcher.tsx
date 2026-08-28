@@ -39,7 +39,6 @@ export default function LangSwitcher() {
       onClick={toggle}
       className="inline-flex items-center gap-1.5 text-sm text-[#817E84] hover:text-[#E5E5E5] transition-colors duration-200 px-3 py-1.5 rounded-lg border border-[#202128] hover:border-[#937AFF]/50"
     >
-      <span>{locale === 'ar' ? '🇸🇦' : '🇬🇧'}</span>
       <span>{locale === 'ar' ? 'English' : 'العربية'}</span>
     </button>
   );

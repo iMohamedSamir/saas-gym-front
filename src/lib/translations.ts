@@ -57,7 +57,7 @@ const ar = {
     'ملفات صحية وبدنية: الإصابات والحالات الصحية والأهداف اللياقية',
     'سجل CRM كامل: ملاحظات وتفاعلات ، كل مدرب يعرف قصة كل عضو',
   ],
-  pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/714ce578e627.jpeg',
+  pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f61b5abfb62e.jpg',
 
   // Pillar 2: Attendance & Kiosk
   pillar2_tagline: 'سجّل الدخول في ثوانٍ ، <strong>تتبّع كل شيء تلقائيًا</strong>',
@@ -67,7 +67,7 @@ const ar = {
     'قائمة حضور اليوم تتحديث تلقائيًا كل 30 ثانية',
     'سجل حضور تاريخي كامل مع إمكانية تسجيل الخروج',
   ],
-  pillar2_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c37015a87ec.png',
+  pillar2_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e6e56c3b1e64.jpg',
 
   // Pillar 3: Sales & Billing
   pillar3_tagline: 'احصل على أموالك أسرع ، <strong>لا تفقد دولارًا واحدًا</strong>',
@@ -80,7 +80,7 @@ const ar = {
     'فواتير PDF باسم صالتك وعنوانها وهويتها ، وصفحة فاتورة عامة قابلة للمشاركة والطباعة',
     'استردادات مسجلة تعيد موازنة الفواتير والاشتراكات تلقائيًا',
   ],
-  pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d42a31c39a08.jpg',
+  pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a14078eb2e9a.jpeg',
 
   // Pillar 4: Scheduling & Classes
   pillar4_tagline: 'املأ كل فصل ، <strong>لا مزيد من الغيابات</strong>',
@@ -90,7 +90,7 @@ const ar = {
     'تقويم شهري بصري يعرض كل الجلسات والمدربين والمقاعد المتاحة',
     'حجوزات مباشرة بعدادات مقاعد وشارات «ممتلئ/متاح» تمنع الحجز الزائد',
   ],
-  pillar4_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08d55eb6c1a5.jpg',
+  pillar4_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f4d1f5b91554.jpg',
 
   // Pillar 5: Leads & CRM
   pillar5_tagline: 'حوّل كل زائر إلى <strong>عضو يدفع</strong>',
@@ -101,7 +101,7 @@ const ar = {
     'حملات جماعية بمتغيرات قوالب مثل {name} و{gym} تستهدف شرائح الأعضاء',
     'قوالب إشعارات وسجل تسليم كامل يوثق كل رسالة أُرسلت',
   ],
-  pillar5_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cebe0b40b2c1.jpg',
+  pillar5_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c86058689a9.jpg',
 
   // Pillar 6: Member Portal
   pillar6_tagline: 'أعضاؤك سيعشقون <strong>هذه المنصة</strong>',
@@ -111,7 +111,7 @@ const ar = {
     'إدارة كلمة المرور ذاتيًا ، استقلالية كاملة للأعضاء',
     'عرض فواتير عامة مع زر الطباعة والمشاركة',
   ],
-  pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5293270e4501.jpg',
+  pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bfe3ff1a0d92.jpg',
 
   // Pillar 7: Analytics
   pillar7_tagline: 'قرارات مبنية على البيانات ، <strong>ليس التخمين</strong>',
@@ -121,7 +121,40 @@ const ar = {
     'مقارنة أداء الفروع جنباً إلى جنب ومقاييس أداء الموظفين وتوزيع الأعضاء',
     'تصدير بتقنية واحدة إلى CSV أو JSON وحفظ تقارير مخصصة ، لكل فرع وفترة (7/30/90/180/365 يومًا)',
   ],
-  pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f494a18a6e38.png',
+  pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69c2219391f0.jpg',
+
+  // Pillar 8: WhatsApp & Marketing Automation
+  pillar8_tagline: 'وصلك لأعضائك حيث يقرأون فعلاً — <strong>واتساب</strong>',
+  pillar8_points: [
+    'روابط واتساب جاهزة في كل مكان مهم: التجديدات والمدفوعات المعلقة وأعياد الميلاد والفواتير',
+    'مدير حملات جماعية يستهدف شرائح الأعضاء بمتغيرات قوالب مثل {name} و{gym}',
+    'قوالب رسائل قابلة لإعادة الاستخدام مع سجل تسليم يوثق حالة كل رسالة أُرسلت',
+    'قوائم أعياد الميلاد تظهر يوميًا لتهنئة بنقرة واحدة — أرخص أداة احتفاظ بالأعضاء موجودة',
+    'روّج لفصل جديد لـ500 عضو بنقرة واحدة — دون أن تضيع الرسائل في بريد إلكتروني لا يقرأه أحد',
+  ],
+  pillar8_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/afc6a83dbcdd.jpeg',
+
+  // Pillar 9: Fitness, Gamification & Retention
+  pillar9_tagline: 'تقدّم يحوّل <strong>الاحتفاظ بالأعضاء إلى لعبة</strong>',
+  pillar9_points: [
+    'قاعدة بيانات تضم 800+ تمرين مصنّفة حسب المجموعة العضلية مع صور وتعليمات خطوة بخطوة',
+    'حاسبات BMI وBMR وWHR لتقييمات فورية مبهرة عند الاشتراك',
+    'نظام رتب من الأبيض إلى الأسود مثل الأحزمة مع سجل منح ولوحة صدارة للأعضاء',
+    'لوحة المدرب: كل مدرب يرى أعضاءه المعيّنين وحضورهم — مسؤولية مدمجة لفريق التدريب',
+    'الأعضاء يتنافسون على الرتبة التالية ويبقون مشتركين — احتفاظ ممتع بالأعضاء',
+  ],
+  pillar9_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6ed6ec4cb6bd.jpg',
+
+  // Pillar 10: Multi-Branch, Security & Branding
+  pillar10_tagline: 'حساب واحد يدير <strong>سلسلتك كاملة</strong>',
+  pillar10_points: [
+    'فروع غير محدودة من تسجيل دخول واحد مع منطق الموقع الافتراضي',
+    'أعضاء وموظفون ومبيعات وتقارير مرتبطة بكل فرع مع مقارنة أداء جنباً إلى جنب',
+    'صلاحيات دقيقة حسب الدور لكل إجراء ، مفروضة في الواجهة وAPI — كل موظف يرى ما يخصه فقط',
+    'سجلات مراجعة لكل عملية: من فعل ماذا ومتى — أي نزاع ينتهي هنا',
+    'اسم صالتك وعنوانها وعملتها تظهر في الفواتير وPDF وكامل الواجهة — علامتك أنت، لا علامتنا',
+  ],
+  pillar10_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6f79452a173f.jpg',
 
   // Additional Features Grid
   moreFeatures_title: 'المزيد من المميزات <strong>القوية</strong>',
@@ -134,6 +167,12 @@ const ar = {
     { icon: 'trophy', title: 'نظام الرتب', desc: 'رتب من الأبيض إلى الأسود مثل الأحزمة، تُمنح وتُتتبع مع لوحة صدارة ، احتفاظ ممتع بالأعضاء' },
     { icon: 'webhook', title: 'API وتكاملات', desc: 'مفاتيح API وويب هوكس مشتركة في الأحداث لربط أنظمة الدخول ومواقع الويب وأدوات BI' },
     { icon: 'filetext', title: 'سجل مراجعة كامل', desc: 'سجل لكل عملية: من فعل ماذا ومتى ، أي نزاع ينتهي هنا' },
+    { icon: 'clipboard', title: 'مدير المهام', desc: 'قائمة مهام يومية لعمليات الصالة — لا شيء يسقط من البين في زحمة ساعات الذروة' },
+    { icon: 'calculator', title: 'حاسبات اللياقة', desc: 'حاسبات BMI وBMR وWHR لتقييم فوري مبهر للعضو الجديد عند التسجيل' },
+    { icon: 'dumbbell', title: 'مكتبة التمارين', desc: 'أكثر من 800 تمرين مصنّفة حسب المجموعة العضلية مع صور وتعليمات — محتوى احترافي جاهز دون بناء مكتبتك' },
+    { icon: 'megaphone', title: 'قوالب الإشعارات والسجلات', desc: 'قوالب رسائل قابلة لإعادة الاستخدام مع سجل تسليم وحالات — هوية ثابتة وتوثيق كامل لكل ما أُرسل' },
+    { icon: 'smartphone', title: 'بوابة الأعضاء', desc: 'الأعضاء يخدمون أنفسهم: الاشتراكات والحضور والحجوزات والفواتير — مقاطعات أقل لمكتب الاستقبال' },
+    { icon: 'receipt', title: 'فواتير عامة قابلة للمشاركة', desc: 'كل عملية بيع تصبح فاتورة بشعار صالتك مع صفحة عامة قابلة للطباعة — أرسلها عبر واتساب' },
   ],
 
   // How It Works
@@ -382,7 +421,7 @@ const en: typeof ar = {
     'Health profiles: injuries, conditions, and fitness goals',
     'Full CRM log: notes and interactions , every trainer knows every member\'s story',
   ],
-  pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/714ce578e627.jpeg',
+  pillar1_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f61b5abfb62e.jpg',
 
   pillar2_tagline: 'Check Members In In Seconds , <strong>Track Everything Automatically</strong>',
   pillar2_points: [
@@ -391,7 +430,7 @@ const en: typeof ar = {
     'Today\'s board plus full attendance history with per-member visit counts',
     'Check-out supported on every record',
   ],
-  pillar2_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c37015a87ec.png',
+  pillar2_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/e6e56c3b1e64.jpg',
 
   pillar3_tagline: 'Get Paid Faster , <strong>Never Lose Track Of A Dollar</strong>',
   pillar3_points: [
@@ -403,7 +442,7 @@ const en: typeof ar = {
     'Branded PDF invoices carrying YOUR gym name, address, and identity , plus a shareable public invoice view',
     'Refund recording that automatically rebalances invoices and entitlements',
   ],
-  pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/d42a31c39a08.jpg',
+  pillar3_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/a14078eb2e9a.jpeg',
 
   pillar4_tagline: 'Fill Every Class , <strong>No More No-Shows</strong>',
   pillar4_points: [
@@ -412,7 +451,7 @@ const en: typeof ar = {
     'Visual monthly calendar showing every session and trainer',
     'Member bookings with live booked/capacity counters and Full/Open badges , no more overbooked classes',
   ],
-  pillar4_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/08d55eb6c1a5.jpg',
+  pillar4_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f4d1f5b91554.jpg',
 
   pillar5_tagline: 'Turn Every Walk-In Into A <strong>Paying Member</strong>',
   pillar5_points: [
@@ -422,7 +461,7 @@ const en: typeof ar = {
     'Bulk campaigns to member segments with template variables like {name} and {gym}',
     'Reusable notification templates plus a delivery log tracking every message sent',
   ],
-  pillar5_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/cebe0b40b2c1.jpg',
+  pillar5_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/3c86058689a9.jpg',
 
   pillar6_tagline: 'Your Members Will Love <strong>This Platform</strong>',
   pillar6_points: [
@@ -431,7 +470,7 @@ const en: typeof ar = {
     'Password self-service , members manage their own credentials',
     'Public invoice view with print and share buttons',
   ],
-  pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/5293270e4501.jpg',
+  pillar6_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/bfe3ff1a0d92.jpg',
 
   pillar7_tagline: 'Make Data-Driven Decisions , <strong>Not Guesses</strong>',
   pillar7_points: [
@@ -440,7 +479,40 @@ const en: typeof ar = {
     'Side-by-side branch comparison, staff performance metrics, and gender split',
     'One-click export to CSV or JSON, saved custom reports , filterable by branch & period (7/30/90/180/365 days)',
   ],
-  pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/f494a18a6e38.png',
+  pillar7_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/69c2219391f0.jpg',
+
+  // Pillar 8: WhatsApp & Marketing Automation
+  pillar8_tagline: 'Reach Members Where They Actually Read — <strong>WhatsApp</strong>',
+  pillar8_points: [
+    'WhatsApp deep-links everywhere it matters: renewals, pending payments, birthdays, and invoices',
+    'Bulk campaign manager targeting member segments with template variables like {name} and {gym}',
+    'Reusable message templates plus a delivery log tracking the status of every message sent',
+    'Birthday lists surfaced daily for one-tap greetings — the cheapest retention tool that exists',
+    'Promote a new class to 500 members in one click — no more messages lost in an unread inbox',
+  ],
+  pillar8_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/afc6a83dbcdd.jpeg',
+
+  // Pillar 9: Fitness, Gamification & Retention
+  pillar9_tagline: 'Gamified Progress That <strong>Sells Memberships For You</strong>',
+  pillar9_points: [
+    '800+ exercise database categorized by muscle group with images and step-by-step instructions',
+    'BMI, BMR & WHR calculators for instant, impressive sign-up assessments',
+    'White-to-Black-belt style rank progression with award history and a member leaderboard',
+    'Trainer panel: every trainer sees their assigned members and attendance — built-in accountability',
+    'Members grind for the next rank and stay subscribed — gamified retention',
+  ],
+  pillar9_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6ed6ec4cb6bd.jpg',
+
+  // Pillar 10: Multi-Branch, Security & Branding
+  pillar10_tagline: 'One Account Runs Your <strong>Whole Chain</strong>',
+  pillar10_points: [
+    'Unlimited branches from a single login with default-location logic',
+    'Location-aware members, staff, sales, and reports — with side-by-side branch comparison',
+    'Granular role-based permissions per action, enforced in API and UI — staff see only what they should',
+    'Organization-scoped audit logs: who did what, when — disputes end here',
+    'Your gym name, address, and currency flow into invoices, PDFs, and the whole UI — your brand, not ours',
+  ],
+  pillar10_image: 'https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/6f79452a173f.jpg',
 
   moreFeatures_title: 'More <strong>Powerful Features</strong>',
   moreFeatures_grid: [
@@ -452,6 +524,12 @@ const en: typeof ar = {
     { icon: 'trophy', title: 'Rank Progression', desc: 'White-to-Black-belt style ranks with awards, history, and a member leaderboard , gamified retention' },
     { icon: 'webhook', title: 'API & Webhooks', desc: 'REST API keys and event-subscribed webhooks to connect access control, websites, and BI tools' },
     { icon: 'filetext', title: 'Full Audit Trail', desc: 'Organization-scoped log of who did what, when , disputes end here' },
+    { icon: 'clipboard', title: 'Task Manager', desc: 'A daily ops task list — nothing falls through the cracks during rush hour' },
+    { icon: 'calculator', title: 'Fitness Calculators', desc: 'BMI, BMR & WHR assessments — instant, impressive evaluations for new sign-ups' },
+    { icon: 'dumbbell', title: 'Exercise Library', desc: '800+ exercises categorized by muscle group with images and instructions — ready-made pro content, no need to build your own' },
+    { icon: 'megaphone', title: 'Notification Templates & Logs', desc: 'Reusable message templates plus a delivery log with statuses — consistent branding, full audit of what was sent' },
+    { icon: 'smartphone', title: 'Member Portal', desc: 'Members self-serve memberships, attendance, bookings, and invoices — fewer front-desk interruptions' },
+    { icon: 'receipt', title: 'Shareable Public Invoices', desc: 'Every sale becomes a branded invoice with a shareable, printable public page — send it over WhatsApp' },
   ],
 
   howItWorks_title: 'Get Started in <strong>3 Steps</strong>',

@@ -6,7 +6,8 @@ import {
   Users, ScanLine, CreditCard, CalendarDays,
   Target, Smartphone, BarChart3, Shield, Globe,
   Banknote, Building, Trophy, Webhook, FileText,
-  Utensils, ChevronRight
+  Utensils, ChevronRight,
+  ClipboardList, Calculator, Dumbbell, Megaphone, Receipt
 } from 'lucide-react';
 import FaqAccordion from '@/components/FaqAccordion';
 import MobileNav from '@/components/MobileNav';
@@ -43,6 +44,48 @@ interface FaqItem {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Avatar — initials fallback (no broken image links)                 */
+/* ------------------------------------------------------------------ */
+function InitialsAvatar({ name, sizeClass, textClass }: { name?: string; sizeClass: string; textClass: string }) {
+  const initials = (name || '?')
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join('')
+    .toUpperCase();
+  return (
+    <div className={`${sizeClass} ${textClass} rounded-full bg-[#937AFF]/15 border border-[#937AFF]/40 text-[#937AFF] flex items-center justify-center font-bold select-none shrink-0`}>
+      {initials}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  RadialGlow — Automark-style radial-gradient separator discs        */
+/*  Large blurred circles straddling section edges to visually         */
+/*  separate sections (half-clipped by the section's overflow-hidden). */
+/* ------------------------------------------------------------------ */
+const GLOW_VARIANTS = {
+  /* Strong glow straddling a section edge (top-center / bottom-center) */
+  edge: 'radial-gradient(circle, rgba(147,122,255,0.55) 0%, rgba(147,122,255,0.28) 20%, transparent 70%)',
+  /* Softer wide glow */
+  soft: 'radial-gradient(circle, rgba(147,122,255,0.35) 0%, transparent 80%)',
+  /* Corner glow (bottom-right / bottom-left) */
+  corner: 'radial-gradient(circle, rgba(147,122,255,0.45) 0%, rgba(147,122,255,0.18) 12%, transparent 60%)',
+} as const;
+
+function RadialGlow({ variant = 'edge', className = '' }: { variant?: keyof typeof GLOW_VARIANTS; className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={`pointer-events-none absolute -z-20 blur-2xl ${className}`}
+      style={{ background: GLOW_VARIANTS[variant] }}
+    />
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Icon helper                                                       */
 /* ------------------------------------------------------------------ */
 const iconMap: Record<string, React.ReactNode> = {
@@ -58,6 +101,11 @@ const iconMap: Record<string, React.ReactNode> = {
   trophy: <Trophy className="w-6 h-6" />,
   webhook: <Webhook className="w-6 h-6" />,
   filetext: <FileText className="w-6 h-6" />,
+  clipboard: <ClipboardList className="w-6 h-6" />,
+  calculator: <Calculator className="w-6 h-6" />,
+  dumbbell: <Dumbbell className="w-6 h-6" />,
+  megaphone: <Megaphone className="w-6 h-6" />,
+  receipt: <Receipt className="w-6 h-6" />,
 };
 
 export default function HomeContent() {
@@ -116,6 +164,9 @@ export default function HomeContent() {
     { tagline: t.pillar5_tagline, points: t.pillar5_points, image: t.pillar5_image },
     { tagline: t.pillar6_tagline, points: t.pillar6_points, image: t.pillar6_image },
     { tagline: t.pillar7_tagline, points: t.pillar7_points, image: t.pillar7_image },
+    { tagline: t.pillar8_tagline, points: t.pillar8_points, image: t.pillar8_image },
+    { tagline: t.pillar9_tagline, points: t.pillar9_points, image: t.pillar9_image },
+    { tagline: t.pillar10_tagline, points: t.pillar10_points, image: t.pillar10_image },
   ];
 
   const moreFeatures = t.moreFeatures_grid as any[];
@@ -134,7 +185,7 @@ export default function HomeContent() {
           </a>
           <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} className="text-sm text-[#817E84] hover:text-[#E5E5E5] transition-colors duration-200">
+              <a key={l.href} href={l.href} className="text-sm text-[#BDBAC4] hover:text-white transition-colors duration-200">
                 {l.label}
               </a>
             ))}
@@ -153,11 +204,13 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 2. HERO — Gym images + glow                                */}
         {/* ============================================================ */}
-        <section className="relative overflow-hidden py-24 sm:py-32 lg:py-44">
+        <section className="relative isolate overflow-hidden py-24 sm:py-32 lg:py-44">
           {/* Radial glow */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <div className="h-[600px] w-[600px] rounded-full bg-[#937AFF]/15 blur-[140px]" />
           </div>
+          {/* Separator glow straddling the hero bottom edge (hero → stats) */}
+          <RadialGlow variant="soft" className="bottom-0 left-1/2 size-160 xl:size-280 -translate-x-1/2 translate-y-1/2" />
 
           <div className="relative z-10 max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -181,17 +234,17 @@ export default function HomeContent() {
               <div className={`relative flex items-center justify-center ${isRTL ? 'lg:order-1' : ''}`}>
                 {/* Back image */}
                 <div className="absolute -top-4 opacity-30 blur-sm scale-95">
-                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/03fa670ae1d4.jpeg" alt="" className="w-56 h-72 sm:w-72 sm:h-96 object-cover rounded-2xl" loading="eager" />
+                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/00cc853d1ddc.jpg" alt="" className="w-56 h-72 sm:w-72 sm:h-96 object-cover rounded-2xl" loading="eager" />
                 </div>
                 {/* Main image */}
                 <div className="relative z-10">
-                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/fd34df0a8630.jpg" alt="" className="w-64 h-80 sm:w-80 sm:h-[28rem] object-cover rounded-2xl border border-[#202128] shadow-2xl shadow-black/50" loading="eager" />
+                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/48c009adaa1a.jpg" alt="" className="w-64 h-80 sm:w-80 sm:h-[28rem] object-cover rounded-2xl border border-[#202128] shadow-2xl shadow-black/50" loading="eager" />
                   {/* Glow behind main */}
                   <div className="absolute -inset-4 bg-[#937AFF]/20 rounded-3xl blur-2xl -z-10" />
                 </div>
                 {/* Front image */}
                 <div className="absolute -bottom-4 opacity-25 blur-sm scale-95">
-                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/82afe857d6fb.jpg" alt="" className="w-52 h-64 sm:w-64 sm:h-80 object-cover rounded-2xl" loading="eager" />
+                  <img src="https://z-cdn.chatglm.cn/image-search-mcp/images-ppt/2b51de6a053f.jpg" alt="" className="w-52 h-64 sm:w-64 sm:h-80 object-cover rounded-2xl" loading="eager" />
                 </div>
               </div>
             </div>
@@ -202,7 +255,8 @@ export default function HomeContent() {
         {/* 3. STATS                                                     */}
         {/* ============================================================ */}
         {stats.length > 0 && (
-          <section className="py-16 border-y border-[#202128] bg-[#0B0C17]/50">
+          <section className="relative isolate overflow-hidden py-16 border-y border-[#202128] bg-[#0B0C17]/50">
+            <RadialGlow variant="corner" className="bottom-0 right-0 size-120 xl:size-280 translate-x-2/5 translate-y-1/2" />
             <div className="max-w-7xl mx-auto px-6">
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
                 {stats.map((s: any) => (
@@ -219,7 +273,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 4. PROBLEM SECTION — Pain points                            */}
         {/* ============================================================ */}
-        <section className="py-20 sm:py-28">
+        <section className="relative isolate overflow-hidden py-20 sm:py-28">
+          <RadialGlow variant="edge" className="left-1/2 top-0 size-160 xl:size-300 -translate-x-1/2 -translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.problem_title }} />
             <p className="mt-6 text-lg text-[#817E84] text-center max-w-3xl mx-auto">
@@ -239,7 +294,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 5. SOLUTION INTRO — 4 value cards                           */}
         {/* ============================================================ */}
-        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+        <section className="relative isolate overflow-hidden py-20 sm:py-28 bg-[#0B0C17]/30">
+          <RadialGlow variant="corner" className="bottom-0 left-0 size-120 xl:size-280 -translate-x-2/5 translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.solution_title }} />
             <p className="mt-6 text-lg text-[#817E84] text-center max-w-3xl mx-auto">
@@ -263,7 +319,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 6. FEATURE PILLARS — Alternating image + bullets            */}
         {/* ============================================================ */}
-        <section id="features" className="py-20 sm:py-28">
+        <section id="features" className="relative isolate overflow-hidden py-20 sm:py-28">
+          <RadialGlow variant="edge" className="left-1/2 top-0 size-160 xl:size-300 -translate-x-1/2 -translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.pillars_title }} />
             <p className="mt-4 text-[#817E84] text-center max-w-2xl mx-auto">
@@ -308,7 +365,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 7. MORE FEATURES GRID                                       */}
         {/* ============================================================ */}
-        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+        <section className="relative isolate overflow-hidden py-20 sm:py-28 bg-[#0B0C17]/30">
+          <RadialGlow variant="corner" className="bottom-0 right-0 size-120 xl:size-280 translate-x-2/5 translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.moreFeatures_title }} />
             <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -328,7 +386,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 8. HOW IT WORKS                                             */}
         {/* ============================================================ */}
-        <section className="py-20 sm:py-28">
+        <section className="relative isolate overflow-hidden py-20 sm:py-28">
+          <RadialGlow variant="edge" className="left-1/2 top-0 size-160 xl:size-300 -translate-x-1/2 -translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.howItWorks_title }} />
             <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -354,7 +413,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 9. PRICING — UNTOUCHED                                       */}
         {/* ============================================================ */}
-        <section id="pricing" className="py-20 sm:py-28 bg-[#0B0C17]/30">
+        <section id="pricing" className="relative isolate overflow-hidden py-20 sm:py-28 bg-[#0B0C17]/30">
+          <RadialGlow variant="edge" className="left-1/2 top-0 size-180 xl:size-300 -translate-x-1/2 -translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.pricing_title }} />
             <p className="mt-4 text-[#817E84] text-center max-w-2xl mx-auto">{t.pricing_content}</p>
@@ -397,7 +457,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 10. TESTIMONIAL QUOTE                                       */}
         {/* ============================================================ */}
-        <section id="testimonials" className="py-20 sm:py-28">
+        <section id="testimonials" className="relative isolate overflow-hidden py-20 sm:py-28">
+          <RadialGlow variant="soft" className="bottom-0 left-1/2 size-160 xl:size-280 -translate-x-1/2 translate-y-1/2" />
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.testimonial_title }} />
             <blockquote className="mt-12">
@@ -406,7 +467,7 @@ export default function HomeContent() {
               </p>
               {t.singleTestimonial_name && (
                 <div className="mt-8 flex flex-col items-center">
-                  <img src="/images/avatar.png" alt={t.singleTestimonial_name} className="w-14 h-14 rounded-full" />
+                  <InitialsAvatar name={t.singleTestimonial_name} sizeClass="w-14 h-14" textClass="text-base" />
                   <p className="mt-3 font-semibold text-white">{t.singleTestimonial_name}</p>
                   <p className="text-sm text-[#817E84]">{t.singleTestimonial_company}</p>
                 </div>
@@ -428,7 +489,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 11. TESTIMONIALS CARDS                                       */}
         {/* ============================================================ */}
-        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+        <section className="relative isolate overflow-hidden py-20 sm:py-28 bg-[#0B0C17]/30">
+          <RadialGlow variant="corner" className="bottom-0 right-0 size-120 xl:size-280 translate-x-2/5 translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {testimonials.map((tm: any) => (
@@ -440,7 +502,7 @@ export default function HomeContent() {
                   </div>
                   <p className="text-[#E5E5E5] leading-relaxed">{tm.content}</p>
                   <div className="mt-6 flex items-center gap-3">
-                    <img src={tm.avatar} alt={tm.name} className="w-10 h-10 rounded-full" />
+                    <InitialsAvatar name={tm.name} sizeClass="w-10 h-10" textClass="text-xs" />
                     <div>
                       <p className="font-semibold text-white text-sm">{tm.name}</p>
                       <p className="text-xs text-[#817E84]">{tm.designation}</p>
@@ -455,7 +517,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 12. FAQ                                                      */}
         {/* ============================================================ */}
-        <section id="faq" className="py-20 sm:py-28 bg-[#0B0C17]/30">
+        <section id="faq" className="relative isolate overflow-hidden py-20 sm:py-28 bg-[#0B0C17]/30">
+          <RadialGlow variant="corner" className="bottom-0 left-0 size-120 xl:size-240 -translate-x-2/5 translate-y-1/2" />
           <div className="max-w-3xl mx-auto px-6">
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.faq_title }} />
             <p className="mt-4 text-[#817E84] text-center">{t.faq_content}</p>
@@ -468,7 +531,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 13. CTA                                                      */}
         {/* ============================================================ */}
-        <section className="py-20 sm:py-28 bg-[#0B0C17]/30">
+        <section className="relative isolate overflow-hidden py-20 sm:py-28 bg-[#0B0C17]/30">
+          <RadialGlow variant="edge" className="bottom-0 left-1/2 size-160 xl:size-280 -translate-x-1/2 translate-y-1/2" />
           <div className="max-w-4xl mx-auto px-6 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-white" dangerouslySetInnerHTML={{ __html: t.cta_title }} />
             <p className="mt-6 text-lg text-[#817E84] max-w-2xl mx-auto">{t.cta_description}</p>
@@ -482,7 +546,8 @@ export default function HomeContent() {
         {/* ============================================================ */}
         {/* 14. CONTACT                                                  */}
         {/* ============================================================ */}
-        <section id="contact" className="py-20 sm:py-28">
+        <section id="contact" className="relative isolate overflow-hidden py-20 sm:py-28">
+          <RadialGlow variant="corner" className="bottom-0 right-0 size-120 xl:size-240 translate-x-2/5 translate-y-1/2" />
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
