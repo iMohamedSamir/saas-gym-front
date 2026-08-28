@@ -2,7 +2,7 @@ services:
   gym-front:
     build: .
     ports:
-      - "3000:3000"
+      - "3008:3008"
     environment:
       - DATABASE_URL=file:/app/data/payload.db
       - DB_DIR=/app/data
