@@ -28,6 +28,7 @@ interface PricingPlan {
   id: string;
   title?: string;
   price?: string;
+  currency?: string;
   yearlyPrice?: string;
   description?: string;
   isFeatured?: boolean;
@@ -35,6 +36,180 @@ interface PricingPlan {
   buttonLabel?: string;
   buttonLink?: string;
   features?: PricingFeature[];
+}
+
+/* ------------------------------------------------------------------ */
+/*  Pricing — live plans fetched from the app API (grouped by duration) */
+/* ------------------------------------------------------------------ */
+
+type PricingDuration = 'monthly' | 'quarterly' | 'yearly';
+
+const PRICING_API_URL = 'https://app-gym.siwaworks.com/api/pricing';
+
+const DURATION_ALIASES: Record<string, PricingDuration> = {
+  monthly: 'monthly', month: 'monthly', months: 'monthly', permonth: 'monthly',
+  quarterly: 'quarterly', quarter: 'quarterly', quarters: 'quarterly', '3months': 'quarterly', perquarter: 'quarterly',
+  yearly: 'yearly', annual: 'yearly', annually: 'yearly', year: 'yearly', years: 'yearly', '12months': 'yearly', peryear: 'yearly',
+};
+
+function canonicalDuration(raw: unknown): PricingDuration | null {
+  if (raw == null) return null;
+  if (typeof raw === 'number') {
+    if (raw === 1) return 'monthly';
+    if (raw === 3) return 'quarterly';
+    if (raw === 12) return 'yearly';
+    return null;
+  }
+  const key = String(raw).trim().toLowerCase().replace(/[\s_-]+/g, '');
+  return DURATION_ALIASES[key] ?? null;
+}
+
+function asDisplayString(raw: unknown): string | undefined {
+  if (typeof raw === 'string' && raw.trim()) return raw.trim();
+  if (typeof raw === 'number' && Number.isFinite(raw)) return String(raw);
+  return undefined;
+}
+
+// Currency prefix for plan prices: '$' for USD (legacy look), localized
+// 'ج.م' for EGP in Arabic, 'EGP' in English, other codes shown as-is.
+function currencyLabel(currency: string | undefined, locale: Locale): string {
+  const code = (currency || 'USD').trim().toUpperCase();
+  if (code === 'USD' || code === 'US$' || code === '$') return '$';
+  if (code === 'EGP' || code === 'LE' || code === 'E£') return locale === 'ar' ? 'ج.م' : 'EGP';
+  return code;
+}
+
+function normalizePlan(rawPlan: unknown, index: number): PricingPlan | null {
+  if (!rawPlan || typeof rawPlan !== 'object') return null;
+  const raw = rawPlan as Record<string, unknown>;
+
+  const title =
+    asDisplayString(raw.title) ?? asDisplayString(raw.name) ??
+    asDisplayString(raw.planName) ?? asDisplayString(raw.titleAr) ??
+    asDisplayString(raw.nameAr) ?? asDisplayString(raw.title_ar) ??
+    asDisplayString(raw.name_ar);
+  if (!title) return null;
+
+  const featuresRaw = raw.features ?? raw.perks ?? raw.benefits ?? raw.inclusions;
+  let features: PricingFeature[] | undefined;
+  if (Array.isArray(featuresRaw)) {
+    features = featuresRaw
+      .map((entry: unknown): PricingFeature | null => {
+        if (typeof entry === 'string' || typeof entry === 'number') {
+          return { label: String(entry), included: true };
+        }
+        if (!entry || typeof entry !== 'object') return null;
+        const feat = entry as Record<string, unknown>;
+        const label =
+          asDisplayString(feat.label) ?? asDisplayString(feat.name) ??
+          asDisplayString(feat.text) ?? asDisplayString(feat.title) ??
+          asDisplayString(feat.feature);
+        if (!label) return null;
+        const includedRaw = feat.included ?? feat.enabled ?? feat.available;
+        return {
+          label,
+          included: includedRaw === undefined ? true : Boolean(includedRaw),
+          tooltip: asDisplayString(feat.tooltip),
+        };
+      })
+      .filter((f): f is PricingFeature => f !== null);
+  }
+
+  const price =
+    asDisplayString(raw.price) ?? asDisplayString(raw.amount) ??
+    asDisplayString(raw.monthlyPrice) ?? asDisplayString(raw.cost) ??
+    asDisplayString(raw.rate);
+
+  return {
+    id: asDisplayString(raw.id) ?? asDisplayString(raw.slug) ?? `${title}-${index}`,
+    title,
+    price,
+    currency: asDisplayString(raw.currency) ?? asDisplayString(raw.currencyCode) ?? asDisplayString(raw.currency_code),
+    yearlyPrice: asDisplayString(raw.yearlyPrice) ?? asDisplayString(raw.yearly_price) ?? asDisplayString(raw.annualPrice),
+    description: asDisplayString(raw.description) ?? asDisplayString(raw.desc) ?? asDisplayString(raw.summary) ?? asDisplayString(raw.subtitle),
+    isFeatured: Boolean(raw.isFeatured ?? raw.featured ?? raw.popular ?? raw.isPopular ?? raw.highlight),
+    offerText: asDisplayString(raw.offerText) ?? asDisplayString(raw.offer) ?? asDisplayString(raw.badge),
+    buttonLabel: asDisplayString(raw.buttonLabel) ?? asDisplayString(raw.ctaLabel) ?? asDisplayString(raw.buttonText) ?? asDisplayString(raw.cta),
+    buttonLink: asDisplayString(raw.buttonLink) ?? asDisplayString(raw.link) ?? asDisplayString(raw.url) ?? asDisplayString(raw.href),
+    features,
+  };
+}
+
+function planDurationOf(raw: Record<string, unknown>): PricingDuration | null {
+  return canonicalDuration(raw.duration) ?? canonicalDuration(raw.billingCycle) ??
+    canonicalDuration(raw.billing_cycle) ?? canonicalDuration(raw.period) ??
+    canonicalDuration(raw.interval) ?? canonicalDuration(raw.durationName) ??
+    canonicalDuration(raw.name) ?? canonicalDuration(raw.slug) ??
+    canonicalDuration(raw.title) ?? canonicalDuration(raw.key);
+}
+
+const PRICING_GROUP_FIELDS = ['plans', 'items', 'options', 'tiers', 'pricing'] as const;
+
+function normalizePricing(json: unknown): Partial<Record<PricingDuration, PricingPlan[]>> {
+  const groups: Partial<Record<PricingDuration, PricingPlan[]>> = {};
+  const addPlan = (duration: PricingDuration, rawPlan: unknown, index: number) => {
+    const plan = normalizePlan(rawPlan, index);
+    if (!plan) return;
+    (groups[duration] ||= []).push(plan);
+  };
+
+  // Unwrap common response envelopes ({data: ...} / {result: ...} / {docs: ...})
+  let root: unknown = json;
+  if (json && typeof json === 'object' && !Array.isArray(json)) {
+    const obj = json as Record<string, unknown>;
+    const wrapper = obj.data ?? obj.result ?? obj.docs;
+    if (wrapper && typeof wrapper === 'object') root = wrapper;
+  }
+
+  if (Array.isArray(root)) {
+    for (const item of root) {
+      if (!item || typeof item !== 'object') continue;
+      const entry = item as Record<string, unknown>;
+      const nested = PRICING_GROUP_FIELDS.map(field => entry[field]).find(Array.isArray);
+      if (nested) {
+        const duration = planDurationOf(entry);
+        if (duration) {
+          (nested as unknown[]).forEach((plan, i) => addPlan(duration, plan, i));
+          continue;
+        }
+      }
+      // {monthly: [...]}-style entry inside an array
+      const keyed = Object.entries(entry).find(([key, value]) => canonicalDuration(key) && Array.isArray(value));
+      if (keyed) {
+        const [key, list] = keyed as [string, unknown[]];
+        const duration = canonicalDuration(key);
+        if (duration) {
+          list.forEach((plan, i) => addPlan(duration, plan, i));
+          continue;
+        }
+      }
+      // Flat plan carrying its own duration field
+      const duration = planDurationOf(entry);
+      if (duration) addPlan(duration, entry, groups[duration]?.length ?? 0);
+    }
+  } else if (root && typeof root === 'object') {
+    // Object keyed by duration: {monthly: [...], quarterly: [...], yearly: [...]}
+    for (const [key, value] of Object.entries(root as Record<string, unknown>)) {
+      const duration = canonicalDuration(key);
+      if (!duration) continue;
+      if (Array.isArray(value)) {
+        value.forEach((plan, i) => addPlan(duration, plan, i));
+      } else if (value && typeof value === 'object') {
+        const objValue = value as Record<string, unknown>;
+        const nested = PRICING_GROUP_FIELDS.map(field => objValue[field]).find(Array.isArray);
+        if (nested) {
+          (nested as unknown[]).forEach((plan, i) => addPlan(duration, plan, i));
+        } else {
+          addPlan(duration, objValue, groups[duration]?.length ?? 0);
+        }
+      }
+    }
+  }
+
+  (Object.keys(groups) as PricingDuration[]).forEach(key => {
+    if (!groups[key]?.length) delete groups[key];
+  });
+  return groups;
 }
 
 interface FaqItem {
@@ -111,6 +286,9 @@ const iconMap: Record<string, React.ReactNode> = {
 export default function HomeContent() {
   const [locale, setLocale] = useState<Locale>('ar');
   const [mounted, setMounted] = useState(false);
+  const [pricingGroups, setPricingGroups] = useState<Partial<Record<PricingDuration, PricingPlan[]>> | null>(null);
+  const [pricingLoading, setPricingLoading] = useState(true);
+  const [duration, setDuration] = useState<PricingDuration>('monthly');
 
   const t = translations[locale];
 
@@ -129,6 +307,39 @@ export default function HomeContent() {
     window.addEventListener('localechange', handler);
     return () => window.removeEventListener('localechange', handler);
   }, [updateLocale]);
+
+  // Fetch live pricing plans (grouped by duration) from the app API.
+  // On failure or empty response, fall back to the static plans.
+  useEffect(() => {
+    let cancelled = false;
+    fetch(PRICING_API_URL, { headers: { Accept: 'application/json' } })
+      .then(response => {
+        if (!response.ok) throw new Error(`pricing API responded ${response.status}`);
+        return response.json();
+      })
+      .then((json: unknown) => {
+        if (cancelled) return;
+        const groups = normalizePricing(json);
+        const hasPlans = Object.values(groups).some(list => list && list.length > 0);
+        if (hasPlans) {
+          setPricingGroups(groups);
+        } else {
+          console.warn('[pricing] API returned no plans — using static fallback');
+          setPricingGroups(null);
+        }
+      })
+      .catch((error: unknown) => {
+        if (cancelled) return;
+        console.warn('[pricing] API unavailable — using static fallback', error);
+        setPricingGroups(null);
+      })
+      .finally(() => {
+        if (!cancelled) setPricingLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   if (!mounted) {
     return (
@@ -153,7 +364,26 @@ export default function HomeContent() {
   const stats = t.stats_fallback as any[];
   const testimonials = t.testimonials_fallback;
   const faqItems: FaqItem[] = t.faq_fallback as unknown as FaqItem[];
-  const pricingPlans: PricingPlan[] = t.pricing_fallback as unknown as PricingPlan[];
+  // Pricing source of truth: live API (grouped by duration) with static fallback.
+  const staticPlans = t.pricing_fallback as unknown as PricingPlan[];
+  const usingApi = !!pricingGroups;
+
+  const availableDurations = (['monthly', 'quarterly', 'yearly'] as PricingDuration[]).filter(
+    d => (usingApi ? !!pricingGroups?.[d]?.length : d === 'monthly' || d === 'yearly')
+  );
+  const activeDuration: PricingDuration = availableDurations.includes(duration)
+    ? duration
+    : availableDurations[0] ?? 'monthly';
+
+  const displayPlans: PricingPlan[] = usingApi
+    ? pricingGroups?.[activeDuration] ?? []
+    : staticPlans.map(plan =>
+        activeDuration === 'yearly' && plan.yearlyPrice
+          ? { ...plan, price: plan.yearlyPrice }
+          : plan
+      );
+  const pricingPeriodLabel =
+    activeDuration === 'monthly' ? t.pricing_monthly : activeDuration === 'quarterly' ? t.pricing_quarterly : t.pricing_yearly;
 
   // Feature pillars data
   const pillars = [
@@ -419,38 +649,78 @@ export default function HomeContent() {
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center" dangerouslySetInnerHTML={{ __html: t.pricing_title }} />
             <p className="mt-4 text-[#817E84] text-center max-w-2xl mx-auto">{t.pricing_content}</p>
 
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-              {(pricingPlans.length > 0 ? pricingPlans : []).map((plan: PricingPlan) => (
-                <div key={plan.id} className={`relative rounded-2xl p-8 border transition-all duration-300 ${
-                  plan.isFeatured ? 'bg-[#937AFF]/10 border-[#937AFF]/50 shadow-lg shadow-[#937AFF]/10' : 'bg-[#0B0C17] border-[#202128] hover:border-[#937AFF]/30'
-                }`}>
-                  {plan.offerText && (
-                    <span className="absolute -top-3 start-4 bg-[#937AFF] text-white text-xs font-bold px-3 py-1 rounded-full">
-                      {plan.offerText}
-                    </span>
-                  )}
-                  <h3 className="text-xl font-bold text-white">{plan.title}</h3>
-                  <p className="mt-2 text-sm text-[#817E84]">{plan.description}</p>
-                  <div className="mt-6 flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-white">${plan.price}</span>
-                    <span className="text-sm text-[#817E84]">{t.pricing_monthly}</span>
-                  </div>
-                  <ul className="mt-8 space-y-3">
-                    {plan.features?.map((feat, fi) => (
-                      <li key={fi} className="flex items-center gap-3">
-                        {feat.included ? <Check className="w-5 h-5 text-[#937AFF] shrink-0" /> : <X className="w-5 h-5 text-[#817E84] shrink-0" />}
-                        <span className={`text-sm ${feat.included ? 'text-[#E5E5E5]' : 'text-[#817E84]'}`}>{feat.label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a href={plan.buttonLink || '#contact'} className={`mt-8 block text-center font-semibold py-3 rounded-lg transition-colors duration-200 ${
-                    plan.isFeatured ? 'bg-[#937AFF] hover:bg-[#7d5ff0] text-white' : 'border border-[#202128] hover:border-[#937AFF]/50 text-white'
-                  }`}>
-                    {plan.buttonLabel}
-                  </a>
+            {/* Duration toggle (monthly / quarterly / yearly) */}
+            {availableDurations.length > 1 && (
+              <div className="mt-8 flex justify-center">
+                <div className="inline-flex items-center gap-1 rounded-full border border-[#202128] bg-[#0B0C17] p-1" role="tablist" aria-label={t.pricing_content}>
+                  {availableDurations.map(d => (
+                    <button
+                      key={d}
+                      type="button"
+                      role="tab"
+                      aria-selected={activeDuration === d}
+                      onClick={() => setDuration(d)}
+                      className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                        activeDuration === d
+                          ? 'bg-[#937AFF] text-white shadow-lg shadow-[#937AFF]/25'
+                          : 'text-[#817E84] hover:text-white'
+                      }`}
+                    >
+                      {d === 'monthly' ? t.pricing_toggle_monthly : d === 'quarterly' ? t.pricing_toggle_quarterly : t.pricing_toggle_yearly}
+                    </button>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            )}
+
+            {pricingLoading ? (
+              <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[0, 1, 2].map(i => (
+                  <div key={i} className="rounded-2xl p-8 border border-[#202128] bg-[#0B0C17] animate-pulse">
+                    <div className="h-5 w-1/3 rounded bg-[#202128]" />
+                    <div className="mt-3 h-3 w-2/3 rounded bg-[#181A22]" />
+                    <div className="mt-6 h-9 w-1/2 rounded bg-[#202128]" />
+                    <div className="mt-8 space-y-3">
+                      {[0, 1, 2, 3, 4].map(j => <div key={j} className="h-3 w-full rounded bg-[#181A22]" />)}
+                    </div>
+                    <div className="mt-8 h-11 w-full rounded-lg bg-[#181A22]" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                {displayPlans.map((plan: PricingPlan) => (
+                  <div key={plan.id} className={`relative rounded-2xl p-8 border transition-all duration-300 ${
+                    plan.isFeatured ? 'bg-[#937AFF]/10 border-[#937AFF]/50 shadow-lg shadow-[#937AFF]/10' : 'bg-[#0B0C17] border-[#202128] hover:border-[#937AFF]/30'
+                  }`}>
+                    {plan.offerText && (
+                      <span className="absolute -top-3 start-4 bg-[#937AFF] text-white text-xs font-bold px-3 py-1 rounded-full">
+                        {plan.offerText}
+                      </span>
+                    )}
+                    <h3 className="text-xl font-bold text-white">{plan.title}</h3>
+                    <p className="mt-2 text-sm text-[#817E84]">{plan.description}</p>
+                    <div className="mt-6 flex items-baseline gap-1">
+                      <span className="text-4xl font-bold text-white">{currencyLabel(plan.currency, locale)}{plan.price}</span>
+                      <span className="text-sm text-[#817E84]">{pricingPeriodLabel}</span>
+                    </div>
+                    <ul className="mt-8 space-y-3">
+                      {plan.features?.map((feat, fi) => (
+                        <li key={fi} className="flex items-center gap-3">
+                          {feat.included ? <Check className="w-5 h-5 text-[#937AFF] shrink-0" /> : <X className="w-5 h-5 text-[#817E84] shrink-0" />}
+                          <span className={`text-sm ${feat.included ? 'text-[#E5E5E5]' : 'text-[#817E84]'}`}>{feat.label}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <a href={plan.buttonLink || '#contact'} className={`mt-8 block text-center font-semibold py-3 rounded-lg transition-colors duration-200 ${
+                      plan.isFeatured ? 'bg-[#937AFF] hover:bg-[#7d5ff0] text-white' : 'border border-[#202128] hover:border-[#937AFF]/50 text-white'
+                    }`}>
+                      {plan.buttonLabel}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

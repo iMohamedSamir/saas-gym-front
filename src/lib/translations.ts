@@ -216,7 +216,11 @@ const ar = {
   pricing_title: 'خطط أسعار <strong>معقولة</strong>',
   pricing_content: 'اختر الخطة المناسبة لصالتك الرياضية.',
   pricing_monthly: '/ شهريًا',
+  pricing_quarterly: '/ ربع سنويًا',
   pricing_yearly: '/ سنويًا',
+  pricing_toggle_monthly: 'شهري',
+  pricing_toggle_quarterly: 'ربع سنوي',
+  pricing_toggle_yearly: 'سنوي',
   pricing_fallback: [
     {
       id: 'p1', title: 'الأساسيات', price: '97', yearlyPrice: '970',
@@ -569,7 +573,11 @@ const en: typeof ar = {
   pricing_title: 'Affordable <strong>Pricing Plans</strong>',
   pricing_content: 'Choose the plan that fits your gym.',
   pricing_monthly: '/month',
+  pricing_quarterly: '/quarter',
   pricing_yearly: '/year',
+  pricing_toggle_monthly: 'Monthly',
+  pricing_toggle_quarterly: 'Quarterly',
+  pricing_toggle_yearly: 'Yearly',
   pricing_fallback: [
     {
       id: 'p1', title: 'Essentials', price: '97', yearlyPrice: '970',
