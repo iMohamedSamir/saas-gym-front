@@ -221,6 +221,7 @@ const ar = {
   pricing_toggle_monthly: 'شهري',
   pricing_toggle_quarterly: 'ربع سنوي',
   pricing_toggle_yearly: 'سنوي',
+  pricing_default_cta: 'ابدأ التجربة المجانية',
   pricing_fallback: [
     {
       id: 'p1', title: 'الأساسيات', price: '97', yearlyPrice: '970',
@@ -578,6 +579,7 @@ const en: typeof ar = {
   pricing_toggle_monthly: 'Monthly',
   pricing_toggle_quarterly: 'Quarterly',
   pricing_toggle_yearly: 'Yearly',
+  pricing_default_cta: 'Start Free Trial',
   pricing_fallback: [
     {
       id: 'p1', title: 'Essentials', price: '97', yearlyPrice: '970',

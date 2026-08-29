@@ -136,11 +136,11 @@ function normalizePlan(rawPlan: unknown, index: number): PricingPlan | null {
 }
 
 function planDurationOf(raw: Record<string, unknown>): PricingDuration | null {
-  return canonicalDuration(raw.duration) ?? canonicalDuration(raw.billingCycle) ??
-    canonicalDuration(raw.billing_cycle) ?? canonicalDuration(raw.period) ??
-    canonicalDuration(raw.interval) ?? canonicalDuration(raw.durationName) ??
-    canonicalDuration(raw.name) ?? canonicalDuration(raw.slug) ??
-    canonicalDuration(raw.title) ?? canonicalDuration(raw.key);
+  return canonicalDuration(raw.duration) ?? canonicalDuration(raw.planType) ??
+    canonicalDuration(raw.billingCycle) ?? canonicalDuration(raw.billing_cycle) ??
+    canonicalDuration(raw.period) ?? canonicalDuration(raw.interval) ??
+    canonicalDuration(raw.durationName) ?? canonicalDuration(raw.name) ??
+    canonicalDuration(raw.slug) ?? canonicalDuration(raw.title) ?? canonicalDuration(raw.key);
 }
 
 const PRICING_GROUP_FIELDS = ['plans', 'items', 'options', 'tiers', 'pricing'] as const;
@@ -715,7 +715,7 @@ export default function HomeContent() {
                     <a href={plan.buttonLink || '#contact'} className={`mt-8 block text-center font-semibold py-3 rounded-lg transition-colors duration-200 ${
                       plan.isFeatured ? 'bg-[#937AFF] hover:bg-[#7d5ff0] text-white' : 'border border-[#202128] hover:border-[#937AFF]/50 text-white'
                     }`}>
-                      {plan.buttonLabel}
+                      {plan.buttonLabel || t.pricing_default_cta}
                     </a>
                   </div>
                 ))}
