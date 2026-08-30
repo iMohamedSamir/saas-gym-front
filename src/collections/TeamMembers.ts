@@ -5,8 +5,8 @@ export const TeamMembers: CollectionConfig = {
   admin: { useAsTitle: "name" },
   access: { read: () => true },
   fields: [
-    { name: "name", type: "text", required: true, localize: true },
-    { name: "role", type: "text", required: true, localize: true },
+    { name: "name", type: "text", required: true, localized: true },
+    { name: "role", type: "text", required: true, localized: true },
     { name: "image", type: "text", defaultValue: "/images/peoples/Profile Image.png" },
     { name: "sortOrder", type: "number", defaultValue: 0 },
   ],

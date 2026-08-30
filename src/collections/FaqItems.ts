@@ -5,8 +5,8 @@ export const FaqItems: CollectionConfig = {
   admin: { useAsTitle: "question" },
   access: { read: () => true },
   fields: [
-    { name: "question", type: "text", required: true, localize: true },
-    { name: "answer", type: "textarea", required: true, localize: true },
+    { name: "question", type: "text", required: true, localized: true },
+    { name: "answer", type: "textarea", required: true, localized: true },
     { name: "sortOrder", type: "number", defaultValue: 0 },
   ],
 };

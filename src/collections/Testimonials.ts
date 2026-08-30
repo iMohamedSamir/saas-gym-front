@@ -5,9 +5,9 @@ export const Testimonials: CollectionConfig = {
   admin: { useAsTitle: "name" },
   access: { read: () => true },
   fields: [
-    { name: "name", type: "text", required: true, localize: true },
-    { name: "designation", type: "text", required: true, localize: true },
-    { name: "content", type: "textarea", required: true, localize: true },
+    { name: "name", type: "text", required: true, localized: true },
+    { name: "designation", type: "text", required: true, localized: true },
+    { name: "content", type: "textarea", required: true, localized: true },
     { name: "avatar", type: "text", defaultValue: "/images/avatar.png" },
     { name: "sortOrder", type: "number", defaultValue: 0 },
   ],

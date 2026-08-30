@@ -5,8 +5,8 @@ export const Features: CollectionConfig = {
   admin: { useAsTitle: "title" },
   access: { read: () => true },
   fields: [
-    { name: "title", type: "text", required: true, localize: true },
-    { name: "description", type: "textarea", localize: true },
+    { name: "title", type: "text", required: true, localized: true },
+    { name: "description", type: "textarea", localized: true },
     { name: "icon", type: "text", defaultValue: "/images/features-menu-icon.svg" },
     { name: "isStarred", type: "checkbox", defaultValue: false },
     {

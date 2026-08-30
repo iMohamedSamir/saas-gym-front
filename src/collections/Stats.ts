@@ -6,7 +6,7 @@ export const Stats: CollectionConfig = {
   access: { read: () => true },
   fields: [
     { name: "value", type: "text", required: true },
-    { name: "label", type: "text", required: true, localize: true },
+    { name: "label", type: "text", required: true, localized: true },
     { name: "sortOrder", type: "number", defaultValue: 0 },
   ],
 };
