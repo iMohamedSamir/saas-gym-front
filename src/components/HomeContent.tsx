@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import {
   Mail, Phone, Calendar, Check, X, Star, ArrowRight,
   Users, ScanLine, CreditCard, CalendarDays,
@@ -54,6 +54,12 @@ const DURATION_ALIASES: Record<string, PricingDuration> = {
 
 function canonicalDuration(raw: unknown): PricingDuration | null {
   if (raw == null) return null;
+  // Bilingual objects (e.g. name: {ar, en}) — try their string values
+  if (typeof raw === 'object') {
+    const obj = raw as Record<string, unknown>;
+    raw = obj.en ?? obj.ar ?? null;
+    if (raw == null || typeof raw === 'object') return null;
+  }
   if (typeof raw === 'number') {
     if (raw === 1) return 'monthly';
     if (raw === 3) return 'quarterly';
@@ -70,6 +76,38 @@ function asDisplayString(raw: unknown): string | undefined {
   return undefined;
 }
 
+// Pick a display string from either a plain string or a bilingual object
+// ({ar: '...', en: '...'}). Fallback chain: requested locale -> keys that
+// start with the locale code (ar-EG etc.) -> other locale -> other-locale
+// prefixed keys -> first non-empty string value.
+function pickLocalized(raw: unknown, locale: Locale): string | undefined {
+  if (raw == null) return undefined;
+  if (typeof raw === 'string' || typeof raw === 'number') return asDisplayString(raw);
+  if (typeof raw === 'object') {
+    const obj = raw as Record<string, unknown>;
+    const other = locale === 'ar' ? 'en' : 'ar';
+    const exact = (code: string) =>
+      asDisplayString(obj[code]) ??
+      asDisplayString(Object.entries(obj).find(([k]) => k.toLowerCase().startsWith(code))?.[1]);
+    return exact(locale) ?? exact(other) ??
+      Object.values(obj).map(v => asDisplayString(v)).find(Boolean);
+  }
+  return undefined;
+}
+
+// Pick a localized array (features: {ar: [...], en: [...]} or plain array).
+function pickLocalizedArray(raw: unknown, locale: Locale): unknown[] | undefined {
+  if (Array.isArray(raw)) return raw;
+  if (raw && typeof raw === 'object') {
+    const obj = raw as Record<string, unknown>;
+    const other = locale === 'ar' ? 'en' : 'ar';
+    const chosen = obj[locale] ?? obj[other] ??
+      Object.values(obj).find(Array.isArray);
+    if (Array.isArray(chosen)) return chosen;
+  }
+  return undefined;
+}
+
 // Currency prefix for plan prices: '$' for USD (legacy look), localized
 // 'ج.م' for EGP in Arabic, 'EGP' in English, other codes shown as-is.
 function currencyLabel(currency: string | undefined, locale: Locale): string {
@@ -79,18 +117,21 @@ function currencyLabel(currency: string | undefined, locale: Locale): string {
   return code;
 }
 
-function normalizePlan(rawPlan: unknown, index: number): PricingPlan | null {
+function normalizePlan(rawPlan: unknown, index: number, locale: Locale): PricingPlan | null {
   if (!rawPlan || typeof rawPlan !== 'object') return null;
   const raw = rawPlan as Record<string, unknown>;
 
   const title =
-    asDisplayString(raw.title) ?? asDisplayString(raw.name) ??
-    asDisplayString(raw.planName) ?? asDisplayString(raw.titleAr) ??
-    asDisplayString(raw.nameAr) ?? asDisplayString(raw.title_ar) ??
-    asDisplayString(raw.name_ar);
+    pickLocalized(raw.title, locale) ?? pickLocalized(raw.name, locale) ??
+    pickLocalized(raw.planName, locale) ?? pickLocalized(raw.titleAr, locale) ??
+    pickLocalized(raw.nameAr, locale) ?? pickLocalized(raw.title_ar, locale) ??
+    pickLocalized(raw.name_ar, locale);
   if (!title) return null;
 
-  const featuresRaw = raw.features ?? raw.perks ?? raw.benefits ?? raw.inclusions;
+  const featuresRaw = pickLocalizedArray(
+    raw.features ?? raw.perks ?? raw.benefits ?? raw.inclusions,
+    locale,
+  );
   let features: PricingFeature[] | undefined;
   if (Array.isArray(featuresRaw)) {
     features = featuresRaw
@@ -101,15 +142,15 @@ function normalizePlan(rawPlan: unknown, index: number): PricingPlan | null {
         if (!entry || typeof entry !== 'object') return null;
         const feat = entry as Record<string, unknown>;
         const label =
-          asDisplayString(feat.label) ?? asDisplayString(feat.name) ??
-          asDisplayString(feat.text) ?? asDisplayString(feat.title) ??
-          asDisplayString(feat.feature);
+          pickLocalized(feat.label, locale) ?? pickLocalized(feat.name, locale) ??
+          pickLocalized(feat.text, locale) ?? pickLocalized(feat.title, locale) ??
+          pickLocalized(feat.feature, locale);
         if (!label) return null;
         const includedRaw = feat.included ?? feat.enabled ?? feat.available;
         return {
           label,
           included: includedRaw === undefined ? true : Boolean(includedRaw),
-          tooltip: asDisplayString(feat.tooltip),
+          tooltip: pickLocalized(feat.tooltip, locale),
         };
       })
       .filter((f): f is PricingFeature => f !== null);
@@ -124,13 +165,13 @@ function normalizePlan(rawPlan: unknown, index: number): PricingPlan | null {
     id: asDisplayString(raw.id) ?? asDisplayString(raw.slug) ?? `${title}-${index}`,
     title,
     price,
-    currency: asDisplayString(raw.currency) ?? asDisplayString(raw.currencyCode) ?? asDisplayString(raw.currency_code),
+    currency: pickLocalized(raw.currency, locale) ?? pickLocalized(raw.currencyCode, locale) ?? pickLocalized(raw.currency_code, locale),
     yearlyPrice: asDisplayString(raw.yearlyPrice) ?? asDisplayString(raw.yearly_price) ?? asDisplayString(raw.annualPrice),
-    description: asDisplayString(raw.description) ?? asDisplayString(raw.desc) ?? asDisplayString(raw.summary) ?? asDisplayString(raw.subtitle),
+    description: pickLocalized(raw.description, locale) ?? pickLocalized(raw.desc, locale) ?? pickLocalized(raw.summary, locale) ?? pickLocalized(raw.subtitle, locale),
     isFeatured: Boolean(raw.isFeatured ?? raw.featured ?? raw.popular ?? raw.isPopular ?? raw.highlight),
-    offerText: asDisplayString(raw.offerText) ?? asDisplayString(raw.offer) ?? asDisplayString(raw.badge),
-    buttonLabel: asDisplayString(raw.buttonLabel) ?? asDisplayString(raw.ctaLabel) ?? asDisplayString(raw.buttonText) ?? asDisplayString(raw.cta),
-    buttonLink: asDisplayString(raw.buttonLink) ?? asDisplayString(raw.link) ?? asDisplayString(raw.url) ?? asDisplayString(raw.href),
+    offerText: pickLocalized(raw.offerText, locale) ?? pickLocalized(raw.offer, locale) ?? pickLocalized(raw.badge, locale),
+    buttonLabel: pickLocalized(raw.buttonLabel, locale) ?? pickLocalized(raw.ctaLabel, locale) ?? pickLocalized(raw.buttonText, locale) ?? pickLocalized(raw.cta, locale),
+    buttonLink: pickLocalized(raw.buttonLink, locale) ?? pickLocalized(raw.link, locale) ?? pickLocalized(raw.url, locale) ?? pickLocalized(raw.href, locale),
     features,
   };
 }
@@ -145,10 +186,10 @@ function planDurationOf(raw: Record<string, unknown>): PricingDuration | null {
 
 const PRICING_GROUP_FIELDS = ['plans', 'items', 'options', 'tiers', 'pricing'] as const;
 
-function normalizePricing(json: unknown): Partial<Record<PricingDuration, PricingPlan[]>> {
+function normalizePricing(json: unknown, locale: Locale): Partial<Record<PricingDuration, PricingPlan[]>> {
   const groups: Partial<Record<PricingDuration, PricingPlan[]>> = {};
   const addPlan = (duration: PricingDuration, rawPlan: unknown, index: number) => {
-    const plan = normalizePlan(rawPlan, index);
+    const plan = normalizePlan(rawPlan, index, locale);
     if (!plan) return;
     (groups[duration] ||= []).push(plan);
   };
@@ -286,7 +327,7 @@ const iconMap: Record<string, React.ReactNode> = {
 export default function HomeContent() {
   const [locale, setLocale] = useState<Locale>('ar');
   const [mounted, setMounted] = useState(false);
-  const [pricingGroups, setPricingGroups] = useState<Partial<Record<PricingDuration, PricingPlan[]>> | null>(null);
+  const [rawPricing, setRawPricing] = useState<unknown>(null);
   const [pricingLoading, setPricingLoading] = useState(true);
   const [duration, setDuration] = useState<PricingDuration>('monthly');
 
@@ -319,19 +360,17 @@ export default function HomeContent() {
       })
       .then((json: unknown) => {
         if (cancelled) return;
-        const groups = normalizePricing(json);
-        const hasPlans = Object.values(groups).some(list => list && list.length > 0);
-        if (hasPlans) {
-          setPricingGroups(groups);
-        } else {
+        if (!json || typeof json !== 'object' || Object.keys(json as Record<string, unknown>).length === 0) {
           console.warn('[pricing] API returned no plans — using static fallback');
-          setPricingGroups(null);
+          setRawPricing(null);
+          return;
         }
+        setRawPricing(json);
       })
       .catch((error: unknown) => {
         if (cancelled) return;
         console.warn('[pricing] API unavailable — using static fallback', error);
-        setPricingGroups(null);
+        setRawPricing(null);
       })
       .finally(() => {
         if (!cancelled) setPricingLoading(false);
@@ -340,6 +379,14 @@ export default function HomeContent() {
       cancelled = true;
     };
   }, []);
+
+  // Re-resolve localized strings ({ar, en}) whenever the language changes —
+  // no refetch needed since the API returns both languages at once.
+  const pricingGroups = useMemo<Partial<Record<PricingDuration, PricingPlan[]>> | null>(() => {
+    if (rawPricing == null) return null;
+    const groups = normalizePricing(rawPricing, locale);
+    return Object.keys(groups).length ? groups : null;
+  }, [rawPricing, locale]);
 
   if (!mounted) {
     return (
